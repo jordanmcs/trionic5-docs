@@ -2,8 +2,8 @@
 
 Reverse-engineering documentation for the Saab **Trionic 5** engine-management ECU
 (Motorola 68000 / MC68332 class), worked out from the factory **4780656** image with
-REA + Ghidra (m68k). The analysis targets a T5.5 (9-5 era) 256 KiB flash with the ROM
-based at `0x40000`.
+REA + Ghidra (m68k). The analysis targets a T5.5 (NG900 era — Saab 900 / 9-3,
+B204RM) 256 KiB flash with the ROM based at `0x40000`.
 
 All calibration values in these pages are **factory 4780656** values. Some tables carry
 an `(MCS differs)` tag: a commercial reflash changes that table, and the tune
