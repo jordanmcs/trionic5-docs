@@ -1,0 +1,3080 @@
+[
+ {
+  "name": "Insp_mat",
+  "rom": "0x040E10",
+  "ram": "0x4976",
+  "len": 256
+ },
+ {
+  "name": "Adapt_korr",
+  "rom": "0x04040A",
+  "ram": "0x4876",
+  "len": 256
+ },
+ {
+  "name": "Adapt_injfaktor",
+  "rom": "0x04075A",
+  "ram": "0x4A76",
+  "len": 1
+ },
+ {
+  "name": "Adapt_inj_imat",
+  "rom": "0x04075B",
+  "ram": "0x4A78",
+  "len": 1
+ },
+ {
+  "name": "Nr_adapt_idle_mat",
+  "rom": "0x04075C",
+  "ram": "0x4A7A",
+  "len": 2
+ },
+ {
+  "name": "Retard_konst",
+  "rom": "0x040AD4",
+  "ram": "0x4A7C",
+  "len": 64
+ },
+ {
+  "name": "Retard_temp",
+  "rom": "0x040B14",
+  "ram": "0x4ABC",
+  "len": 15
+ },
+ {
+  "name": "Startvev_fak",
+  "rom": "0x04085E",
+  "ram": "0x4ACC",
+  "len": 15
+ },
+ {
+  "name": "Eftersta_fak",
+  "rom": "0x04086D",
+  "ram": "0x4ADC",
+  "len": 15
+ },
+ {
+  "name": "Eftersta_fak2",
+  "rom": "0x04087C",
+  "ram": "0x4AEC",
+  "len": 15
+ },
+ {
+  "name": "Eft_dec_fak",
+  "rom": "0x04088B",
+  "ram": "0x4AFC",
+  "len": 15
+ },
+ {
+  "name": "Eft_dec_fak2",
+  "rom": "0x04089A",
+  "ram": "0x4B0C",
+  "len": 15
+ },
+ {
+  "name": "Eft_fak_minsk",
+  "rom": "0x0408A9",
+  "ram": "0x4B1C",
+  "len": 1
+ },
+ {
+  "name": "Expand",
+  "rom": "0x0408AA",
+  "ram": "0x4B1E",
+  "len": 1
+ },
+ {
+  "name": "Tempkomp_konst",
+  "rom": "0x0408AB",
+  "ram": "0x4B20",
+  "len": 15
+ },
+ {
+  "name": "Temp_ramp_value",
+  "rom": "0x0408BA",
+  "ram": "0x4B30",
+  "len": 2
+ },
+ {
+  "name": "Accel_konst",
+  "rom": "0x0408BC",
+  "ram": "0x4B32",
+  "len": 64
+ },
+ {
+  "name": "Acc_tab_mul",
+  "rom": "0x04097C",
+  "ram": "0x4B72",
+  "len": 1
+ },
+ {
+  "name": "Min_load_gadapt",
+  "rom": "0x04097E",
+  "ram": "0x4B76",
+  "len": 1
+ },
+ {
+  "name": "Max_load_gadapt",
+  "rom": "0x04097F",
+  "ram": "0x4B78",
+  "len": 1
+ },
+ {
+  "name": "Min_rpm_gadapt",
+  "rom": "0x040980",
+  "ram": "0x4B7A",
+  "len": 2
+ },
+ {
+  "name": "Max_rpm_gadapt",
+  "rom": "0x040982",
+  "ram": "0x4B7C",
+  "len": 2
+ },
+ {
+  "name": "Global_adapt_nr",
+  "rom": "0x040984",
+  "ram": "0x4B7E",
+  "len": 2
+ },
+ {
+  "name": "Ret_tab_mul",
+  "rom": "0x04097D",
+  "ram": "0x4B74",
+  "len": 1
+ },
+ {
+  "name": "Ret_clear_tab_low",
+  "rom": "0x040986",
+  "ram": "0x4B80",
+  "len": 1
+ },
+ {
+  "name": "Last_acc_nr",
+  "rom": "0x040987",
+  "ram": "0x4B82",
+  "len": 1
+ },
+ {
+  "name": "Max_acc_dec",
+  "rom": "0x040988",
+  "ram": "0x4B84",
+  "len": 1
+ },
+ {
+  "name": "Max_ret_dec",
+  "rom": "0x040989",
+  "ram": "0x4B86",
+  "len": 1
+ },
+ {
+  "name": "Max_lacc_dec",
+  "rom": "0x04098A",
+  "ram": "0x4B88",
+  "len": 1
+ },
+ {
+  "name": "Max_lret_dec",
+  "rom": "0x04098B",
+  "ram": "0x4B8A",
+  "len": 1
+ },
+ {
+  "name": "Acc_clear_tab",
+  "rom": "0x04098C",
+  "ram": "0x4B8C",
+  "len": 16
+ },
+ {
+  "name": "Trans_x_st",
+  "rom": "0x040F4C",
+  "ram": "0x4B9C",
+  "len": 8
+ },
+ {
+  "name": "Trans_y_st",
+  "rom": "0x040F54",
+  "ram": "0x4BA4",
+  "len": 16
+ },
+ {
+  "name": "Accel_temp",
+  "rom": "0x0409AC",
+  "ram": "0x4BB4",
+  "len": 15
+ },
+ {
+  "name": "Accel_temp2",
+  "rom": "0x0409BB",
+  "ram": "0x4BC4",
+  "len": 15
+ },
+ {
+  "name": "Fload_throt_tab",
+  "rom": "0x0409CA",
+  "ram": "0x4BD4",
+  "len": 16
+ },
+ {
+  "name": "Fload_tab",
+  "rom": "0x0409DA",
+  "ram": "0x4BE4",
+  "len": 16
+ },
+ {
+  "name": "Inj_konst",
+  "rom": "0x040BA6",
+  "ram": "0x4BF4",
+  "len": 1
+ },
+ {
+  "name": "Min_tid",
+  "rom": "0x040BA8",
+  "ram": "0x4BF6",
+  "len": 2
+ },
+ {
+  "name": "Last_cyl_komp",
+  "rom": "0x040BAA",
+  "ram": "0x4BF8",
+  "len": 1
+ },
+ {
+  "name": "Start_insp",
+  "rom": "0x040BAC",
+  "ram": "0x4BFA",
+  "len": 2
+ },
+ {
+  "name": "Del_mat",
+  "rom": "0x04075E",
+  "ram": "0x4BFC",
+  "len": 256
+ },
+ {
+  "name": "Retard_detekt",
+  "rom": "0x040B23",
+  "ram": "0x4CFC",
+  "len": 1
+ },
+ {
+  "name": "Open_loop",
+  "rom": "0x040718",
+  "ram": "0x4CFE",
+  "len": 16
+ },
+ {
+  "name": "Open_loop_adapt",
+  "rom": "0x040728",
+  "ram": "0x4D0E",
+  "len": 16
+ },
+ {
+  "name": "Open_loop_knock",
+  "rom": "0x040738",
+  "ram": "0x4D1E",
+  "len": 16
+ },
+ {
+  "name": "Halva_sidan",
+  "rom": "0x040748",
+  "ram": "0x4D2E",
+  "len": 1
+ },
+ {
+  "name": "Ramp_fak",
+  "rom": "0x04063F",
+  "ram": "0x4D30",
+  "len": 15
+ },
+ {
+  "name": "LhomeXaxisPman",
+  "rom": "0x04064E",
+  "ram": "0x4D40",
+  "len": 12
+ },
+ {
+  "name": "LhomeYaxisPman",
+  "rom": "0x04065A",
+  "ram": "0x4D4C",
+  "len": 24
+ },
+ {
+  "name": "LhomeMapPman",
+  "rom": "0x040672",
+  "ram": "0x4D64",
+  "len": 144
+ },
+ {
+  "name": "Start_dead_tab",
+  "rom": "0x040702",
+  "ram": "0x4DF4",
+  "len": 15
+ },
+ {
+  "name": "Start_trottel",
+  "rom": "0x040716",
+  "ram": "0x4E04",
+  "len": 1
+ },
+ {
+  "name": "Start_proc",
+  "rom": "0x040F10",
+  "ram": "0x4E06",
+  "len": 1
+ },
+ {
+  "name": "Retrigg_limit",
+  "rom": "0x040754",
+  "ram": "0x4E08",
+  "len": 1
+ },
+ {
+  "name": "Leave_shut",
+  "rom": "0x040749",
+  "ram": "0x4E0A",
+  "len": 1
+ },
+ {
+  "name": "Cyl_komp",
+  "rom": "0x040538",
+  "ram": "0x4E0C",
+  "len": 4
+ },
+ {
+  "name": "Com_on_idle",
+  "rom": "0x04074B",
+  "ram": "0x4E10",
+  "len": 1
+ },
+ {
+  "name": "Ramp_steg",
+  "rom": "0x04074C",
+  "ram": "0x4E12",
+  "len": 1
+ },
+ {
+  "name": "Start_v_vinkel",
+  "rom": "0x040F12",
+  "ram": "0x4E14",
+  "len": 2
+ },
+ {
+  "name": "Before_start",
+  "rom": "0x040F14",
+  "ram": "0x4E16",
+  "len": 15
+ },
+ {
+  "name": "Build_up_time",
+  "rom": "0x040534",
+  "ram": "0x4E26",
+  "len": 1
+ },
+ {
+  "name": "Build_up_time_2",
+  "rom": "0x040535",
+  "ram": "0x4E28",
+  "len": 1
+ },
+ {
+  "name": "Build_up_time_switch",
+  "rom": "0x040536",
+  "ram": "0x4E2A",
+  "len": 1
+ },
+ {
+  "name": "BS_temp",
+  "rom": "0x040F23",
+  "ram": "0x4E2C",
+  "len": 1
+ },
+ {
+  "name": "Delay_open",
+  "rom": "0x040F24",
+  "ram": "0x4E2E",
+  "len": 1
+ },
+ {
+  "name": "Delay_cut",
+  "rom": "0x040F25",
+  "ram": "0x4E30",
+  "len": 1
+ },
+ {
+  "name": "Open_all_varv",
+  "rom": "0x040F26",
+  "ram": "0x4E32",
+  "len": 2
+ },
+ {
+  "name": "Cut_temp",
+  "rom": "0x040F2A",
+  "ram": "0x4E34",
+  "len": 1
+ },
+ {
+  "name": "Shut_off_time",
+  "rom": "0x040F2E",
+  "ram": "0x4E36",
+  "len": 2
+ },
+ {
+  "name": "Mainrly_off",
+  "rom": "0x040F30",
+  "ram": "0x4E38",
+  "len": 2
+ },
+ {
+  "name": "Tid_konst",
+  "rom": "0x040BA2",
+  "ram": "0x4E3A",
+  "len": 2
+ },
+ {
+  "name": "Vinkel_konst",
+  "rom": "0x040BA4",
+  "ram": "0x4E3C",
+  "len": 2
+ },
+ {
+  "name": "Cut_ej_under",
+  "rom": "0x040BAE",
+  "ram": "0x4E3E",
+  "len": 2
+ },
+ {
+  "name": "Open_varv",
+  "rom": "0x040BB0",
+  "ram": "0x4E40",
+  "len": 2
+ },
+ {
+  "name": "Start_max",
+  "rom": "0x040712",
+  "ram": "0x4E42",
+  "len": 2
+ },
+ {
+  "name": "Start_ramp",
+  "rom": "0x040714",
+  "ram": "0x4E44",
+  "len": 2
+ },
+ {
+  "name": "Start_detekt_rpm",
+  "rom": "0x040756",
+  "ram": "0x4E46",
+  "len": 2
+ },
+ {
+  "name": "Start_detekt_nr",
+  "rom": "0x040758",
+  "ram": "0x4E48",
+  "len": 2
+ },
+ {
+  "name": "Batt_korr_tab",
+  "rom": "0x04051E",
+  "ram": "0x4E4A",
+  "len": 22
+ },
+ {
+  "name": "Adapt_duty",
+  "rom": "0x040F34",
+  "ram": "0x4E60",
+  "len": 1
+ },
+ {
+  "name": "Fuel_map_xaxis",
+  "rom": "0x041674",
+  "ram": "0x4E62",
+  "len": 16
+ },
+ {
+  "name": "Fuel_map_yaxis",
+  "rom": "0x041684",
+  "ram": "0x4E72",
+  "len": 32
+ },
+ {
+  "name": "Purge_map_xaxis",
+  "rom": "0x0416A4",
+  "ram": "0x4E92",
+  "len": 16
+ },
+ {
+  "name": "Purge_map_yaxis",
+  "rom": "0x0416B4",
+  "ram": "0x4EA2",
+  "len": 32
+ },
+ {
+  "name": "Idle_st_rpm",
+  "rom": "0x0416E0",
+  "ram": "0x4EC2",
+  "len": 16
+ },
+ {
+  "name": "After_fcut_tab",
+  "rom": "0x0416F0",
+  "ram": "0x4ED2",
+  "len": 10
+ },
+ {
+  "name": "Dash_tab",
+  "rom": "0x0416FA",
+  "ram": "0x4EDC",
+  "len": 64
+ },
+ {
+  "name": "Dash_trot_axis",
+  "rom": "0x04173A",
+  "ram": "0x4F1C",
+  "len": 8
+ },
+ {
+  "name": "Dash_rpm_axis",
+  "rom": "0x041742",
+  "ram": "0x4F24",
+  "len": 16
+ },
+ {
+  "name": "Dash_act_step",
+  "rom": "0x041752",
+  "ram": "0x4F34",
+  "len": 1
+ },
+ {
+  "name": "Hot_tab",
+  "rom": "0x041753",
+  "ram": "0x4F36",
+  "len": 7
+ },
+ {
+  "name": "Hot_decr",
+  "rom": "0x04175A",
+  "ram": "0x4F3E",
+  "len": 7
+ },
+ {
+  "name": "Ret_up_rpm",
+  "rom": "0x041762",
+  "ram": "0x4F46",
+  "len": 2
+ },
+ {
+  "name": "Ret_down_rpm",
+  "rom": "0x041764",
+  "ram": "0x4F48",
+  "len": 2
+ },
+ {
+  "name": "Ret_delta_rpm",
+  "rom": "0x041766",
+  "ram": "0x4F4A",
+  "len": 2
+ },
+ {
+  "name": "Ret_fuel_time",
+  "rom": "0x041769",
+  "ram": "0x4F4C",
+  "len": 1
+ },
+ {
+  "name": "Ret_fuel_step",
+  "rom": "0x041768",
+  "ram": "0x4F4E",
+  "len": 1
+ },
+ {
+  "name": "Ret_fuel_tab",
+  "rom": "0x04176A",
+  "ram": "0x4F50",
+  "len": 1
+ },
+ {
+  "name": "Last_varv_st",
+  "rom": "0x04176C",
+  "ram": "0x4F52",
+  "len": 30
+ },
+ {
+  "name": "Last_temp_st",
+  "rom": "0x04178A",
+  "ram": "0x4F70",
+  "len": 15
+ },
+ {
+  "name": "I_last_rpm",
+  "rom": "0x04179A",
+  "ram": "0x4F80",
+  "len": 16
+ },
+ {
+  "name": "Max_adjust_load_adapt",
+  "rom": "0x0417AA",
+  "ram": "0x4F90",
+  "len": 1
+ },
+ {
+  "name": "Load_adapt_time",
+  "rom": "0x0417AB",
+  "ram": "0x4F92",
+  "len": 1
+ },
+ {
+  "name": "I_last_temp",
+  "rom": "0x0417AC",
+  "ram": "0x4F94",
+  "len": 16
+ },
+ {
+  "name": "Last_reg_ac",
+  "rom": "0x0417BC",
+  "ram": "0x4FA4",
+  "len": 16
+ },
+ {
+  "name": "Last_reg_kon",
+  "rom": "0x0417CC",
+  "ram": "0x51BE",
+  "len": 8
+ },
+ {
+  "name": "Restart_tab",
+  "rom": "0x0417D4",
+  "ram": "0x4FB4",
+  "len": 3
+ },
+ {
+  "name": "Restart_temp",
+  "rom": "0x0417D7",
+  "ram": "0x4FB8",
+  "len": 1
+ },
+ {
+  "name": "Grund_last",
+  "rom": "0x0417D8",
+  "ram": "0x51C6",
+  "len": 1
+ },
+ {
+  "name": "Grund_last_max",
+  "rom": "0x0417D9",
+  "ram": "0x51C8",
+  "len": 1
+ },
+ {
+  "name": "Ign_map_0_x_axis",
+  "rom": "0x041826",
+  "ram": "0x51CA",
+  "len": 36
+ },
+ {
+  "name": "Ign_map_0_y_axis",
+  "rom": "0x04184A",
+  "ram": "0x51EE",
+  "len": 32
+ },
+ {
+  "name": "Ign_map_0",
+  "rom": "0x04186A",
+  "ram": "0x520E",
+  "len": 576
+ },
+ {
+  "name": "Ign_map_1_x_axis",
+  "rom": "0x041AAA",
+  "ram": "0x544E",
+  "len": 2
+ },
+ {
+  "name": "Ign_map_1_y_axis",
+  "rom": "0x041AAC",
+  "ram": "0x5450",
+  "len": 22
+ },
+ {
+  "name": "Ign_map_1",
+  "rom": "0x041AC2",
+  "ram": "0x5466",
+  "len": 22
+ },
+ {
+  "name": "Ign_map_2_x_axis",
+  "rom": "0x041AD8",
+  "ram": "0x547C",
+  "len": 16
+ },
+ {
+  "name": "Ign_map_2_y_axis",
+  "rom": "0x041AE8",
+  "ram": "0x548C",
+  "len": 32
+ },
+ {
+  "name": "Ign_map_2",
+  "rom": "0x041B08",
+  "ram": "0x54AC",
+  "len": 256
+ },
+ {
+  "name": "Ign_map_3_x_axis",
+  "rom": "0x041C08",
+  "ram": "0x55AC",
+  "len": 24
+ },
+ {
+  "name": "Ign_map_3_y_axis",
+  "rom": "0x041C20",
+  "ram": "0x55C4",
+  "len": 32
+ },
+ {
+  "name": "Ign_map_3",
+  "rom": "0x041C40",
+  "ram": "0x55E4",
+  "len": 384
+ },
+ {
+  "name": "Ign_map_4",
+  "rom": "0x041DC0",
+  "ram": "0x5764",
+  "len": 576
+ },
+ {
+  "name": "Ign_map_5_x_axis",
+  "rom": "0x042000",
+  "ram": "0x59A4",
+  "len": 2
+ },
+ {
+  "name": "Ign_map_5_y_axis",
+  "rom": "0x042002",
+  "ram": "0x59A6",
+  "len": 32
+ },
+ {
+  "name": "Ign_map_5",
+  "rom": "0x042022",
+  "ram": "0x59C6",
+  "len": 32
+ },
+ {
+  "name": "Ign_map_6_x_axis",
+  "rom": "0x042042",
+  "ram": "0x59E6",
+  "len": 10
+ },
+ {
+  "name": "Ign_map_6_y_axis",
+  "rom": "0x04204C",
+  "ram": "0x59F0",
+  "len": 10
+ },
+ {
+  "name": "Ign_map_6",
+  "rom": "0x042056",
+  "ram": "0x59FA",
+  "len": 50
+ },
+ {
+  "name": "Ign_map_7_x_axis",
+  "rom": "0x042088",
+  "ram": "0x5A2C",
+  "len": 10
+ },
+ {
+  "name": "Ign_map_7_y_axis",
+  "rom": "0x042092",
+  "ram": "0x5A36",
+  "len": 10
+ },
+ {
+  "name": "Ign_map_7",
+  "rom": "0x04209C",
+  "ram": "0x5A40",
+  "len": 50
+ },
+ {
+  "name": "Ign_map_8_x_axis",
+  "rom": "0x0420D2",
+  "ram": "0x5A72",
+  "len": 2
+ },
+ {
+  "name": "Ign_map_8_y_axis",
+  "rom": "0x0420D4",
+  "ram": "0x5A74",
+  "len": 22
+ },
+ {
+  "name": "Ign_map_8",
+  "rom": "0x0420EA",
+  "ram": "0x5A8A",
+  "len": 22
+ },
+ {
+  "name": "Ign_offset",
+  "rom": "0x04284A",
+  "ram": "0x5AA0",
+  "len": 2
+ },
+ {
+  "name": "Ign_offset_cyl1",
+  "rom": "0x04284C",
+  "ram": "0x5AA2",
+  "len": 2
+ },
+ {
+  "name": "Ign_offset_cyl2",
+  "rom": "0x04284E",
+  "ram": "0x5AA4",
+  "len": 2
+ },
+ {
+  "name": "Ign_offset_cyl3",
+  "rom": "0x042850",
+  "ram": "0x5AA6",
+  "len": 2
+ },
+ {
+  "name": "Ign_offset_cyl4",
+  "rom": "0x042852",
+  "ram": "0x5AA8",
+  "len": 2
+ },
+ {
+  "name": "Ign_offset_adapt",
+  "rom": "0x042854",
+  "ram": "0x5AAA",
+  "len": 2
+ },
+ {
+  "name": "Kadapt_max_ref",
+  "rom": "0x042856",
+  "ram": "0x5AAC",
+  "len": 22
+ },
+ {
+  "name": "Kadapt_rpm_high",
+  "rom": "0x04286C",
+  "ram": "0x5AC2",
+  "len": 2
+ },
+ {
+  "name": "Kadapt_rpm_low",
+  "rom": "0x04286E",
+  "ram": "0x5AC4",
+  "len": 2
+ },
+ {
+  "name": "Kadapt_load_high",
+  "rom": "0x042870",
+  "ram": "0x5AC6",
+  "len": 1
+ },
+ {
+  "name": "Kadapt_load_low",
+  "rom": "0x042871",
+  "ram": "0x5AC8",
+  "len": 1
+ },
+ {
+  "name": "Kadapt_period",
+  "rom": "0x042872",
+  "ram": "0x5ACA",
+  "len": 2
+ },
+ {
+  "name": "Ramp_down_ram",
+  "rom": "0x042886",
+  "ram": "0x5ACC",
+  "len": 16
+ },
+ {
+  "name": "Ramp_up_ram",
+  "rom": "0x042876",
+  "ram": "0x5ADC",
+  "len": 16
+ },
+ {
+  "name": "Temp_limit_low",
+  "rom": "0x042896",
+  "ram": "0x5AEC",
+  "len": 1
+ },
+ {
+  "name": "Temp_limit_high",
+  "rom": "0x042897",
+  "ram": "0x5AEE",
+  "len": 1
+ },
+ {
+  "name": "Mis_trans_limit",
+  "rom": "0x042898",
+  "ram": "0x5AF0",
+  "len": 2
+ },
+ {
+  "name": "Mis_thrott_ign_lim",
+  "rom": "0x04289A",
+  "ram": "0x5AF2",
+  "len": 1
+ },
+ {
+  "name": "Mis_thrott_ign_lim_g",
+  "rom": "0x04289B",
+  "ram": "0x5AF4",
+  "len": 1
+ },
+ {
+  "name": "Mis_temp_limit",
+  "rom": "0x04289C",
+  "ram": "0x5AF6",
+  "len": 1
+ },
+ {
+  "name": "Misf_wait_time",
+  "rom": "0x04289D",
+  "ram": "0x5AF8",
+  "len": 1
+ },
+ {
+  "name": "Sync_temp",
+  "rom": "0x04289E",
+  "ram": "0x5AFA",
+  "len": 1
+ },
+ {
+  "name": "Sond_omsl_limit",
+  "rom": "0x0428A0",
+  "ram": "0x5AFC",
+  "len": 2
+ },
+ {
+  "name": "Diag_speed_time",
+  "rom": "0x0428A2",
+  "ram": "0x5B00",
+  "len": 2
+ },
+ {
+  "name": "Sond_ign_limit",
+  "rom": "0x0428A4",
+  "ram": "0x5AFE",
+  "len": 2
+ },
+ {
+  "name": "Sync_rpm",
+  "rom": "0x0428A6",
+  "ram": "0x5B02",
+  "len": 2
+ },
+ {
+  "name": "Sync_counter",
+  "rom": "0x0428A8",
+  "ram": "0x5B04",
+  "len": 2
+ },
+ {
+  "name": "Lambda_cat_lean",
+  "rom": "0x0428AA",
+  "ram": "0x5B06",
+  "len": 2
+ },
+ {
+  "name": "Lambda_cat_rich",
+  "rom": "0x0428AC",
+  "ram": "0x5B08",
+  "len": 2
+ },
+ {
+  "name": "Diag_speed_rpm",
+  "rom": "0x0428AE",
+  "ram": "0x5B0A",
+  "len": 2
+ },
+ {
+  "name": "Press_rpm_lim",
+  "rom": "0x0428B0",
+  "ram": "0x5B0C",
+  "len": 2
+ },
+ {
+  "name": "Diag_speed_load",
+  "rom": "0x0428B2",
+  "ram": "0x5B0E",
+  "len": 1
+ },
+ {
+  "name": "Adapt_korr_low",
+  "rom": "0x0428B3",
+  "ram": "0x5B10",
+  "len": 1
+ },
+ {
+  "name": "Adapt_korr_high",
+  "rom": "0x0428B4",
+  "ram": "0x5B12",
+  "len": 1
+ },
+ {
+  "name": "Adapt_injfaktor_low",
+  "rom": "0x0428B5",
+  "ram": "0x5B14",
+  "len": 1
+ },
+ {
+  "name": "Press_vs_lim",
+  "rom": "0x0428B6",
+  "ram": "0x5B16",
+  "len": 1
+ },
+ {
+  "name": "Adapt_injfaktor_high",
+  "rom": "0x0428B7",
+  "ram": "0x5B18",
+  "len": 1
+ },
+ {
+  "name": "Rev_grad_sens_dur_req",
+  "rom": "0x0420D0",
+  "ram": "0x5B1A",
+  "len": 2
+ },
+ {
+  "name": "Rev_grad_sens_cont",
+  "rom": "0x0420CE",
+  "ram": "0x5B1C",
+  "len": 2
+ },
+ {
+  "name": "Ap_max_on_time",
+  "rom": "0x042BDE",
+  "ram": "0x5B3E",
+  "len": 2
+ },
+ {
+  "name": "Ap_max_rpm",
+  "rom": "0x042BE0",
+  "ram": "0x5B40",
+  "len": 2
+ },
+ {
+  "name": "Ap_max_start_watertemp",
+  "rom": "0x042BE2",
+  "ram": "0x5B42",
+  "len": 1
+ },
+ {
+  "name": "Ap_max_start_airtemp",
+  "rom": "0x042BE3",
+  "ram": "0x5B44",
+  "len": 1
+ },
+ {
+  "name": "Ap_max_on_watertemp",
+  "rom": "0x042BE4",
+  "ram": "0x5B46",
+  "len": 1
+ },
+ {
+  "name": "Ap_min_watertemp",
+  "rom": "0x042BE5",
+  "ram": "0x5B48",
+  "len": 1
+ },
+ {
+  "name": "Ap_min_airtemp",
+  "rom": "0x042BE6",
+  "ram": "0x5B4A",
+  "len": 1
+ },
+ {
+  "name": "Ap_lambda_delay",
+  "rom": "0x042BE8",
+  "ram": "0x5B4C",
+  "len": 2
+ },
+ {
+  "name": "Airpump_ign_offset",
+  "rom": "0x042BEA",
+  "ram": "0x5B4E",
+  "len": 2
+ },
+ {
+  "name": "Airpump_inj_factor",
+  "rom": "0x042BEC",
+  "ram": "0x5B50",
+  "len": 1
+ },
+ {
+  "name": "Ap_start_delay",
+  "rom": "0x042BEE",
+  "ram": "0x5B52",
+  "len": 2
+ },
+ {
+  "name": "Ap_start_delay2",
+  "rom": "0x042BF0",
+  "ram": "0x5B54",
+  "len": 2
+ },
+ {
+  "name": "Ap_max_on_time2",
+  "rom": "0x042BF2",
+  "ram": "0x5B56",
+  "len": 2
+ },
+ {
+  "name": "Ap_max_startwatertemp2",
+  "rom": "0x042BF4",
+  "ram": "0x5B58",
+  "len": 1
+ },
+ {
+  "name": "Ap_min_stop_time",
+  "rom": "0x042BF6",
+  "ram": "0x5B5A",
+  "len": 2
+ },
+ {
+  "name": "Ap_inj_factor_delay",
+  "rom": "0x042BF8",
+  "ram": "0x5B5C",
+  "len": 2
+ },
+ {
+  "name": "Ap_inj_factor_delay2",
+  "rom": "0x042BFA",
+  "ram": "0x5B5E",
+  "len": 2
+ },
+ {
+  "name": "Ap_ign_step",
+  "rom": "0x042BFC",
+  "ram": "0x5B60",
+  "len": 2
+ },
+ {
+  "name": "Ap_ign_offset_delay",
+  "rom": "0x042BFE",
+  "ram": "0x5B62",
+  "len": 2
+ },
+ {
+  "name": "Ap_ign_offset_delay2",
+  "rom": "0x042C00",
+  "ram": "0x5B64",
+  "len": 2
+ },
+ {
+  "name": "API_throttle_tab",
+  "rom": "0x042E4A",
+  "ram": "0x5B1E",
+  "len": 5
+ },
+ {
+  "name": "API_dt_offset_tab",
+  "rom": "0x042E50",
+  "ram": "0x5B24",
+  "len": 10
+ },
+ {
+  "name": "API_dt_delay",
+  "rom": "0x042E5A",
+  "ram": "0x5B2E",
+  "len": 2
+ },
+ {
+  "name": "API_dt_ramp",
+  "rom": "0x042E5C",
+  "ram": "0x5B30",
+  "len": 2
+ },
+ {
+  "name": "API_ku_offset",
+  "rom": "0x042E5E",
+  "ram": "0x5B32",
+  "len": 2
+ },
+ {
+  "name": "API_ku_delay",
+  "rom": "0x042E60",
+  "ram": "0x5B34",
+  "len": 2
+ },
+ {
+  "name": "API_ku_ramp",
+  "rom": "0x042E62",
+  "ram": "0x5B36",
+  "len": 2
+ },
+ {
+  "name": "API_ku_derivata",
+  "rom": "0x042E64",
+  "ram": "0x5B38",
+  "len": 2
+ },
+ {
+  "name": "API_rpm_limit",
+  "rom": "0x042E66",
+  "ram": "0x5B3A",
+  "len": 2
+ },
+ {
+  "name": "API_throttle_limit",
+  "rom": "0x042E68",
+  "ram": "0x5B3C",
+  "len": 1
+ },
+ {
+  "name": "Trans_offset",
+  "rom": "0x041824",
+  "ram": "0x5F68",
+  "len": 2
+ },
+ {
+  "name": "Trans_trott_limit",
+  "rom": "0x042BDA",
+  "ram": "0x5B6A",
+  "len": 2
+ },
+ {
+  "name": "Max_vehicle_speed",
+  "rom": "0x042BDC",
+  "ram": "0x5B6C",
+  "len": 1
+ },
+ {
+  "name": "Pwm_ind_rpm",
+  "rom": "0x041288",
+  "ram": "0x5B6E",
+  "len": 32
+ },
+ {
+  "name": "Pwm_ind_trot",
+  "rom": "0x0412A8",
+  "ram": "0x5B8E",
+  "len": 40
+ },
+ {
+  "name": "Tryck_vakt_tab",
+  "rom": "0x0412D0",
+  "ram": "0x5BB6",
+  "len": 16
+ },
+ {
+  "name": "Tryck_mat",
+  "rom": "0x0412E0",
+  "ram": "0x5BC6",
+  "len": 128
+ },
+ {
+  "name": "Tryck_mat_a",
+  "rom": "0x041360",
+  "ram": "0x5C46",
+  "len": 128
+ },
+ {
+  "name": "Overs_komp_tab",
+  "rom": "0x0413E0",
+  "ram": "0x5CC6",
+  "len": 8
+ },
+ {
+  "name": "Overs_tab",
+  "rom": "0x0413E8",
+  "ram": "0x5CCE",
+  "len": 128
+ },
+ {
+  "name": "Overs_tab_xaxis",
+  "rom": "0x041468",
+  "ram": "0x5D4E",
+  "len": 8
+ },
+ {
+  "name": "Overstid_tab",
+  "rom": "0x041470",
+  "ram": "0x5D56",
+  "len": 16
+ },
+ {
+  "name": "Reg_varv",
+  "rom": "0x041480",
+  "ram": "0x5D66",
+  "len": 14
+ },
+ {
+  "name": "P_fors",
+  "rom": "0x041492",
+  "ram": "0x5D74",
+  "len": 28
+ },
+ {
+  "name": "I_fors",
+  "rom": "0x0414AE",
+  "ram": "0x5D90",
+  "len": 28
+ },
+ {
+  "name": "D_fors",
+  "rom": "0x0414CA",
+  "ram": "0x5DAC",
+  "len": 28
+ },
+ {
+  "name": "P_fors_a",
+  "rom": "0x0414E6",
+  "ram": "0x5DC8",
+  "len": 28
+ },
+ {
+  "name": "I_fors_a",
+  "rom": "0x041502",
+  "ram": "0x5DE4",
+  "len": 28
+ },
+ {
+  "name": "D_fors_a",
+  "rom": "0x04151E",
+  "ram": "0x5E00",
+  "len": 28
+ },
+ {
+  "name": "Reg_kon_mat",
+  "rom": "0x0415E8",
+  "ram": "0x5E1C",
+  "len": 62
+ },
+ {
+  "name": "Reg_kon_mat_a",
+  "rom": "0x041626",
+  "ram": "0x5E5A",
+  "len": 62
+ },
+ {
+  "name": "Adaption_time",
+  "rom": "0x041664",
+  "ram": "0x5E98",
+  "len": 1
+ },
+ {
+  "name": "I_fak_max",
+  "rom": "0x041666",
+  "ram": "0x5E9A",
+  "len": 2
+ },
+ {
+  "name": "Max_um_time",
+  "rom": "0x041668",
+  "ram": "0x5E9C",
+  "len": 2
+ },
+ {
+  "name": "Max_pos_der",
+  "rom": "0x04166A",
+  "ram": "0x5E9E",
+  "len": 2
+ },
+ {
+  "name": "Max_neg_der",
+  "rom": "0x04166C",
+  "ram": "0x5EA0",
+  "len": 2
+ },
+ {
+  "name": "Um_thr_lim",
+  "rom": "0x04166E",
+  "ram": "0x5EA2",
+  "len": 1
+ },
+ {
+  "name": "Um_min_limit",
+  "rom": "0x04166F",
+  "ram": "0x5EA4",
+  "len": 1
+ },
+ {
+  "name": "Frek_230",
+  "rom": "0x041670",
+  "ram": "0x5EA6",
+  "len": 2
+ },
+ {
+  "name": "Frek_250",
+  "rom": "0x041672",
+  "ram": "0x5EA8",
+  "len": 2
+ },
+ {
+  "name": "Reg_last",
+  "rom": "0x04148E",
+  "ram": "0x5EAA",
+  "len": 4
+ },
+ {
+  "name": "Apc_konst_tid",
+  "rom": "0x04153A",
+  "ram": "0x5EAE",
+  "len": 1
+ },
+ {
+  "name": "Apc_cert_tid",
+  "rom": "0x04153B",
+  "ram": "0x5EB0",
+  "len": 1
+ },
+ {
+  "name": "Apc_fullgas",
+  "rom": "0x04153C",
+  "ram": "0x5EB2",
+  "len": 1
+ },
+ {
+  "name": "Overs_angle",
+  "rom": "0x04153D",
+  "ram": "0x5EB4",
+  "len": 1
+ },
+ {
+  "name": "Apc_frek",
+  "rom": "0x04153E",
+  "ram": "0x5EB6",
+  "len": 1
+ },
+ {
+  "name": "Gear_st",
+  "rom": "0x041540",
+  "ram": "0x5EB8",
+  "len": 10
+ },
+ {
+  "name": "Gear_ratio_delta",
+  "rom": "0x04154A",
+  "ram": "0x5EC2",
+  "len": 5
+ },
+ {
+  "name": "Apc_decrese_asp",
+  "rom": "0x04154F",
+  "ram": "0x5EC8",
+  "len": 1
+ },
+ {
+  "name": "Reg_kon_fga",
+  "rom": "0x041550",
+  "ram": "0x5ECA",
+  "len": 1
+ },
+ {
+  "name": "Reg_kon_fgm",
+  "rom": "0x041551",
+  "ram": "0x5ECC",
+  "len": 1
+ },
+ {
+  "name": "Reg_kon_sgm",
+  "rom": "0x041552",
+  "ram": "0x5ECE",
+  "len": 1
+ },
+ {
+  "name": "Regl_tryck_fgaut",
+  "rom": "0x041554",
+  "ram": "0x5ED0",
+  "len": 16
+ },
+ {
+  "name": "Temp_max_regl",
+  "rom": "0x041564",
+  "ram": "0x5EE0",
+  "len": 2
+ },
+ {
+  "name": "Max_regl_temp_1",
+  "rom": "0x041566",
+  "ram": "0x5EE2",
+  "len": 32
+ },
+ {
+  "name": "Max_regl_temp_2",
+  "rom": "0x041586",
+  "ram": "0x5F02",
+  "len": 32
+ },
+ {
+  "name": "Max_regl_sp",
+  "rom": "0x0415A6",
+  "ram": "0x5F22",
+  "len": 32
+ },
+ {
+  "name": "Regl_tryck_fgm",
+  "rom": "0x0415C6",
+  "ram": "0x5F42",
+  "len": 16
+ },
+ {
+  "name": "Regl_tryck_sgm",
+  "rom": "0x0415D6",
+  "ram": "0x5F52",
+  "len": 16
+ },
+ {
+  "name": "Apc_knock_back",
+  "rom": "0x042EAA",
+  "ram": "0x5F62",
+  "len": 1
+ },
+ {
+  "name": "Idle_fuel_korr",
+  "rom": "0x040DB0",
+  "ram": "0x5F6A",
+  "len": 96
+ },
+ {
+  "name": "Ign_idle_angle",
+  "rom": "0x04181E",
+  "ram": "0x5FCA",
+  "len": 2
+ },
+ {
+  "name": "Ign_idle_angle_start",
+  "rom": "0x041820",
+  "ram": "0x5FCC",
+  "len": 2
+ },
+ {
+  "name": "I_luft_cel",
+  "rom": "0x040F9C",
+  "ram": "0x61F2",
+  "len": 1
+ },
+ {
+  "name": "AC_Control",
+  "rom": "0x040F9E",
+  "ram": "0x61F4",
+  "len": 4
+ },
+ {
+  "name": "AC_start_tid",
+  "rom": "0x040FA2",
+  "ram": "0x5FCE",
+  "len": 1
+ },
+ {
+  "name": "AC_klick",
+  "rom": "0x040FA3",
+  "ram": "0x5FD0",
+  "len": 1
+ },
+ {
+  "name": "Idle_update",
+  "rom": "0x040FA4",
+  "ram": "0x5FD2",
+  "len": 1
+ },
+ {
+  "name": "AC_fak",
+  "rom": "0x040FA5",
+  "ram": "0x5FD4",
+  "len": 1
+ },
+ {
+  "name": "Idle_der_tab",
+  "rom": "0x040FAE",
+  "ram": "0x5FD6",
+  "len": 32
+ },
+ {
+  "name": "Idle_p_tab",
+  "rom": "0x040FCE",
+  "ram": "0x5FF6",
+  "len": 16
+ },
+ {
+  "name": "AC_wait_on",
+  "rom": "0x04110A",
+  "ram": "0x6006",
+  "len": 8
+ },
+ {
+  "name": "AC_wait_off",
+  "rom": "0x041112",
+  "ram": "0x600E",
+  "len": 8
+ },
+ {
+  "name": "I_medel_varv",
+  "rom": "0x040FF6",
+  "ram": "0x6016",
+  "len": 1
+ },
+ {
+  "name": "Idle_rpm_off",
+  "rom": "0x041162",
+  "ram": "0x6018",
+  "len": 2
+ },
+ {
+  "name": "Idle_ac_extra_tab",
+  "rom": "0x041188",
+  "ram": "0x601A",
+  "len": 32
+ },
+ {
+  "name": "Idle_ac_extra_sp",
+  "rom": "0x0411A8",
+  "ram": "0x603A",
+  "len": 32
+ },
+ {
+  "name": "LLS_just_tab",
+  "rom": "0x041185",
+  "ram": "0x605A",
+  "len": 1
+ },
+ {
+  "name": "Min_dead",
+  "rom": "0x041186",
+  "ram": "0x605C",
+  "len": 1
+ },
+ {
+  "name": "Max_dead",
+  "rom": "0x041184",
+  "ram": "0x605E",
+  "len": 1
+ },
+ {
+  "name": "I_kyl_st",
+  "rom": "0x04112A",
+  "ram": "0x6088",
+  "len": 8
+ },
+ {
+  "name": "Idle_start_extra_ramp",
+  "rom": "0x04114A",
+  "ram": "0x6078",
+  "len": 16
+ },
+ {
+  "name": "Idle_start_extra_sp",
+  "rom": "0x041142",
+  "ram": "0x6060",
+  "len": 8
+ },
+ {
+  "name": "Idle_start_extra",
+  "rom": "0x041132",
+  "ram": "0x6068",
+  "len": 16
+ },
+ {
+  "name": "I_luft_st",
+  "rom": "0x04115A",
+  "ram": "0x6090",
+  "len": 8
+ },
+ {
+  "name": "Idle_ej_off",
+  "rom": "0x0411C9",
+  "ram": "0x6098",
+  "len": 1
+ },
+ {
+  "name": "Delay",
+  "rom": "0x040FA8",
+  "ram": "0x609A",
+  "len": 1
+ },
+ {
+  "name": "Hast_grans",
+  "rom": "0x0411C8",
+  "ram": "0x609C",
+  "len": 1
+ },
+ {
+  "name": "Idle_start",
+  "rom": "0x041284",
+  "ram": "0x609E",
+  "len": 1
+ },
+ {
+  "name": "Omslag_grans",
+  "rom": "0x041285",
+  "ram": "0x60A0",
+  "len": 1
+ },
+ {
+  "name": "AC_const",
+  "rom": "0x040FA6",
+  "ram": "0x60A2",
+  "len": 1
+ },
+ {
+  "name": "AC_slope",
+  "rom": "0x040FA7",
+  "ram": "0x60A4",
+  "len": 1
+ },
+ {
+  "name": "AC_delay",
+  "rom": "0x040F9A",
+  "ram": "0x60A6",
+  "len": 2
+ },
+ {
+  "name": "Derivata_grans",
+  "rom": "0x040FAA",
+  "ram": "0x60A8",
+  "len": 2
+ },
+ {
+  "name": "Derivata_times",
+  "rom": "0x040FAC",
+  "ram": "0x60AA",
+  "len": 1
+ },
+ {
+  "name": "Idle_step_imns",
+  "rom": "0x040FDE",
+  "ram": "0x60AC",
+  "len": 2
+ },
+ {
+  "name": "Idle_step_ioka",
+  "rom": "0x040FE0",
+  "ram": "0x60AE",
+  "len": 2
+ },
+ {
+  "name": "LLS_min",
+  "rom": "0x040FE4",
+  "ram": "0x60B0",
+  "len": 2
+ },
+ {
+  "name": "Trot_limit_ac",
+  "rom": "0x040FE2",
+  "ram": "0x60B2",
+  "len": 1
+ },
+ {
+  "name": "Idle_drift_tab",
+  "rom": "0x040FF8",
+  "ram": "0x61F8",
+  "len": 4
+ },
+ {
+  "name": "Iv_min_tab_ac",
+  "rom": "0x041068",
+  "ram": "0x6268",
+  "len": 108
+ },
+ {
+  "name": "Iv_min_tab",
+  "rom": "0x040FFC",
+  "ram": "0x61FC",
+  "len": 108
+ },
+ {
+  "name": "Iv_min_count",
+  "rom": "0x0410D4",
+  "ram": "0x62D4",
+  "len": 1
+ },
+ {
+  "name": "Iv_min_load",
+  "rom": "0x0410D5",
+  "ram": "0x62D6",
+  "len": 1
+ },
+ {
+  "name": "Iv_min_change",
+  "rom": "0x0410D6",
+  "ram": "0x62D8",
+  "len": 1
+ },
+ {
+  "name": "Idle_ac_tab",
+  "rom": "0x0410D8",
+  "ram": "0x62DA",
+  "len": 32
+ },
+ {
+  "name": "Iv_start_pos_offset",
+  "rom": "0x0410F8",
+  "ram": "0x62FA",
+  "len": 1
+ },
+ {
+  "name": "Iv_start_rpm_offset",
+  "rom": "0x0410F9",
+  "ram": "0x62FC",
+  "len": 1
+ },
+ {
+  "name": "Iv_start_time_tab",
+  "rom": "0x0410FA",
+  "ram": "0x62FE",
+  "len": 16
+ },
+ {
+  "name": "Idle_temp_off",
+  "rom": "0x040FE6",
+  "ram": "0x60B4",
+  "len": 16
+ },
+ {
+  "name": "Idle_rpm_tab",
+  "rom": "0x04111A",
+  "ram": "0x60C4",
+  "len": 16
+ },
+ {
+  "name": "Br_plus_tab",
+  "rom": "0x041164",
+  "ram": "0x6106",
+  "len": 16
+ },
+ {
+  "name": "Derivata_br_sp",
+  "rom": "0x042C24",
+  "ram": "0x60D4",
+  "len": 16
+ },
+ {
+  "name": "Derivata_fuel_rpm",
+  "rom": "0x042C34",
+  "ram": "0x60E4",
+  "len": 2
+ },
+ {
+  "name": "Derivata_br_tab_pos",
+  "rom": "0x042C04",
+  "ram": "0x60E6",
+  "len": 16
+ },
+ {
+  "name": "Derivata_br_tab_neg",
+  "rom": "0x042C14",
+  "ram": "0x60F6",
+  "len": 16
+ },
+ {
+  "name": "Br_minus_tab",
+  "rom": "0x041174",
+  "ram": "0x6116",
+  "len": 16
+ },
+ {
+  "name": "Start_tab",
+  "rom": "0x0411CA",
+  "ram": "0x6126",
+  "len": 16
+ },
+ {
+  "name": "Temp_reduce_mat",
+  "rom": "0x0411DA",
+  "ram": "0x6136",
+  "len": 64
+ },
+ {
+  "name": "Temp_reduce_mat_2",
+  "rom": "0x04121A",
+  "ram": "0x6176",
+  "len": 64
+ },
+ {
+  "name": "Temp_reduce_x_st",
+  "rom": "0x04125A",
+  "ram": "0x61B6",
+  "len": 8
+ },
+ {
+  "name": "Temp_reduce_y_st",
+  "rom": "0x041262",
+  "ram": "0x61BE",
+  "len": 16
+ },
+ {
+  "name": "Idle_tryck",
+  "rom": "0x041272",
+  "ram": "0x61CE",
+  "len": 16
+ },
+ {
+  "name": "Min_tid_acink",
+  "rom": "0x041282",
+  "ram": "0x61DE",
+  "len": 1
+ },
+ {
+  "name": "Limp_tryck_konst",
+  "rom": "0x041283",
+  "ram": "0x61E0",
+  "len": 1
+ },
+ {
+  "name": "Idle_st_last",
+  "rom": "0x0416D4",
+  "ram": "0x61E2",
+  "len": 12
+ },
+ {
+  "name": "Fuel_knock_mat",
+  "rom": "0x0409F4",
+  "ram": "0x6352",
+  "len": 192
+ },
+ {
+  "name": "Fuel_knock_xaxis",
+  "rom": "0x040AB4",
+  "ram": "0x6412",
+  "len": 12
+ },
+ {
+  "name": "Apc_knock_tab",
+  "rom": "0x040AC0",
+  "ram": "0x641E",
+  "len": 8
+ },
+ {
+  "name": "Acc_reduce",
+  "rom": "0x040AC8",
+  "ram": "0x6426",
+  "len": 11
+ },
+ {
+  "name": "Knock_offset",
+  "rom": "0x041822",
+  "ram": "0x675C",
+  "len": 2
+ },
+ {
+  "name": "Knock_matrix_time",
+  "rom": "0x0428B8",
+  "ram": "0x6432",
+  "len": 2
+ },
+ {
+  "name": "Knock_ref_matrix",
+  "rom": "0x0428BA",
+  "ram": "0x6434",
+  "len": 576
+ },
+ {
+  "name": "Lknock_oref_tab",
+  "rom": "0x042AFA",
+  "ram": "0x6674",
+  "len": 32
+ },
+ {
+  "name": "Knock_press_tab",
+  "rom": "0x042B1A",
+  "ram": "0x6694",
+  "len": 32
+ },
+ {
+  "name": "Turbo_knock_tab",
+  "rom": "0x042B3A",
+  "ram": "0x66B4",
+  "len": 32
+ },
+ {
+  "name": "Knock_average_tab",
+  "rom": "0x042B5A",
+  "ram": "0x66D4",
+  "len": 32
+ },
+ {
+  "name": "Knock_wind_rpm",
+  "rom": "0x042B7A",
+  "ram": "0x66F4",
+  "len": 32
+ },
+ {
+  "name": "Knock_wind_on_tab",
+  "rom": "0x042B9A",
+  "ram": "0x6714",
+  "len": 32
+ },
+ {
+  "name": "Knock_wind_off_tab",
+  "rom": "0x042BBA",
+  "ram": "0x6734",
+  "len": 32
+ },
+ {
+  "name": "Knock_ang_dec",
+  "rom": "0x042874",
+  "ram": "0x6754",
+  "len": 2
+ },
+ {
+  "name": "Knock_start",
+  "rom": "0x040512",
+  "ram": "0x6756",
+  "len": 2
+ },
+ {
+  "name": "Wait_count_tab",
+  "rom": "0x0417FE",
+  "ram": "0x630E",
+  "len": 32
+ },
+ {
+  "name": "Knock_reduce",
+  "rom": "0x0417DA",
+  "ram": "0x6350",
+  "len": 2
+ },
+ {
+  "name": "Knock_back",
+  "rom": "0x0417DC",
+  "ram": "0x634E",
+  "len": 2
+ },
+ {
+  "name": "Knock_lim_tab",
+  "rom": "0x0417DE",
+  "ram": "0x632E",
+  "len": 32
+ },
+ {
+  "name": "Detect_map_x_axis",
+  "rom": "0x042100",
+  "ram": "0x675E",
+  "len": 36
+ },
+ {
+  "name": "Detect_map_y_axis",
+  "rom": "0x042124",
+  "ram": "0x6782",
+  "len": 32
+ },
+ {
+  "name": "Detect_map",
+  "rom": "0x042144",
+  "ram": "0x67A2",
+  "len": 576
+ },
+ {
+  "name": "Misfire_map_x_axis",
+  "rom": "0x042384",
+  "ram": "0x69E2",
+  "len": 36
+ },
+ {
+  "name": "Misfire_map_y_axis",
+  "rom": "0x0423A8",
+  "ram": "0x6A06",
+  "len": 32
+ },
+ {
+  "name": "Limit_high",
+  "rom": "0x040510",
+  "ram": "0x6A26",
+  "len": 1
+ },
+ {
+  "name": "Limit_low",
+  "rom": "0x04050F",
+  "ram": "0x6A28",
+  "len": 1
+ },
+ {
+  "name": "Synk_ok_limit",
+  "rom": "0x040514",
+  "ram": "0x6A2A",
+  "len": 2
+ },
+ {
+  "name": "Sond_heat_tab",
+  "rom": "0x0409EA",
+  "ram": "0x6A30",
+  "len": 6
+ },
+ {
+  "name": "Lam_laststeg",
+  "rom": "0x040BB2",
+  "ram": "0x6A36",
+  "len": 3
+ },
+ {
+  "name": "Lam_rpmsteg",
+  "rom": "0x040BB5",
+  "ram": "0x6A3A",
+  "len": 3
+ },
+ {
+  "name": "Min_rpm_closed_loop",
+  "rom": "0x040D4E",
+  "ram": "0x6A3E",
+  "len": 2
+ },
+ {
+  "name": "Lean_step_map",
+  "rom": "0x040BB8",
+  "ram": "0x6A40",
+  "len": 64
+ },
+ {
+  "name": "Rich_step_map",
+  "rom": "0x040BF8",
+  "ram": "0x6A80",
+  "len": 64
+ },
+ {
+  "name": "Frekv_map",
+  "rom": "0x040C38",
+  "ram": "0x6AC0",
+  "len": 64
+ },
+ {
+  "name": "Konst_lean_map",
+  "rom": "0x040C78",
+  "ram": "0x6B00",
+  "len": 64
+ },
+ {
+  "name": "Konst_rich_map",
+  "rom": "0x040CB8",
+  "ram": "0x6B40",
+  "len": 64
+ },
+ {
+  "name": "Lam_load_sp",
+  "rom": "0x040CF8",
+  "ram": "0x6B80",
+  "len": 8
+ },
+ {
+  "name": "Lam_rpm_sp",
+  "rom": "0x040D00",
+  "ram": "0x6B88",
+  "len": 16
+ },
+ {
+  "name": "AdjustLamCal",
+  "rom": "0x040D10",
+  "ram": "0x6B98",
+  "len": 62
+ },
+ {
+  "name": "Lambdamatris_diag",
+  "rom": "0x040D50",
+  "ram": "0x6BD6",
+  "len": 96
+ },
+ {
+  "name": "Lamb_temp",
+  "rom": "0x04074A",
+  "ram": "0x6C36",
+  "len": 1
+ },
+ {
+  "name": "Lamb_kyl",
+  "rom": "0x040F64",
+  "ram": "0x6C38",
+  "len": 9
+ },
+ {
+  "name": "Lamb_tid",
+  "rom": "0x040F6D",
+  "ram": "0x6C42",
+  "len": 9
+ },
+ {
+  "name": "Lamb_idle",
+  "rom": "0x040F76",
+  "ram": "0x6C4C",
+  "len": 9
+ },
+ {
+  "name": "Lamb_ej",
+  "rom": "0x040F7F",
+  "ram": "0x6C56",
+  "len": 9
+ },
+ {
+  "name": "Min_lam_omslag",
+  "rom": "0x040F88",
+  "ram": "0x6C60",
+  "len": 1
+ },
+ {
+  "name": "Lam_minlast",
+  "rom": "0x040F8A",
+  "ram": "0x6C62",
+  "len": 16
+ },
+ {
+  "name": "Lacc_clear_tab",
+  "rom": "0x04099C",
+  "ram": "0x6C72",
+  "len": 16
+ },
+ {
+  "name": "Lacc_konst",
+  "rom": "0x0408FC",
+  "ram": "0x6C82",
+  "len": 64
+ },
+ {
+  "name": "Lret_konst",
+  "rom": "0x04093C",
+  "ram": "0x6CC6",
+  "len": 64
+ },
+ {
+  "name": "Lner_detekt",
+  "rom": "0x040B9F",
+  "ram": "0x6CC2",
+  "len": 1
+ },
+ {
+  "name": "Lupp_detekt",
+  "rom": "0x040BA0",
+  "ram": "0x6CC4",
+  "len": 1
+ },
+ {
+  "name": "Purge_tab",
+  "rom": "0x04053E",
+  "ram": "0x6D10",
+  "len": 256
+ },
+ {
+  "name": "Purge_min_value",
+  "rom": "0x04063E",
+  "ram": "0x6E10",
+  "len": 1
+ },
+ {
+  "name": "Purge_temp",
+  "rom": "0x04053C",
+  "ram": "0x6E12",
+  "len": 1
+ },
+ {
+  "name": "Adapt_purge_period",
+  "rom": "0x040F32",
+  "ram": "0x6E14",
+  "len": 2
+ },
+ {
+  "name": "Purge_l_step",
+  "rom": "0x041286",
+  "ram": "0x6E16",
+  "len": 1
+ },
+ {
+  "name": "Purge_duty_idle",
+  "rom": "0x0409F0",
+  "ram": "0x6D0A",
+  "len": 1
+ },
+ {
+  "name": "Purge_duty_tank",
+  "rom": "0x0409F1",
+  "ram": "0x6D0C",
+  "len": 1
+ },
+ {
+  "name": "Purge_ramp_kon",
+  "rom": "0x0409F2",
+  "ram": "0x6D0E",
+  "len": 1
+ },
+ {
+  "name": "Diag_mod",
+  "rom": "0x0423C8",
+  "ram": "0x6E20",
+  "len": 1
+ },
+ {
+  "name": "Mis200_map",
+  "rom": "0x0423CA",
+  "ram": "0x6E22",
+  "len": 576
+ },
+ {
+  "name": "Mis1000_map",
+  "rom": "0x04260A",
+  "ram": "0x7062",
+  "len": 576
+ },
+ {
+  "name": "DI_cassette_U_limit",
+  "rom": "0x042C02",
+  "ram": "0x72A2",
+  "len": 1
+ },
+ {
+  "name": "Cat_delta_load_lim",
+  "rom": "0x042C36",
+  "ram": "0x72A4",
+  "len": 1
+ },
+ {
+  "name": "Cat_load_filt_coef",
+  "rom": "0x042C38",
+  "ram": "0x72A6",
+  "len": 2
+ },
+ {
+  "name": "Cat_cool_temp_lim",
+  "rom": "0x042C3A",
+  "ram": "0x72A8",
+  "len": 1
+ },
+ {
+  "name": "Cat_vehi_speed_hi",
+  "rom": "0x042C3B",
+  "ram": "0x72AA",
+  "len": 1
+ },
+ {
+  "name": "Cat_vehi_speed_lo",
+  "rom": "0x042C3C",
+  "ram": "0x72AC",
+  "len": 1
+ },
+ {
+  "name": "Cat_air_flow_hi",
+  "rom": "0x042C3E",
+  "ram": "0x72AE",
+  "len": 2
+ },
+ {
+  "name": "Cat_air_flow_lo",
+  "rom": "0x042C40",
+  "ram": "0x72B0",
+  "len": 2
+ },
+ {
+  "name": "Cat_ready_timer_lim",
+  "rom": "0x042C42",
+  "ram": "0x72B2",
+  "len": 1
+ },
+ {
+  "name": "Cat_ready_timer_step",
+  "rom": "0x042C43",
+  "ram": "0x72B4",
+  "len": 1
+ },
+ {
+  "name": "Cat_ox1_filt_coef_map",
+  "rom": "0x042C44",
+  "ram": "0x72B6",
+  "len": 128
+ },
+ {
+  "name": "Cat_ox1_bias_lim",
+  "rom": "0x042CC4",
+  "ram": "0x7336",
+  "len": 2
+ },
+ {
+  "name": "Cat_ox1_err_lim",
+  "rom": "0x042CC6",
+  "ram": "0x7338",
+  "len": 2
+ },
+ {
+  "name": "Cat_ox2_filt_coef_map",
+  "rom": "0x042CC8",
+  "ram": "0x733A",
+  "len": 128
+ },
+ {
+  "name": "Cat_ox2_filt_coef_2",
+  "rom": "0x042D48",
+  "ram": "0x73BA",
+  "len": 2
+ },
+ {
+  "name": "Cat_air_flow_tab",
+  "rom": "0x042D4A",
+  "ram": "0x73BC",
+  "len": 16
+ },
+ {
+  "name": "Cat_rpm_tab",
+  "rom": "0x042D5A",
+  "ram": "0x73CC",
+  "len": 16
+ },
+ {
+  "name": "Cat_load_tab",
+  "rom": "0x042D6A",
+  "ram": "0x73DC",
+  "len": 16
+ },
+ {
+  "name": "Cat_ox1_per_hi_tab",
+  "rom": "0x042D7A",
+  "ram": "0x73EC",
+  "len": 16
+ },
+ {
+  "name": "Cat_ox1_per_lo_tab",
+  "rom": "0x042D8A",
+  "ram": "0x73FC",
+  "len": 16
+ },
+ {
+  "name": "Cat_ox1_duty_hi_lim",
+  "rom": "0x042D9A",
+  "ram": "0x740C",
+  "len": 1
+ },
+ {
+  "name": "Cat_ox1_duty_lo_lim",
+  "rom": "0x042D9B",
+  "ram": "0x740E",
+  "len": 1
+ },
+ {
+  "name": "Cat_ox1_err_max_tab",
+  "rom": "0x042D9C",
+  "ram": "0x7410",
+  "len": 16
+ },
+ {
+  "name": "Cat_ox2_dev_max_map",
+  "rom": "0x042DAC",
+  "ram": "0x7420",
+  "len": 128
+ },
+ {
+  "name": "Cat_ox2_dev_samp_lim",
+  "rom": "0x042E2C",
+  "ram": "0x74A0",
+  "len": 1
+ },
+ {
+  "name": "Cat_stage1_threshold",
+  "rom": "0x042E2E",
+  "ram": "0x74A2",
+  "len": 2
+ },
+ {
+  "name": "Cat_start_timer_lim",
+  "rom": "0x042E30",
+  "ram": "0x74A4",
+  "len": 2
+ },
+ {
+  "name": "Cat_hl_timer_lim",
+  "rom": "0x042E32",
+  "ram": "0x74A6",
+  "len": 2
+ },
+ {
+  "name": "Cat_vs_timer_lim",
+  "rom": "0x042E34",
+  "ram": "0x74A8",
+  "len": 2
+ },
+ {
+  "name": "Cat_fc_timer_lim",
+  "rom": "0x042E36",
+  "ram": "0x74AA",
+  "len": 2
+ },
+ {
+  "name": "Cat_monitor_restart",
+  "rom": "0x042E38",
+  "ram": "0x74AC",
+  "len": 1
+ },
+ {
+  "name": "Cat_af_start_timer_min",
+  "rom": "0x042E3A",
+  "ram": "0x74AE",
+  "len": 2
+ },
+ {
+  "name": "Cat_hl_air_flow_min",
+  "rom": "0x042E3C",
+  "ram": "0x74B0",
+  "len": 2
+ },
+ {
+  "name": "Cl_timer1_lim",
+  "rom": "0x042E3E",
+  "ram": "0x74B2",
+  "len": 2
+ },
+ {
+  "name": "Cl_timer2_lim",
+  "rom": "0x042E40",
+  "ram": "0x74B4",
+  "len": 2
+ },
+ {
+  "name": "Misf_rpm_diff",
+  "rom": "0x042E42",
+  "ram": "0x74B6",
+  "len": 2
+ },
+ {
+  "name": "Misf_rpm_diff_start",
+  "rom": "0x042E44",
+  "ram": "0x74B8",
+  "len": 2
+ },
+ {
+  "name": "Misf_kyltemp",
+  "rom": "0x042E46",
+  "ram": "0x74BA",
+  "len": 1
+ },
+ {
+  "name": "Jd_lastvar",
+  "rom": "0x042E48",
+  "ram": "0x74BC",
+  "len": 2
+ },
+ {
+  "name": "Ox2_change_lim",
+  "rom": "0x04050C",
+  "ram": "0x74C0",
+  "len": 2
+ },
+ {
+  "name": "Ox1DeltaLoadLim",
+  "rom": "0x04050E",
+  "ram": "0x74BE",
+  "len": 1
+ },
+ {
+  "name": "Ox2_activity_time_lim",
+  "rom": "0x04050A",
+  "ram": "0x74C2",
+  "len": 2
+ },
+ {
+  "name": "Start_time_rpm_lim",
+  "rom": "0x042E6A",
+  "ram": "0x74C4",
+  "len": 2
+ },
+ {
+  "name": "PMCal_StartRamp",
+  "rom": "0x042E6C",
+  "ram": "0x74C6",
+  "len": 2
+ },
+ {
+  "name": "PMCal_LamTransCntLim",
+  "rom": "0x042E6E",
+  "ram": "0x74C8",
+  "len": 1
+ },
+ {
+  "name": "PMCal_OpenTimeTab",
+  "rom": "0x042E70",
+  "ram": "0x74CA",
+  "len": 16
+ },
+ {
+  "name": "PMCal_OpenPWMTab",
+  "rom": "0x042E80",
+  "ram": "0x74DA",
+  "len": 16
+ },
+ {
+  "name": "PMCal_LambdaAvgLim",
+  "rom": "0x042E90",
+  "ram": "0x74EA",
+  "len": 2
+ },
+ {
+  "name": "PMCal_IdleValueLim",
+  "rom": "0x042E92",
+  "ram": "0x74EC",
+  "len": 2
+ },
+ {
+  "name": "PMCal_CloseRamp",
+  "rom": "0x042E94",
+  "ram": "0x74EE",
+  "len": 2
+ },
+ {
+  "name": "PMCal_LambdaAvgHaltLim",
+  "rom": "0x042E96",
+  "ram": "0x74F0",
+  "len": 2
+ },
+ {
+  "name": "PMCal_IdleRefHaltLim",
+  "rom": "0x042E98",
+  "ram": "0x74F2",
+  "len": 2
+ },
+ {
+  "name": "PMCal_TestCountLim",
+  "rom": "0x042E9A",
+  "ram": "0x74F4",
+  "len": 1
+ },
+ {
+  "name": "PMCal_PurgeAdaptLim",
+  "rom": "0x042E9B",
+  "ram": "0x74F6",
+  "len": 1
+ },
+ {
+  "name": "PMCal_PurgeAdaptLim2",
+  "rom": "0x042E9C",
+  "ram": "0x74F8",
+  "len": 1
+ },
+ {
+  "name": "PMCal_BrakeNumber",
+  "rom": "0x042E9D",
+  "ram": "0x74FA",
+  "len": 1
+ },
+ {
+  "name": "PMCal_LambdaLim",
+  "rom": "0x042E9E",
+  "ram": "0x74FC",
+  "len": 1
+ },
+ {
+  "name": "PMCal_MaxNrTest",
+  "rom": "0x042E9F",
+  "ram": "0x74FE",
+  "len": 1
+ },
+ {
+  "name": "PMCal_TempLim1",
+  "rom": "0x042EA0",
+  "ram": "0x7500",
+  "len": 1
+ },
+ {
+  "name": "PMCal_TempLim2",
+  "rom": "0x042EA1",
+  "ram": "0x7502",
+  "len": 1
+ },
+ {
+  "name": "PMCal_Numberccv",
+  "rom": "0x042EA2",
+  "ram": "0x7504",
+  "len": 1
+ },
+ {
+  "name": "PMCal_RpmIdleNomRefLim",
+  "rom": "0x042EA4",
+  "ram": "0x7506",
+  "len": 2
+ },
+ {
+  "name": "PMCal_IdlePosFiltCoef",
+  "rom": "0x042EA8",
+  "ram": "0x7508",
+  "len": 2
+ },
+ {
+  "name": "PMCal_IdlePosIntABSLim",
+  "rom": "0x042EA6",
+  "ram": "0x750A",
+  "len": 2
+ },
+ {
+  "name": "Fsond_lamtime",
+  "rom": "0x042F42",
+  "ram": "0x750C",
+  "len": 4
+ },
+ {
+  "name": "Tank_start_time",
+  "rom": "0x042EAC",
+  "ram": "0x7510",
+  "len": 4
+ },
+ {
+  "name": "P_tank_diff_min",
+  "rom": "0x042EB0",
+  "ram": "0x7514",
+  "len": 1
+ },
+ {
+  "name": "P_tank_diff_max",
+  "rom": "0x042EB1",
+  "ram": "0x7516",
+  "len": 1
+ },
+ {
+  "name": "P1_tank_diff",
+  "rom": "0x042EB2",
+  "ram": "0x7518",
+  "len": 1
+ },
+ {
+  "name": "P2_tank",
+  "rom": "0x042EB3",
+  "ram": "0x751A",
+  "len": 1
+ },
+ {
+  "name": "P3_tank_diff",
+  "rom": "0x042EB4",
+  "ram": "0x751C",
+  "len": 1
+ },
+ {
+  "name": "T1_max",
+  "rom": "0x042EB6",
+  "ram": "0x751E",
+  "len": 4
+ },
+ {
+  "name": "T2_max",
+  "rom": "0x042EBA",
+  "ram": "0x7522",
+  "len": 4
+ },
+ {
+  "name": "Ign_counter_mis_lim",
+  "rom": "0x042EBE",
+  "ram": "0x7526",
+  "len": 4
+ },
+ {
+  "name": "Misf_ign_lim",
+  "rom": "0x042EC2",
+  "ram": "0x752A",
+  "len": 4
+ },
+ {
+  "name": "Misfcut_ign_lim",
+  "rom": "0x042EC6",
+  "ram": "0x752E",
+  "len": 1
+ },
+ {
+  "name": "Misfpres_ign_lim",
+  "rom": "0x042EC7",
+  "ram": "0x7530",
+  "len": 1
+ },
+ {
+  "name": "Misfrpm_ign_lim",
+  "rom": "0x042EC8",
+  "ram": "0x7532",
+  "len": 1
+ },
+ {
+  "name": "Misfac_ign_lim",
+  "rom": "0x042EC9",
+  "ram": "0x7534",
+  "len": 1
+ },
+ {
+  "name": "Misfpur_ign_lim",
+  "rom": "0x042ECA",
+  "ram": "0x7536",
+  "len": 1
+ },
+ {
+  "name": "Misfgear_lim",
+  "rom": "0x042ECB",
+  "ram": "0x7538",
+  "len": 1
+ },
+ {
+  "name": "Misftransa_limit",
+  "rom": "0x042ECC",
+  "ram": "0x753A",
+  "len": 1
+ },
+ {
+  "name": "Misftransr_limit",
+  "rom": "0x042ECD",
+  "ram": "0x753C",
+  "len": 1
+ },
+ {
+  "name": "Mis_kyltemp_tab",
+  "rom": "0x042ECE",
+  "ram": "0x753E",
+  "len": 15
+ },
+ {
+  "name": "Misftakeoff_ign_tab",
+  "rom": "0x042EDD",
+  "ram": "0x754E",
+  "len": 15
+ },
+ {
+  "name": "Misftrans_ign_tab",
+  "rom": "0x042EEC",
+  "ram": "0x755E",
+  "len": 15
+ },
+ {
+  "name": "P_man_korr_tab",
+  "rom": "0x042EFC",
+  "ram": "0x756E",
+  "len": 18
+ },
+ {
+  "name": "P_man_korr_axis",
+  "rom": "0x042F0E",
+  "ram": "0x7580",
+  "len": 36
+ },
+ {
+  "name": "Pur_misadapt_othr",
+  "rom": "0x042F32",
+  "ram": "0x75A4",
+  "len": 1
+ },
+ {
+  "name": "Pur_misadapt_cthr",
+  "rom": "0x042F33",
+  "ram": "0x75A6",
+  "len": 1
+ },
+ {
+  "name": "Rpm_perf_max",
+  "rom": "0x042F34",
+  "ram": "0x75A8",
+  "len": 2
+ },
+ {
+  "name": "Rpm_perf_min",
+  "rom": "0x042F36",
+  "ram": "0x75AA",
+  "len": 2
+ },
+ {
+  "name": "Press_perf_max",
+  "rom": "0x042F38",
+  "ram": "0x75AC",
+  "len": 2
+ },
+ {
+  "name": "Press_perf_min",
+  "rom": "0x042F3A",
+  "ram": "0x75AE",
+  "len": 2
+ },
+ {
+  "name": "Press_press_lim",
+  "rom": "0x042F3C",
+  "ram": "0x75B0",
+  "len": 1
+ },
+ {
+  "name": "Press_thrott_lim",
+  "rom": "0x042F3D",
+  "ram": "0x75B2",
+  "len": 1
+ },
+ {
+  "name": "Press_diff_ok",
+  "rom": "0x042F3E",
+  "ram": "0x75B4",
+  "len": 1
+ },
+ {
+  "name": "P_tank_filt_fak",
+  "rom": "0x042F40",
+  "ram": "0x75B6",
+  "len": 2
+ },
+ {
+  "name": "Pdec_min",
+  "rom": "0x042F46",
+  "ram": "0x75B8",
+  "len": 2
+ },
+ {
+  "name": "Pinc_min",
+  "rom": "0x042F48",
+  "ram": "0x75BA",
+  "len": 2
+ },
+ {
+  "name": "Pperf_min",
+  "rom": "0x042F4A",
+  "ram": "0x75BC",
+  "len": 2
+ },
+ {
+  "name": "Temp_steg",
+  "rom": "0x040B24",
+  "ram": "0x75BE",
+  "len": 15
+ },
+ {
+  "name": "Hp_support_points",
+  "rom": "0x040B33",
+  "ram": "0x75CE",
+  "len": 9
+ },
+ {
+  "name": "Restart_corr_hp",
+  "rom": "0x040B3C",
+  "ram": "0x75D8",
+  "len": 9
+ },
+ {
+  "name": "Indent_kvot",
+  "rom": "0x040717",
+  "ram": "0x75E2",
+  "len": 1
+ },
+ {
+  "name": "Kyltemp_steg",
+  "rom": "0x040B45",
+  "ram": "0x75E4",
+  "len": 19
+ },
+ {
+  "name": "Kyltemp_tab",
+  "rom": "0x040B58",
+  "ram": "0x75F8",
+  "len": 19
+ },
+ {
+  "name": "Comb_w_temp_limphome",
+  "rom": "0x040B6C",
+  "ram": "0x760C",
+  "len": 2
+ },
+ {
+  "name": "Lufttemp_steg",
+  "rom": "0x040B6E",
+  "ram": "0x760E",
+  "len": 16
+ },
+ {
+  "name": "Lufttemp_tab",
+  "rom": "0x040B7E",
+  "ram": "0x761E",
+  "len": 16
+ },
+ {
+  "name": "Luft_kompfak",
+  "rom": "0x040B8E",
+  "ram": "0x762E",
+  "len": 16
+ },
+ {
+  "name": "Accupp_detekt",
+  "rom": "0x040B9E",
+  "ram": "0x763E",
+  "len": 1
+ },
+ {
+  "name": "Rpm_dif",
+  "rom": "0x040F28",
+  "ram": "0x7664",
+  "len": 2
+ },
+ {
+  "name": "Rpm_max",
+  "rom": "0x040F2C",
+  "ram": "0x7640",
+  "len": 2
+ },
+ {
+  "name": "Shift_up_temp",
+  "rom": "0x040F35",
+  "ram": "0x7642",
+  "len": 1
+ },
+ {
+  "name": "Shift_max_rpm",
+  "rom": "0x040F36",
+  "ram": "0x7644",
+  "len": 2
+ },
+ {
+  "name": "Shift_rpm",
+  "rom": "0x040F38",
+  "ram": "0x7646",
+  "len": 8
+ },
+ {
+  "name": "Shift_load",
+  "rom": "0x040F40",
+  "ram": "0x764E",
+  "len": 4
+ },
+ {
+  "name": "Shift_up_rpm_hyst",
+  "rom": "0x040F44",
+  "ram": "0x7652",
+  "len": 2
+ },
+ {
+  "name": "Shift_up_load_hyst",
+  "rom": "0x040F46",
+  "ram": "0x7654",
+  "len": 1
+ },
+ {
+  "name": "Shift_up_off_time",
+  "rom": "0x040F48",
+  "ram": "0x7656",
+  "len": 2
+ },
+ {
+  "name": "Shift_up_time",
+  "rom": "0x040F4A",
+  "ram": "0x7658",
+  "len": 2
+ },
+ {
+  "name": "Press_trans_type",
+  "rom": "0x040516",
+  "ram": "0x765A",
+  "len": 4
+ },
+ {
+  "name": "Pulses_per_rev",
+  "rom": "0x04051A",
+  "ram": "0x765E",
+  "len": 2
+ },
+ {
+  "name": "Radius_of_roll",
+  "rom": "0x04051C",
+  "ram": "0x7666",
+  "len": 2
+ },
+ {
+  "name": "Max_ratio_aut",
+  "rom": "0x0415E6",
+  "ram": "0x7668",
+  "len": 2
+ },
+ {
+  "name": "Data_namn",
+  "rom": "0x0403FC",
+  "ram": "0x766E",
+  "len": 14
+ },
+ {
+  "name": "Pgm_mod",
+  "rom": "0x04074E",
+  "ram": "0x76E2",
+  "len": 6
+ }
+]

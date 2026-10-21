@@ -1,0 +1,41 @@
+# Function_00049B46
+
+**ROM:** `0x00049B46`
+
+```c
+
+void Function_00049B46(void)
+
+{
+  DAT_00003d8c = DAT_00003d94._1_1_;
+  DAT_00003d8e = (&DAT_00003c4c)[DAT_00003d94._2_1_];
+  DAT_00003d8d = DAT_00003d94._2_1_;
+  if (DAT_00003d94._1_1_ == '\0') {
+    DAT_00003c6c = (undefined1)DAT_00003d94;
+    DAT_00003c6d = DAT_00003d98;
+    DAT_00003c6e = DAT_00003d99;
+    DAT_00003c6f = DAT_00003d9a;
+    DAT_00003c74 = DAT_00003d9b;
+    DAT_00003d8f = DAT_00003c42;
+    DAT_00003d90 = DAT_00003c43;
+    DAT_00003d91 = DAT_00003c44;
+    DAT_00003d92 = DAT_00003c45;
+    DAT_00003d93 = DAT_00003c4a;
+  }
+  else if (DAT_00003d94._1_1_ == '\x01') {
+    DAT_00003c70 = (undefined1)DAT_00003d94;
+    DAT_00003c71 = DAT_00003d98;
+    DAT_00003c72 = DAT_00003d99;
+    DAT_00003c73 = DAT_00003d9a;
+    DAT_00003c75 = DAT_00003d9b;
+    DAT_00003d8f = DAT_00003c46;
+    DAT_00003d90 = DAT_00003c47;
+    DAT_00003d91 = DAT_00003c48;
+    DAT_00003d92 = DAT_00003c49;
+    DAT_00003d93 = DAT_00003c4b;
+  }
+  Function_00049DB0();
+  return;
+}
+
+```

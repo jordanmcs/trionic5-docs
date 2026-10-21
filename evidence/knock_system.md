@@ -1,0 +1,372 @@
+# Trionic 5 Knock Detection System — Deep Dive (T5.5, factory 4780656 values)
+
+Code paths traced on a commercial reflash of the same hardware (file not distributed); value authority: `firmware/4780656_factory.BIN` (256 KiB, ROM @ 0x40000, entry 0x76904).
+All addresses are linear ROM addresses; RAM symbols from the embedded 225-entry symbol table
+(`data/t5_symbols.csv`). Every claim cites the disassembly (`firmware/4780656.asm`)
+or a decompiled function (`evidence/knock/func_0xADDR.json`). Analysis 2026-10-19.
+
+---
+
+## 1. Big picture
+
+> **Summary:** the complete signal and control path. The ECU samples ion current per spark event and converts each detection window into a pulse count ([Knock_level](../reference/symbols/Knock_level.md) 0x1D0C). A count above that cylinder's reference sets [Spik_count](../reference/symbols/Spik_count.md) 1/2, which does two things independently: retards that cylinder's ignition ([Ret_mangd](../reference/symbols/Ret_mangd.md) output) and derates the global boost target ([Apc_decrese](../reference/symbols/Apc_decrese.md) subtracted from [Regl_tryck](../reference/symbols/Regl_tryck.md) @0x72782). Both corrections decay once knock stops.
+
+```
+DI cassette ion sensing: 80 V plug bias ─► ion current after combustion
+  ─► cassette bandpass ~7 kHz ─► knock sine burst ─► ECU pin 44 (shared)
+        │                          │
+        ▼                          ▼
+ ADC channel (ad_knock,        external knock counter
+ F_00069C30 → AD_knock)        (cassette 7 kHz pulses)
+        │                          │ strobe gated by TPU PWM window
+        ▼                          ▼
+ Knock_level (peak, F_00047CE0)   window pulse-count  ── per spark event
+        │                          │
+        └────────► per-window evaluate  F_00060BFE
+                        │  ref = Knock_ref_matrix[rpm,load] · Lknock_oref − ratio-capped
+                        │  Detect_map[rpm,load] enable mask
+                        ▼
+             Spik_count = 1 (weak) / 2 (strong) + K-adapt (F_00060F5A)
+                        │
+             5-sample ring buffer per cylinder (avg + peak-hold, base 0x389A)
+                        ▼
+        ┌───────────────┴────────────────┐
+        ▼                                ▼
+ per-cylinder offset engine      global APC controller
+ F_00062842..0x636xx             F_00072DC2
+ +1.5°/event, −0.2°/period       boost setpoint derate +8%/event
+ cap Knock_lim_tab[rpm]          held while P_Man > base−Apc_decrese
+ Knock_average = mean(4 cyl)     boost target −Apc_decrese (F_00072782)
+        │                                │
+        ▼                                ▼
+ Ret_mangd/Lret_mangd[cyl]      global retard + boost reduce
+ (retard demand → dwell/spark,  (Regl_tryck, floor 0x78)
+  F_0006AC56/0x6C2FE/0x6E256)
+```
+
+Two independent loops, classic Bosch-style: **fast per-cylinder ignition pull-back** and
+**slow global adaptive perm-compromise (APC)** that also trims boost.
+
+## 1b. Signal source: ion sensing, not a knock sensor
+
+> **Summary:** T5 has no knock sensor; the plug gap itself is the sensor (Saab: "the spark plug-gap is used as a probe"). After combustion, ionized gas conducts current across the gap, measured at the coil's low-voltage side with ~80 V bias from the DI cassette. Knock is a pressure oscillation of the chamber gases (frequency set by chamber geometry) that appears superimposed on that current. The cassette's ~7 kHz band-pass extracts it as a pulse burst on ECU pin 44; pulse count is proportional to oscillation amplitude within the window. All cylinders share the one wire — attribution comes from sampling-window timing, not separate channels. Published behavior "1.5° per event, up to ~12°" corresponds to [Knock_reduce](../reference/symbols/Knock_reduce.md) = 15 and [Knock_lim_tab](../reference/symbols/Knock_lim_tab.md) max 130.
+
+There is no block-mounted piezo KS on T5. The DI cassette biases each plug with ~80 V
+(low-voltage side of the coil); after combustion the ionized gases conduct an ion
+current across the plug gap. Knock pressure oscillations (frequency set by chamber
+geometry) modulate that current; the **cassette** band-passes it (~7 kHz sine,
+amplitude = knock severity) onto ECU **pin 44** as a pulse burst. One shared pin —
+the ECU knows which cylinder just fired, and the per-cylinder window strobes below
+make the counter read only that cylinder's burst. Ion current is also the misfire
+signal (cyl 1+2 → pin 17, 3+4 → pin 18) and crank-phase sync — why T5 has no cam
+sensor and no KS. Saab's published stock behavior — **1.5° retard per knock event per
+cylinder, up to ~12°** — matches this binary's `Knock_reduce = 15` (0.1° units) and
+[Knock_lim_tab](../reference/symbols/Knock_lim_tab.md) (30→130; the 13° peak is **stock**, verified against factory 4780656 —
+the published "12°" is approximate) exactly.
+
+## 2. Acquisition / window hardware
+
+> **Summary:** window timing is generated by hardware. The TPU PWM unit (registers 0xFFFF28/2A) opens each detection window — edges from [Knock_wind_on_tab](../reference/symbols/Knock_wind_on_tab.md)/[Knock_wind_off_tab](../reference/symbols/Knock_wind_off_tab.md) interpolated by rpm, roughly −30° to +75° around spark — and the external counter chip at 0xFFFA00 counts the filtered pulses inside it without CPU involvement. Firmware only reads the result: `F_00043B74` computes window angles, `F_00069C30` copies the ADC peak (`ad_knock`), `F_00047CE0` handles the per-window level. Consequently the count is exact even under heavy interrupt load.
+
+- `F_00043B74` — computes the detection window in timer ticks: interpolates
+  [Knock_wind_on_tab](../reference/symbols/Knock_wind_on_tab.md)/[Knock_wind_off_tab](../reference/symbols/Knock_wind_off_tab.md) (rpm axis [Knock_wind_rpm](../reference/symbols/Knock_wind_rpm.md), values in 0.1°)
+  → absolute angles `Knock_wind_on_ang = Ign_angle − wind_on`, `…off_ang`
+  (F_00060B78 does the interpolation) → tick conversion `×period×10/180` (cam-rev base).
+  Multi-spit support: window scaled by `(300+Ign_angle)/Mult_time` per spark.
+- Window is **hardware-generated**: TPU PWM registers 0xFFFF28/0xFFFF2A written, HSRR1
+  redirect bits 0x10/0x30 select the redirect channel → the knock-counter strobe is
+  hardware-ANDed with the window. No per-pulse software.
+- `F_00043BF0` — one-time init: writes chip-select CSBAR/CSPAR (maps the knock-counter
+  peripheral at 0xFFFA00), polls handshake bit at 0xFFFA05, sets SYNCR clock divider.
+- `F_00069C30` (`ad_knock`) — cassette knock-level ADC byte from 0x3B52 copied through test-output mux 0x4050
+  (dyno/dashboard channel) into `AD_knock`. Analog peak is thus also observable on a scope
+  via the test output.
+- `F_00047CE0` — per-window level handling: reads [Knock_level](../reference/symbols/Knock_level.md), compares/updates
+  [Knock_diag](../reference/symbols/Knock_diag.md) (0x1D14), sets [Knock_status](../reference/symbols/Knock_status.md) bits, feeds diagnostics.
+
+## 3. Per-window evaluation (`F_00060BFE`, core 0x60DCE–0x60F48)
+
+> **Summary:** the per-window decision. The raw count is stored as [Knock_diag_level](../reference/symbols/Knock_diag_level.md), then compared against `Knock_ref_matrix[rpm,load]` (19–87 pulses) scaled by [Lknock_oref_tab](../reference/symbols/Lknock_oref_tab.md) (200→120 %). Evaluation runs only when the measurement is meaningful: MAP above [Knock_press_limit](../reference/symbols/Knock_press_limit.md), coolant above 40 °C, not during multi-spit, and only where `Detect_map[rpm,load]` = 1. Output is [Spik_count](../reference/symbols/Spik_count.md) = 1 (over reference) or 2 (strong) per cylinder, fed to a 5-window ring buffer per cylinder — averaging/peak-hold, so a single aberrant cycle (ion current varies cycle-to-cycle even in healthy combustion) cannot command full correction by itself.
+
+1. ratio = window pulse-count ÷ [Knock_ref_level](../reference/symbols/Knock_ref_level.md) (0x4622), capped by
+   [Kadapt_max_ref](../reference/symbols/Kadapt_max_ref.md) (rpm table: <150 rpm fixed, >600 rpm interpolated from 0x5AC0, else
+   `Kadapt_max_ref[rpm/50]`).
+2. operating threshold `0x4628 = Lknock_oref_level × ratio / 100`
+   ([Lknock_oref_tab](../reference/symbols/Lknock_oref_tab.md): 200→120 %, rpm-indexed).
+3. [Knock_diag_level](../reference/symbols/Knock_diag_level.md) ← raw window count.
+4. Gate: not test mode (0x76E6 bit5), `P_Man > Knock_press_limit` ([Knock_press_tab](../reference/symbols/Knock_press_tab.md),
+   60–70 → knock control needs real load), coolant > 40 °C (or diag bit), not multi-spark.
+5. If count > capped ratio → `Spik_count = 2` (strong) else `Spik_count = 1`;
+   both paths run the K-adaptation handler `F_00060F5A` (rpm/load-gated by [Kadapt_period](../reference/symbols/Kadapt_period.md)).
+6. Detection only where `Detect_map[rpm,load] = 1` (see §7) — enable mask with a diagonal
+   exemption band; thresholds from `Knock_ref_matrix[rpm,load]` (19…87 pulses).
+7. Result feeds a **5-slot ring buffer per cylinder** (stride 10 from base 0x389A):
+   history shift, 5-sample **average** (0x4630) and **peak-hold** (0x462E), plus
+   `Knock_count_cyl` max tracking (`F_000610D2`, base 0x3B2A).
+
+## 4. Per-cylinder offset engine (`F_00062842` … `F_000636xx`)
+
+> **Summary:** per-cylinder retard state. Each knock event adds 1.5° ([Knock_reduce](../reference/symbols/Knock_reduce.md) = 15); each control period without an event subtracts 0.2° ([Knock_back](../reference/symbols/Knock_back.md) = 2); the total is clamped to [Knock_lim_tab](../reference/symbols/Knock_lim_tab.md) interpolated by rpm (30→130→90 = 3.0°/13.0°/9.0°). Recovery pauses under conditions listed below (idle, active boost control, sustained load past the 60 s timer). The retained value is passed to the ignition scheduler as [Ret_mangd](../reference/symbols/Ret_mangd.md).
+
+State (SRAM): offsets 0x39A6·4 cylinders, counters 0x39A4, [Knock_average](../reference/symbols/Knock_average.md) =
+`(off1+off2+off3+off4)/4` (0x62A28).
+
+- Knock event → `offset += Knock_reduce` = **15 = 1.5°** (0.1° units), clamped to
+  `Knock_lim_tab[rpm]` = **30→130→90 (3.0°…13.0°…9.0°)**.
+- Quiet → `offset −= Knock_back` = **2 = 0.2°** per control period.
+- Decay/refresh gated: APC active, not idle, `P_Man ≤ 105`, rpm < 3250 (0xCB2),
+  60 s sustained-load timeout (0xEA60 ms, second branch at 0x62A72),
+  hold-flag 0x3896, matrix period [Knock_matrix_time](../reference/symbols/Knock_matrix_time.md) = **12000 ms** (32-bit ms tick
+  at 0x3B02, elapsed 0x4658); wait counters `Wait_count1..3`.
+- [Knock_average_tab](../reference/symbols/Knock_average_tab.md) (80→20) scales how far the average offset may exceed the
+  per-cylinder value; [Knock_ang_dec](../reference/symbols/Knock_ang_dec.md) = 2.0° step for angle-based reduction.
+- Strong sustained knock path also raises `Knock_count_max` → forces full `Knock_lim`.
+
+## 5. Global APC knock response (`F_00072DC2`) — boost derate, NOT ignition
+
+> **Summary:** the global response to knock is boost pressure, not ignition timing. Each confirmed event adds +8 % to [Apc_decrese](../reference/symbols/Apc_decrese.md) ([Apc_knock_tab](../reference/symbols/Apc_knock_tab.md)), subtracted from the charge-pressure setpoint [Regl_tryck](../reference/symbols/Regl_tryck.md) @0x72782 (floor 0x78) — reducing cylinder pressure removes knock's cause directly. Recovery rate is [Apc_knock_back](../reference/symbols/Apc_knock_back.md) (factory 5 %/period). Sustained severe knock falls back to basic charge pressure, which the ISAT tool reports as cause "KNOCK CONTROL".
+
+**APC here = "Automatic Performance Control", Saab's name for Trionic's boost/charge-
+pressure control function** (the PID loop driving the BPC valve: [Regl_tryck](../reference/symbols/Regl_tryck.md),
+[Reg_kon_mat](../reference/symbols/Reg_kon_mat.md), [Apc_adapt](../reference/symbols/Apc_adapt.md), I-part etc.). Per the user (owner) and the service lit:
+do **not** confuse it with the mid-80s standalone Saab APC microprocessor box, which
+was a completely different device sharing only the name. In T5 code the `Apc_*`
+namespace is the knock interface *into* boost control.
+
+T5Suite book (docs/trionic5_book.txt p78) documents the boost PID:
+`PWM_ut = reg_kon·(e·P_gain + I_gain + D_gain + temperatur + Adapt) · APC_knock` with
+**`APC_knock = (100 − Apc_decrese) / 100`** — i.e. [Apc_decrese](../reference/symbols/Apc_decrese.md) is a **percent derate
+of charge-pressure setpoint (0–100)**, not an ignition angle.
+
+Code agrees:
+- On confirmed knock: `Apc_decrese += Apc_knock_tab[step]` = **+8 %/event** in this tune,
+  ceiling 0x64 = 100 % (full boost pulled).
+- Applied as setpoint subtraction from [Regl_tryck](../reference/symbols/Regl_tryck.md) at **0x72782** (floor 0x78).
+- Held while measured boost stays above the derated setpoint (0x47E2 compare vs
+  `0x3A8A` base); after the confirmation timer expires the derate recovers at
+  [Apc_knock_back](../reference/symbols/Apc_knock_back.md) (this tune: 0 — stock value not yet compared; recovery otherwise via
+  per-cylinder engine). [Apc_decrese_asp](../reference/symbols/Apc_decrese_asp.md) = variant derate during ASP/torque-
+  intervention states (vehicle-speed/gear gated, 0x72F56).
+- Sustained/severe knock → boost control falls back to **basic charge pressure** and the
+  ISAT scan tool reports cause "KNOCK CONTROL" (2.7 manual p91/233: causes listed =
+  inferior petrol or defective ignition discharge module = DI cassette).
+- Status surface: `Apc_status` byte0 flags per T5Suite p102 (0x02 = new reduce allowed,
+  0x20 = I-part active, 0x10 = overboost, 0x40 = adaption disable); knock counters
+  `Apc_step` 0x5534, `Apc_knock_count` 0x5536, snapshot `Apc_frame` (35 longs) @0x2916.
+
+## 6. Retard application & diagnostics
+
+> **Summary:** execution and signal-path self-check. Retard demand ([Ret_mangd](../reference/symbols/Ret_mangd.md)) is queued every cycle by the ignition scheduler (`F_0006BFA4`) and applied through dwell and spark timing. A separate monitor verifies the ion signal path is functional: a window count > 50 constitutes signal presence ([Knock_diag_level](../reference/symbols/Knock_diag_level.md) @0x1100); counts ≤ 50 for 10 consecutive seconds — with sufficient rpm and battery voltage above [DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md) — set fault 0x28/0x2C and store the [Knock_frame](../reference/symbols/Knock_frame.md) snapshot. Below the voltage threshold the check abstains, because signal amplitude scales with supply voltage. Clearing the latch requires 1500 ignition cycles.
+
+- Offsets leave the controller as per-cylinder **retard demand** bytes
+  [Ret_mangd](../reference/symbols/Ret_mangd.md)/[Lret_mangd](../reference/symbols/Lret_mangd.md) ("retard demand"): queue mgmt in the ignition scheduler
+  `F_0006BFA4` (0x6C2FE–0x6C386), consumed by dwell/charge-time and TPU spark scheduling
+  (reads at 0x6AC56, 0x6E226–0x6E286: demand halves dwell budget; interlock with
+  [Retard_konst](../reference/symbols/Retard_konst.md) map during shift-retard), cleared per cycle (0x6E6EA, 0x6ECBA).
+- **Ion-path supervision** (`F_00072380` + `F_0005C34A`): measured cassette knock-signal
+  event frequency byte 0x47D4 vs [Apc_frek](../reference/symbols/Apc_frek.md) — `CMP.B`/`BCS` at 0x723F2 (error if unsigned
+  measured < threshold). **`Apc_frek = 0` in the factory binary
+  (user-verified) ⇒ the comparison can never fire; this gate is dead code** — an unused
+  optional threshold inside the boost-control module's knock monitoring. The live
+  ion-path fault monitor is the state machine below. State machine: ignition on,
+  battery > [DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md), rpm ≈ 800+ and load → if no valid signal for >10 ticks
+  ([Knock_time_low](../reference/symbols/Knock_time_low.md) 0x2108/0x210A) → fault code **0x28/0x2C**, 25-long `Error_frame`
+  copied to [Knock_frame](../reference/symbols/Knock_frame.md) (0x293A), flag 0x401A bit40. Auto-recover: 1500 (0x5DC) clean
+  ignition cycles decrement the counter.
+- [Knock_status](../reference/symbols/Knock_status.md) 0x1D10 bit-flags; [Knock_error](../reference/symbols/Knock_error.md) 0x2116; [Knock_retard](../reference/symbols/Knock_retard.md) 0x1D16
+  (current applied retard, reported).
+
+## 7. Calibration tables (this binary — ROM source → RAM copy)
+
+> **Summary:** every calibration constant the logic above reads, with ROM address, format, and current values. Two findings worth recording: the [Detect_map](../reference/symbols/Detect_map.md) exclusion regions and the [Knock_ref_matrix](../reference/symbols/Knock_ref_matrix.md) ridge pattern are byte-identical to factory 4780656 (Saab's original design, confirmed by full binary diff), and the MCS tune's knock-side change set is catalogued in `T5 MCS Tune Changes.md`.
+
+| Table | ROM | fmt | values |
+|---|---|---|---|
+| [Knock_reduce](../reference/symbols/Knock_reduce.md) | 0x417DA | word | 15 → +1.5°/event |
+| [Knock_back](../reference/symbols/Knock_back.md) | 0x417DC | word | 2 → −0.2°/period |
+| [Knock_lim_tab](../reference/symbols/Knock_lim_tab.md) | 0x417DE | 16 w (rpm via [Ign_map_0_y_axis](../reference/symbols/Ign_map_0_y_axis.md), proven at 0x619D0–0x61A3E) | 30,30,80,120,130×3,120×2,100,90×6 — stock-identical |
+| [Knock_matrix_time](../reference/symbols/Knock_matrix_time.md) | 0x428B8 | word | 12000 ms |
+| [Knock_ref_matrix](../reference/symbols/Knock_ref_matrix.md) | 0x428BA | 288 w (18 load × 16 rpm); axes [Ign_map_0_x_axis](../reference/symbols/Ign_map_0_x_axis.md)/`_y_axis` (proven, 0x61B40–46) | floor 19, ridge 87, max 78 |
+| [Lknock_oref_tab](../reference/symbols/Lknock_oref_tab.md) | 0x42AFA | 16 w (rpm via [Ign_map_0_y_axis](../reference/symbols/Ign_map_0_y_axis.md)) | 200,200,130×4,125×5,120×5 (%) |
+| [Knock_press_tab](../reference/symbols/Knock_press_tab.md) | 0x42B1A | 16 w (rpm via [Ign_map_0_y_axis](../reference/symbols/Ign_map_0_y_axis.md)) | 70×7,65,60×8 (raw MAP count ≈ kPa abs: enables ≈ 0.3–0.4 bar below atmospheric) |
+| [Turbo_knock_tab](../reference/symbols/Turbo_knock_tab.md) | 0x42B3A | 16 w (rpm via [Ign_map_0_y_axis](../reference/symbols/Ign_map_0_y_axis.md)) | 138–150 (≈ boost scaling) |
+| [Knock_average_tab](../reference/symbols/Knock_average_tab.md) | 0x42B5A | 16 w (rpm via [Ign_map_0_y_axis](../reference/symbols/Ign_map_0_y_axis.md)) | 80,80×6,70,60,50,40,30,20×4 |
+| [Knock_wind_rpm](../reference/symbols/Knock_wind_rpm.md) (axis) | 0x42B7A | 16 w | 1000…6250 rpm — dedicated axis of the two wind edge tables only (search 0x60AF4) |
+| [Knock_wind_on_tab](../reference/symbols/Knock_wind_on_tab.md) | 0x42B9A | 16 w (axis [Knock_wind_rpm](../reference/symbols/Knock_wind_rpm.md)) | 300→450 (window starts 30.0°–45.0° after spark) |
+| [Knock_wind_off_tab](../reference/symbols/Knock_wind_off_tab.md) | 0x42BBA | 16 w (axis [Knock_wind_rpm](../reference/symbols/Knock_wind_rpm.md)) | 600→750 (ends 60.0°–75.0° after spark) — i.e. the ion/combustion phase |
+| [Detect_map_x_axis](../reference/symbols/Detect_map_x_axis.md) | 0x42100 | 18 w | raw MAP count 32…212 — default 2.5-bar sensor: count ≈ kPa absolute (0–255 ↔ −1…+1.5 bar), boost ≈ count − 100, so 212 ≈ +1.12 bar, 32 ≈ idle vacuum |
+| [Detect_map_y_axis](../reference/symbols/Detect_map_y_axis.md) | 0x42124 | 16 w | rpm 880…6010 |
+| [Detect_map](../reference/symbols/Detect_map.md) | 0x42144 | 18×16 | 0/1 enable; 0 at min-load col, max-load col, and a diagonal band that migrates left→ as rpm rises |
+| [Knock_start](../reference/symbols/Knock_start.md) | 0x40512 | word | 0x76C = 1900 (monitor start rpm) |
+| [Knock_ang_dec](../reference/symbols/Knock_ang_dec.md) | 0x42874 | word | 20 = 2.0° |
+| [Apc_knock_tab](../reference/symbols/Apc_knock_tab.md) | 0x40AC0 | 8 B | 8,8,8,8,8,8,8,8 (+8 % boost derate/step) |
+| [Apc_knock_back](../reference/symbols/Apc_knock_back.md) | 0x42EAA | byte | **stock = 5 (%/period recovery)** (MCS differs — `T5 MCS Tune Changes.md`) |
+| [Apc_frek](../reference/symbols/Apc_frek.md) | 0x4153E | byte | **0 — unused optional threshold (see §6)** |
+| `Limit_low` | 0x4050F | byte | 5 |
+| [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) | 0x409F4 | 192 B | knock enrichment (×128, MAP×rpm); **MCS differs** — `T5 MCS Tune Changes.md` |
+
+Full dumps: `knock_tables.txt`. Matrix/detect maps plotted: 18 load columns × 16 rpm
+rows (row-major by rpm).
+
+**The [Detect_map](../reference/symbols/Detect_map.md) 0/1 pattern — including the diagonal 0 band, the min-load column and
+the max-load column — is IDENTICAL to factory (user-verified, then confirmed by full
+byte-diff; [Knock_ref_matrix](../reference/symbols/Knock_ref_matrix.md) also byte-identical). It is Saab's own
+design, not an MCS artifact.** Plausible physics for a fixed post-spark ion window
+(needs waveform work, unverified): the masked regions are where the burn/ion event
+leaves the 30–75°-after-spark window or saturates it — min-load = slow weak ion plus
+heavily advanced timing at rpm; the diagonal tracks combustion phasing sweeping through
+the window as rpm rises; max-load col = ion saturation, with wide-open-throttle
+protection instead handled by fixed maps. The mid-load 0 column near load-116 at low rpm
+is unexplained. The `Ref_matrix` ridge is likewise **byte-identical to stock** — Saab's own
+"raise thresholds where the ion window loses the event" partner to the mask. See
+`knock_stock_vs_mcs.md` (not distributed): full byte diff of both images; the MCS change set is
+catalogued in `T5 MCS Tune Changes.md`.
+
+## 7b. Knock adaptation ("K-adapt") — self-calibrating the baseline
+
+> **Summary:** K-adapt calibrates the detection reference to the individual engine. Baseline ion-window activity differs per engine (combustion varies cycle-to-cycle; spark-discharge energy leaks into the window), so the ECU records 100 [Knock_level](../reference/symbols/Knock_level.md) samples per session — only under restricted conditions: 2100–3250 rpm ([Kadapt_rpm_low](../reference/symbols/Kadapt_rpm_low.md)/[Kadapt_rpm_high](../reference/symbols/Kadapt_rpm_high.md)), load 85–105 ([Kadapt_load_low](../reference/symbols/Kadapt_load_low.md)/[Kadapt_load_high](../reference/symbols/Kadapt_load_high.md)), coolant > 60 °C, no retard pending, no misfires ([Kadapt_period](../reference/symbols/Kadapt_period.md) = 320 ticks abandons a lapse) — then adjusts [Kadapt_ref_value_actual](../reference/symbols/Kadapt_ref_value_actual.md) (init 34) toward the computed target by 1, 2, or 10 units per session depending on the difference. [Kadapt_max_ref](../reference/symbols/Kadapt_max_ref.md) (0x42856) clamps the evaluation ratio to 3.15×…1.66× by rpm regardless of what has been learned.
+
+The ECU does not trust one fixed reference: it learns each engine's baseline ion activity ([Kadapt_ref_value_actual](../reference/symbols/Kadapt_ref_value_actual.md), init **34** at 0x4EC0A) and feeds the per-window
+ratio denominator ([Knock_ref_level](../reference/symbols/Knock_ref_level.md) long at 0x4622 = factor(0x3892) × actual value,
+0x4EC12–0x4EC22, recomputed at init; adaptation updates the actual value in RAM).
+
+**Sampling gate (`F_000610D2`)** — a sample is taken only when ALL of:
+
+| condition | calibration | note |
+|---|---|---|
+| rpm between | [Kadapt_rpm_low](../reference/symbols/Kadapt_rpm_low.md) 210 … [Kadapt_rpm_high](../reference/symbols/Kadapt_rpm_high.md) 325 (rpm/10 → **2100–3250 rpm**) | |
+| load between | [Kadapt_load_low](../reference/symbols/Kadapt_load_low.md) 85 … [Kadapt_load_high](../reference/symbols/Kadapt_load_high.md) 105 (`Last`) | mid-load only |
+| coolant | `Kyl_temp > 60 °C` (0x61134) | STRICTER than the 40 °C detection gate |
+| retard pending | `Ret_mangd == 0` | never learn while correcting knock |
+| misfires / accel | 0x1044/45/46 == 0, `Acc_mangd == 0`, 0x1003/04/05 == 0 | clean running only |
+
+Each pass stores one [Knock_level](../reference/symbols/Knock_level.md) sample into a 100-slot session; when 100 samples are
+collected, lockout bit 0x3886:0x40 is set (one learning run). A session that lingers is
+abandoned after [Kadapt_period](../reference/symbols/Kadapt_period.md) = **320** ticks (0x6133C compares against `Diag_tid`
+and clears the state machine).
+
+**Application (`F_000611E6`)** — over ~150 evaluation passes the stored samples are
+scored (samples > 95 count as "hot", others as OK; early stop when the activity sum
+exceeds 32), producing a fresh target `Kadapt_ref_value = 2·n`. The actual value then
+**creeps toward the target asymmetrically-floored in discrete steps** (0x612A6–0x61316):
+
+| Δ (actual vs target) | step |
+|---|---|
+| Δ > 20 | ±10 |
+| 10 < Δ ≤ 20 | ±2 |
+| 2 < Δ ≤ 10 | ±1 |
+| Δ ≤ 2 | hold |
+
+So one learning run can move the reference at most ±10 from 34; repeated runs walk it
+to the engine's true quiet-load baseline. Raising it makes detection *less* sensitive
+(more pulses needed), lowering it *more* sensitive.
+
+**Ratio ceiling map [Kadapt_max_ref](../reference/symbols/Kadapt_max_ref.md)** (ROM 0x42856, 11 words, ×100):
+`[315, 315, 315, 270, 250, 229, 218, 200, 183, 166, 166]`, indexed
+`(rpm−150)/32 + 1` (rpm/10). The count/ref ratio used in evaluation is clamped to this:
+3.15× below ~2500 rpm falling to 1.66× above ~4700 rpm — high-rpm sensitivity rises
+because window time per combustion shrinks.
+
+**Knock averaging escalation**: per-cylinder offset engines maintain [Knock_average](../reference/symbols/Knock_average.md)
+(0x62A36 etc.) compared against [Knock_average_limit](../reference/symbols/Knock_average_limit.md) interpolated from
+[Knock_average_tab](../reference/symbols/Knock_average_tab.md) (ROM 0x42B5A): `[80,80,80,80,80,80,80,70,60,50]` by rpm band —
+sustained average activity above the tab trips the documented [Knock_status](../reference/symbols/Knock_status.md) flag
+"[Knock_average](../reference/symbols/Knock_average.md) > limit".
+
+## 7c. Temperature & voltage gating (knock-specific)
+
+> **Summary:** knock's temperature handling consists of gates, not scaling tables: detection disabled ≤ 40 °C ([Kyl_temp](../reference/symbols/Kyl_temp.md) vs `#28` @0x60EB2, force-enabled if the coolant-sensor diagnostic bit 0x80 is set, so a failed sensor cannot disable protection), adaptation disabled ≤ 60 °C (0x61134), MAP gate via [Knock_press_limit](../reference/symbols/Knock_press_limit.md), and a battery-voltage gate ([DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md)) on the ion-path fault check. Tables with temperature-compensation names ([Tempkomp_konst](../reference/symbols/Tempkomp_konst.md), [Eftersta_fak](../reference/symbols/Eftersta_fak.md), [Retard_temp](../reference/symbols/Retard_temp.md)) are coolant-indexed warm-up fuel and idle maps with no knock function.
+
+Trionic 5 knock has **no smooth temperature-compensation table** — it uses hard gates:
+
+| gate | threshold | code | behavior |
+|---|---|---|---|
+| detection enable | coolant > **40 °C** (signed byte, 0x60EB2 `CMPI.B #28`) | eval core | below 40 °C (or cold-sensor diag bit 0x80 set) knock evaluation is skipped entirely — cold engines never retard/derate |
+| learning enable | coolant > **60 °C** (0x61134 `CMPI.B #3C`) | K-adapt gate | detection works 40–60 °C but the ECU refuses to *learn* until > 60 °C |
+| manifold pressure | > [Knock_press_limit](../reference/symbols/Knock_press_limit.md) ([Knock_press_tab](../reference/symbols/Knock_press_tab.md) 80→50 by rpm) | 0x60EA8 | low-load = no knock judgement |
+| battery | cassette fault SM gated by [DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md) | 0x5C34A | ion-line fault only judged when system voltage is healthy (signal amplitude is voltage-dependent) |
+
+Look-alike temperature tables that are NOT knock (named in the same init block):
+[Retard_temp](../reference/symbols/Retard_temp.md), [Tempkomp_konst](../reference/symbols/Tempkomp_konst.md), [Startvev_fak](../reference/symbols/Startvev_fak.md), [Eftersta_fak](../reference/symbols/Eftersta_fak.md) / [Eftersta_fak2](../reference/symbols/Eftersta_fak2.md),
+[Eft_dec_fak](../reference/symbols/Eft_dec_fak.md) / [Eft_dec_fak2](../reference/symbols/Eft_dec_fak2.md) are all coolant-indexed **warm-up / idle fuel & retard ramps**
+(interpolated against raw [AD_kylv](../reference/symbols/AD_kylv.md) with [Temp_steg](../reference/symbols/Temp_steg.md) axis, 0x69B58 / 0x6D41E).
+[Tempkomp_konst](../reference/symbols/Tempkomp_konst.md) (stock `[0,0,4,8,10,13,15,21,27,34,43,54,70,82,90]`, ÷128 multiplier,
+ramps down at [Temp_ramp_value](../reference/symbols/Temp_ramp_value.md) = 20 ticks/step) is one of five warm-up enrichment
+tables the MCS tune re-tuned — catalogued in `T5 MCS Tune Changes.md`.
+
+## 8. Function index (knock subsystem)
+
+> **Summary:** address → function cross-reference for the knock subsystem; the entry point for reading the disassembly.
+
+| Addr | Role |
+|---|---|
+| 0x43B74 | window angle→ticks, TPU PWM write, multi-spit scaling |
+| 0x43BF0 | knock-counter peripheral init (CSBAR/CSPAR, 0xFFFA00 handshake) |
+| 0x60B78 | wind_on/off angle interpolation |
+| 0x60BFE | **per-window evaluate**: threshold, gating, 5-sample buffers, [Spik_count](../reference/symbols/Spik_count.md) |
+| 0x60F5A | K-adaptation handler (rpm/load gated) |
+| 0x610D2 | Kadapt gating + per-cyl max tracking |
+| 0x611E6 | controller entry (reads [Ret_mangd](../reference/symbols/Ret_mangd.md)) |
+| 0x6185E | Knock_lim interpolation helper |
+| 0x62842–0x636xx | **offset accumulation/decay engine**, [Knock_average](../reference/symbols/Knock_average.md), matrix timer |
+| 0x47CE0 | level/diag update per window |
+| 0x69C30 | ADC ad_knock channel copy |
+| 0x72DC2 | **APC step controller** |
+| 0x72782 | [Apc_decrese](../reference/symbols/Apc_decrese.md) (%) → boost setpoint derate ([Regl_tryck](../reference/symbols/Regl_tryck.md)) |
+| 0x72380 | ion-path (cassette) signal frequency supervision |
+| 0x5C34A | ion-path fault state machine (code 28/2C, [Knock_frame](../reference/symbols/Knock_frame.md)) |
+| 0x51AAE | map init (flash→RAM copies) |
+| 0x6BFA4 | ignition scheduler: Ret_mangd/Lret_mangd queue |
+
+## 9. Ground-truth documentation (authoritative, on disk)
+
+> **Summary:** cross-validation against the two Saab reference books, pairing each firmware finding with the corresponding published statement. Agreement on all eight independent rows is the basis for treating this analysis as verified rather than inferred.
+
+- `docs/trionic5_book.txt` ← *Analyzing Trionic 5 with T5Suite* (Dilemma & J.K. Nilsson,
+  2010; from `Trionic5.pdf`, 192 pp). Knock/ion: Appendix VII (pp 145-148); boost PID
+  formula with `APC_knock = (100−Apc_decrese)/100` (p 72 of book = p78 of pdf text);
+  APC_status/Knock_status flag tables (pp 102-104); Error_frame layout incl.
+  [Knock_time_low](../reference/symbols/Knock_time_low.md) (p 104).
+- `docs/trionic27_obdii.txt` ← *Saab 9000 2.7 Engine Management System, Trionic OBD II*
+  (M1996-364216ENG, 331 pp). ISAT scan-tool functions: "KNOCK SENSOR" = knock level
+  0-2.55 V (= [Knock_level](../reference/symbols/Knock_level.md) ADC), "KNOCK CONTROL YES/NO" = ignition retarded for knock
+  (p 91-92 of book); basic-boost fallback with cause "KNOCK CONTROL" — inferior petrol
+  or defective ignition discharge module (p 232-233).
+
+Cross-validation of this report against the books:
+
+| firmware finding | book statement |
+|---|---|
+| [Knock_reduce](../reference/symbols/Knock_reduce.md) = 15 (1.5°) | "lowers the ignition advance by 1.5° on this cylinder" |
+| [Knock_lim_tab](../reference/symbols/Knock_lim_tab.md) max 130 (13°) | published "up to ~12°" (approx.; byte-identical to factory) |
+| [Apc_decrese](../reference/symbols/Apc_decrese.md) on [Regl_tryck](../reference/symbols/Regl_tryck.md) (0x72782) | APC_knock % factor in boost PID |
+| [Knock_average](../reference/symbols/Knock_average.md)/[Knock_average_tab](../reference/symbols/Knock_average_tab.md) | [Knock_status](../reference/symbols/Knock_status.md) flag "[Knock_average](../reference/symbols/Knock_average.md) > [Knock_average_limit](../reference/symbols/Knock_average_limit.md) (knock detected)" |
+| [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) enrichment | [Pgm_status](../reference/symbols/Pgm_status.md) "Knock fuel map activated" |
+| [Knock_time_low](../reference/symbols/Knock_time_low.md) in diag SM | listed in Error_frame layout |
+| knock level ADC byte | ISAT "KNOCK SENSOR" 0-2.55 V |
+| severe knock → basic boost | ISAT basic charge pressure cause "KNOCK CONTROL" |
+
+## 10. Open questions / next probes
+
+> **Summary:** unresolved items. The design rationale for the MCS [Apc_knock_back](../reference/symbols/Apc_knock_back.md) change (`T5 MCS Tune Changes.md`), [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) unit confirmation, and a measured pin-44 waveform (to convert window counts into pressure-oscillation magnitude) remain open; the [Detect_map](../reference/symbols/Detect_map.md) pattern and x-axis units (raw MAP count ≈ kPa abs on the 2.5-bar sensor) are resolved above.
+
+1. RESOLVED (user, 2026-10-20): [Detect_map](../reference/symbols/Detect_map.md)/[Ign_map_0](../reference/symbols/Ign_map_0.md) x-axis = raw MAP sensor count
+   with the standard 2.5-bar sensor scaling — 0–255 ↔ −1…+1.5 bar gauge, i.e. count ≈
+   kPa absolute; 212 ≈ +1.12 bar boost. Caveat: a 3-bar sensor keeps these raw load
+   values but rescales them to its coarser resolution (~1.18 kPa/count) — the table's
+   lower/upper physical limits are lost in practice.
+1b. RESOLVED: full diff vs factory 4780656 → `knock_stock_vs_mcs.md` (not distributed). Knock
+   subsystem fully stock except [Apc_knock_back](../reference/symbols/Apc_knock_back.md) (5→0) and [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) (reshaped).
+   Open now: why the MCS tune changed APC derate recovery (`T5 MCS Tune Changes.md`),
+   and units confirmation for [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) (8.7 fixed vs %).
+2. Front-end lives in the **DI cassette** (80 V bias, ~7 kHz bandpass, amplitude→pulse
+   burst; Saab doc notes the cassette trigger must be kept low until knock info is read
+   because spark charge pulses are the main disturbance). ECU-side counter at 0xFFFA00
+   counts burst pulses inside the TPU window → count ≈ amplitude × window time; exact
+   conversion needs a scope on pin 44 while driving.
+3. Knock evaluation is gated OFF during multi-spit — consistent with ion sensing:
+   repeated sparks inject charge-pulse disturbance into the ion window.
+4. RESOLVED: [Kadapt_max_ref](../reference/symbols/Kadapt_max_ref.md) (ROM 0x42856) + full K-adapt family dumped and traced →
+   §7b. Learning window, creep steps, ratio ceilings documented.
+5. Trionic 7 knock is a completely different design (MPC555 PowerPC, different window
+   engine) — this doc is T5-only.

@@ -1,0 +1,127 @@
+# Function_0004FA74
+
+**ROM:** `0x0004FA74`
+
+```c
+
+void Function_0004FA74(void)
+
+{
+  short sVar1;
+  undefined1 *puVar2;
+  bool bVar3;
+  
+  puVar2 = &DAT_00001984;
+  sVar1 = 0x1b00;
+  do {
+    *puVar2 = 0;
+    bVar3 = sVar1 != 0;
+    puVar2 = puVar2 + 1;
+    sVar1 = sVar1 + -1;
+  } while (bVar3);
+  DAT_000019c6 = &DAT_00001066;
+  DAT_000019ca = &DAT_00001031;
+  DAT_000019ce = &DAT_00001032;
+  DAT_000019d2 = &DAT_00001066;
+  DAT_000019d6 = &DAT_000010b4;
+  DAT_000019da = &DAT_00001013;
+  DAT_000019de = &RAM_Eft_dec2;
+  DAT_000019e2 = &DAT_00001025;
+  DAT_000019e6 = &DAT_0000104a;
+  DAT_000019ea = &RAM_Last;
+  DAT_000019ee = &DAT_0000102e;
+  DAT_000019f2 = &DAT_00001156;
+  DAT_000019f6 = &DAT_00003353;
+  DAT_000019fa = &DAT_00001013;
+  DAT_000019fe = &DAT_00001984;
+  DAT_00001a02 = 0x20;
+  DAT_00001a03 = 0x52;
+  DAT_00001a04 = 0x70;
+  DAT_00001a05 = 0x6d;
+  DAT_00001a06 = 0x20;
+  DAT_00001a07 = 0x20;
+  DAT_00001a08 = 0x4c;
+  DAT_00001a09 = 0x61;
+  DAT_00001a0a = 0x6d;
+  DAT_00001a0b = 0x62;
+  DAT_00001a0c = 0x20;
+  DAT_00001a0d = 0x4c;
+  DAT_00001a0e = 0x61;
+  DAT_00001a0f = 0x73;
+  DAT_00001a10 = 0x74;
+  DAT_00001a11 = 0x20;
+  DAT_00001a12 = 0x20;
+  DAT_00001a13 = 0x52;
+  DAT_00001a14 = 0x70;
+  DAT_00001a15 = 0x6d;
+  DAT_00001a16 = 0x20;
+  DAT_00001a17 = 0x20;
+  DAT_00001a18 = 0x49;
+  DAT_00001a19 = 0x67;
+  DAT_00001a1a = 0x6e;
+  DAT_00001a1b = 0x20;
+  DAT_00001a1c = 0x20;
+  DAT_00001a1d = 0x50;
+  DAT_00001a1e = 0x72;
+  DAT_00001a1f = 0x65;
+  DAT_00001a20 = 0x73;
+  DAT_00001a21 = 0x20;
+  DAT_00001a22 = 0x20;
+  DAT_00001a23 = 0x46;
+  DAT_00001a24 = 0x61;
+  DAT_00001a25 = 0x6b;
+  DAT_00001a26 = 0x31;
+  DAT_00001a27 = 0x20;
+  DAT_00001a28 = 0x46;
+  DAT_00001a29 = 0x61;
+  DAT_00001a2a = 0x6b;
+  DAT_00001a2b = 0x32;
+  DAT_00001a2c = 0x20;
+  DAT_00001a2d = 0x54;
+  DAT_00001a2e = 0x66;
+  DAT_00001a2f = 0x61;
+  DAT_00001a30 = 0x6b;
+  DAT_00001a31 = 0x20;
+  DAT_00001a32 = 0x20;
+  DAT_00001a33 = 0x4c;
+  DAT_00001a34 = 0x75;
+  DAT_00001a35 = 0x66;
+  DAT_00001a36 = 0x74;
+  DAT_00001a37 = 0x20;
+  DAT_00001a38 = 0x4b;
+  DAT_00001a39 = 0x79;
+  DAT_00001a3a = 0x6c;
+  DAT_00001a3b = 0x20;
+  DAT_00001a3c = 0x20;
+  DAT_00001a3d = 0x4c;
+  DAT_00001a3e._0_1_ = 0x4c;
+  DAT_00001a3e._1_1_ = 0x53;
+  DAT_00001a3e._2_1_ = 0x20;
+  DAT_00001a3e._3_1_ = 0x20;
+  DAT_00001a42._0_1_ = 0x20;
+  DAT_00001a42._1_1_ = 0x52;
+  DAT_00001a42._2_1_ = 0x65;
+  DAT_00001a42._3_1_ = 0x67;
+  DAT_00001a46._0_1_ = 0x6c;
+  DAT_00001a46._1_1_ = 0x20;
+  DAT_00001a46._2_1_ = 0x50;
+  DAT_00001a46._3_1_ = 0x5f;
+  DAT_00001a4a = 0x4d;
+  DAT_00001a4b = 0x61;
+  DAT_00001a4c = 0x20;
+  DAT_00001a4d = 0x52;
+  DAT_00001a4e = 0x61;
+  DAT_00001a4f = 0x6d;
+  DAT_00001a50 = 0x75;
+  DAT_00001a51 = 0x20;
+  DAT_00001a52 = 1;
+  DAT_00001a53 = 3;
+  DAT_00001a54 = 0;
+  DAT_00001a55 = 0x1c;
+  DAT_00001a56 = 0x24;
+  RAM_Trot_delta = 0x2d;
+  RAM_Nom_last = 100;
+  return;
+}
+
+```

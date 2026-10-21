@@ -1,0 +1,18 @@
+---
+tags: [saab, trionic5, torque, subsystem]
+---
+# T5 Torque Intervention
+
+> **Summary:** There is no torque-request bus and no arbitration hub. Interventions are small strategy blocks that all converge on one shared retard word, **0x390E**, subtracted from the summed ignition advance by the combiner `Function_00061F30` at `0x6282C`: `timing = Σ per-cylinder offsets − 0x390E + 0x3896`. The automatic-transmission pair **API_dt** (N→D engagement assist) and **API_ku** (kickdown-upshift shock cut) detect gearbox events from engine sensors alone — gear-characteristic discrete, engine-speed trace, throttle delta — and at factory both produce **zero** retard (offset tables all zero). MT cars get a full ignition blip during lever moves instead (`Function_00071F30`). `RAM_API` has zero producers: "API" is internal strategy namespace, not a link to the gearbox.
+
+Working evidence: `source/torque_system.md`, raw bytes `source/torque_tables.txt`, REA decompiles `t5-re/evidence/torque_mine/`.
+
+## Key facts
+
+- **dt trigger:** N→D edge (`F_00044B86` 'N'→'D') → bin [API_throttle_tab](../reference/symbols/API_throttle_tab.md) by throttle delta → [API_dt_offset_tab](../reference/symbols/API_dt_offset_tab.md) cell → hold [API_dt_delay](../reference/symbols/API_dt_delay.md) (1000 ms) → ramp out over [API_dt_ramp](../reference/symbols/API_dt_ramp.md) (500 ms). AT bit `0x76E5 & 2` gates the whole block.
+- **ku trigger:** raw rpm fell by more than [API_ku_derivata](../reference/symbols/API_ku_derivata.md) since last evaluation (sign edge) while rpm > [API_rpm_limit](../reference/symbols/API_rpm_limit.md) (4000), throttle delta > [API_throttle_limit](../reference/symbols/API_throttle_limit.md), and 3 s cooldown → [API_ku_offset](../reference/symbols/API_ku_offset.md) retard, hold [API_ku_delay](../reference/symbols/API_ku_delay.md), ramp [API_ku_ramp](../reference/symbols/API_ku_ramp.md). MCS differs (T5 MCS Tune Changes).
+- **MT blip:** window [Shift_rpm](../reference/symbols/Shift_rpm.md) per gear ± [Shift_up_rpm_hyst](../reference/symbols/Shift_up_rpm_hyst.md), cut [Shift_up_time](../reference/symbols/Shift_up_time.md) ticks; gear-change inferred from [Gear_st](../reference/symbols/Gear_st.md)/[Gear_ratio_delta](../reference/symbols/Gear_ratio_delta.md).
+- **Companions:** [Temp_reduce_mat](../reference/symbols/Temp_reduce_mat.md)/[Temp_reduce_mat_2](../reference/symbols/Temp_reduce_mat_2.md) cut fuel-temp enrichment during interventions; [Br_plus_tab](../reference/symbols/Br_plus_tab.md)/[Br_minus_tab](../reference/symbols/Br_minus_tab.md) brake-vacuum idle trim; per-gear boost ceiling [Regl_tryck_sgm](../reference/symbols/Regl_tryck_sgm.md); AC engagement via [AC_wait_on](../reference/symbols/AC_wait_on.md)/[AC_wait_off](../reference/symbols/AC_wait_off.md) timing; [Mainrly_off](../reference/symbols/Mainrly_off.md) start gate.
+- The gearbox is a ZF 4HP22 EHS that shifts autonomously; the ECU only reads the Drive character discrete and the torque-limit request input. 615 Kbit/s belongs to the CAN/SFI diagnostic link, not to any gearbox communication.
+
+Related: [T5 Ignition Timing](ignition-timing.md) (where 0x390E lands) · [T5 Misfire Detection](misfire-detection.md) (reports only, no intervention) · [T5 Symbols](../reference/symbol-index.md)

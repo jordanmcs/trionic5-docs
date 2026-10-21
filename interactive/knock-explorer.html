@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: var(--font-sans, system-ui, sans-serif); color: var(--foreground); margin: 0; }
+  .wrap { max-width: 980px; padding: 4px 2px; }
+  h1 { font-size: 17px; margin: 6px 0 2px; }
+  h2 { font-size: 13px; margin: 22px 0 8px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted-foreground); border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+  .sub { color: var(--muted-foreground); font-size: 12px; margin: 0 0 4px; }
+  .chain { display: flex; gap: 0; align-items: stretch; flex-wrap: wrap; }
+  .node { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 9px; font-size: 11px; width: 138px; }
+  .node b { display: block; font-size: 11.5px; margin-bottom: 3px; }
+  .node span { color: var(--muted-foreground); font-size: 10px; line-height: 1.35; display: block; }
+  .arrow { align-self: center; padding: 0 5px; color: var(--muted-foreground); font-size: 14px; }
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .row { display: flex; gap: 18px; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 270px; }
+  button { font: inherit; font-size: 11.5px; padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--foreground); cursor: pointer; }
+  button.acc { border-color: var(--accent); color: var(--accent); }
+  button.danger { border-color: #c0392b; color: #e74c3c; }
+  button:active { transform: scale(.97); }
+  .bar-out { height: 14px; width: 100%; background: rgba(128,128,128,.15); border-radius: 4px; overflow: hidden; margin: 2px 0 6px; position: relative; }
+  .bar { height: 100%; background: var(--accent); transition: width .25s; }
+  .bar.red { background: #e67e22; }
+  .bar.boost { background: #8e44ad; }
+  .lbl { font-size: 11px; display: flex; justify-content: space-between; color: var(--muted-foreground); }
+  .chip { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 10.5px; border: 1px solid var(--border); color: var(--muted-foreground); }
+  .chip.on { color: #2ecc71; border-color: #27ae60; }
+  .chip.warn { color: #e67e22; border-color: #d35400; }
+  .chip.err { color: #e74c3c; border-color: #c0392b; }
+  input[type=range] { width: 100%; }
+  .sm-row { display:flex; align-items:center; gap:8px; font-size:11.5px; margin: 3px 0; flex-wrap: wrap;}
+  .timerbar { height: 10px; width: 220px; background: rgba(128,128,128,.15); border-radius: 4px; overflow: hidden;}
+  .timerbar div { height:100%; background:#e67e22; width:0; transition: width .2s; }
+  .foot { font-size: 10px; color: var(--muted-foreground); margin-top: 18px; border-top: 1px solid var(--border); padding-top: 6px; line-height:1.5; }
+  code { font-size: 10px; background: rgba(128,128,128,.12); padding: 0 3px; border-radius: 3px; }
+  .stateflow { font-size: 11px; line-height: 1.75; color: var(--muted-foreground); }
+  .stateflow b { color: var(--foreground); font-weight: 600; }
+  .grid4 { display:grid; grid-template-columns: 56px 1fr 74px; gap: 2px 8px; align-items:center; font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Saab Trionic 5 — knock detection, end to end</h1>
+  <p class="sub">MCS Green Giant V3 — identical to factory 4780656 except <code>Apc_knock_back</code> (5→0) and <code>Fuel_knock_mat</code>. Values below are real calibration data from your binary.</p>
+
+  <h2>1 · Signal chain — the spark plug IS the knock sensor</h2>
+  <div class="chain">
+    <div class="node"><b>Cylinder / plug gap</b><span>After combustion, ionized gas conducts an <b>ion current</b> (80 V bias, sensed at coil low-voltage side). Knock = chamber pressure oscillation modulating that current.</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><b>DI cassette</b><span>Band-pass ≈ <b>7 kHz</b> → sine burst, <b>amplitude = knock severity</b>. One shared output. No piezo KS exists on T5; ion also gives misfire + crank sync (no cam sensor).</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><b>ECU pin 44</b><span>Shared by all 4 cylinders — attribution by <b>timing</b>: ECU knows who just fired.</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><b>TPU hardware window</b><span>PWM strobe opens counter <b>30–45° to 60–75° after each spark</b> (ion/combustion phase). No software per pulse.</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><b>Window pulse count</b><span>Count ≈ amplitude × time. Scale 0…~90. Baseline count ≠ 0 — spark-discharge energy leaks into the window; a healthy engine counts 20–45.</span></div>
+  </div>
+
+  <h2>2 · One window, decided — drag the slider</h2>
+  <div class="panel">
+    <div class="row">
+      <div class="col">
+        <div class="lbl"><span>window pulse count = <b id="cntv" style="color:var(--foreground)">20</b></span><span id="thr" style="font-size:11px"></span></div>
+        <input type="range" id="cnt" min="0" max="120" value="20">
+        <div style="font-size:10.5px;color:var(--muted-foreground)">threshold = <code>Knock_ref_matrix[rpm,load]</code> × <code>Lknock_oref/100</code>, capped by <code>Kadapt_max_ref</code> · current point: mid-load 2500 rpm → base 53 × 125 % ⇒ <b id="thrv" style="color:var(--foreground)">66</b></div>
+      </div>
+      <div class="col">
+        <span class="chip" id="c_quiet">no knock</span>
+        <span class="chip" id="c_weak">weak · Spik_count=1</span>
+        <span class="chip" id="c_knock">KNOCK · Spik_count=2</span>
+        <div style="font-size:10.5px;color:var(--muted-foreground);margin-top:6px">Also stored: <code>Knock_diag_level ← count</code> on every window → feeds the line-health watchdog in panel 4. Gated OFF below ~60–70 kPa MAP, &lt;40 °C, multi-spit, or where <code>Detect_map</code>=0 (Saab's diagonal visibility mask — stock).</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>3 · The two control loops — fire knock events, watch them react</h2>
+  <div class="panel">
+    <div class="row">
+      <div class="col">
+        <div style="font-size:11.5px;margin-bottom:6px">rpm point:
+          <button id="r1000">1000 (cap 3°)</button>
+          <button id="r2500">2500 (cap 13°)</button>
+          <button id="r6000">6000 (cap 9°)</button>
+        </div>
+        <div class="grid4" id="cyls"></div>
+        <div class="lbl" style="margin-top:4px"><span>Knock_average = <b id="avg" style="color:var(--foreground)">0.00°</b> of <span id="caplbl">13.0</span>°</span><span>+1.5°/event · −0.2°/period</span></div>
+        <div style="margin-top:8px">
+          <button class="danger" id="fire1">knock cyl 1</button>
+          <button class="danger" id="fire2">knock cyl 2</button>
+          <button class="danger" id="fire3">knock cyl 3</button>
+          <button class="danger" id="fire4">knock cyl 4</button>
+          <button class="acc" id="tick">advance 1 control period</button>
+        </div>
+      </div>
+      <div class="col">
+        <div style="font-size:11.5px;margin-bottom:4px">Global APC boost derate <code>Apc_decrese</code></div>
+        <div class="bar-out"><div class="bar boost" id="boostbar" style="width:0%"></div></div>
+        <div class="lbl"><span><b id="decv">0</b> % charge-pressure pulled</span><span>+8 %/knock event · cap 100 %</span></div>
+        <div style="margin-top:8px;font-size:11px">recovery mode:
+          <label><input type="radio" name="mode" value="stock" checked> stock (Apc_knock_back = 5 %/period)</label><br>
+          <label style="margin-left:2px"><input type="radio" name="mode" value="mcs"> MCS ( = 0: derate held)</label>
+        </div>
+        <div style="font-size:10.5px;color:var(--muted-foreground);margin-top:6px">Severe sustained knock → boost control falls back to <b>basic charge pressure</b> (ISAT shows cause “KNOCK CONTROL”: bad fuel or dying cassette). Per-cylinder offsets exit as <code>Ret_mangd</code> retard demand → spark + dwell. MCS also enriches differently while knocking (<code>Fuel_knock_mat</code>, peak 1.51× vs stock 1.61×).</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>4 · Ion-path watchdog (the <code>Knock_diag_level</code> story)</h2>
+  <div class="panel">
+    <div class="row">
+      <div class="col">
+        <div class="sm-row"><input type="checkbox" id="live" checked> cassette line alive (window count &gt; 50)</div>
+        <div class="sm-row"><input type="checkbox" id="batt" checked> battery ≥ <code>DI_cassette_U_limit</code> (no sag)</div>
+        <div class="sm-row"><input type="checkbox" id="rpm" checked> rpm proxy ≥ 800, ignition on</div>
+        <div style="margin:10px 0 2px" class="lbl"><span>no-signal timer (fault at 10 s)</span></div>
+        <div class="timerbar"><div id="tbar"></div></div>
+        <div style="margin-top:10px">
+          <span class="chip on" id="c_ok">healthy</span>
+          <span class="chip warn" id="c_run">timing…</span>
+          <span class="chip" id="c_blk">measurement inhibited (batt/rpm)</span>
+          <span class="chip err" id="c_fault">LATCHED 0x28/0x2C + Knock_frame</span>
+        </div>
+        <div style="margin-top:10px"><button class="acc" id="igncycle">+1 ignition cycle (×100)</button><span style="font-size:10.5px;color:var(--muted-foreground)"> 1500 clean cycles → auto-clear</span></div>
+      </div>
+      <div class="col">
+        <div class="stateflow">
+          Every pass of <b>F_0005C34A</b>:<br>
+          <b>diag_level &gt; 50</b> → timer ← now (“proof of life” — spark ringing keeps a healthy line well above 0; wire-off reads ≈0 forever).<br>
+          <b>≤ 50</b> and battery healthy and rpm ≥ 800 → timer <i>not refreshed</i>; after <b>10 s</b> → latch fault: set knock-fault bit, error code <b>0x28/0x2C</b>, snapshot 25 longs of Error_frame → <b>Knock_frame</b>.<br>
+          <b>Battery sag?</b> cassette output legitimately shrinks with supply voltage → watchdog declines to convict (that's the <code>DI_cassette_U_limit</code> gate).<br>
+          While latched, watchdog skips itself; recovery only via <b>1500 clean ignition cycles</b>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>5 · K-adapt — the ECU learns your engine's baseline</h2>
+  <div class="panel">
+    <div class="row">
+      <div class="col">
+        <div class="lbl"><span>engine baseline activity (count produced by normal, non-knocking windows)</span><span><b id="nf" style="color:var(--foreground)">34</b></span></div>
+        <input type="range" id="base" min="10" max="90" value="34">
+        <div class="sm-row"><input type="checkbox" id="g_rpm" checked> 2100–3250 rpm <span style="color:var(--muted-foreground)">(<code>Kadapt_rpm_low/high</code> 210/325)</span></div>
+        <div class="sm-row"><input type="checkbox" id="g_load" checked> mid load 85–105 <span style="color:var(--muted-foreground)">(<code>Kadapt_load_low/high</code>)</span></div>
+        <div class="sm-row"><input type="checkbox" id="g_temp" checked> coolant &gt; <b>60 °C</b> — stricter than the 40 °C detection gate</div>
+        <div class="sm-row"><input type="checkbox" id="g_clean" checked> no retard pending, no misfire, steady throttle</div>
+        <div style="margin-top:8px">
+          <button class="acc" id="sample1">sample ×1</button>
+          <button class="acc" id="sample100">drive the learning window</button>
+          <button class="danger" id="break_gates">break a gate mid-session</button>
+        </div>
+        <div style="font-size:10.5px;color:var(--muted-foreground);margin-top:6px"><code>F_000610D2</code> takes one <code>Knock_level</code> sample per pass only while <b>all</b> gates hold; 100 samples = one learning run (session abandoned after <code>Kadapt_period</code> = 320 ticks if conditions lapse).</div>
+      </div>
+      <div class="col">
+        <div class="lbl"><span><code>Kadapt_ref_value_actual</code></span><span>init 34</span></div>
+        <div class="bar-out" style="height:20px"><div class="bar" id="adbar" style="width:34%"></div></div>
+        <div class="lbl"><span><b id="adval" style="color:var(--foreground);font-size:15px">34</b></span><span id="admsg" style="font-size:10.5px">samples 0/100</span></div>
+        <div style="margin-top:6px"><button class="acc" id="apply">finish run → apply</button><span class="chip" id="c_learn">idle</span></div>
+        <div style="font-size:10.5px;margin-top:8px;color:var(--muted-foreground)">creep per run: <b>Δ≤2 hold · Δ≤10 ±1 · Δ≤20 ±2 · Δ&gt;20 ±10</b> — repeated runs walk toward the true baseline. This value scales the denominator of the per-window count/reference ratio (0x4622).</div>
+        <div style="margin-top:8px;font-size:10.5px;color:var(--muted-foreground)">ratio ceiling <code>Kadapt_max_ref</code> falls with rpm:<br>
+          <svg width="230" height="58" viewBox="0 0 230 58" style="overflow:visible">
+            <polyline id="capline" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+            <text x="0" y="56" font-size="8" fill="var(--muted-foreground)">1500</text>
+            <text x="105" y="56" font-size="8" fill="var(--muted-foreground)">3200 rpm</text>
+            <text x="205" y="56" font-size="8" fill="var(--muted-foreground)">5000</text>
+            <text x="0" y="10" font-size="8" fill="var(--muted-foreground)">3.15×</text>
+            <text x="0" y="44" font-size="8" fill="var(--muted-foreground)">1.66×</text>
+          </svg>
+          <span id="capread" style="font-size:10px"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>6 · Temperature: two hard gates for knock, smooth tables for fuel</h2>
+  <div class="panel">
+    <div class="row">
+      <div class="col">
+        <div class="lbl"><span>coolant <code>Kyl_temp</code></span><span><b id="ctv" style="color:var(--foreground)">20 °C</b></span></div>
+        <input type="range" id="ct" min="-20" max="110" value="20">
+        <div style="position:relative;height:16px;border-radius:4px;margin:10px 0 2px;background:linear-gradient(to right,#c0392b 0 38.5%,#d35400 38.5% 53.8%,#27ae60 53.8% 100%)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted-foreground)"><span>−20</span><span>40 °C → detect ON</span><span>60 °C → learn ON</span><span>110</span></div>
+        <div style="margin-top:8px">
+          <span class="chip" id="c_detect">knock detection</span>
+          <span class="chip" id="c_kadapt">K-adapt learning</span>
+        </div>
+        <div class="sm-row" style="margin-top:8px"><input type="checkbox" id="tsens"> coolant sensor failed (<code>Diag_status</code> 0x80)</div>
+        <div style="font-size:10.5px;color:var(--muted-foreground);margin-top:4px">T5 knock uses <b>no smooth temperature table</b> — just these gates (+ the 40–60 kPa <code>Knock_press_limit</code> map and the battery <code>DI_cassette_U_limit</code> gate). Below 40 °C the ECU never retards or derates for knock. Sensor failed? Detection is force-enabled so a dead sensor can't disarm protection.</div>
+      </div>
+      <div class="col">
+        <div style="font-size:11.5px;margin-bottom:4px"><code>Tempkomp_konst</code> — the table literally named “temperature compensation”… is <b>warm-up fuel</b>. Stock vs MCS, ×128:</div>
+        <svg width="100%" height="120" viewBox="0 0 260 120">
+          <line x1="26" y1="100" x2="252" y2="100" stroke="var(--border)"/>
+          <line x1="26" y1="10" x2="26" y2="100" stroke="var(--border)"/>
+          <polyline id="tk_stock" fill="none" stroke="var(--muted-foreground)" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <polyline id="tk_mcs" fill="none" stroke="#e67e22" stroke-width="1.8"/>
+          <text x="26" y="112" font-size="8" fill="var(--muted-foreground)">warm (idx 0)</text>
+          <text x="205" y="112" font-size="8" fill="var(--muted-foreground)">cold (idx 14)</text>
+          <text x="0" y="14" font-size="8" fill="var(--muted-foreground)">+90</text>
+          <text x="0" y="102" font-size="8" fill="var(--muted-foreground)">0</text>
+          <text x="30" y="20" font-size="8.5" fill="var(--muted-foreground)">- - stock</text>
+          <text x="80" y="20" font-size="8.5" fill="#e67e22">— MCS</text>
+        </svg>
+        <div style="font-size:10.5px;color:var(--muted-foreground)">MCS runs richer through the warm-up band (after-start +6…10, cold decel 46→58, this table +2…+6, peak +0.75× vs +0.70×) — while its K-adapt and knock-gate calibration is byte-identical to factory.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Sources: <code>notes/knock_system.md</code> + §7b/§7c (K-adapt: F_000610D2/F_000611E6, tables 0x42856/0x42B5A; gates 0x60EB2/0x61134), <code>notes/knock_stock_vs_mcs.md</code> (warm-up family diff, ROM 0x4085E–0x408AB), <i>Analyzing Trionic 5 with T5Suite</i> pp 72/102-104/145-148, Saab 9000 2.7 OBD II manual pp 91-92/232-233. Simulator is illustrative — periods are compressed for interactivity.</div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+// panel 2
+const cnt = $('cnt');
+function decide(){
+  const v = +cnt.value, thr = 66;
+  $('cntv').textContent = v;
+  $('thrv').textContent = thr;
+  $('thr').textContent = 'threshold ' + thr;
+  const set=(id,on)=>$(id).className = 'chip' + (on ? (id==='c_knock'?' err':id==='c_weak'?' warn':' on') : '');
+  set('c_quiet', v<=thr); set('c_weak', v>thr && v<=thr*1.35); set('c_knock', v>thr*1.35);
+}
+cnt.oninput = decide; decide();
+// panel 3
+let lim = 130, offs = [0,0,0,0], dec = 0, cyc = 0;
+const cyls = $('cyls');
+function cap(btn,v){ return ()=>{ lim=v; $('caplbl').textContent=(v/10).toFixed(1); render(); } }
+$('r1000').onclick=cap(0,30); $('r2500').onclick=cap(0,130); $('r6000').onclick=cap(0,90);
+function render(){
+  let h='';
+  for(let i=0;i<4;i++){
+    const deg=(offs[i]/10).toFixed(1);
+    h+=`<div>cyl ${i+1}</div><div class="bar-out"><div class="bar red" style="width:${Math.min(100,offs[i]/lim*100)}%"></div></div><div>${deg}° / ${(lim/10).toFixed(1)}°</div>`;
+  }
+  cyls.innerHTML=h;
+  const avg = offs.reduce((a,b)=>a+b,0)/4;
+  $('avg').textContent=(avg/10).toFixed(2)+'°';
+  $('boostbar').style.width=dec+'%';
+  $('decv').textContent=Math.round(dec);
+}
+function fire(i){ offs[i]=Math.min(lim, offs[i]+15); dec=Math.min(100,dec+8); render(); }
+$('fire1').onclick=()=>fire(0); $('fire2').onclick=()=>fire(1); $('fire3').onclick=()=>fire(2); $('fire4').onclick=()=>fire(3);
+$('tick').onclick=()=>{
+  for(let i=0;i<4;i++) offs[i]=Math.max(0,offs[i]-2);
+  const mode=document.querySelector('input[name=mode]:checked').value;
+  if(mode==='stock') dec=Math.max(0,dec-5);
+  render();
+};
+render();
+// panel 4
+let t=0, latched=false, cycles=0;
+function watchdog(){
+  const live=$('live').checked, batt=$('batt').checked, rpm=$('rpm').checked;
+  if(latched) return;
+  if(live){ t=0; }
+  else if(batt&&rpm){ t=Math.min(10,t+1); }
+  if(t>=10){ latched=true; cycles=0; }
+  $('tbar').style.width=(t*10)+'%';
+  $('c_ok').className='chip'+(!latched&&t==0&&!(!live&&!(batt&&rpm))?' on':'');
+  $('c_run').className='chip'+(!latched&&t>0?' warn':'');
+  $('c_blk').className='chip'+(!latched&&!live&&!(batt&&rpm)?' warn':'');
+  $('c_fault').className='chip'+(latched?' err':'');
+}
+['live','batt','rpm'].forEach(id=>$(id).onchange=watchdog);
+$('igncycle').onclick=()=>{ if(latched){ cycles+=100; if(cycles>=1500){ latched=false; cycles=0; } } watchdog(); };
+setInterval(watchdog, 700); watchdog();
+// panel 5 — K-adapt
+let actual = 34, session = 0;
+const gatesOK = () => ['g_rpm','g_load','g_temp','g_clean'].every(id=>$(id).checked);
+function kadaptUI(msg, cls){
+  $('nf').textContent = $('base').value;
+  $('adval').textContent = actual;
+  $('adbar').style.width = Math.min(100, actual) + '%';
+  $('admsg').textContent = msg || ('samples ' + session + '/100');
+  $('c_learn').className = 'chip' + (cls ? ' ' + cls : '');
+  $('capline').setAttribute('points', [315,315,315,270,250,229,218,200,183,166,166]
+    .map((v,i)=>`${8+i*21},${14+(315-v)/149*26}`).join(' '));
+  $('capread').textContent = '3.15× below ~2500 rpm → 1.66× above ~4700 rpm';
+}
+$('base').oninput = () => kadaptUI();
+function takeSample(n){
+  if(!gatesOK()){ session = 0; kadaptUI('gate open — session discarded', 'err'); return false; }
+  session = Math.min(100, session + n);
+  kadaptUI(session>=100 ? 'run complete → apply' : undefined, session>=100 ? 'warn' : 'on');
+  return true;
+}
+$('sample1').onclick = () => takeSample(1);
+$('sample100').onclick = () => takeSample(100);
+$('break_gates').onclick = () => { $('g_temp').checked = false; takeSample(1); };
+$('apply').onclick = () => {
+  if(session < 100){ kadaptUI('need 100 samples first', 'err'); return; }
+  const target = +$('base').value, d = target - actual;
+  const step = Math.abs(d)<=2 ? 0 : Math.abs(d)<=10 ? 1 : Math.abs(d)<=20 ? 2 : 10;
+  actual += d>0 ? step : -step;
+  session = 0;
+  kadaptUI(`Δ=${d} → step ${step>0?(d>0?'+':'-')+step:'hold'} → ${actual}`, step? 'on':'');
+};
+['g_rpm','g_load','g_temp','g_clean'].forEach(id => $(id).onchange = () => { if(!gatesOK() && session) { session=0; kadaptUI('gate open — session discarded','err'); } else kadaptUI(); });
+kadaptUI();
+// panel 6 — temperature
+function temps(){
+  const c = +$('ct').value, failed = $('tsens').checked;
+  $('ctv').textContent = c + ' °C';
+  const detect = c > 40 || failed, kadr = c > 60;
+  $('c_detect').className = 'chip' + (detect ? ' on' : ' err');
+  $('c_detect').textContent = detect ? 'knock detection ON' + (failed && c<=40 ? ' (forced: sensor failed)' : '') : 'detection OFF (<40 °C)';
+  $('c_kadapt').className = 'chip' + (kadr ? ' on' : '');
+  $('c_kadapt').textContent = kadr ? 'K-adapt learning ON' : 'K-adapt learning OFF (≤60 °C)';
+}
+$('ct').oninput = temps; $('tsens').onchange = temps; temps();
+(function(){
+  const S=[0,0,4,8,10,13,15,21,27,34,43,54,70,82,90], M=[0,2,5,10,13,16,17,19,30,37,47,58,75,88,96];
+  const pts = a => a.map((v,i)=>`${26+i*(226/14)},${100-v/96*84}`).join(' ');
+  $('tk_stock').setAttribute('points', pts(S));
+  $('tk_mcs').setAttribute('points', pts(M));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+T5.5 IGNITION SUBSYSTEM CALIBRATION TABLES - factory 4780656 raw bytes.
+MCS diffs: T5 MCS Tune Changes.md; changed-table markers in mcs_bytes_by_table.txt.
+ROM base 0x40000. Angles are 16-bit words, 0.1 crank degrees per count unless stated. x-axes are raw MAP
+counts (2.5-bar sensor: count ~= kPa absolute; 100 = atmospheric). y-axes rpm unless stated.
+====================================================================================================
+
+Ign_map_0  ROM 0x04186a len 576  shape 16 rpm x 18 load  [base ignition map, warm engine (main)]  (MCS differs)
+  y-axis Ign_map_0_y_axis ROM 0x04184a: [500, 880, 1260, 1640, 2020, 2400, 2780, 3160, 3540, 3920, 4300, 4680, 5060, 5440, 5820, 6200]
+  x-axis Ign_map_0_x_axis ROM 0x041826: [0, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240]
+  raw hex : 00000050005000500050005000500050003c002800140014000a0000000000000000000000640064006400640064006400640064003a0028001e001e0014000a0000000000000000009600960096009600960096009600960078007800460028001e000a000a00000000000000c800c800fa00fa00fa00fa00fa00e600b40096006e00500032000a000a00000000000000c800c800fa012c0145012c00fa00e600d200aa008c005f005a0028001e00140000000000c800c800fa012c01450122010e00fa00d200aa008c00780064003c001e00140000000000c800c800fa012c015e0136010400f000dc00dc00d2008c0082006400460032000a000000c800c800fa012c0168015e012c010400f000f000dc00b400a00082005a003c001e001400c800fa012c01400168015e012c010400f000f000f000c300a0008c0064003c0032003200fa012c014001540168016801360118010400fa00f000cd00b400a00073005a00500046012c014001540168016801680136012c010400fa00f000cd00b400aa00730064005000460140015401680168016801680136012c0118010400f000d200b400a000780069005a00500154016801680168016801680140012c010e00f000f000d200b400a00082006e005a005001680168016801680168015e0136012c012200f000f000d200af00a00082006e0064005501680168016801680168015e012c012c011800f000f000d200a0008c00820078006e005a01680168016801680168015e015e012c011800dc00dc00b40091008c00820078006e005f
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+        0    80    80    80    80    80    80    80    60    40    20    20    10     0     0     0     0     0
+      100   100   100   100   100   100   100   100    58    40    30    30    20    10     0     0     0     0
+      150   150   150   150   150   150   150   150   120   120    70    40    30    10    10     0     0     0
+      200   200   250   250   250   250   250   230   180   150   110    80    50    10    10     0     0     0
+      200   200   250   300   325   300   250   230   210   170   140    95    90    40    30    20     0     0
+      200   200   250   300   325   290   270   250   210   170   140   120   100    60    30    20     0     0
+      200   200   250   300   350   310   260   240   220   220   210   140   130   100    70    50    10     0
+      200   200   250   300   360   350   300   260   240   240   220   180   160   130    90    60    30    20
+      200   250   300   320   360   350   300   260   240   240   240   195   160   140   100    60    50    50
+      250   300   320   340   360   360   310   280   260   250   240   205   180   160   115    90    80    70
+      300   320   340   360   360   360   310   300   260   250   240   205   180   170   115   100    80    70
+      320   340   360   360   360   360   310   300   280   260   240   210   180   160   120   105    90    80
+      340   360   360   360   360   360   320   300   270   240   240   210   180   160   130   110    90    80
+      360   360   360   360   360   350   310   300   290   240   240   210   175   160   130   110   100    85
+      360   360   360   360   360   350   300   300   280   240   240   210   160   140   130   120   110    90
+      360   360   360   360   360   350   350   300   280   220   220   180   145   140   130   120   110    95
+
+Ign_map_4  ROM 0x041dc0 len 576  shape 16 rpm x 18 load  [warm-up ignition map (crossfade to map0 by intake temp)]  (MCS differs)
+  y-axis Ign_map_0_y_axis ROM 0x04184a: [500, 880, 1260, 1640, 2020, 2400, 2780, 3160, 3540, 3920, 4300, 4680, 5060, 5440, 5820, 6200]
+  x-axis Ign_map_0_x_axis ROM 0x041826: [0, 16, 24, 32, 40, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240]
+  raw hex : 00c8012c00fa00fa00fa00fa00960082003c002800140014000a0000000000000000000000c8012c00fa012c012c012c00960082003c0028001e001e0014000a000000000000000000c800c800fa012c015e012c00fa00dc00b400960064003c0028000a000a00000000000000c800c800fa012c014a012c010400e600be00b4008c0050003c0014000a00000000000000c800c800fa012c0145012c00fa00e600dc00c800b4007300640046001400000000000000c800c800fa012c01450122010e00fa00e600c800c30087007300500037001e0000000000c800c800fa012c015e0136010400f000dc00e600e600b4008c006e004b0032000a000000c800c800fa012c0168015e012c010400f000f000e600c800aa008200690046001e001400c800fa012c01400168015e012c010400f000f000fa00d700b4008c00730064003c003200fa012c014001540168016801360118010400fa00fa00eb00be009b0082007800500046012c0140015401680168016801360118010400fa00fa00dc00be009600820082005000460140015401680168016801680136012c0118010400fa00e100be00a000870069005a00500154016801680168016801680140012c010e00e600f000dc00c30091006e006e005a005001680168016801680168015e0136012c012200f000fa00d700b900a0007800730064005501680168016801680168015e012c012c011800e600f000dc00b4008c00820078006e005a01680168016801680168015e015e012c011800dc00e600d200af008c0082007d006e005f
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+      200   300   250   250   250   250   150   130    60    40    20    20    10     0     0     0     0     0
+      200   300   250   300   300   300   150   130    60    40    30    30    20    10     0     0     0     0
+      200   200   250   300   350   300   250   220   180   150   100    60    40    10    10     0     0     0
+      200   200   250   300   330   300   260   230   190   180   140    80    60    20    10     0     0     0
+      200   200   250   300   325   300   250   230   220   200   180   115   100    70    20     0     0     0
+      200   200   250   300   325   290   270   250   230   200   195   135   115    80    55    30     0     0
+      200   200   250   300   350   310   260   240   220   230   230   180   140   110    75    50    10     0
+      200   200   250   300   360   350   300   260   240   240   230   200   170   130   105    70    30    20
+      200   250   300   320   360   350   300   260   240   240   250   215   180   140   115   100    60    50
+      250   300   320   340   360   360   310   280   260   250   250   235   190   155   130   120    80    70
+      300   320   340   360   360   360   310   280   260   250   250   220   190   150   130   130    80    70
+      320   340   360   360   360   360   310   300   280   260   250   225   190   160   135   105    90    80
+      340   360   360   360   360   360   320   300   270   230   240   220   195   145   110   110    90    80
+      360   360   360   360   360   350   310   300   290   240   250   215   185   160   120   115   100    85
+      360   360   360   360   360   350   300   300   280   230   240   220   180   140   130   120   110    90
+      360   360   360   360   360   350   350   300   280   220   230   210   175   140   130   125   110    95
+
+Ign_map_1  ROM 0x041ac2 len 22  shape 1x11  [idle torque correction vs rpm-error axis (x constant)]
+  y-axis Ign_map_1_y_axis ROM 0x041aac: [-500, -100, -70, -50, -20, 0, 30, 250, 400, 1650, 2000]
+  x-axis Ign_map_1_x_axis ROM 0x041aaa: [0]
+  raw hex : 000000640064005000280000ffd8ffd8ffd800320032
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+        0   100   100    80    40     0   -40   -40   -40    50    50
+
+Ign_map_2  ROM 0x041b08 len 256  shape 16 rpm x 8 load  [knock retard overlay (MAP>140 kPa regime)]  (MCS differs)
+  y-axis Ign_map_2_y_axis ROM 0x041ae8: [500, 880, 1260, 1640, 2020, 2400, 2780, 3160, 3540, 3920, 4300, 4680, 5060, 5440, 5820, 6200]
+  x-axis Ign_map_2_x_axis ROM 0x041ad8: [128, 144, 160, 176, 192, 208, 224, 240]
+  raw hex : 00000000000000000000000000000000000000000000000a00000000000000000028000a000a000a000a0000000000000046003c001e000a000a000000000000003c005000550028001e001400000000003c005a0055003c001400140000000000460055005500460023001e000a0000002d00500046003200190014000a000a003200500041003c0019000a000a000a00370050004100320019000a000a000a003c00460032003c0019000a000a000a00320032003200320019000a000a000a00320032002300320014000a000a000a00320032002300280014000a000a000a002800280014000a000a000a000a000a00140014000a000a000a000a000a000a
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+        0     0     0     0     0     0     0     0
+        0     0     0    10     0     0     0     0
+       40    10    10    10    10     0     0     0
+       70    60    30    10    10     0     0     0
+       60    80    85    40    30    20     0     0
+       60    90    85    60    20    20     0     0
+       70    85    85    70    35    30    10     0
+       45    80    70    50    25    20    10    10
+       50    80    65    60    25    10    10    10
+       55    80    65    50    25    10    10    10
+       60    70    50    60    25    10    10    10
+       50    50    50    50    25    10    10    10
+       50    50    35    50    20    10    10    10
+       50    50    35    40    20    10    10    10
+       40    40    20    10    10    10    10    10
+       20    20    10    10    10    10    10    10
+
+Ign_map_3  ROM 0x041c40 len 384  shape 16 rpm x 12  [transient map (FACTORY: ALL ZERO)]
+  y-axis Ign_map_3_y_axis ROM 0x041c20: [500, 830, 1160, 1480, 1810, 2140, 2460, 2790, 3120, 3440, 3770, 4100, 4420, 4750, 5070, 5400]
+  x-axis Ign_map_3_x_axis ROM 0x041c08: [30, 37, 50, 65, 82, 102, 122, 149, 174, 200, 224, 248]
+  raw hex : 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+        0     0     0     0     0     0     0     0     0     0     0     0
+
+Ign_map_5  ROM 0x042022 len 32  shape 16 rpm  [fixed +2.0 deg overlay when channel-5 weight active]
+  y-axis Ign_map_5_y_axis ROM 0x082002: [500, 880, 1260, 1640, 2020, 2400, 2780, 3160, 3540, 3920, 4300, 4680, 5060, 5440, 5820, 6200]
+  x-axis Ign_map_5_x_axis ROM 0x082000: [0]
+  raw hex : 0014001400140014001400140014001400140014001400140014001400140014
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+       20    20    20    20    20    20    20    20    20    20    20    20    20    20    20    20
+
+Ign_map_6  ROM 0x042056 len 50  shape 5 rpm x 5 load  [upshift torque reduction]
+  y-axis Ign_map_6_y_axis ROM 0x08204c: [1000, 1800, 2200, 3000, 3400]
+  x-axis Ign_map_6_x_axis ROM 0x082042: [60, 90, 110, 130, 224]
+  raw hex : 0000ffecffc400a000aaffbcff9cff9c00460028ff9cff9c00140014ffceff9cffe2ffdd0000ff9cff9cffecffceffc4ff9c
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+        0   -20   -60   160   170
+      -68  -100  -100    70    40
+     -100  -100    20    20   -50
+     -100   -30   -35     0  -100
+     -100   -20   -50   -60  -100
+
+Ign_map_7  ROM 0x04209c len 50  shape 5 rpm x 5 load  [downshift torque control]
+  y-axis Ign_map_7_y_axis ROM 0x082092: [1000, 1800, 2400, 2800, 3400]
+  x-axis Ign_map_7_x_axis ROM 0x082088: [24, 32, 92, 120, 224]
+  raw hex : 006400640064006400aa006400b40082004600280032000a0014000a000a001effceff9cff9cff9c0064ff9cff9cff9cff9c
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+      100   100   100   100   170
+      100   180   130    70    40
+       50    10    20    10    10
+       30   -50  -100  -100  -100
+      100  -100  -100  -100  -100
+
+Ign_map_8  ROM 0x0420ea len 22  shape 1x11  [coast idle correction vs rpm error (FACTORY: ALL ZERO)]
+  y-axis Ign_map_8_y_axis ROM 0x0820d4: [-100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100]
+  x-axis Ign_map_8_x_axis ROM 0x0820d2: [0]
+  raw hex : 00000000000000000000000000000000000000000000
+  decoded words (0.1 deg), rows=y(rpm), cols=x(load):
+        0     0     0     0     0     0     0     0     0     0     0
+
+====================================================================================================
+SCALARS (words signed 0.1 deg unless noted)
+====================================================================================================
+Ign_idle_angle           ROM 0x04181e len   2  factory=0046 (              70) unit=deg0.1             | idle base angle work-value init  (MCS differs)
+Ign_idle_angle_start     ROM 0x041820 len   2  factory=00b4 (             180) unit=deg0.1             | idle angle when idle unstable too long
+Knock_offset             ROM 0x041822 len   2  factory=0000 (               0) unit=deg0.1             | global constant knock overlay subtract
+Trans_offset             ROM 0x041824 len   2  factory=0000 (               0) unit=deg0.1             | transient offset constant init (runtime RAM word reused by F_62102)
+Ign_offset               ROM 0x04284a len   2  factory=0000 (               0) unit=deg0.1             | global fixed ignition offset
+Ign_offset_cyl1          ROM 0x04284c len   2  factory=0000 (               0) unit=deg0.1             | per-cyl offset sel by sync angle 0x21C
+Ign_offset_cyl2          ROM 0x04284e len   2  factory=0000 (               0) unit=deg0.1             | per-cyl offset sel by sync angle 0x168
+Ign_offset_cyl3          ROM 0x042850 len   2  factory=0000 (               0) unit=deg0.1             | per-cyl offset (default branch)
+Ign_offset_cyl4          ROM 0x042852 len   2  factory=0000 (               0) unit=deg0.1             | per-cyl offset sel by sync angle 0xB4
+Ign_offset_adapt         ROM 0x042854 len   2  factory=ff9c (            -100) unit=deg0.1             | knock adaptive ignition offset init (work word 0x3896)
+Knock_ang_dec            ROM 0x042874 len   2  factory=0014 (              20) unit=deg0.1             | knock map limit addend for Knock_map_lim
+Ramp_up_ram              ROM 0x042876 len  16  factory=03e803e8000000000000000000140064 ([3, 232, 3, 232, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 100]) unit=weight/1000 per event | per-channel blend weight ramp-up rates (8 ch)
+Ramp_down_ram            ROM 0x042886 len  16  factory=03e803e803e800fa0000000000000000 ([3, 232, 3, 232, 3, 232, 0, 250, 0, 0, 0, 0, 0, 0, 0, 0]) unit=weight/1000 per event | per-channel blend weight ramp-down rates
+Ret_tab_mul              ROM 0x04097d len   1  factory=0a (              10) unit=/10                | Ret_mangd increment scale
+Ret_clear_tab_low        ROM 0x040986 len   1  factory=03 (               3) unit=events             | Ret_mangd clear threshold
+Max_ret_dec              ROM 0x040989 len   1  factory=96 (             150) unit=/256               | Ret_mangd decay-per-cycle scale
+Max_lret_dec             ROM 0x04098b len   1  factory=b4 (             180) unit=/256               | Lret_mangd (fuel decel) decay scale
+Ret_up_rpm               ROM 0x041762 len   2  factory=0096 (             150) unit=rpm x10            | knock-fuel window upper rpm
+Ret_down_rpm             ROM 0x041764 len   2  factory=005a (              90) unit=rpm x10            | knock-fuel window lower rpm
+Ret_delta_rpm            ROM 0x041766 len   2  factory=0005 (               5) unit=rpm x10            | rpm deficit threshold to trigger knock-fuel enrich
+Ret_fuel_tab             ROM 0x04176a len   1  factory=66 (             102) unit=x/128 fuel         | Ret_fuel_fak enrichment value (all-cyl knock)
+Ret_fuel_step            ROM 0x041768 len   1  factory=01 (               1) unit=/t                 | ret fuel ramp step
+Ret_fuel_time            ROM 0x041769 len   1  factory=02 (               2) unit=t                  | ret fuel ramp time
+Airpump_ign_offset       ROM 0x042bea len   2  factory=0000 (               0) unit=deg0.1             | AIR-pump ignition advance target (factory 0)
+Ap_ign_step              ROM 0x042bfc len   2  factory=0005 (               5) unit=deg0.1             | AIR-pump advance ramp step
+Sond_ign_limit           ROM 0x0428a4 len   2  factory=01f4 (             500) unit=rpm x10            | ignition-event counter limit for O2-sensor counters
+Mis_thrott_ign_lim       ROM 0x04289a len   1  factory=19 (              25) unit=%TPS               | misfire eval throttle limit
+Mis_thrott_ign_lim_g     ROM 0x04289b len   1  factory=19 (              25) unit=%TPS               | misfire eval throttle limit (auto)
+Ign_counter_mis_lim      ROM 0x042ebe len   4  factory=00000960 (   [0, 0, 9, 96]) unit=events             | ignition-event window for misfire counters  (MCS differs)
+Misf_ign_lim             ROM 0x042ec2 len   4  factory=00000000 (    [0, 0, 0, 0]) unit=events             | misfire ignition limit set  (MCS differs)
+Misfcut_ign_lim          ROM 0x042ec6 len   1  factory=1e (              30) unit=events             | misfire cut limit  (MCS differs)
+Misfpres_ign_lim         ROM 0x042ec7 len   1  factory=50 (              80) unit=                   | misfire pressure limit  (MCS differs)
+Misfrpm_ign_lim          ROM 0x042ec8 len   1  factory=50 (              80) unit=                   | misfire rpm limit
+Misfac_ign_lim           ROM 0x042ec9 len   1  factory=1e (              30) unit=                   | misfire AC limit  (MCS differs)
+Misfpur_ign_lim          ROM 0x042eca len   1  factory=14 (              20) unit=                   | misfire purge limit  (MCS differs)
+Retard_temp              ROM 0x040b14 len  15  factory=b3b5cae0eef9ffffffffffff8080ff ([179, 181, 202, 224, 238, 249, 255, 255, 255, 255, 255, 255, 128, 128, 255]) unit=x/128 mult         | warm-up retard/enrich multiplier (coolant-AD table, see warmup_tables.txt)
+
+Lret_konst ROM 0x04093C len 64 (8x8 decel-enrichment konst map, x=Trans_x_st rpm,y=Trans_y_st dLoad; used F_6BFA4 not angle path)
+  raw hex: 00000d1326262d3300000d121a263340000d131a263340660013202633465a660013202d33465a660013202d33465a660013202d33465a660013202d33465a66

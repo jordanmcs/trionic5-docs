@@ -1,0 +1,678 @@
+T5.5 FUEL SUBSYSTEM CALIBRATION TABLES - RAW BYTES
+Sources: bin/4780656_factory.BIN (factory AUTHORITY).
+ROM addrs identical in both images (init copy sites byte-verified 513/513). RAM = runtime address.
+Enumerated via init 'PEA (ROM_x!) / MOVE.W #len / PEA (RAM_dst)' pattern scan (tools/fuel_tables.py -> symbols/init_copy_inventory.json).
+Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs);
+their bytes live in mcs_bytes_by_table.txt (summary: T5 MCS Tune Changes.md).
+
+
+NOTE: fuel-PRESSURE regulator PID tables (P_fors/I_fors/D_fors, Tryck_mat) belong to the
+rail-pressure control loop, not the injection-duration chain documented here.
+
+== Insp_mat ==
+  ROM 0x040E10  len 256 B  RAM 0x4976  (MCS differs)
+  factory hex  : 11 14 19 28 39 3E 43 48 4E 56 66 66 66 67 67 67 11 15 24 34 3E 42 45 4C 4F 51 63 64 66 66 66 67 12 19 25 36 43 49 4B 52 57 58 59 65 66 67 67 67 12 14 23 39 47 4B 4C 53 5A 5B 5B 5D 66 66 67 67 11 13 20 33 41 48 4B 52 56 56 59 5A 5D 6A 81 81 1B 1B 27 3C 49 50 54 5A 5E 61 6B 6C 63 69 76 7F 0D 10 1E 34 44 49 4D 53 56 63 69 6D 6B 6C 7D 81 1F 1D 2E 41 50 53 56 5B 60 64 66 6B 72 87 96 97 1A 1A 29 45 53 59 5D 63 6B 6D 78 82 89 9A A6 A6 15 15 22 40 51 55 5C 63 6B 70 72 7E 8C 94 A2 A6 15 11 1E 3C 4E 54 5C 67 6D 72 74 8D 90 C1 C0 A6 16 10 1D 3D 4C 58 5E 66 6F 76 84 97 A8 BF BF C1 15 17 2B 44 59 60 68 73 77 7A 8F AE B9 B8 C0 BF 1D 1F 31 4C 64 6A 6F 78 7E 8E B3 D5 D7 D6 B3 B3 2D 1F 31 4C 67 6E 74 7E 8B A7 BC E6 EE EE A6 A7 2A 2B 33 53 68 71 76 7F 8D A9 BE E8 F0 F1 C0 C0
+  factory rows:
+   17  20  25  40  57  62  67  72  78  86 102 102 102 103 103 103
+   17  21  36  52  62  66  69  76  79  81  99 100 102 102 102 103
+   18  25  37  54  67  73  75  82  87  88  89 101 102 103 103 103
+   18  20  35  57  71  75  76  83  90  91  91  93 102 102 103 103
+   17  19  32  51  65  72  75  82  86  86  89  90  93 106 129 129
+   27  27  39  60  73  80  84  90  94  97 107 108  99 105 118 127
+   13  16  30  52  68  73  77  83  86  99 105 109 107 108 125 129
+   31  29  46  65  80  83  86  91  96 100 102 107 114 135 150 151
+   26  26  41  69  83  89  93  99 107 109 120 130 137 154 166 166
+   21  21  34  64  81  85  92  99 107 112 114 126 140 148 162 166
+   21  17  30  60  78  84  92 103 109 114 116 141 144 193 192 166
+   22  16  29  61  76  88  94 102 111 118 132 151 168 191 191 193
+   21  23  43  68  89  96 104 115 119 122 143 174 185 184 192 191
+   29  31  49  76 100 106 111 120 126 142 179 213 215 214 179 179
+   45  31  49  76 103 110 116 126 139 167 188 230 238 238 166 167
+   42  43  51  83 104 113 118 127 141 169 190 232 240 241 192 192
+  NOTE: 16 load x 16 rpm VE-correction matrix; cell factor = (v+128)/256 (v-0x80 = +/-50% VE trim; factory range 0x0D..0xF1). x = Fuel_map_xaxis (kPa abs load count), y = Fuel_map_yaxis (rpm/10). Read CalculateInjectionDuration 0x6DEF8/0x6E056.
+
+== Fuel_map_xaxis ==
+  ROM 0x041674  len 16 B  RAM 0x4E62
+  factory hex  : 10 18 20 30 40 48 50 60 70 80 90 A0 B0 C0 D0 E0
+  factory rows:
+   16  24  32  48  64  72  80  96
+  112 128 144 160 176 192 208 224
+  NOTE: Load x-axis for Insp_mat / Adapt_korr / Fuel_knock / Fload scans, 16 bytes, raw MAP counts = kPa ABSOLUTE (16..224).
+
+== Fuel_map_yaxis ==
+  ROM 0x041684  len 32 B  RAM 0x4E72
+  factory hex  : 00 58 00 7E 00 A4 00 B7 00 CA 00 F0 01 16 01 3C 01 62 01 88 01 AE 01 D4 01 FA 02 20 02 46 02 6C
+  factory rows:
+    0  88   0 126   0 164   0 183
+    0 202   0 240   1  22   1  60
+    1  98   1 136   1 174   1 212
+    1 250   2  32   2  70   2 108
+  NOTE: Rpm y-axis for the same maps, 16 words, rpm/10 (88..620 = 880..6200 rpm).
+
+== Adapt_korr ==
+  ROM 0x04040A  len 256 B  RAM 0x4876
+  factory hex  : 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80
+  factory rows:
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  128 128 128 128 128 128 128 128 128 128 128 128 128 128 128 128
+  NOTE: 16x16 pointed-adaption matrix (same axes as Insp_mat). Applied as (v+128)/256. Initial 0x80; updated +-1 per adaptation event at 0x6BBD8/0x6BC0A; limits Adapt_korr_low/high.
+
+== Adapt_injfaktor ==
+  ROM 0x04075A  len 1 B  RAM 0x4A76
+  factory hex  : 80
+  NOTE: Global-adaption injection factor byte, multiplier (v+384)/512 (0x80 = 1.000). Learned at 0x6B598: += mean(Lambdaint)-0x80.
+
+== Adapt_inj_imat ==
+  ROM 0x04075B  len 1 B  RAM 0x4A78
+  factory hex  : 80
+  NOTE: Initial/hold value of idle-map global adaptation, 0x80 = 1.000 via (v+384)/512 (0x6DEA6).
+
+== Nr_adapt_idle_mat ==
+  ROM 0x04075C  len 2 B  RAM 0x4A7A
+  factory hex  : 00 80
+  factory words: 128
+  NOTE: Idle-map adaptation counter/target pair (word 0x0080), gates idle-cell learning (Nr_adapt_idle_mat! 0x4A7A).
+
+== Adapt_korr_low ==
+  ROM 0x0428B3  len 1 B  RAM 0x5B10
+  factory hex  : 4D
+  NOTE: Min legal Adapt_korr cell (0x4D = -51 raw = ~-20%); out-of-range sets CEL (book p19).
+
+== Adapt_korr_high ==
+  ROM 0x0428B4  len 1 B  RAM 0x5B12
+  factory hex  : B3
+  NOTE: Max legal Adapt_korr cell (0xB3 = +51 raw).
+
+== Adapt_injfaktor_low ==
+  ROM 0x0428B5  len 1 B  RAM 0x5B14
+  factory hex  : 1A
+  NOTE: Min global factor (0x1A -> 0.80 = -20%).
+
+== Adapt_injfaktor_high ==
+  ROM 0x0428B7  len 1 B  RAM 0x5B18
+  factory hex  : E6
+  NOTE: Max global factor (0xE6 -> 1.20 = +20%).
+
+== Adaption_time ==
+  ROM 0x041664  len 1 B  RAM 0x5E98
+  factory hex  : 05
+  NOTE: Adaption period: 5 = "every fifth minute" (book), ticks of the scheduler.
+
+== Load_adapt_time ==
+  ROM 0x0417AB  len 1 B  RAM 0x4F92
+  factory hex  : 02
+  NOTE: Adaption window length (2 = 30 s book).
+
+== Global_adapt_nr ==
+  ROM 0x040984  len 2 B  RAM 0x4B7E
+  factory hex  : 03 20
+  factory words: 800
+  NOTE: Accumulation target for global adaption: 800 ticks (0x320); mean Lambdaint applied at count 250 (0xFA) reached.
+
+== Min_load_gadapt ==
+  ROM 0x04097E  len 1 B  RAM 0x4B76
+  factory hex  : 28
+  NOTE: Global-adaption load window min, load count 0x28 = 40 kPa.
+
+== Max_load_gadapt ==
+  ROM 0x04097F  len 1 B  RAM 0x4B78
+  factory hex  : 68
+  NOTE: Global-adaption load window max, 0x68 = 104 kPa (book: 60-120 kPa).
+
+== Min_rpm_gadapt ==
+  ROM 0x040980  len 2 B  RAM 0x4B7A
+  factory hex  : 00 AE
+  factory words: 174
+  NOTE: Global-adaption rpm window min (word rpm/10: 0xAE = 1740 rpm).
+
+== Max_rpm_gadapt ==
+  ROM 0x040982  len 2 B  RAM 0x4B7C
+  factory hex  : 01 29
+  factory words: 297
+  NOTE: Global-adaption rpm window max (0x129 = 2970 rpm; book 2000-3000).
+
+== Max_adjust_load_adapt ==
+  ROM 0x0417AA  len 1 B  RAM 0x4F90
+  factory hex  : 05
+  NOTE: Max load shift per adaptation event (5).
+
+== Adapt_duty ==
+  ROM 0x040F34  len 1 B  RAM 0x4E60
+  factory hex  : 0A
+  NOTE: Adaptation duty-cycle limit 10 (lambda integrator activity threshold for adaptation).
+
+== Min_tid ==
+  ROM 0x040BA8  len 2 B  RAM 0x4BF6
+  factory hex  : 00 FA
+  factory words: 250
+  NOTE: Minimum injection duration, word, 250 x 4us = 1.000 ms (book p23).
+
+== Min_tid_acink ==
+  ROM 0x041282  len 1 B  RAM 0x61DE
+  factory hex  : 01
+  NOTE: Extra minimum-duration flag/step for AC-increase state (1).
+
+== Inj_konst ==
+  ROM 0x040BA6  len 1 B  RAM 0x4BF4  (MCS differs)
+  factory hex  : 14
+  NOTE: Injector constant: Grund_tid = Inj_konst x aircharge (0x6DDA2). Factory 0x14 = 20 (book: ~20-21 stock; E85 raises it).
+
+== Tid_konst ==
+  ROM 0x040BA2  len 2 B  RAM 0x4E3A
+  factory hex  : 02 EE
+  factory words: 750
+  NOTE: Constant idle injection time override: 0x2EE = 750 x 4us = 3.0 ms; used when Pgm_mod byte1 bit3 and idle status (0x6E598).
+
+== Vinkel_konst ==
+  ROM 0x040BA4  len 2 B  RAM 0x4E3C  (MCS differs)
+  factory hex  : 00 35
+  factory words: 53
+  NOTE: Injection angle constant, crank degrees (word): factory 0x35 = 53. Written to Insp_vinkel at 0x69962 when running and Pgm_mod byte0 bit2 clear.
+
+== Start_v_vinkel ==
+  ROM 0x040F12  len 2 B  RAM 0x4E14
+  factory hex  : 00 00
+  factory words: 0
+  NOTE: Injection angle during cranking/not-yet-running (0x6990A), factory 0.
+
+== Del_mat ==
+  ROM 0x04075E  len 256 B  RAM 0x4BFC
+  factory hex  : 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 42 32 23 00 00 00 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 42 32 23 00 00 00 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 42 32 23 00 00 00 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 42 32 23 00 00 00 4D 4D 4D 4D 4D 4D 4D 4D 4D 46 3D 32 23 00 00 00 4D 4D 4D 4D 4D 4D 4D 4D 48 42 39 2D 23 00 00 00 4D 4D 4D 4D 4D 4D 4D 46 3F 33 28 1E 0E 04 00 00 4D 4D 4D 4D 4D 4D 49 40 39 2E 1F 15 08 00 00 00 4D 4D 4D 4D 4D 4B 43 3B 33 25 18 05 00 00 00 00 4D 4D 4D 4D 4D 46 3E 34 2C 1C 0A 00 00 00 00 00 4D 4D 4D 4D 4C 41 38 2D 21 0F 00 00 00 00 00 00 4D 4D 4D 4D 48 3D 32 27 13 02 00 00 00 00 00 00 4D 4D 4D 4D 46 37 29 21 0B 00 00 00 00 00 00 00 4D 4D 4D 4C 40 32 26 13 00 00 00 00 00 00 00 00 4D 4D 4D 49 3C 2E 20 0A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  factory rows:
+   77  77  77  77  77  77  77  77  77  77  66  50  35   0   0   0
+   77  77  77  77  77  77  77  77  77  77  66  50  35   0   0   0
+   77  77  77  77  77  77  77  77  77  77  66  50  35   0   0   0
+   77  77  77  77  77  77  77  77  77  77  66  50  35   0   0   0
+   77  77  77  77  77  77  77  77  77  70  61  50  35   0   0   0
+   77  77  77  77  77  77  77  77  72  66  57  45  35   0   0   0
+   77  77  77  77  77  77  77  70  63  51  40  30  14   4   0   0
+   77  77  77  77  77  77  73  64  57  46  31  21   8   0   0   0
+   77  77  77  77  77  75  67  59  51  37  24   5   0   0   0   0
+   77  77  77  77  77  70  62  52  44  28  10   0   0   0   0   0
+   77  77  77  77  76  65  56  45  33  15   0   0   0   0   0   0
+   77  77  77  77  72  61  50  39  19   2   0   0   0   0   0   0
+   77  77  77  77  70  55  41  33  11   0   0   0   0   0   0   0
+   77  77  77  76  64  50  38  19   0   0   0   0   0   0   0   0
+   77  77  77  73  60  46  32  10   0   0   0   0   0   0   0   0
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+  NOTE: 16x16 injection delay map (crank deg/3), axes Fuel_map_xaxis/yaxis; used when Pgm_mod byte0 bit2 = "Interpolation of delay map": Insp_vinkel = 3 x map value (0x69952). 
+
+== Batt_korr_tab ==
+  ROM 0x04051E  len 22 B  RAM 0x4E4A  (MCS differs)
+  factory hex  : 00 94 00 C1 00 C4 00 EA 01 41 01 78 01 CF 02 44 03 A4 03 A4 03 A4
+  factory rows:
+    0 148   0 193   0 196   0 234   1  65   1 120   1 207   2  68   3 164   3 164   3 164
+  NOTE: Battery-voltage open-time correction, 11 words; index = 14 - round(Batt_volt) (V clamped 4..14, 0x6E512); value ADDED to duration in 4us ticks (0.59 ms @14 V ... 3.7 ms @<=6 V).
+
+== Grund_last ==
+  ROM 0x0417D8  len 1 B  RAM 0x51C6  (MCS differs)
+  factory hex  : 25
+  NOTE: Baseline load byte (learned minimum load; ramps +-1 toward Medellast between this value and Grund_last_max, only >55 degC, 0x70344). Initial 0x25 = 37.
+
+== Grund_last_max ==
+  ROM 0x0417D9  len 1 B  RAM 0x51C8
+  factory hex  : 32
+  NOTE: Upper bound for the Grund_last ramp (0x32 = 50).
+
+== Last_reg_kon ==
+  ROM 0x0417CC  len 8 B  RAM 0x51BE  (MCS differs)
+  factory hex  : 01 22 00 64 00 96 00 00
+  NOTE: Idle load-regulation constants (4 words): [0] base (0x122=290) + Idle_ej_off + Dash_act (0x70536), used by idle speed load controller; factory 290,100,150,0.
+
+== Reg_last ==
+  ROM 0x04148E  len 4 B  RAM 0x5EAA  (MCS differs)
+  factory hex  : 05 0F 1E 32
+  NOTE: Idle load-regulation thresholds 4 bytes (05 0F 1E 32.
+
+== Idle_fuel_korr ==
+  ROM 0x040DB0  len 96 B  RAM 0x5F6A  (MCS differs)
+  factory hex  : 26 26 26 27 26 2B 32 38 3F 49 54 5C 0D 0D 0D 1F 23 2B 30 38 3D 44 51 59 0D 0D 0D 1A 20 28 2D 31 3B 44 4F 56 0D 0D 0D 1B 23 28 29 31 38 40 49 56 0D 0D 14 1B 23 28 2A 31 38 3E 44 56 0D 0D 1A 1E 25 2B 2B 31 38 3D 44 56 0D 11 1B 24 26 2C 2E 33 38 3E 45 56 12 1C 24 26 26 2B 30 33 38 3E 44 56
+  factory rows:
+   38  38  38  39  38  43  50  56  63  73  84  92
+   13  13  13  31  35  43  48  56  61  68  81  89
+   13  13  13  26  32  40  45  49  59  68  79  86
+   13  13  13  27  35  40  41  49  56  64  73  86
+   13  13  20  27  35  40  42  49  56  62  68  86
+   13  13  26  30  37  43  43  49  56  61  68  86
+   13  17  27  36  38  44  46  51  56  62  69  86
+   18  28  36  38  38  43  48  51  56  62  68  86
+  NOTE: Idle fuel map 8 rpm x 12 load (rows = rpm axis Idle_st_rpm, cols = Idle_st_last). Signed cell, applied as (v+128)/256 (book formula (x+128)/256). Pgm_mod byte2 bit1 gates use.
+
+== Idle_st_rpm ==
+  ROM 0x0416E0  len 16 B  RAM 0x4EC2
+  factory hex  : 00 32 00 3C 00 46 00 50 00 5A 00 64 00 6E 00 78
+  factory rows:
+    0  50   0  60   0  70   0  80   0  90   0 100   0 110   0 120
+  NOTE: Idle map rpm axis, 8 words rpm/10 (50..120 = 500..1200 rpm).
+
+== Idle_st_last ==
+  ROM 0x0416D4  len 12 B  RAM 0x61E2
+  factory hex  : 00 1E 23 28 2D 32 37 3C 41 46 4B 64
+  factory rows:
+    0  30  35  40  45  50  55  60  65  70  75 100
+  NOTE: Idle map load axis, 12 bytes (30..100).
+
+== Last_cyl_komp ==
+  ROM 0x040BAA  len 1 B  RAM 0x4BF8
+  factory hex  : 28
+  NOTE: Load threshold (0x28 = 40) below which per-cylinder Cyl_komp compensation is applied (0x6E400).
+
+== Cyl_komp ==
+  ROM 0x040538  len 4 B  RAM 0x4E0C
+  factory hex  : 80 80 80 80
+  NOTE: Per-cylinder fuel compensation bytes, factor (v+384)/512, initial 0x80 each.
+
+== Start_insp ==
+  ROM 0x040BAC  len 2 B  RAM 0x4BFA
+  factory hex  : 08 CA
+  factory words: 2250
+  NOTE: Cranking base injection count 0x08CA = 2250 (x Startvev_fak /128, warmup doc).
+
+== Konst_lean_map ==
+  ROM 0x040C78  len 64 B  RAM 0x6B00
+  factory hex  : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  factory rows:
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+  NOTE: 16x4 lambda-control constant matrix (all zero = integral form used).
+
+== Konst_rich_map ==
+  ROM 0x040CB8  len 64 B  RAM 0x6B40
+  factory hex  : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  factory rows:
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+  NOTE: 16x4 lambda-control constant matrix (all zero).
+
+== Lean_step_map ==
+  ROM 0x040BB8  len 64 B  RAM 0x6A40
+  factory hex  : 07 07 08 09 0A 0D 0F 0F 08 09 08 09 0A 0C 0C 04 04 09 07 08 09 08 07 05 05 07 0A 09 09 08 08 08 09 0C 0A 0C 0A 09 09 09 06 07 09 0A 08 06 08 07 09 09 08 06 07 06 06 06 09 09 09 07 05 04 06 05
+  factory rows:
+    7   7   8   9  10  13  15  15   8   9   8   9  10  12  12   4
+    4   9   7   8   9   8   7   5   5   7  10   9   9   8   8   8
+    9  12  10  12  10   9   9   9   6   7   9  10   8   6   8   7
+    9   9   8   6   7   6   6   6   9   9   9   7   5   4   6   5
+  NOTE: 16x4 lambda step-down matrix (steps per lambda event, 4..15).
+
+== Rich_step_map ==
+  ROM 0x040BF8  len 64 B  RAM 0x6A80
+  factory hex  : 0A 0A 0A 09 07 07 0C 0C 10 0B 09 0A 08 07 0A 19 10 0D 0B 0A 09 0A 09 14 0D 0B 09 08 08 0A 09 09 0A 09 07 09 08 08 09 07 0C 0B 09 0A 09 08 07 06 0C 0C 0A 0A 0A 0A 0B 06 0B 0B 0B 0A 09 0A 0B 06
+  factory rows:
+   10  10  10   9   7   7  12  12  16  11   9  10   8   7  10  25
+   16  13  11  10   9  10   9  20  13  11   9   8   8  10   9   9
+   10   9   7   9   8   8   9   7  12  11   9  10   9   8   7   6
+   12  12  10  10  10  10  11   6  11  11  11  10   9  10  11   6
+  NOTE: 16x4 lambda step-up matrix (steps per lambda event, 6..25).
+
+== Lam_laststeg ==
+  ROM 0x040BB2  len 3 B  RAM 0x6A36
+  factory hex  : 20 38 50
+  NOTE: Lambda step map load breakpoints: 32/56/80.
+
+== Lam_rpmsteg ==
+  ROM 0x040BB5  len 3 B  RAM 0x6A3A
+  factory hex  : 3C 5A 78
+  NOTE: Lambda step map rpm breakpoints (rpm/10): 60/90/120.
+
+== Lam_load_sp ==
+  ROM 0x040CF8  len 8 B  RAM 0x6B80
+  factory hex  : 23 2D 37 41 4B 55 64 73
+  NOTE: Lambda-map spacing load points 35..115.
+
+== Lam_rpm_sp ==
+  ROM 0x040D00  len 16 B  RAM 0x6B88
+  factory hex  : 03 84 03 E8 05 14 06 40 07 6C 08 98 09 C4 0A F0
+  factory rows:
+    3 132   3 232   5  20   6  64   7 108   8 152   9 196  10 240
+  NOTE: Lambda-map spacing rpm points 900..2800 (words rpm).
+
+== Lambdamatris_diag ==
+  ROM 0x040D50  len 96 B  RAM 0x6BD6
+  factory hex  : 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00 0A 0A 19 02 00 00
+  factory rows:
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+   10  10  25   2   0   0
+  NOTE: 16 rows of 6 diagnostic bytes (pattern 0A 0A 19 02 00 00): lambda-control monitoring per rpm row.
+
+== Lam_minlast ==
+  ROM 0x040F8A  len 16 B  RAM 0x6C62
+  factory hex  : 18 16 15 14 13 12 12 12 12 12 12 12 12 12 12 12
+  factory rows:
+   24  22  21  20  19  18  18  18  18  18  18  18  18  18  18  18
+  NOTE: Minimum load for lambda control per rpm row (0x18..0x12 = 24..18).
+
+== AdjustLamCal ==
+  ROM 0x040D10  len 62 B  RAM 0x6B98
+  factory hex  : 00 0F 00 23 00 32 00 64 00 C8 01 2C 01 90 01 F4 02 58 02 BC 03 20 FF F8 FF FA FF FC FF FE FF FF 00 01 00 02 00 04 00 08 00 06 00 04 00 02 00 01 FF FF FF FE FF FC 01 5E 02 8A 13 88 32 01
+  factory rows:
+    0  15
+    0  35
+    0  50
+    0 100
+    0 200
+    1  44
+    1 144
+    1 244
+    2  88
+    2 188
+    3  32
+  255 248
+  255 250
+  255 252
+  255 254
+  255 255
+    0   1
+    0   2
+    0   4
+    0   8
+    0   6
+    0   4
+    0   2
+    0   1
+  255 255
+  255 254
+  255 252
+    1  94
+    2 138
+   19 136
+   50   1
+  NOTE: 31 words: lambda-sensor calibration / monitoring table (thresholds and +- deltas).
+
+== Lamb_tid ==
+  ROM 0x040F6D  len 9 B  RAM 0x6C42
+  factory hex  : 80 80 80 80 80 80 80 80 80
+  NOTE: Lambda-control timing table (all 0x80).
+
+== Lamb_kyl ==
+  ROM 0x040F64  len 9 B  RAM 0x6C38
+  factory hex  : 29 3D 5C 7F 99 AE CB DD FF
+  NOTE: Lambda correction vs coolant temp table (0x29..0xFF).
+
+== Lamb_idle ==
+  ROM 0x040F76  len 9 B  RAM 0x6C4C
+  factory hex  : 61 61 61 75 82 8C 96 96 96
+  NOTE: Lambda correction at idle (0x61..0x96).
+
+== Lamb_ej ==
+  ROM 0x040F7F  len 9 B  RAM 0x6C56
+  factory hex  : 82 82 82 82 8C 96 A0 AA B4
+  NOTE: Lambda correction non-idle (0x82..0xB4, ~1.0 center).
+
+== Min_lam_omslag ==
+  ROM 0x040F88  len 1 B  RAM 0x6C60
+  factory hex  : 08
+  NOTE: Minimum number of lambda switch events (8) to run lambda control.
+
+== Ap_lambda_delay ==
+  ROM 0x042BE8  len 2 B  RAM 0x5B4C
+  factory hex  : 00 0F
+  factory words: 15
+  NOTE: Lambda delay after air-pump activity (15).
+
+== Airpump_inj_factor ==
+  ROM 0x042BEC  len 1 B  RAM 0x5B50
+  factory hex  : 55
+  NOTE: Air-pump enrichment factor 0x55 applied via Function_0004AA8C when pump active (0x6E55A).
+
+== Ap_inj_factor_delay ==
+  ROM 0x042BF8  len 2 B  RAM 0x5B5C
+  factory hex  : 01 2C
+  factory words: 300
+  NOTE: Air-pump injection factor on/off delay 0x12C.
+
+== Ap_inj_factor_delay2 ==
+  ROM 0x042BFA  len 2 B  RAM 0x5B5E
+  factory hex  : 00 00
+  factory words: 0
+  NOTE: Second air-pump injection delay (0).
+
+== Adapt_purge_period ==
+  ROM 0x040F32  len 2 B  RAM 0x6E14
+  factory hex  : 04 B0
+  factory words: 1200
+  NOTE: Purge-adaptation period 0x4B0 ticks.
+
+== Open_loop ==
+  ROM 0x040718  len 16 B  RAM 0x4CFE
+  factory hex  : 50 C8 C8 C8 92 92 92 92 92 80 80 78 68 60 58 58
+  factory rows:
+   80 200 200 200 146 146 146 146 146 128 128 120 104  96  88  88
+  NOTE: Closed->open loop load limit per rpm row (0x50..0xC8): above = lambda masked.
+
+== Open_loop_adapt ==
+  ROM 0x040728  len 16 B  RAM 0x4D0E
+  factory hex  : 50 C8 C8 C8 78 78 78 78 78 80 80 78 68 60 58 58
+  factory rows:
+   80 200 200 200 120 120 120 120 120 128 128 120 104  96  88  88
+  NOTE: Same for adaptation window.
+
+== Open_loop_knock ==
+  ROM 0x040738  len 16 B  RAM 0x4D1E
+  factory hex  : 50 80 80 80 80 80 80 80 70 70 68 68 60 50 50 50
+  factory rows:
+   80 128 128 128 128 128 128 128 112 112 104 104  96  80  80  80
+  NOTE: Same while knock map active.
+
+== Open_varv ==
+  ROM 0x040BB0  len 2 B  RAM 0x4E40
+  factory hex  : 00 8C
+  factory words: 140
+  NOTE: Fuel-save reactivation rpm 0x8C = 140 (rpm/10 = 1400, book fuel-save).
+
+== Open_all_varv ==
+  ROM 0x040F26  len 2 B  RAM 0x4E32
+  factory hex  : 00 64
+  factory words: 100
+  NOTE: Fuel-save disable floor 0x64 = 1000 rpm.
+
+== Iv_min_load ==
+  ROM 0x0410D5  len 1 B  RAM 0x62D6
+  factory hex  : 16
+  NOTE: Min load for injection-related idle logic (0x16).
+
+== Fload_throt_tab ==
+  ROM 0x0409CA  len 16 B  RAM 0x4BD4
+  factory hex  : AA AA AA AA AA B4 B4 B4 BE FF FF FF FF FF FF FF
+  factory rows:
+  170 170 170 170 170 180 180 180 190 255 255 255 255 255 255 255
+  NOTE: WOT throttle-AD threshold per rpm row: 0xAA (170) low rpm .. 0xBE, 0xFF = WOT enrich disabled above ~2400 rpm.
+
+== Fload_tab ==
+  ROM 0x0409DA  len 16 B  RAM 0x4BE4
+  factory hex  : 1F 33 1F 2E 1F 00 00 00 00 00 00 00 00 00 00 00
+  factory rows:
+   31  51  31  46  31   0   0   0   0   0   0   0   0   0   0   0
+  NOTE: WOT enrichment added per rpm row, factor (v+512)/512 (0x1F=+6%, 0x33=+10%, 0x2E=+9%; 0 above 2400 rpm). Book p30.
+
+== Accel_konst ==
+  ROM 0x0408BC  len 64 B  RAM 0x4B32
+  factory hex  : 0D 1A 20 33 4D 66 80 80 0D 20 33 4D 6D 80 80 80 13 26 33 73 9A C0 C0 FF 0D 26 33 66 80 9A C0 FF 0D 26 33 66 80 9A C0 FF 0D 26 33 66 80 9A C0 FF 0D 26 33 66 80 A0 C0 FF 0D 26 33 66 80 A0 C0 FF
+  factory rows:
+   13  26  32  51  77 102 128 128  13  32  51  77 109 128 128 128
+   19  38  51 115 154 192 192 255  13  38  51 102 128 154 192 255
+   13  38  51 102 128 154 192 255  13  38  51 102 128 154 192 255
+   13  38  51 102 128 160 192 255  13  38  51 102 128 160 192 255
+  NOTE: Throttle-delta acceleration map 8x8; cell factor (v+128)/256 via Trans_x/y axes; per book Lacc/Accel max() applied.
+
+== Lacc_konst ==
+  ROM 0x0408FC  len 64 B  RAM 0x6C82
+  factory hex  : 13 26 4D 66 80 9A C0 FF 13 26 4D 66 80 9A C0 FF 13 26 4D 66 80 9A C0 FF 0D 20 3A 5A 73 9A C0 FF 0D 20 3A 5A 73 9A C0 FF 0D 20 3A 5A 73 9A C0 FF 0D 20 3A 5A 73 9A C0 FF 0D 20 3A 5A 73 9A C0 FF
+  factory rows:
+   19  38  77 102 128 154 192 255  19  38  77 102 128 154 192 255
+   19  38  77 102 128 154 192 255  13  32  58  90 115 154 192 255
+   13  32  58  90 115 154 192 255  13  32  58  90 115 154 192 255
+   13  32  58  90 115 154 192 255  13  32  58  90 115 154 192 255
+  NOTE: Load-delta acceleration map 8x8.
+
+== Retard_konst ==
+  ROM 0x040AD4  len 64 B  RAM 0x4A7C
+  factory hex  : 1A 33 33 33 33 33 33 33 1A 33 3A 3A 3A 3A 3A 3A 1A 33 43 43 43 43 43 43 1A 4D 73 80 9A C0 C0 C0 1A 66 80 9A C0 C0 C0 90 1A 5A 80 9A C0 C0 C0 A0 1A 5A 80 9A C0 C0 C0 C0 1A 5A 80 9A C0 C0 C0 C0
+  factory rows:
+   26  51  51  51  51  51  51  51  26  51  58  58  58  58  58  58
+   26  51  67  67  67  67  67  67  26  77 115 128 154 192 192 192
+   26 102 128 154 192 192 192 144  26  90 128 154 192 192 192 160
+   26  90 128 154 192 192 192 192  26  90 128 154 192 192 192 192
+  NOTE: Throttle-delta deceleration (enleanment) map 8x8.
+
+== Lret_konst ==
+  ROM 0x04093C  len 64 B  RAM 0x6CC6
+  factory hex  : 00 00 0D 13 26 26 2D 33 00 00 0D 12 1A 26 33 40 00 0D 13 1A 26 33 40 66 00 13 20 26 33 46 5A 66 00 13 20 2D 33 46 5A 66 00 13 20 2D 33 46 5A 66 00 13 20 2D 33 46 5A 66 00 13 20 2D 33 46 5A 66
+  factory rows:
+    0   0  13  19  38  38  45  51   0   0  13  18  26  38  51  64
+    0  13  19  26  38  51  64 102   0  19  32  38  51  70  90 102
+    0  19  32  45  51  70  90 102   0  19  32  45  51  70  90 102
+    0  19  32  45  51  70  90 102   0  19  32  45  51  70  90 102
+  NOTE: Load-delta deceleration map 8x8.
+
+== Acc_tab_mul ==
+  ROM 0x04097C  len 1 B  RAM 0x4B72
+  factory hex  : 14
+  NOTE: Acceleration quantity multiplier (20) used at 0x6EA6E.
+
+== Max_acc_dec ==
+  ROM 0x040988  len 1 B  RAM 0x4B84
+  factory hex  : 96
+  NOTE: Max acceleration enrichment (0x96 = 150/256 ~ +59%) at 0x6E9FA.
+
+== Max_lacc_dec ==
+  ROM 0x04098A  len 1 B  RAM 0x4B88
+  factory hex  : C8
+  NOTE: Max load-delta acceleration enrichment (200).
+
+== Max_ret_dec ==
+  ROM 0x040989  len 1 B  RAM 0x4B86
+  factory hex  : 96
+  NOTE: Max throttle-delta enleanment (150).
+
+== Max_lret_dec ==
+  ROM 0x04098B  len 1 B  RAM 0x4B8A
+  factory hex  : B4
+  NOTE: Max load-delta enleanment (180).
+
+== Ret_fuel_tab ==
+  ROM 0x04176A  len 1 B  RAM 0x4F50
+  factory hex  : 66
+  NOTE: Post-fuel-cut re-enrichment value 0x66 (factor (v+1024)/1024).
+
+== Ret_fuel_step ==
+  ROM 0x041768  len 1 B  RAM 0x4F4E
+  factory hex  : 01
+  NOTE: Re-enrichment step 1.
+
+== Ret_fuel_time ==
+  ROM 0x041769  len 1 B  RAM 0x4F4C
+  factory hex  : 02
+  NOTE: Re-enrichment ramp period 2.
+
+== After_fcut_tab ==
+  ROM 0x0416F0  len 10 B  RAM 0x4ED2
+  factory hex  : CC 99 66 33 28 1E 14 0A 00 00
+  NOTE: After-fuel-cut enrichment table (0xCC=204 ... 0), factor (v+1024)/1024, stepped by Ret_fuel_step/time after each cut.
+
+== Delay_cut ==
+  ROM 0x040F25  len 1 B  RAM 0x4E30
+  factory hex  : 00
+  NOTE: Fuel-save (decel cut) delay in 4-tick units (factory 0 = no delay on this tune).
+
+== Tryck_vakt_tab ==
+  ROM 0x0412D0  len 16 B  RAM 0x5BB6  (MCS differs)
+  factory hex  : E6 E6 E6 E6 E6 E6 E6 E6 E6 E6 E6 E6 E6 E6 E6 E6
+  factory rows:
+  230 230 230 230 230 230 230 230 230 230 230 230 230 230 230 230
+  NOTE: Overboost fuel-cut MAP limit per rpm row, kPa ABSOLUTE: factory 0xE6 = 230 kPa (~1.3 bar boost, book p47).
+
+== Overstid_tab ==
+  ROM 0x041470  len 16 B  RAM 0x5D56
+  factory hex  : 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28
+  factory rows:
+   40  40  40  40  40  40  40  40  40  40  40  40  40  40  40  40
+  NOTE: Injection over-time (TPU reload margin) per rpm row, 0x28.
+
+== I_fak_max ==
+  ROM 0x041666  len 2 B  RAM 0x5E9A
+  factory hex  : 01 90
+  factory words: 400
+  NOTE: Max injection factor limit 0x190 (400).
+
+== Derivata_fuel_rpm ==
+  ROM 0x042C34  len 2 B  RAM 0x60E4
+  factory hex  : 00 A0
+  factory words: 160
+  NOTE: Lambda derivata window rpm 0xA0.
+
+== Fuel_knock_mat ==
+  ROM 0x0409F4  len 192 B  RAM 0x6352  (MCS differs)
+  factory hex  : 2E 39 4D 57 60 6F 71 75 76 76 76 80 33 3E 40 48 4B 5C 65 6D 73 7C 7B 80 41 49 4D 54 58 5A 5F 80 80 80 80 80 4A 4C 50 54 5B 5B 5E 5F 80 80 81 80 3C 46 4A 53 5C 5F 5B 5B 5B 60 7F 80 4E 50 56 5C 60 63 71 76 6C 6C 72 80 3C 47 4E 55 60 63 7A 87 84 7F 82 8A 4C 54 56 5D 66 6B 7A 90 94 93 93 93 4E 58 5D 66 72 78 95 A2 AA A8 AA C0 4A 52 5C 6C 7A 87 94 A3 AC AC B3 C0 43 56 5C 68 76 91 A3 A5 AB AC B3 C0 45 51 5C 67 7D 92 A3 B5 B9 B3 C1 C0 4C 58 5E 78 92 A6 AD BB B8 B9 CC CE 5A 62 67 7B A4 AB B5 BB C2 C3 CC CC 5D 68 76 A4 AE B8 BD C0 C2 C3 CC CD 65 71 85 A9 B6 BB C1 CE CD CD CD CE
+  factory rows:
+   46  57  77  87  96 111 113 117 118 118 118 128  51  62  64  72
+   75  92 101 109 115 124 123 128  65  73  77  84  88  90  95 128
+  128 128 128 128  74  76  80  84  91  91  94  95 128 128 129 128
+   60  70  74  83  92  95  91  91  91  96 127 128  78  80  86  92
+   96  99 113 118 108 108 114 128  60  71  78  85  96  99 122 135
+  132 127 130 138  76  84  86  93 102 107 122 144 148 147 147 147
+   78  88  93 102 114 120 149 162 170 168 170 192  74  82  92 108
+  122 135 148 163 172 172 179 192  67  86  92 104 118 145 163 165
+  171 172 179 192  69  81  92 103 125 146 163 181 185 179 193 192
+   76  88  94 120 146 166 173 187 184 185 204 206  90  98 103 123
+  164 171 181 187 194 195 204 204  93 104 118 164 174 184 189 192
+  194 195 204 205 101 113 133 169 182 187 193 206 205 205 205 206
+  NOTE: Knock enrichment VE matrix 12 load x 16 rpm (0x409F4, same axes concept), factor (v+128)/256; OVERRIDES Insp_mat when Knock_status bit0 and load > Fuel_knock_xaxis[0] (0x6DFA2-0x6DFE8). Book: active above ~140 kPa.
+
+== Fuel_knock_xaxis ==
+  ROM 0x040AB4  len 12 B  RAM 0x6412
+  factory hex  : 40 48 50 60 70 80 90 A0 B0 C0 D0 E0
+  factory rows:
+   64  72  80  96 112 128 144 160 176 192 208 224
+  NOTE: Knock-map load axis, 12 bytes (kPa abs).
+
+== Pgm_mod ==
+  ROM 0x04074E  len 6 B  RAM 0x76E2  (MCS differs)
+  factory hex  : FB F6 EA D4 86 10
+  NOTE: Program-mode bitmask (book table: byte0 b1 WOT enrich, b2 delay-map interp, b5 adaptivity; byte1 b0 const time, b2 fuelcut, b3 const idle time, b7 adapt closed throttle; byte2 b1 separate idle map). Factory FB F6 EA D4 86 10; no dedicated E85 bit exists (E85 is tuned via Inj_konst, book p33).
+
+== Rpm_max ==
+  ROM 0x040F2C  len 2 B  RAM 0x7640  (MCS differs)
+  factory hex  : 02 80
+  NOTE: Rev-limit speed; exceeded -> Pgm_status bit7 (Function_00071CEC), scheduler clears injector channels.
+
+== Rpm_dif ==
+  ROM 0x040F28  len 2 B  RAM 0x7664
+  factory hex  : 00 14
+  NOTE: Rev-cut re-engagement window (0x719C0).
+
+== Com_on_idle ==
+  ROM 0x04074B  len 1 B  RAM 0x4E10
+  factory hex  : 00
+  NOTE: Idle-adaptation counter threshold: with fewer confirmed idle adaptations, the idle map branch is replaced by Insp_mat (0x6DE3E).

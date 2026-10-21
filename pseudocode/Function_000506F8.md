@@ -1,0 +1,107 @@
+# Function_000506F8
+
+**ROM:** `0x000506F8`
+
+```c
+
+void Function_000506F8(void)
+
+{
+  FUN_0004fc68(&DAT_000051ca);
+  FUN_0004fc68(&DAT_000051ee);
+  FUN_0004fc68(&DAT_0000520e);
+  FUN_0004fc68(&RAM_Ign_map_0_);
+  FUN_0004fc68(&DAT_00005450);
+  FUN_0004fc68(&DAT_00005466);
+  FUN_0004fc68(RAM_Ign_map_1_);
+  FUN_0004fc68(&DAT_0000548c);
+  FUN_0004fc68(&DAT_000054ac);
+  FUN_0004fc68(RAM_Ign_map_2_);
+  FUN_0004fc68(&DAT_000055c4);
+  FUN_0004fc68(&DAT_000055e4);
+  FUN_0004fc68(RAM_Ign_map_3_);
+  FUN_0004fc68(&RAM_Ign_map_4_);
+  FUN_0004fc68(&DAT_000059a6);
+  FUN_0004fc68(&DAT_000059c6);
+  FUN_0004fc68(RAM_Ign_map_5_);
+  FUN_0004fc68(&DAT_000059f0);
+  FUN_0004fc68(&DAT_000059fa);
+  FUN_0004fc68(RAM_Ign_map_6_);
+  FUN_0004fc68(&DAT_00005a36);
+  FUN_0004fc68(&DAT_00005a40);
+  FUN_0004fc68(&RAM_Rev_grad_sens_dur_req_);
+  FUN_0004fc68(&DAT_00005a74);
+  FUN_0004fc68(&DAT_00005a8a);
+  FUN_0004fc68(&RAM_Mis1000_map_);
+  FUN_0004fc68(&DAT_00005aa2);
+  FUN_0004fc68(&RAM_Ign_offset_cyl1_);
+  FUN_0004fc68(&RAM_Ign_offset_cyl2_);
+  FUN_0004fc68(&RAM_Ign_offset_cyl3_);
+  FUN_0004fc68(&RAM_Ign_offset_cyl4_);
+  FUN_0004fc68(&DAT_00005aac);
+  FUN_0004fc68(&DAT_00005ac2);
+  FUN_0004fc68(&RAM_Kadapt_rpm_high_);
+  FUN_0004fc68(&DAT_00005ac6);
+  FUN_0004fc68(&DAT_00005ac8);
+  FUN_0004fc68(&RAM_Kadapt_load_low_);
+  FUN_0004fc68(RAM_Ramp_up_ram_);
+  FUN_0004fc68(RAM_Knock_ang_dec_);
+  FUN_0004fc68(&RAM_Ramp_down_ram_);
+  FUN_0004fc68(&DAT_00005aee);
+  FUN_0004fc68(&RAM_Temp_limit_high_);
+  FUN_0004fc68(&RAM_Mis_trans_limit_);
+  FUN_0004fc68(&DAT_00005af4);
+  FUN_0004fc68(&DAT_00005af6);
+  FUN_0004fc68(&DAT_00005af8);
+  FUN_0004fc68(&DAT_00005afa);
+  FUN_0004fc68(&RAM_Sync_temp_);
+  FUN_0004fc68(&RAM_Sond_omsl_limit_);
+  FUN_0004fc68(&RAM_Diag_speed_time_);
+  FUN_0004fc68(&DAT_00005b02);
+  FUN_0004fc68(&DAT_00005b04);
+  FUN_0004fc68(&DAT_00005b06);
+  FUN_0004fc68(&RAM_Lambda_cat_lean_);
+  FUN_0004fc68(&RAM_Lambda_cat_rich_);
+  FUN_0004fc68(&DAT_00005b0c);
+  FUN_0004fc68(&RAM_Press_rpm_lim_);
+  FUN_0004fc68(&RAM_Diag_speed_load_);
+  FUN_0004fc68(&DAT_00005b12);
+  FUN_0004fc68(&RAM_Adapt_korr_high_);
+  FUN_0004fc68(&RAM_Adapt_injfaktor_low_);
+  FUN_0004fc68(&DAT_00005b18);
+  FUN_0004fc68(&DAT_00005b1a);
+  FUN_0004fc68(&RAM_Ign_map_7_);
+  FUN_0004fc68(&RAM_Max_vehicle_speed_);
+  FUN_0004fc68(&DAT_00005b40);
+  FUN_0004fc68(&DAT_00005b42);
+  FUN_0004fc68(&DAT_00005b44);
+  FUN_0004fc68(&DAT_00005b46);
+  FUN_0004fc68(&RAM_Ap_max_on_watertemp_);
+  FUN_0004fc68(&DAT_00005b4a);
+  FUN_0004fc68(&DAT_00005b4c);
+  FUN_0004fc68(&RAM_Ap_lambda_delay_);
+  FUN_0004fc68(&DAT_00005b50);
+  FUN_0004fc68(&DAT_00005b52);
+  FUN_0004fc68(&DAT_00005b54);
+  FUN_0004fc68(&RAM_Ap_start_delay2_);
+  FUN_0004fc68(&RAM_Ap_max_on_time2_);
+  FUN_0004fc68(&DAT_00005b5a);
+  FUN_0004fc68(&DAT_00005b5c);
+  FUN_0004fc68(&RAM_Ap_inj_factor_delay_);
+  FUN_0004fc68(&DAT_00005b60);
+  FUN_0004fc68(&RAM_Ap_ign_step_);
+  FUN_0004fc68(&RAM_Ap_ign_offset_delay_);
+  FUN_0004fc68(&DAT_00005b1e);
+  FUN_0004fc68(&DAT_00005b24);
+  FUN_0004fc68(&RAM_API_dt_offset_tab_);
+  FUN_0004fc68(&DAT_00005b30);
+  FUN_0004fc68(&RAM_API_dt_ramp_);
+  FUN_0004fc68(&RAM_API_ku_offset_);
+  FUN_0004fc68(&DAT_00005b36);
+  FUN_0004fc68(&RAM_API_ku_ramp_);
+  FUN_0004fc68(&RAM_API_ku_derivata_);
+  FUN_0004fc68(&RAM_API_rpm_limit_);
+  return;
+}
+
+```

@@ -1,0 +1,27 @@
+---
+tags: [saab, trionic5, symbol, boost]
+type: "8-bit table (16x8 bytes, flash)"
+address: "ROM 0x412E0, RAM 0x5BC6"
+---
+# Tryck_mat
+
+**Value in factory 4780656:** peak 199 — units: kPa absolute (boost = raw-100)
+
+**Function:** main boost request map (rpm x throttle)
+
+**Code path:** interpolated F_00072972 @0x725E2/0x7261E
+
+| throttle \ rpm | 150 | 175 | 200 | 225 | 250 | 275 | 300 | 325 | 350 | 400 | 450 | 500 | 550 | 575 | 600 | 650 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 10 | 100 | 100 | 100 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 |
+| 29 | 145 | 142 | 115 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 | 20 |
+| 47 | 155 | 152 | 145 | 64 | 64 | 64 | 64 | 64 | 35 | 25 | 20 | 20 | 20 | 20 | 20 | 20 |
+| 66 | 165 | 162 | 162 | 122 | 122 | 122 | 122 | 122 | 122 | 100 | 90 | 85 | 60 | 55 | 50 | 40 |
+| 86 | 175 | 170 | 170 | 170 | 162 | 160 | 158 | 155 | 152 | 146 | 144 | 134 | 130 | 127 | 125 | 120 |
+| 108 | 179 | 179 | 190 | 190 | 187 | 177 | 174 | 168 | 164 | 164 | 166 | 154 | 145 | 145 | 145 | 140 |
+| 130 | 194 | 194 | 194 | 194 | 199 | 199 | 193 | 184 | 178 | 180 | 184 | 179 | 173 | 168 | 160 | 150 |
+| 155 | 194 | 194 | 194 | 194 | 199 | 199 | 193 | 184 | 178 | 180 | 184 | 179 | 173 | 168 | 160 | 150 |
+
+kPa absolute (boost ≈ value − 100). Rows = throttle-AD opening (axis [Pwm_ind_trot](Pwm_ind_trot.md) bank), columns = rpm×10 (axis [Pwm_ind_rpm](Pwm_ind_rpm.md)).
+
+Part of [T5 Boost Control](../../guide/boost-control.md) · index: [T5 Symbols](../symbol-index.md)
