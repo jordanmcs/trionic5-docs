@@ -16,12 +16,12 @@ documentation shipped with the T5SuiteII tuning suite.
 
 ## Where to start
 
-**Looking up a symbol?** → **[`reference/symbol-index.md`](reference/symbol-index.md)** — every named
+**Looking up a symbol?** → **[`reference/symbol-index.md`](https://github.com/jordanmcs/trionic5-docs/blob/main/reference/symbol-index.md)** — every named
 calibration and state symbol, grouped by subsystem, each linking to a page with ROM/RAM
 address, factory value, units, and consuming code paths.
 
 **Using an AI agent?** Everything here is plain text — an agent can answer Trionic 5
-questions with no RE tooling at all. Point it at **[`AGENTS.md`](AGENTS.md)** in the repo
+questions with no RE tooling at all. Point it at **[`AGENTS.md`](https://github.com/jordanmcs/trionic5-docs/blob/main/AGENTS.md)** in the repo
 root first: it gives the agent the layout conventions and a verification chain (symbol
 page → pseudocode → disassembly → firmware bytes) so it grounds every claim in the
 distributed artifacts instead of guessing.
