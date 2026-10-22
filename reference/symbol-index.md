@@ -75,13 +75,13 @@ Every symbol named in the subsystem explainers ([T5 Knock Detection and Adaptati
 
 | Symbol | Type | Address | Function |
 |---|---|---|---|
-| [Knock_level](symbols/Knock_level.md) | State word | RAM 0x1D0C | Current per-window pulse count |
-| [Knock_count](symbols/Knock_count.md) | State word | RAM 0x1D0E | Knock event counter in the knock state block. |
-| [Knock_status](symbols/Knock_status.md) | State byte | RAM 0x1D10 | Knock status bits incl |
-| [Knock_diag](symbols/Knock_diag.md) | State word | RAM 0x1D14 | Knock diagnostics accumulator updated per window alongside [Knock_diag_level](symbols/Knock_diag_level.md). |
+| [Knock_level](symbols/Knock_level.md) | State word | RAM 0x112C | Current per-window pulse count |
+| [Knock_count](symbols/Knock_count.md) | State word | RAM 0x1D0A–0x1D10 | No single `Knock_count` symbol in the embedded table; there are per-cylinder words `Knock_count_cyl1..4` at 0x1D0A/0C/0E/10 |
+| [Knock_status](symbols/Knock_status.md) | State byte | RAM 0x1119 | Knock status bits (bit0 arms the knock fuel map); address verified against the embedded symbol table + code operands 2026-10-21 |
+| [Knock_diag](symbols/Knock_diag.md) | Correction note | — | Not a symbol in the factory image; the former 0x1D14 is `Start_time_tot`, F_00047CE0 is TPU config |
 | [Knock_retard](symbols/Knock_retard.md) | State word | RAM 0x1D16 | Currently applied knock retard (reported value). |
-| [Knock_diag_level](symbols/Knock_diag_level.md) | State byte | SRAM 0x1100 | Raw pulse count of the last evaluated window, written unconditionally every window |
-| [Knock_error](symbols/Knock_error.md) | State word | RAM 0x2116 | Knock error code storage in the diagnostics block. |
+| [Knock_diag_level](symbols/Knock_diag_level.md) | State byte | SRAM 0x10FE | Raw pulse count of the last evaluated window, written unconditionally every window (earlier exports paired it with 0x1100 = `Knock_wind_on`; code operand re-audit pending) |
+| [Knock_error](symbols/Knock_error.md) | State word | RAM 0x1D20 | Knock error code storage in the diagnostics block. |
 | [Knock_time_low](symbols/Knock_time_low.md) | State word | RAM 0x2108/0x210A | No-signal duration timer for the ion-path watchdog; latches fault past the 10 s threshold |
 | [Knock_frame](symbols/Knock_frame.md) | State block | RAM 0x293A | Error-frame snapshot (25 longs) captured when the ion-path fault latches — the knock-line diagnostic black box. |
 | [Knock_average](symbols/Knock_average.md) | State word | RAM, computed 0x62A28 | Mean of the four cylinder retard offsets; compared against [Knock_average_limit](symbols/Knock_average_limit.md) for sustained-knock escalation. |

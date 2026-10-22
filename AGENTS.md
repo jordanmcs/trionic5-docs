@@ -12,6 +12,7 @@ Every documentation claim is address-anchored. Resolve the chain:
 1. **Symbol name** → `data/t5_symbols.csv` (RAM state words) or
    `data/init_copy_inventory.factory.json` (513 calibration tables: name, ROM source,
    RAM copy, length).
+   > **Caveat (2026-10-21):** the CSV is regenerated from the embedded symbol table in the flash image, whose records are `<addr:2BE> <len:2BE> <name-padded> CR LF` — the address *precedes* the name. Dumps made before this fix paired each name with the **next** record's address (e.g. `Knock_status 0x111A`, actually `Misftakeoff_ign_lim`; true value `0x1119`, confirmed by code operands at `0x62890`/`0x6DFA4`/`0x72DCA`). If a CSV row conflicts with a disassembly operand or a symbol page, trust the code operand and report the row.
 2. **ROM address** → pseudocode: `pseudocode/<Function_XXXXXXXX>.md` (Ghidra
    decompiler output, `Function_<entry>` naming; full table in `pseudocode/index.md`).
 3. **Exact instructions** → `firmware/4780656.asm` (ground truth; grep for

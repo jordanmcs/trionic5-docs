@@ -1,7 +1,7 @@
 
 # Knock_diag_level
 
-State byte (SRAM 0x1100) · SRAM 0x1100
+State byte (SRAM 0x10FE) · SRAM 0x10FE
 
 **Value in factory 4780656:** raw window count
 

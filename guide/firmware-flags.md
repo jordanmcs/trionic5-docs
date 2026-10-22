@@ -9,7 +9,7 @@
 ### byte0 @ RAM `0x76E2` — factory `0xFB`
 
 | Bit | Name | What it does | Interacts with | Factory |
-|---|---|---|---|---|
+| --- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------- |
 | b0 | (unnamed) | Read by two fuel-path tests (`ANDI.B #$01` at `0x6F254`, `0x6F376`); no documented name | fuel duration chain | 1 |
 | b1 | WOT enrichment | Gates the wide-open-throttle enrichment branch of the duration chain | [Fload_tab](../reference/symbols/Fload_tab.md) catalyst-enrichment map (+6…10 %, throttle-AD gated, 550–2400 rpm) | 1 |
 | b2 | Injection delay-map interpolation | Selects an interpolated injection **angle** instead of the fixed constant: [Insp_vinkel](../reference/symbols/Insp_vinkel.md) = [Del_mat](../reference/symbols/Del_mat.md) × 3 instead of [Vinkel_konst](../reference/symbols/Vinkel_konst.md) = 53° | `Function_00069808` angle select (`0x69952`/`0x69962`); changes where in the intake stroke each pulse lands | **0** |
@@ -61,8 +61,8 @@ The engine-state word every cut path checks first.
 ### Injection group mode — `0x103B` bit 0
 Set on lost crank-sync or a skipped cylinder. Downstream: [Insp_tid](../reference/symbols/Insp_tid.md) is halved and per-cylinder angle offsets are dropped (paired injectors fire together, each pulse half-width). Knock cylinder attribution (by ignition timing) degrades in this mode.
 
-### [Knock_status](../reference/symbols/Knock_status.md) — byte @ RAM `0x111A`
-⚠️ Open item: `t5_symbols.csv` says `0x111A`, the symbol page says `0x1D10`; the asm lists only the symbolic operand. Per AGENTS.md the CSV is the resolution source.
+### [Knock_status](../reference/symbols/Knock_status.md) — byte @ RAM `0x1119`
+**Resolved 2026-10-21 against the factory BIN (REA/Ghidra):** the embedded symbol-table record at ROM `0x53748` (format `[addr:2BE][len:2BE][name]\r\n`) reads `11 19 00 01 Knock_status`, and all three code references use operand `$1119` (`MOVEA.L #$1119,A0` at `0x62890`; `MOVE.B $1119,D1`/`ANDI.B #1` at `0x6DFA4`; `MOVEA.L #$1119,A4` at `0x72DCA`). `t5_symbols.csv`'s `0x111A` is an extraction artifact — the dump paired each name with the *next* table record's address (`0x111A` really is `Misftakeoff_ign_lim`); the older pages' `0x1D10` is `Knock_count_cyl4`. Byte-packed with [Multispark](../reference/symbols/Multispark.md) `0x1118`.
 
 | Bit / flag | Meaning | Consumers / interactions |
 |---|---|---|
@@ -108,7 +108,7 @@ Drives the `Restart_fak` blend (`0x6F23A`/`0x6F2C8`) and the injection-array flu
 
 ### Diagnostic witnesses (flag-like state)
 
-- [Knock_diag_level](../reference/symbols/Knock_diag_level.md) (SRAM `0x1100`): raw ion-pulse count of the last window, the ion-line watchdog's witness. >50 pulses = line alive; ≤50 for 10 s with healthy battery and rpm ≥ 800 → latched fault `0x28`/`0x2C` + [Knock_frame](../reference/symbols/Knock_frame.md) error frame; clears after 1500 clean ignitions (`Function_0005C34A`). Watchdog sensitivity couples to battery voltage ([DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md) — ion amplitude sags with supply).
+- [Knock_diag_level](../reference/symbols/Knock_diag_level.md) (SRAM `0x10FE`; earlier exports said `0x1100` = `Knock_wind_on`): raw ion-pulse count of the last window, the ion-line watchdog's witness. >50 pulses = line alive; ≤50 for 10 s with healthy battery and rpm ≥ 800 → latched fault `0x28`/`0x2C` + [Knock_frame](../reference/symbols/Knock_frame.md) error frame; clears after 1500 clean ignitions (`Function_0005C34A`). Watchdog sensitivity couples to battery voltage ([DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md) — ion amplitude sags with supply).
 - Coolant sensor: the [Kyltemp_tab](../reference/symbols/Kyltemp_tab.md) AD rails double as fault markers; range checks at −40 / −20 / +95 °C set the diagnostic bit. On ADC failure the ECU substitutes fixed AD counts instead of a rail, and recovery is ramped so no fuel step appears.
 - Intake-air sensor plausibility: differs from coolant by >10 °C **at start** (snapshot comparison [S_Lufttemp](../reference/symbols/S_Lufttemp.md) vs [Start_kylv](../reference/symbols/Start_kylv.md)) → flagged; emissions decisions deliberately consume the start snapshots, not live values.
 

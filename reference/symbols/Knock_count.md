@@ -1,7 +1,7 @@
 
 # Knock_count
 
-State word (RAM 0x1D0E) · RAM 0x1D0E
+State word (RAM 0x1D0A–0x1D10) · RAM 0x1D0A–0x1D10
 
 **Value in factory 4780656:** counter
 

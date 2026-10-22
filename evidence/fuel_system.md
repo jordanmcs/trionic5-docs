@@ -374,4 +374,4 @@ factory values from firmware/4780656_factory.BIN.
 [KillInjection](../reference/symbols/KillInjection.md) | State byte (RAM, disassembly alias) | runtime | 0 | immobilizer/limp hard injection kill | TPU pulse writers 0x46EA6, 0x4729C, ... | bool
 [Br_plus](../reference/symbols/Br_plus.md) | State word (RAM) | 0x1150 (symbol table) | 0 | additive fuel trim (plus) | + at 0x6E450 | 4 us ticks (/10 domain)
 [Br_minus](../reference/symbols/Br_minus.md) | State word (RAM) | 0x1152 (symbol table) | 0 | additive fuel trim (minus) | - at 0x6E45A | 4 us ticks (/10 domain)
-[Knock_status](../reference/symbols/Knock_status.md) | State byte (RAM) | 0x111A (symbol table) | runtime | knock detect state; bit0 arms [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) | 0x6DFA2 | bits
+[Knock_status](../reference/symbols/Knock_status.md) | State byte (RAM) | 0x1119 (embedded table + code operands verified 2026-10-21) | runtime | knock detect state; bit0 arms [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) | 0x6DFA4 | bits

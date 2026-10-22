@@ -21,7 +21,7 @@
 00001035	RAM_Lufttemp	1
 00001038	RAM_P_Manifold10	1
 00001040	RAM_Purge_freq	1
-00001041	RAM_Pgm_status	1
+00001039	RAM_Pgm_status	6
 00001043	RAM_Ret_temp	4
 0000104B	RAM_Temp_fak	1
 0000104C	RAM_Temp_fak_tab	1
@@ -52,15 +52,15 @@
 000010DA	RAM_Mis200_max	2
 000010DC	RAM_C200_max	2
 000010E8	RAM_Ign_angle_byte	2
-00001100	RAM_Knock_diag_level	2
+000010FE	RAM_Knock_diag_level	2
 00001106	RAM_Knock_wind_off	2
 00001108	RAM_S_Lufttemp	2
-0000110A	RAM_Multispark	2
+00001118	RAM_Multispark	1
 0000110C	RAM_Detect_limit	2
 0000110E	RAM_Mis200_limit	2
 00001112	RAM_Diag_I_front	2
 00001114	RAM_P_man_korr	2
-0000111A	RAM_Knock_status	1
+00001119	RAM_Knock_status	1
 00001122	RAM_Time_det12	2
 00001124	RAM_Time_det34	2
 0000112F	RAM_LLS_styr	1

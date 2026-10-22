@@ -160,7 +160,7 @@ Code agrees:
 
 ## 6. Retard application & diagnostics
 
-> **Summary:** execution and signal-path self-check. Retard demand ([Ret_mangd](../reference/symbols/Ret_mangd.md)) is queued every cycle by the ignition scheduler (`F_0006BFA4`) and applied through dwell and spark timing. A separate monitor verifies the ion signal path is functional: a window count > 50 constitutes signal presence ([Knock_diag_level](../reference/symbols/Knock_diag_level.md) @0x1100); counts ≤ 50 for 10 consecutive seconds — with sufficient rpm and battery voltage above [DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md) — set fault 0x28/0x2C and store the [Knock_frame](../reference/symbols/Knock_frame.md) snapshot. Below the voltage threshold the check abstains, because signal amplitude scales with supply voltage. Clearing the latch requires 1500 ignition cycles.
+> **Summary:** execution and signal-path self-check. Retard demand ([Ret_mangd](../reference/symbols/Ret_mangd.md)) is queued every cycle by the ignition scheduler (`F_0006BFA4`) and applied through dwell and spark timing. A separate monitor verifies the ion signal path is functional: a window count > 50 constitutes signal presence ([Knock_diag_level](../reference/symbols/Knock_diag_level.md) @0x10FE per the corrected embedded-table parse; earlier exports paired the name with `Knock_wind_on` @0x1100 — code operand re-audit pending); counts ≤ 50 for 10 consecutive seconds — with sufficient rpm and battery voltage above [DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md) — set fault 0x28/0x2C and store the [Knock_frame](../reference/symbols/Knock_frame.md) snapshot. Below the voltage threshold the check abstains, because signal amplitude scales with supply voltage. Clearing the latch requires 1500 ignition cycles.
 
 - Offsets leave the controller as per-cylinder **retard demand** bytes
  [Ret_mangd](../reference/symbols/Ret_mangd.md)/[Lret_mangd](../reference/symbols/Lret_mangd.md) ("retard demand"): queue mgmt in the ignition scheduler
@@ -177,7 +177,7 @@ Code agrees:
  ([Knock_time_low](../reference/symbols/Knock_time_low.md) 0x2108/0x210A) → fault code **0x28/0x2C**, 25-long `Error_frame`
  copied to [Knock_frame](../reference/symbols/Knock_frame.md) (0x293A), flag 0x401A bit40. Auto-recover: 1500 (0x5DC) clean
  ignition cycles decrement the counter.
-- [Knock_status](../reference/symbols/Knock_status.md) 0x1D10 bit-flags; [Knock_error](../reference/symbols/Knock_error.md) 0x2116; [Knock_retard](../reference/symbols/Knock_retard.md) 0x1D16
+- [Knock_status](../reference/symbols/Knock_status.md) 0x1119 bit-flags (embedded-table record verified 2026-10-21); [Knock_error](../reference/symbols/Knock_error.md) 0x1D20; [Knock_retard](../reference/symbols/Knock_retard.md) 0x1D16
  (current applied retard, reported).
 
 ## 7. Calibration tables (this binary — ROM source → RAM copy)
