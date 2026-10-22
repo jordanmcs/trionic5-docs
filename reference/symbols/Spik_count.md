@@ -1,7 +1,7 @@
 
 # Spik_count
 
-State word (per cylinder)  ·  per cylinder
+State word (per cylinder) · per cylinder
 
 **Value in factory 4780656:** 1 = over reference, 2 = strong
 

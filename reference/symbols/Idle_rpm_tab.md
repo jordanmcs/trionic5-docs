@@ -1,7 +1,7 @@
 
 # Idle_rpm_tab
 
-Calibration table, 8 words (coolant-temp-indexed)  ·  ROM 0x4111A
+Calibration table, 8 words (coolant-temp-indexed) · ROM 0x4111A
 
 **Value in factory 4780656:**
 

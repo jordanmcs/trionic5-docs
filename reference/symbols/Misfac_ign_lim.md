@@ -1,9 +1,8 @@
 # Misfac_ign_lim
 
-Calibration word  ·  ROM 0x42EC9 -> RAM 0x7534
+Calibration word · ROM 0x42EC9 -> RAM 0x7534
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
- **MCS differs** — see T5 MCS Tune Changes.
 **Function:** Count-inhibit window for AC compressor kicks.
 
 **Code path:** 0x64xxx compare chain

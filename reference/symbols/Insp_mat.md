@@ -1,6 +1,6 @@
 # Insp_mat
 
-8-bit table 16x16 (flash)  ·  0x40E10 -> 0x4976
+8-bit table 16x16 (flash) · 0x40E10 -> 0x4976
 
 **Value in factory 4780656:** cells 0x0D..0xF1 — units: factor (v+128)/256, +/-50 %
 

@@ -1,7 +1,7 @@
 
 # Retard_temp
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x40B14
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x40B14
 
 **Value in factory 4780656:**
 

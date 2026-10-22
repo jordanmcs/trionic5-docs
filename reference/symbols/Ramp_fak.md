@@ -1,7 +1,7 @@
 
 # Ramp_fak
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x4063F
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x4063F
 
 **Value in factory 4780656:**
 

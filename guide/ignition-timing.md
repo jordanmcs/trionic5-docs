@@ -1,6 +1,10 @@
 
 # T5 Ignition Timing
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 
 
 > **Summary:** Every crank-sync event, `CalculateIgnitionAngle` (ROM `0x62102`) builds the commanded spark angle from a **weighted blend of up to seven simultaneous ignition maps** (not a mode switch), then applies a fixed chain of corrections: knock overlay, global and adaptive knock offsets, idle-governor dither, transient overlay, fixed and per-cylinder trims, AIR-pump advance. Result: [Ign_angle](../reference/symbols/Ign_angle.md) (RAM `0x10B4`), signed **0.1 crank degrees**, clamped −10.0…+40.0°.
@@ -92,13 +96,6 @@ At start, [Ign_angle](../reference/symbols/Ign_angle.md) is forced to 10.0° ([M
 
 
 
-## MCS differences
+## Factory-side notes
 
-
-
-Ignition is one of the big MCS areas. All correction *mechanisms* identical. See T5 MCS Tune Changes.
-
-
-
-Index: [T5 Symbols](../reference/symbol-index.md)
-
+All correction *mechanisms* identical. Index: [T5 Symbols](../reference/symbol-index.md)

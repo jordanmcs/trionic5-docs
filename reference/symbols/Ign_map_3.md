@@ -1,6 +1,6 @@
 # Ign_map_3
 
-Calibration word (flash)  ·  ROM 0x41C40
+Calibration word (flash) · ROM 0x41C40
 
 **Value in factory 4780656:** all 0 — units: 0.1 crank degree (signed)
 

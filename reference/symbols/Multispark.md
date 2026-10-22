@@ -1,6 +1,6 @@
 # Multispark
 
-State byte (RAM 0x1118)  ·  RAM 0x1118
+State byte (RAM 0x1118) · RAM 0x1118
 
 **Value in factory 4780656:** runtime — units: 0/1
 

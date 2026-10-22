@@ -1,6 +1,6 @@
 # Misfire_map_y_axis
 
-Calibration axis, 16 words  ·  ROM 0x423A8 -> RAM 0x6A06
+Calibration axis, 16 words · ROM 0x423A8 -> RAM 0x6A06
 
 **Value in factory 4780656:** words: 880, 1260, 1640, 2020, 2400, 2780, 3160, 3540, 3920, 4300, 4680, 5060, 5440, 5820, 6000, 6010
 

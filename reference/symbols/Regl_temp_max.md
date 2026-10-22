@@ -1,6 +1,6 @@
 # Regl_temp_max
 
-State word (RAM, F_725B8 A2)  ·  (Regl_temp_max label)
+State word (RAM, F_725B8 A2) · (Regl_temp_max label)
 
 **Value in factory 4780656:** dynamic — units: kPa absolute
 

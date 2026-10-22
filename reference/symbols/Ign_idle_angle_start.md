@@ -1,6 +1,6 @@
 # Ign_idle_angle_start
 
-Calibration word (flash)  ·  ROM 0x41820
+Calibration word (flash) · ROM 0x41820
 
 **Value in factory 4780656:** 180 (=18.0 deg) — units: 0.1 crank degree
 

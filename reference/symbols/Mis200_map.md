@@ -1,6 +1,10 @@
 # Mis200_map
 
-Calibration matrix, 576 bytes  ·  ROM 0x423CA -> RAM 0x6E22
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+Calibration matrix, 576 bytes · ROM 0x423CA -> RAM 0x6E22
 
 **Value in factory 4780656:** 576 bytes — full hex in `source/misfire_tables.txt`
 

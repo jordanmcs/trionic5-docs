@@ -1,6 +1,6 @@
 # Rich_step_map
 
-8-bit table 16x4 (flash)  ·  0x40BF8 -> 0x6A80
+8-bit table 16x4 (flash) · 0x40BF8 -> 0x6A80
 
 **Value in factory 4780656:** 6..25 — units: steps per lambda event
 

@@ -1,7 +1,7 @@
 
 # Start_dead_tab
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x40702
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x40702
 
 **Value in factory 4780656:**
 

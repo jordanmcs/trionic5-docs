@@ -1,7 +1,7 @@
 
 # Kyl_temp
 
-State byte (RAM)  ·  (derived from AD_kylv)
+State byte (RAM) · (derived from AD_kylv)
 
 **Value in factory 4780656:** signed °C
 

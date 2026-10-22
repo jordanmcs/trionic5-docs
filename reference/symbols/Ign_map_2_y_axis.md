@@ -1,6 +1,6 @@
 # Ign_map_2_y_axis
 
-8/16-bit table (flash)  ·  ROM 0x41AE8
+8/16-bit table (flash) · ROM 0x41AE8
 
 **Value in factory 4780656:** 500..6200 (16 words) — units: rpm
 

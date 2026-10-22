@@ -1,7 +1,7 @@
 
 # Start_trottel
 
-Calibration scalar  ·  ROM 0x040716
+Calibration scalar · ROM 0x040716
 
 **Value in factory 4780656:**
 

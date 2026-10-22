@@ -1,6 +1,6 @@
 # Fuel_map_yaxis
 
-Calibration table (flash)  ·  0x41684 -> 0x4E72
+Calibration table (flash) · 0x41684 -> 0x4E72
 
 **Value in factory 4780656:** 16 words 0058..026C — units: rpm/10 (880..6200 rpm)
 

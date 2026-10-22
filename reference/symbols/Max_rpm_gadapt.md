@@ -1,6 +1,6 @@
 # Max_rpm_gadapt
 
-Calibration word (flash)  ·  0x40982 -> 0x4B7C
+Calibration word (flash) · 0x40982 -> 0x4B7C
 
 **Value in factory 4780656:** 0x0129 — units: rpm/10
 

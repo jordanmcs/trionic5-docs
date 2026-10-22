@@ -1,6 +1,6 @@
 # Open_loop
 
-Calibration table (flash)  ·  0x40718 -> 0x4CFE
+Calibration table (flash) · 0x40718 -> 0x4CFE
 
 **Value in factory 4780656:** 50 C8 C8 C8 92...58 — units: kPa abs
 

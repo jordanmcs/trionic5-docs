@@ -1,6 +1,6 @@
 # API_throttle_tab
 
-Calibration axis, 5 bytes  ·  ROM 0x42E4A -> RAM 0x5B1E
+Calibration axis, 5 bytes · ROM 0x42E4A -> RAM 0x5B1E
 
 **Value in factory 4780656:** bytes: 0x0A 0x14 0x1E 0x28 0x32
 

@@ -1,7 +1,7 @@
 
 # Start_insp
 
-Calibration scalar  ·  ROM 0x040BAC
+Calibration scalar · ROM 0x040BAC
 
 **Value in factory 4780656:**
 

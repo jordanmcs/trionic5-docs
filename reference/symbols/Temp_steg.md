@@ -1,7 +1,7 @@
 
 # Temp_steg
 
-Calibration axis, 15 bytes (raw AD counts)  ·  ROM 0x40B24 (RAM [Temp_steg](Temp_steg.md))
+Calibration axis, 15 bytes (raw AD counts) · ROM 0x40B24 (RAM [Temp_steg](Temp_steg.md))
 
 **Value in factory 4780656:** 15 raw coolant-AD points 40…241 (low AD = warm).
 

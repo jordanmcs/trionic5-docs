@@ -1,6 +1,6 @@
 # Ret_clear_tab_low
 
-Calibration byte (flash)  ·  ROM 0x40986
+Calibration byte (flash) · ROM 0x40986
 
 **Value in factory 4780656:** 3 — units: events
 

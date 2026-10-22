@@ -1,6 +1,6 @@
 # Br_plus
 
-State word (RAM)  ·  0x1150 (symbol table)
+State word (RAM) · 0x1150 (symbol table)
 
 **Value in factory 4780656:** 0 — units: 4 us ticks (/10 domain)
 

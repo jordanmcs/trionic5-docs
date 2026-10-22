@@ -1,7 +1,7 @@
 
 # Knock_ref_matrix
 
-Calibration map, 288 words (18 load × 16 rpm)  ·  ROM 0x428BA
+Calibration map, 288 words (18 load × 16 rpm) · ROM 0x428BA
 
 **Value in factory 4780656:**
 

@@ -1,6 +1,6 @@
 # Last_cyl_komp
 
-Calibration word (flash)  ·  0x40BAA -> 0x4BF8
+Calibration word (flash) · 0x40BAA -> 0x4BF8
 
 **Value in factory 4780656:** 0x28 (40) — units: kPa abs
 

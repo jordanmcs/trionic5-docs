@@ -1,6 +1,6 @@
 # API_rpm_limit
 
-Calibration word  ·  ROM 0x42E66 -> RAM 0x5B3A
+Calibration word · ROM 0x42E66 -> RAM 0x5B3A
 
 **Value in factory 4780656:** words: 4000
 

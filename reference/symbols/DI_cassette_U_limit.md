@@ -1,7 +1,7 @@
 
 # DI_cassette_U_limit
 
-Calibration byte (RAM copy)  ·  per init map
+Calibration byte (RAM copy) · per init map
 
 **Value in factory 4780656:** (voltage threshold)
 

@@ -1,6 +1,6 @@
 # Idle_update
 
-Calibration byte  ·  ROM 0x40FA4 -> RAM 0x5FD2
+Calibration byte · ROM 0x40FA4 -> RAM 0x5FD2
 
 **Value in factory 4780656:** bytes: 0x00
 

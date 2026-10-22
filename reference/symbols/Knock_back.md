@@ -1,7 +1,7 @@
 
 # Knock_back
 
-Calibration word (flash)  ·  ROM 0x417DC
+Calibration word (flash) · ROM 0x417DC
 
 **Value in factory 4780656:** 2 = 0.2° per control period
 

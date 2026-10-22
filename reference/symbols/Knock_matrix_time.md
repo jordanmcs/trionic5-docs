@@ -1,7 +1,7 @@
 
 # Knock_matrix_time
 
-Calibration word (flash)  ·  ROM 0x428B8
+Calibration word (flash) · ROM 0x428B8
 
 **Value in factory 4780656:** 12000 (ms)
 

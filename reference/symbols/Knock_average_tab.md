@@ -1,7 +1,7 @@
 
 # Knock_average_tab
 
-Calibration table, 16 words × rpm  ·  ROM 0x42B5A
+Calibration table, 16 words × rpm · ROM 0x42B5A
 
 **Value in factory 4780656:**
 

@@ -1,5 +1,9 @@
 # Trionic 5.5 — Idle Air Control (Idle Control Valve)
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 > **Summary:** Idle speed on the NG900 T5.5 is held by a **separate idle control valve** (Swedish *regulerdon*; symbol namespace `Iv_*` = Idle Valve) driven by a linear PWM output — **not** by the throttle plate and **not** by the throttle-actuator misnomer that an early symbol name suggests. The command chain is: base position table [Iv_min_tab](../reference/symbols/Iv_min_tab.md) indexed by rpm → plus learned offset `Iv_min_offset` (a minimum-load integrator) → clamped 225…624 → written to PWM reload register `0xFFFFC4` scaled ×655/1000. In parallel, an rpm-governor path (nominal-speed tables + P/I corrections) adjusts the same actuator and the ignition idle angle. AC engagement raises both the speed target and the base position.
 
 **Platform:** NG900 Saab 900/9-3, B204RM, OBD2. **Factory reference:** factory `4780656`.
@@ -24,10 +28,10 @@ Decompiled logic (pseudocode `evidence/idleair_mine/func_0x709d4.pc.txt`):
 
 1. **Base position:** `step = rpm_raw / 125` (raw rpm word 0x3C32); `base = (step)*2 + table`, table = **[Iv_min_tab](../reference/symbols/Iv_min_tab.md)** (54 words) or **[Iv_min_tab_ac](../reference/symbols/Iv_min_tab_ac.md)** (AC variant) selected by status bits (`0x1137` bit 6 / idle-fuel-branch bit `0x103A` bit 2). Factory: both tables start at 0x00DC (220) — the whole table's raw bytes are in `idle_tables.txt`.
 2. **Minimum-load adaptation (`Iv_min_offset`, RAM 0x3460, clamp ±100):** an integrator that learns the extra position needed so that manifold load at the idle boundary stays at [Iv_min_load](../reference/symbols/Iv_min_load.md) (0x16 = 22 counts):
-   - Conditions: idle-branch/temperature window (coolant byte between 0xC9 and 0xF9), vehicle-motion helper `F_000445AC` non-zero, stable-run counter 0x3A6A reaching [Iv_min_count](../reference/symbols/Iv_min_count.md) (5 confirmations).
-   - If `P_Manifold > Iv_min_load` (load below target → valve needs to open): `Iv_min_offset += Iv_min_change` (3).
-   - If load is above target and position exceeds the floor: `Iv_min_offset −= Iv_min_change`.
-   - This is the compensation for carbon buildup at the idle bypass — "Idle valve min table" in the book glossary.
+ - Conditions: idle-branch/temperature window (coolant byte between 0xC9 and 0xF9), vehicle-motion helper `F_000445AC` non-zero, stable-run counter 0x3A6A reaching [Iv_min_count](../reference/symbols/Iv_min_count.md) (5 confirmations).
+ - If `P_Manifold > Iv_min_load` (load below target → valve needs to open): `Iv_min_offset += Iv_min_change` (3).
+ - If load is above target and position exceeds the floor: `Iv_min_offset −= Iv_min_change`.
+ - This is the compensation for carbon buildup at the idle bypass — "Idle valve min table" in the book glossary.
 3. **Sum and clamps:** `Iv_position 0x4762 = base + Iv_min_offset`; command word 0x1158 = max(sum, caller floor), then `≤ 624`, `≥ LLS_min (225)`; finally `F_00046782` writes the PWM register (§1).
 4. Start-up extras ([Iv_start_pos_offset](../reference/symbols/Iv_start_pos_offset.md) 50, [Iv_start_rpm_offset](../reference/symbols/Iv_start_rpm_offset.md) 20, [Iv_start_time_tab](../reference/symbols/Iv_start_time_tab.md)) are applied by the warmup path — see warmup doc.
 
@@ -65,7 +69,6 @@ Full raw bytes in **`idle_tables.txt`** (27 entries). Highlights:
 | [Idle_ac_tab](../reference/symbols/Idle_ac_tab.md), `Idle_ac_extra_tab/_sp` | 0x014a…, words | AC idle bumps |
 | [Iv_start_pos_offset](../reference/symbols/Iv_start_pos_offset.md) / `_rpm_offset` / `_time_tab` | 50 / 20 / 8 words | start-up valve extra |
 
-**MCS tune relevance:** [Idle_rpm_tab](../reference/symbols/Idle_rpm_tab.md) and [Idle_drift_tab](../reference/symbols/Idle_drift_tab.md) changes (plus [Reg_last](../reference/symbols/Reg_last.md)) are the idle-affecting parts of a commercial reflash; recorded in `T5 MCS Tune Changes.md`.
 
 ## 6. Open items
 

@@ -1,6 +1,10 @@
 # Mis_temp_limit
 
-Calibration byte  ·  ROM 0x4289C -> RAM 0x5AF6
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+Calibration byte · ROM 0x4289C -> RAM 0x5AF6
 
 **Value in factory 4780656:** bytes: 0xD8
 

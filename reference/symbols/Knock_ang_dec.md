@@ -1,7 +1,7 @@
 
 # Knock_ang_dec
 
-Calibration word (flash)  ·  ROM 0x42874
+Calibration word (flash) · ROM 0x42874
 
 **Value in factory 4780656:** 20 = 2.0°
 

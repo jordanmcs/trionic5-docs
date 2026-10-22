@@ -1,6 +1,6 @@
 # Reg_kon_fgm
 
-Calibration word (flash)  ·  ROM 0x41551, RAM 0x5ECC
+Calibration word (flash) · ROM 0x41551, RAM 0x5ECC
 
 **Value in factory 4780656:** 8 — units: PWM counts /10
 

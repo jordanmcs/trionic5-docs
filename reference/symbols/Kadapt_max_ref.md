@@ -1,7 +1,7 @@
 
 # Kadapt_max_ref
 
-Calibration table, 11 words  ·  ROM 0x42856
+Calibration table, 11 words · ROM 0x42856
 
 **Value in factory 4780656:**
 

@@ -30,9 +30,9 @@ Every documentation claim is address-anchored. Resolve the chain:
 - Units: ignition/injection angles are 0.1 crank-degree words; temperature-indexed
   multipliers are ×1/128; pressure tables store kPa absolute (boost ≈ raw − 100);
   rpm words are usually rpm×10.
-- The documentation describes the **factory** calibration. Tables tagged
-  `(MCS differs)` are modified by one commercial reflash; that tune's data is not
-  part of this repository, and questions about it cannot be answered from these files.
+- The documentation describes the **factory** calibration only. Differences
+  introduced by commercial reflashes are out of scope and not distributed here;
+  questions about tuned values cannot be answered from these files.
 
 ## Answer style
 

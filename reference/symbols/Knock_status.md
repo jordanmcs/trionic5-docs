@@ -1,7 +1,11 @@
 
 # Knock_status
 
-State byte (RAM 0x1D10)  ·  RAM 0x1D10
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+State byte (RAM 0x1D10) · RAM 0x1D10
 
 **Value in factory 4780656:** bit flags
 

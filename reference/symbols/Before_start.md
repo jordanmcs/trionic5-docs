@@ -1,7 +1,7 @@
 
 # Before_start
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x40F14
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x40F14
 
 **Value in factory 4780656:**
 

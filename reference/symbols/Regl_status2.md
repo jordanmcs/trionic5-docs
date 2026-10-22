@@ -1,6 +1,6 @@
 # Regl_status2
 
-State words (RAM 0x334B / 0x334C)  ·  0x334B/0x334C
+State words (RAM 0x334B / 0x334C) · 0x334B/0x334C
 
 **Value in factory 4780656:** bitfields — units: flags
 

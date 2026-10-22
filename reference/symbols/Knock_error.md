@@ -1,7 +1,7 @@
 
 # Knock_error
 
-State word (RAM 0x2116)  ·  RAM 0x2116
+State word (RAM 0x2116) · RAM 0x2116
 
 **Value in factory 4780656:** (code bookkeeping)
 

@@ -1,5 +1,9 @@
 # T5 Boost Control
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 > **Summary:** Charge-pressure control is a per-cycle chain: **request** from [Tryck_mat](../reference/symbols/Tryck_mat.md) (rpm × throttle) → overshoot compensation → **knock derate** → **gear / transmission limiters** → **intake-air-temperature cap** (automatics) → fault derate; the result [Regl_tryck](../reference/symbols/Regl_tryck.md) (kPa absolute) is compared against averaged actual MAP ([P_medel](../reference/symbols/P_medel.md)) and closed by a **PID with feed-forward** (`P/I/D_fors` gains, [Reg_kon_mat](../reference/symbols/Reg_kon_mat.md) duty offset, [Apc_adapt](../reference/symbols/Apc_adapt.md) learned term) whose output [PWM_ut](../reference/symbols/PWM_ut.md) (0–98.0 %) drives the boost-control solenoid that bleeds boost pressure to the wastegate actuator.
 
 
@@ -29,8 +33,6 @@ Sum → [PWM_ut](../reference/symbols/PWM_ut.md) (0–980 = 0.1 % counts, max ex
 
 Below 1000 rpm, in reverse, at low battery ([DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md)) or low speed: forced 2 % duty (basic boost). Cause code recorded in [Limiter_cause](../reference/symbols/Limiter_cause.md).
 
-## MCS differences
+## Factory-side notes
 
-See T5 MCS Tune Changes (boost regulation). Factory-side finding worth recording: five dead calibration scalars ([Max_um_time](../reference/symbols/Max_um_time.md) …) are copied to RAM but never referenced in either image.
-
-Index: [T5 Symbols](../reference/symbol-index.md)
+Factory-side finding worth recording: five dead calibration scalars ([Max_um_time](../reference/symbols/Max_um_time.md) …) are copied to RAM but never referenced in either image. Index: [T5 Symbols](../reference/symbol-index.md)

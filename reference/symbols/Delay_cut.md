@@ -1,6 +1,6 @@
 # Delay_cut
 
-Calibration word (flash)  ·  0x40F25 -> 0x4E30
+Calibration word (flash) · 0x40F25 -> 0x4E30
 
 **Value in factory 4780656:** 0x00 — units: cycle ticks
 

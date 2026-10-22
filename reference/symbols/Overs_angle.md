@@ -1,6 +1,6 @@
 # Overs_angle
 
-Calibration word (flash)  ·  ROM 0x4153D, RAM 0x5EB4
+Calibration word (flash) · ROM 0x4153D, RAM 0x5EB4
 
 **Value in factory 4780656:** 160 — units: throttle AD counts
 

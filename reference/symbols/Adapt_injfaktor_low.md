@@ -1,6 +1,6 @@
 # Adapt_injfaktor_low
 
-Calibration word (flash)  ·  0x428B5 -> 0x5B14
+Calibration word (flash) · 0x428B5 -> 0x5B14
 
 **Value in factory 4780656:** 0x1A — units: (v+384)/512
 

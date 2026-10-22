@@ -1,7 +1,7 @@
 
 # BS_temp
 
-Calibration scalar  ·  ROM 0x040F23
+Calibration scalar · ROM 0x040F23
 
 **Value in factory 4780656:**
 

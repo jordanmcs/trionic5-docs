@@ -1,6 +1,6 @@
 # Ret_up_rpm
 
-Calibration word (flash)  ·  ROM 0x41762
+Calibration word (flash) · ROM 0x41762
 
 **Value in factory 4780656:** 150 (=1500 rpm) — units: rpm x10
 

@@ -1,24 +1,26 @@
 # Trionic 5.5 — Torque Intervention & Drivability
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 > **Summary:** Trionic 5.5 has no central "torque arbitration" module and no torque request bus. Torque interventions are produced by small strategy blocks that each write one shared ignition-retard word, **0x390E** (ignition-offset domain), plus discrete fuel/boost limiters. The final ignition combiner (`Function_00061F30`, exit at `0x62840`) subtracts 0x390E from the summed advance every cycle. The automatic-transmission strategies — **API_dt** ("Drive and Throttle", N→D engagement) and **API_ku** ("Kickdown and Upshift") — are internal ECU estimators: they infer what the gearbox is doing from engine sensors (gearbox gear-characteristic discrete, engine-speed trace, throttle delta). There is no serial torque path to the transmission.
 
 **Platform:** NG900 Saab 900/9-3, B204RM, OBD2 (factory footer `B204RM-900 C2 OBD2`). No Trionic 5 9-5 exists; the ZF 4HP22 EHS gearbox shifts autonomously — the ECU never commands shift elements.
 
-**Factory reference:** everything below is factory `4780656`. MCS tune deltas are catalogued in `T5 MCS Tune Changes.md` and not repeated here.
-
-> **Correction notice:** an earlier draft of this document described a "central torque request hub" with priority arbitration and a transmission ECU feeding request flags. That draft was wrong and has been replaced with the decompiled reality below; no arbitration hub exists in the image.
+**Factory reference:** everything below is factory `4780656`.> **Correction notice:** an earlier draft of this document described a "central torque request hub" with priority arbitration and a transmission ECU feeding request flags. That draft was wrong and has been replaced with the decompiled reality below; no arbitration hub exists in the image.
 
 ---
 
 ## 1. Architecture — how an intervention reaches the engine
 
 ```
-strategy blocks (main task)                combiner                     output
-────────────────────────────               ────────────                 ──────
+strategy blocks (main task) combiner output
+──────────────────────────── ──────────── ──────
 API_dt / API_ku governor ──► 0x3910 latch ──► 0x390E retard word ─┐
-MT shift blip (F_00071F30) ──► scheduler     │                    ├─► Function_00061F30
-rev-limit / fuel-save (fuel doc)             │                    │   Σ per-cyl offsets
-                                                              0x3896 global offset ─► per-cyl timing ─► TPU
+MT shift blip (F_00071F30) ──► scheduler │ ├─► Function_00061F30
+rev-limit / fuel-save (fuel doc) │ │ Σ per-cyl offsets
+ 0x3896 global offset ─► per-cyl timing ─► TPU
 ```
 
 - **0x390E** (word) — the intervention retard actually applied. **0x3910** — latched request value used to build the linear ramp. **0x390C** — status byte: bit 7 = dt active, bit 6 = ku active.
@@ -50,7 +52,7 @@ Same function, `0x61E3A`–`0x61F0A`. Detects the momentary engine-speed *drop* 
 
 **Factory calibration: [API_ku_offset](../reference/symbols/API_ku_offset.md) = 0 — also disabled at factory.** On factory 4780656 both API retard paths execute their state machines but contribute zero retard; the calibration points exist for variants that need them.
 
-**MCS deltas:** catalogued in `T5 MCS Tune Changes.md` (torque intervention). Since [API_ku_offset](../reference/symbols/API_ku_offset.md) is 0 at factory, the intervention produces no retard unless the offset is also tuned.
+Since [API_ku_offset](../reference/symbols/API_ku_offset.md) is 0 at factory, the intervention produces no retard unless the offset is also tuned.
 
 ## 4. MT manual-transmission upshift blip — `Function_00071F30`
 
@@ -58,7 +60,7 @@ For manual cars (AT bit clear). Requests a **full ignition cut** (via the schedu
 
 - Inputs: engine temp vs [Shift_up_temp](../reference/symbols/Shift_up_temp.md) (40 °C), [Shift_max_rpm](../reference/symbols/Shift_max_rpm.md) guard (5500), gear-indexed shift-window centre `Shift_rpm[gear]` (2000/1900/1800/1700 rpm) ± [Shift_up_rpm_hyst](../reference/symbols/Shift_up_rpm_hyst.md) (50 rpm), gear-change detection from [Gear_st](../reference/symbols/Gear_st.md) / [Gear_ratio_delta](../reference/symbols/Gear_ratio_delta.md) (gear ratios ×10 and ratio steps ×10 per the book glossary).
 - When a shift is inferred inside the window: cut timing for [Shift_up_time](../reference/symbols/Shift_up_time.md) (3), release after [Shift_up_off_time](../reference/symbols/Shift_up_off_time.md) (3) — timed by the tick engine `F_0006162A`.
-- **MCS deltas:** [Gear_st](../reference/symbols/Gear_st.md) / [Gear_ratio_delta](../reference/symbols/Gear_ratio_delta.md) shift-detection ratios — `T5 MCS Tune Changes.md`. [Shift_up_temp](../reference/symbols/Shift_up_temp.md) is identical.
+./reference/symbols/Gear_st.md) / [Gear_ratio_delta](../reference/symbols/Gear_ratio_delta.[Shift_up_temp](../reference/symbols/Shift_up_temp.md) is identical.
 
 ## 5. Retard sources other than API
 

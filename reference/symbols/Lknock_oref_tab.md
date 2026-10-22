@@ -1,7 +1,7 @@
 
 # Lknock_oref_tab
 
-Calibration table, 16 words × rpm  ·  ROM 0x42AFA
+Calibration table, 16 words × rpm · ROM 0x42AFA
 
 **Value in factory 4780656:**
 

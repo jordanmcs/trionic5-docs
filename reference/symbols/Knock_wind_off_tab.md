@@ -1,7 +1,7 @@
 
 # Knock_wind_off_tab
 
-Calibration table, 16 words × rpm  ·  ROM 0x42BBA
+Calibration table, 16 words × rpm · ROM 0x42BBA
 
 **Value in factory 4780656:**
 

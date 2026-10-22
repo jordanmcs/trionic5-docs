@@ -1,6 +1,6 @@
 # Idle_rpm_off
 
-Calibration word  ·  ROM 0x41162 -> RAM 0x6018
+Calibration word · ROM 0x41162 -> RAM 0x6018
 
 **Value in factory 4780656:** words: 0
 

@@ -1,7 +1,7 @@
 
 # Start_time_rpm_lim
 
-Calibration scalar  ·  ROM 0x042E6A
+Calibration scalar · ROM 0x042E6A
 
 **Value in factory 4780656:**
 

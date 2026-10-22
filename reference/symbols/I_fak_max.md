@@ -1,6 +1,6 @@
 # I_fak_max
 
-Calibration word (flash, 16-bit)  ·  ROM 0x41666, RAM 0x5E9A
+Calibration word (flash, 16-bit) · ROM 0x41666, RAM 0x5E9A
 
 **Value in factory 4780656:** 400 — units: duty counts
 

@@ -1,7 +1,7 @@
 
 # Temp_ramp_value
 
-Calibration scalar  ·  ROM 0x0408BA
+Calibration scalar · ROM 0x0408BA
 
 **Value in factory 4780656:**
 

@@ -1,6 +1,10 @@
 # Fuel_knock_xaxis
 
-Calibration table (flash)  ·  0x40AB4 -> 0x6412
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+Calibration table (flash) · 0x40AB4 -> 0x6412
 
 **Value in factory 4780656:** 12 bytes; [0] = engage load — units: kPa abs (book: active above ~140 kPa)
 

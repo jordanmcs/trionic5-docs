@@ -1,7 +1,7 @@
 
 # I_kyl_st
 
-Calibration table, 8 B (°C axis)  ·  ROM 0x4112A
+Calibration table, 8 B (°C axis) · ROM 0x4112A
 
 **Value in factory 4780656:**
 

@@ -1,7 +1,7 @@
 
 # Start_ramp
 
-Calibration scalar  ·  ROM 0x040714
+Calibration scalar · ROM 0x040714
 
 **Value in factory 4780656:**
 

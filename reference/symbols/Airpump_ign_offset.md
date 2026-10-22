@@ -1,6 +1,6 @@
 # Airpump_ign_offset
 
-Calibration word (flash)  ·  ROM 0x42BEA
+Calibration word (flash) · ROM 0x42BEA
 
 **Value in factory 4780656:** 0 — units: 0.1 crank degree
 

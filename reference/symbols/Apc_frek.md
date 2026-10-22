@@ -3,7 +3,7 @@
 
 # Apc_frek
 
-Calibration byte (flash)  ·  ROM 0x4153E
+Calibration byte (flash) · ROM 0x4153E
 
 
 

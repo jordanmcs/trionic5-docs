@@ -1,6 +1,6 @@
 # AC_Control
 
-Calibration table, 4 bytes  ·  ROM 0x40F9E -> RAM 0x61F4
+Calibration table, 4 bytes · ROM 0x40F9E -> RAM 0x61F4
 
 **Value in factory 4780656:** bytes: 0x05 0x3A 0x03 0xE8
 

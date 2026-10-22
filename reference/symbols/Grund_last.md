@@ -1,6 +1,6 @@
 # Grund_last
 
-Calibration word (RAM state, init flash)  ·  0x417D8 -> 0x51C6
+Calibration word (RAM state, init flash) · 0x417D8 -> 0x51C6
 
 **Value in factory 4780656:** 0x25 (37) — units: kPa abs
 

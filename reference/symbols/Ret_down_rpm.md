@@ -1,6 +1,6 @@
 # Ret_down_rpm
 
-Calibration word (flash)  ·  ROM 0x41764
+Calibration word (flash) · ROM 0x41764
 
 **Value in factory 4780656:** 90 (=900 rpm) — units: rpm x10
 

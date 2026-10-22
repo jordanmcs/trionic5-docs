@@ -1,7 +1,7 @@
 
 # Start_tid
 
-State word (RAM, per cylinder)  ·  (RAM)
+State word (RAM, per cylinder) · (RAM)
 
 **Value in factory 4780656:**
 

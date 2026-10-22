@@ -1,6 +1,6 @@
 # Fault_derate
 
-State word (RAM 0x47A6)  ·  0x47A6
+State word (RAM 0x47A6) · 0x47A6
 
 **Value in factory 4780656:** 0-60 — units: kPa
 

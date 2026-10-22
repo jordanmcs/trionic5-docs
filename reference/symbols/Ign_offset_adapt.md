@@ -1,6 +1,6 @@
 # Ign_offset_adapt
 
-Calibration word (flash->RAM)  ·  ROM 0x42854
+Calibration word (flash->RAM) · ROM 0x42854
 
 **Value in factory 4780656:** -100 (= -10.0) — units: 0.1 crank degree
 

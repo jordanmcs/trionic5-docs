@@ -1,6 +1,6 @@
 # Reg_kon_mat
 
-16-bit table (31 words, flash)  ·  ROM 0x415E8, RAM 0x5E1C
+16-bit table (31 words, flash) · ROM 0x415E8, RAM 0x5E1C
 
 **Value in factory 4780656:** 424->335->448 — units: PWM counts (0-980 scale)
 

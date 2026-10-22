@@ -1,6 +1,6 @@
 # Max_load_gadapt
 
-Calibration word (flash)  ·  0x4097F -> 0x4B78
+Calibration word (flash) · 0x4097F -> 0x4B78
 
 **Value in factory 4780656:** 0x68 — units: kPa abs
 

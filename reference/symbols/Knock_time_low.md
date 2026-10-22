@@ -1,7 +1,11 @@
 
 # Knock_time_low
 
-State word (RAM 0x2108/0x210A)  ·  RAM 0x2108/0x210A
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+State word (RAM 0x2108/0x210A) · RAM 0x2108/0x210A
 
 **Value in factory 4780656:** (timer ticks)
 

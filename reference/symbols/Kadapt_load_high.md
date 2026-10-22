@@ -1,7 +1,7 @@
 
 # Kadapt_load_high
 
-Calibration byte (RAM 0x5AC6)  ·  ROM 0x42870
+Calibration byte (RAM 0x5AC6) · ROM 0x42870
 
 **Value in factory 4780656:** 105 (calculated-load units)
 

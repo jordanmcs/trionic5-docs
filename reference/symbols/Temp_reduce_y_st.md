@@ -1,6 +1,6 @@
 # Temp_reduce_y_st
 
-Calibration axis, 8 words  ·  ROM 0x41262 -> RAM 0x61BE
+Calibration axis, 8 words · ROM 0x41262 -> RAM 0x61BE
 
 **Value in factory 4780656:** words: 88, 164, 240, 316, 392, 468, 544, 620
 

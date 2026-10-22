@@ -1,6 +1,6 @@
 # Mainrly_off
 
-Calibration word  ·  ROM 0x40F30 -> RAM 0x4E38
+Calibration word · ROM 0x40F30 -> RAM 0x4E38
 
 **Value in factory 4780656:** words: 24
 

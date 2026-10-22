@@ -1,6 +1,6 @@
 # Adapt_injfaktor
 
-Calibration word (RAM state, init flash)  ·  0x4075A -> 0x4A76
+Calibration word (RAM state, init flash) · 0x4075A -> 0x4A76
 
 **Value in factory 4780656:** 0x80 — units: (v+384)/512; limits 1A..E6 (-20/+20 %)
 

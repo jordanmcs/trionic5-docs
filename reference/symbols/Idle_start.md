@@ -1,6 +1,6 @@
 # Idle_start
 
-Calibration byte  ·  ROM 0x41284 -> RAM 0x609E
+Calibration byte · ROM 0x41284 -> RAM 0x609E
 
 **Value in factory 4780656:** bytes: 0x05
 

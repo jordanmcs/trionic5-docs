@@ -1,6 +1,6 @@
 # Ign_map_8
 
-Calibration word (flash)  ·  ROM 0x420EA
+Calibration word (flash) · ROM 0x420EA
 
 **Value in factory 4780656:** all 0 (11 words) — units: 0.1 crank degree (signed)
 

@@ -1,15 +1,11 @@
 
 # Vinkel_konst
 
-Calibration word (flash)  ·  0x40BA4 -> 0x4E3C
+Calibration word (flash) · 0x40BA4 -> 0x4E3C
 
 
 
 **Value in factory 4780656:** 0x35 (53) — units: crank degrees
-
-**MCS differs** — see T5 MCS Tune Changes.
-
-
 
 **Function:** injection angle constant
 

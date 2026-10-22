@@ -3,7 +3,7 @@
 
 # Fuel_knock_mat
 
-Calibration map, 192 B (rpm × MAP)  ·  ROM 0x409F4
+Calibration map, 192 B (rpm × MAP) · ROM 0x409F4
 
 
 
@@ -11,7 +11,7 @@ Calibration map, 192 B (rpm × MAP)  ·  ROM 0x409F4
 
 
 
-**Function:** Fuel enrichment applied while knock control is active (Pgm_status "Knock fuel map activated"). Non-monotone blobs in the factory curve. (Tune diff: MCS differs — see T5 MCS Tune Changes.)
+**Function:** Fuel enrichment applied while knock control is active (Pgm_status "Knock fuel map activated"). Non-monotone blobs in the factory curve.)
 
 
 

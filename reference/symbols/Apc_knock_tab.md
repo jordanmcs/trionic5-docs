@@ -1,7 +1,7 @@
 
 # Apc_knock_tab
 
-Calibration table, 8 bytes  ·  ROM 0x40AC0
+Calibration table, 8 bytes · ROM 0x40AC0
 
 **Value in factory 4780656:**
 

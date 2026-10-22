@@ -1,7 +1,7 @@
 
 # Detect_map_x_axis
 
-Calibration axis, 18 words (raw MAP count)  ·  ROM 0x42100 (RAM [Detect_map_x_axis](Detect_map_x_axis.md))
+Calibration axis, 18 words (raw MAP count) · ROM 0x42100 (RAM [Detect_map_x_axis](Detect_map_x_axis.md))
 
 **Value in factory 4780656:** 18 words, MAP counts 32–212 (full table below).
 

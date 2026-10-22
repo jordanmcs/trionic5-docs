@@ -1,6 +1,6 @@
 # Temp_reduce_mat
 
-Calibration matrix, 8x8 bytes  ·  ROM 0x411DA -> RAM 0x6136
+Calibration matrix, 8x8 bytes · ROM 0x411DA -> RAM 0x6136
 
 **Value in factory 4780656:** 8x8 byte grid; rows: see `source/torque_tables.txt`
 

@@ -1,7 +1,7 @@
 
 # Knock_wind_on_tab
 
-Calibration table, 16 words × rpm  ·  ROM 0x42B9A
+Calibration table, 16 words × rpm · ROM 0x42B9A
 
 **Value in factory 4780656:**
 

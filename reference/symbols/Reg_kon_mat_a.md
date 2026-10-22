@@ -1,6 +1,6 @@
 # Reg_kon_mat_a
 
-16-bit table (31 words, flash)  ·  ROM 0x41626, RAM 0x5E5A
+16-bit table (31 words, flash) · ROM 0x41626, RAM 0x5E5A
 
 **Value in factory 4780656:** 140->248->337 — units: PWM counts
 

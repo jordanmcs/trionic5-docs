@@ -1,6 +1,6 @@
 # D_fors
 
-8-bit table (7x4, flash)  ·  ROM 0x414CA, RAM 0x5DAC
+8-bit table (7x4, flash) · ROM 0x414CA, RAM 0x5DAC
 
 **Value in factory 4780656:** 0-255 — units: dimensionless
 

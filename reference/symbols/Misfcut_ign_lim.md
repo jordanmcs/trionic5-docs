@@ -1,9 +1,8 @@
 # Misfcut_ign_lim
 
-Calibration word  ·  ROM 0x42EC6 -> RAM 0x752E
+Calibration word · ROM 0x42EC6 -> RAM 0x752E
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
- **MCS differs** — see T5 MCS Tune Changes.
 **Function:** Count-inhibit window covering injector fuel-cut periods (combustion counts). NOT a fuel-cut trigger.
 
 **Code path:** 0x64xxx compare chain

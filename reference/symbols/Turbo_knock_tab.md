@@ -1,7 +1,7 @@
 
 # Turbo_knock_tab
 
-Calibration table, 16 words × rpm  ·  ROM 0x42B3A
+Calibration table, 16 words × rpm · ROM 0x42B3A
 
 **Value in factory 4780656:**
 

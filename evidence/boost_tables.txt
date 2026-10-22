@@ -1,200 +1,200 @@
 BOOST CONTROL calibration tables -- raw bytes, factory 4780656_factory.BIN (authority).
-Tables tagged (MCS differs) are changed by a commercial reflash; its data is not distributed.
+Tables tagged are changed by a commercial reflash; its data is not distributed.
 ROM base 0x40000; RAM dst = flash->RAM init copy (PEA/MOVE.W #len/PEA/JSR 0x4FC68, init fn 0x5101C-0x5147A + 0x51ADE).
 Enumerated via init copy sites; ROM addrs byte-verified from 48 79/3F 3C/48 79 copy instructions.
 ====================================================================================================
 
-Pwm_ind_rpm        ROM 0x41288  RAM 0x05B6E  len 32
-  factory bytes: [0, 150, 0, 175, 0, 200, 0, 225, 0, 250, 1, 19, 1, 44, 1, 69, 1, 94, 1, 144, 1, 194, 1, 244, 2, 38, 2, 63, 2, 88, 2, 138]
-  decoded (rpm x10): [150, 175, 200, 225, 250, 275, 300, 325, 350, 400, 450, 500, 550, 575, 600, 650]
-  note: Shared regulation rpm axis, 16 words, rpm x10, 1500-6500. Legacy symbol-table name (misnomer); indexes Tryck_mat/Tryck_vakt_tab/Regl_tryck_*/Overstid_tab/Overs_tab columns.
+Pwm_ind_rpm ROM 0x41288 RAM 0x05B6E len 32
+ factory bytes: [0, 150, 0, 175, 0, 200, 0, 225, 0, 250, 1, 19, 1, 44, 1, 69, 1, 94, 1, 144, 1, 194, 1, 244, 2, 38, 2, 63, 2, 88, 2, 138]
+ decoded (rpm x10): [150, 175, 200, 225, 250, 275, 300, 325, 350, 400, 450, 500, 550, 575, 600, 650]
+ note: Shared regulation rpm axis, 16 words, rpm x10, 1500-6500. Legacy symbol-table name (misnomer); indexes Tryck_mat/Tryck_vakt_tab/Regl_tryck_*/Overstid_tab/Overs_tab columns.
 
-Pwm_ind_trot       ROM 0x412A8  RAM 0x05B8E  len 40
-  factory bytes: [10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155]
-  note: Throttle-AD row axis, 5 identical banks of 8 [10,29,47,66,86,108,130,155]; bank = gear-1 (manual); bank 5 (0x5BAE) used for automatics.
+Pwm_ind_trot ROM 0x412A8 RAM 0x05B8E len 40
+ factory bytes: [10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155, 10, 29, 47, 66, 86, 108, 130, 155]
+ note: Throttle-AD row axis, 5 identical banks of 8 [10,29,47,66,86,108,130,155]; bank = gear-1 (manual); bank 5 (0x5BAE) used for automatics.
 
-Tryck_mat          ROM 0x412E0  RAM 0x05BC6  len 128
-  factory bytes: [100, 145, 155, 165, 175, 179, 194, 194, 100, 142, 152, 162, 170, 179, 194, 194, 100, 115, 145, 162, 170, 190, 194, 194, 20, 20, 64, 122, 170, 190, 194, 194, 20, 20, 64, 122, 162, 187, 199, 199, 20, 20, 64, 122, 160, 177, 199, 199, 20, 20, 64, 122, 158, 174, 193, 193, 20, 20, 64, 122, 155, 168, 184, 184, 20, 20, 35, 122, 152, 164, 178, 178, 20, 20, 25, 100, 146, 164, 180, 180, 20, 20, 20, 90, 144, 166, 184, 184, 20, 20, 20, 85, 134, 154, 179, 179, 20, 20, 20, 60, 130, 145, 173, 173, 20, 20, 20, 55, 127, 145, 168, 168, 20, 20, 20, 50, 125, 145, 160, 160, 20, 20, 20, 40, 120, 140, 150, 150]
-  note: Boost request, bytes = kPa ABSOLUTE (boost = raw-100). Layout byte[rpm_col*8 + trot_row], 16 rpm cols x 8 throttle rows, bilinear (F_00072972 @0x725E2).
+Tryck_mat ROM 0x412E0 RAM 0x05BC6 len 128
+ factory bytes: [100, 145, 155, 165, 175, 179, 194, 194, 100, 142, 152, 162, 170, 179, 194, 194, 100, 115, 145, 162, 170, 190, 194, 194, 20, 20, 64, 122, 170, 190, 194, 194, 20, 20, 64, 122, 162, 187, 199, 199, 20, 20, 64, 122, 160, 177, 199, 199, 20, 20, 64, 122, 158, 174, 193, 193, 20, 20, 64, 122, 155, 168, 184, 184, 20, 20, 35, 122, 152, 164, 178, 178, 20, 20, 25, 100, 146, 164, 180, 180, 20, 20, 20, 90, 144, 166, 184, 184, 20, 20, 20, 85, 134, 154, 179, 179, 20, 20, 20, 60, 130, 145, 173, 173, 20, 20, 20, 55, 127, 145, 168, 168, 20, 20, 20, 50, 125, 145, 160, 160, 20, 20, 20, 40, 120, 140, 150, 150]
+ note: Boost request, bytes = kPa ABSOLUTE (boost = raw-100). Layout byte[rpm_col*8 + trot_row], 16 rpm cols x 8 throttle rows, bilinear (F_00072972 @0x725E2).
 
-Tryck_mat_a        ROM 0x41360  RAM 0x05C46  len 128
-  factory bytes: [100, 145, 155, 158, 158, 180, 180, 180, 100, 142, 152, 158, 158, 180, 180, 180, 100, 115, 145, 158, 158, 170, 170, 170, 20, 20, 64, 122, 130, 163, 163, 163, 20, 20, 64, 122, 130, 162, 162, 162, 20, 20, 64, 122, 130, 161, 161, 161, 20, 20, 64, 122, 130, 160, 160, 160, 20, 20, 64, 122, 130, 157, 157, 157, 20, 20, 35, 122, 130, 156, 156, 156, 20, 20, 25, 100, 110, 153, 153, 153, 20, 20, 20, 90, 100, 154, 154, 154, 20, 20, 20, 85, 100, 158, 158, 158, 20, 20, 20, 60, 100, 158, 158, 158, 20, 20, 20, 55, 100, 160, 160, 160, 20, 20, 20, 50, 100, 150, 150, 150, 20, 20, 20, 40, 100, 145, 145, 145]
-  note: Boost request, automatic trans. Same layout/units.
+Tryck_mat_a ROM 0x41360 RAM 0x05C46 len 128
+ factory bytes: [100, 145, 155, 158, 158, 180, 180, 180, 100, 142, 152, 158, 158, 180, 180, 180, 100, 115, 145, 158, 158, 170, 170, 170, 20, 20, 64, 122, 130, 163, 163, 163, 20, 20, 64, 122, 130, 162, 162, 162, 20, 20, 64, 122, 130, 161, 161, 161, 20, 20, 64, 122, 130, 160, 160, 160, 20, 20, 64, 122, 130, 157, 157, 157, 20, 20, 35, 122, 130, 156, 156, 156, 20, 20, 25, 100, 110, 153, 153, 153, 20, 20, 20, 90, 100, 154, 154, 154, 20, 20, 20, 85, 100, 158, 158, 158, 20, 20, 20, 60, 100, 158, 158, 158, 20, 20, 20, 55, 100, 160, 160, 160, 20, 20, 20, 50, 100, 150, 150, 150, 20, 20, 20, 40, 100, 145, 145, 145]
+ note: Boost request, automatic trans. Same layout/units.
 
-Tryck_vakt_tab     ROM 0x412D0  RAM 0x05BB6  len 16
-  factory bytes: [230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230]
-  note: Overboost fuel-cut limit per rpm col (16), byte kPa ABS. 230=1.30 bar cut; 0xFE~1.54 max; 0xFF=off (book).
+Tryck_vakt_tab ROM 0x412D0 RAM 0x05BB6 len 16
+ factory bytes: [230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230]
+ note: Overboost fuel-cut limit per rpm col (16), byte kPa ABS. 230=1.30 bar cut; 0xFE~1.54 max; 0xFF=off (book).
 
-Overstid_tab       ROM 0x41470  RAM 0x05D56  len 16
-  factory bytes: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40]
-  note: Tip-in overshoot-comp duration per rpm col (16), x1 tick (tick base undocumented).
+Overstid_tab ROM 0x41470 RAM 0x05D56 len 16
+ factory bytes: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40]
+ note: Tip-in overshoot-comp duration per rpm col (16), x1 tick (tick base undocumented).
 
-Overs_tab          ROM 0x413E8  RAM 0x05CCE  len 128
-  factory bytes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  note: Overshoot boost add-on, 16 rpm cols x 8 err cols, byte kPa. All zero in factory (feature inactive).
+Overs_tab ROM 0x413E8 RAM 0x05CCE len 128
+ factory bytes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+ note: Overshoot boost add-on, 16 rpm cols x 8 err cols, byte kPa. All zero in factory (feature inactive).
 
-Overs_tab_xaxis    ROM 0x41468  RAM 0x05D4E  len 8
-  factory bytes: [0, 5, 16, 32, 48, 64, 80, 96]
-  note: Overs_tab error axis, 8 bytes, kPa pressure shortfall [0,5,16,32,48,64,80,96].
+Overs_tab_xaxis ROM 0x41468 RAM 0x05D4E len 8
+ factory bytes: [0, 5, 16, 32, 48, 64, 80, 96]
+ note: Overs_tab error axis, 8 bytes, kPa pressure shortfall [0,5,16,32,48,64,80,96].
 
-Overs_komp_tab     ROM 0x413E0  RAM 0x05CC6  len 8
-  factory bytes: [255, 255, 255, 255, 255, 255, 255, 255]
-  note: Overshoot comp temp scaling /255, 8 bytes, index = Lufttemp/10. Factory 255 = x1.0.
+Overs_komp_tab ROM 0x413E0 RAM 0x05CC6 len 8
+ factory bytes: [255, 255, 255, 255, 255, 255, 255, 255]
+ note: Overshoot comp temp scaling /255, 8 bytes, index = Lufttemp/10. Factory 255 = x1.0.
 
-Overs_angle        ROM 0x4153D  RAM 0x05EB4  len 1
-  factory bytes: [160]
-  note: Tip-in throttle threshold byte (160, AD_trot >= this starts overshoot comp).
+Overs_angle ROM 0x4153D RAM 0x05EB4 len 1
+ factory bytes: [160]
+ note: Tip-in throttle threshold byte (160, AD_trot >= this starts overshoot comp).
 
-Reg_varv           ROM 0x41480  RAM 0x05D66  len 14
-  factory bytes: [0, 200, 0, 225, 0, 250, 1, 44, 1, 144, 1, 194, 2, 38]
-  decoded (rpm x10): [200, 225, 250, 300, 400, 450, 550]
-  note: PID gain rpm axis, 7 words rpm x10 [2000..5500].
+Reg_varv ROM 0x41480 RAM 0x05D66 len 14
+ factory bytes: [0, 200, 0, 225, 0, 250, 1, 44, 1, 144, 1, 194, 2, 38]
+ decoded (rpm x10): [200, 225, 250, 300, 400, 450, 550]
+ note: PID gain rpm axis, 7 words rpm x10 [2000..5500].
 
-Reg_last           ROM 0x4148E  RAM 0x05EAA  len 4
-  factory bytes: [5, 15, 30, 50]
-  note: PID gain error axis, 4 bytes boost error [5,15,30,50] kPa.
+Reg_last ROM 0x4148E RAM 0x05EAA len 4
+ factory bytes: [5, 15, 30, 50]
+ note: PID gain error axis, 4 bytes boost error [5,15,30,50] kPa.
 
-P_fors             ROM 0x41492  RAM 0x05D74  len 28
-  factory bytes: [255, 255, 255, 255, 120, 120, 120, 120, 0, 40, 80, 110, 0, 40, 80, 110, 0, 40, 80, 80, 0, 10, 80, 80, 0, 15, 80, 40]
-  note: Kp table manual, 7 rpm rows x 4 error cols, byte, dimensionless gain.
+P_fors ROM 0x41492 RAM 0x05D74 len 28
+ factory bytes: [255, 255, 255, 255, 120, 120, 120, 120, 0, 40, 80, 110, 0, 40, 80, 110, 0, 40, 80, 80, 0, 10, 80, 80, 0, 15, 80, 40]
+ note: Kp table manual, 7 rpm rows x 4 error cols, byte, dimensionless gain.
 
-I_fors             ROM 0x414AE  RAM 0x05D90  len 28
-  factory bytes: [0, 0, 0, 0, 6, 5, 3, 1, 6, 15, 6, 2, 6, 14, 9, 4, 10, 15, 10, 6, 15, 25, 10, 9, 15, 30, 10, 10]
-  note: Ki table manual.
+I_fors ROM 0x414AE RAM 0x05D90 len 28
+ factory bytes: [0, 0, 0, 0, 6, 5, 3, 1, 6, 15, 6, 2, 6, 14, 9, 4, 10, 15, 10, 6, 15, 25, 10, 9, 15, 30, 10, 10]
+ note: Ki table manual.
 
-D_fors             ROM 0x414CA  RAM 0x05DAC  len 28
-  factory bytes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 100, 0, 0, 150, 150, 90, 0, 50, 100, 255, 0, 150, 150, 90]
-  note: Kd table manual.
+D_fors ROM 0x414CA RAM 0x05DAC len 28
+ factory bytes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 100, 0, 0, 150, 150, 90, 0, 50, 100, 255, 0, 150, 150, 90]
+ note: Kd table manual.
 
-P_fors_a           ROM 0x414E6  RAM 0x05DC8  len 28
-  factory bytes: [255, 255, 255, 255, 120, 120, 120, 120, 0, 40, 80, 110, 0, 40, 80, 110, 0, 40, 80, 80, 0, 10, 80, 80, 0, 15, 80, 40]
-  note: Kp table automatic.
+P_fors_a ROM 0x414E6 RAM 0x05DC8 len 28
+ factory bytes: [255, 255, 255, 255, 120, 120, 120, 120, 0, 40, 80, 110, 0, 40, 80, 110, 0, 40, 80, 80, 0, 10, 80, 80, 0, 15, 80, 40]
+ note: Kp table automatic.
 
-I_fors_a           ROM 0x41502  RAM 0x05DE4  len 28
-  factory bytes: [0, 0, 0, 0, 10, 10, 5, 1, 10, 25, 5, 1, 10, 30, 6, 3, 10, 40, 16, 8, 15, 50, 20, 15, 15, 50, 20, 20]
-  note: Ki table automatic.
+I_fors_a ROM 0x41502 RAM 0x05DE4 len 28
+ factory bytes: [0, 0, 0, 0, 10, 10, 5, 1, 10, 25, 5, 1, 10, 30, 6, 3, 10, 40, 16, 8, 15, 50, 20, 15, 15, 50, 20, 20]
+ note: Ki table automatic.
 
-D_fors_a           ROM 0x4151E  RAM 0x05E00  len 28
-  factory bytes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 50, 0, 0, 150, 150, 90, 0, 50, 100, 255, 0, 150, 150, 90]
-  note: Kd table automatic.
+D_fors_a ROM 0x4151E RAM 0x05E00 len 28
+ factory bytes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 50, 0, 0, 150, 150, 90, 0, 50, 100, 255, 0, 150, 150, 90]
+ note: Kd table automatic.
 
-Reg_kon_mat        ROM 0x415E8  RAM 0x05E1C  len 62
-  factory bytes: [1, 168, 1, 165, 1, 162, 1, 159, 1, 156, 1, 153, 1, 138, 1, 123, 1, 108, 1, 93, 1, 79, 1, 79, 1, 79, 1, 79, 1, 79, 1, 79, 1, 84, 1, 89, 1, 94, 1, 98, 1, 102, 1, 104, 1, 107, 1, 109, 1, 112, 1, 115, 1, 120, 1, 125, 1, 130, 1, 134, 1, 138]
-  note: PID output offset (regulation bias) manual, 31 words indexed (rpm/10 - 25) = 2500-5500 rpm step 100. Units = PWM counts (same 0-980 scale as PWM_ut).
+Reg_kon_mat ROM 0x415E8 RAM 0x05E1C len 62
+ factory bytes: [1, 168, 1, 165, 1, 162, 1, 159, 1, 156, 1, 153, 1, 138, 1, 123, 1, 108, 1, 93, 1, 79, 1, 79, 1, 79, 1, 79, 1, 79, 1, 79, 1, 84, 1, 89, 1, 94, 1, 98, 1, 102, 1, 104, 1, 107, 1, 109, 1, 112, 1, 115, 1, 120, 1, 125, 1, 130, 1, 134, 1, 138]
+ note: PID output offset (regulation bias) manual, 31 words indexed (rpm/10 - 25) = 2500-5500 rpm step 100. Units = PWM counts (same 0-980 scale as PWM_ut).
 
-Reg_kon_mat_a      ROM 0x41626  RAM 0x05E5A  len 62
-  factory bytes: [0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 145, 0, 150, 0, 155, 0, 160, 0, 171, 0, 181, 0, 192, 0, 206, 0, 218, 0, 233, 0, 247, 1, 2, 1, 14, 1, 30, 1, 47, 1, 64, 1, 81]
-  note: PID offset automatic, same indexing.
+Reg_kon_mat_a ROM 0x41626 RAM 0x05E5A len 62
+ factory bytes: [0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 140, 0, 145, 0, 150, 0, 155, 0, 160, 0, 171, 0, 181, 0, 192, 0, 206, 0, 218, 0, 233, 0, 247, 1, 2, 1, 14, 1, 30, 1, 47, 1, 64, 1, 81]
+ note: PID offset automatic, same indexing.
 
-Reg_kon_fga        ROM 0x41550  RAM 0x05ECA  len 1
-  factory bytes: [14]
-  note: Reg_kon cap automatic full-gas, byte x10 counts (14 = 140).
+Reg_kon_fga ROM 0x41550 RAM 0x05ECA len 1
+ factory bytes: [14]
+ note: Reg_kon cap automatic full-gas, byte x10 counts (14 = 140).
 
-Reg_kon_fgm        ROM 0x41551  RAM 0x05ECC  len 1
-  factory bytes: [8]
-  note: Reg_kon cap first gear manual, byte x10 (8).
+Reg_kon_fgm ROM 0x41551 RAM 0x05ECC len 1
+ factory bytes: [8]
+ note: Reg_kon cap first gear manual, byte x10 (8).
 
-Reg_kon_sgm        ROM 0x41552  RAM 0x05ECE  len 1
-  factory bytes: [255]
-  note: Reg_kon cap second gear manual, byte signed (255 = -1).
+Reg_kon_sgm ROM 0x41552 RAM 0x05ECE len 1
+ factory bytes: [255]
+ note: Reg_kon cap second gear manual, byte signed (255 = -1).
 
-Regl_tryck_fgm     ROM 0x415C6  RAM 0x05F42  len 16
-  factory bytes: [158, 158, 163, 159, 161, 163, 160, 156, 153, 155, 155, 157, 162, 163, 159, 159]
-  note: First-gear max boost limiter, 16 rpm cols, byte kPa ABS. ~0.58-0.63 bar. Cap semantics: values ABOVE Tryck_mat disable it (book).
+Regl_tryck_fgm ROM 0x415C6 RAM 0x05F42 len 16
+ factory bytes: [158, 158, 163, 159, 161, 163, 160, 156, 153, 155, 155, 157, 162, 163, 159, 159]
+ note: First-gear max boost limiter, 16 rpm cols, byte kPa ABS. ~0.58-0.63 bar. Cap semantics: values ABOVE Tryck_mat disable it (book).
 
-Regl_tryck_sgm     ROM 0x415D6  RAM 0x05F52  len 16
-  factory bytes: [194, 194, 194, 194, 199, 199, 193, 184, 178, 178, 180, 177, 173, 168, 160, 159]
-  note: Second-gear max boost limiter, 16 rpm cols, kPa ABS. ~0.84-0.99 bar.
+Regl_tryck_sgm ROM 0x415D6 RAM 0x05F52 len 16
+ factory bytes: [194, 194, 194, 194, 199, 199, 193, 184, 178, 178, 180, 177, 173, 168, 160, 159]
+ note: Second-gear max boost limiter, 16 rpm cols, kPa ABS. ~0.84-0.99 bar.
 
-Regl_tryck_fgaut   ROM 0x41554  RAM 0x05ED0  len 16
-  factory bytes: [255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255]
-  note: First-gear/automatic-stage limiter, 16 rpm cols, kPa ABS. Factory 255 = disabled.
+Regl_tryck_fgaut ROM 0x41554 RAM 0x05ED0 len 16
+ factory bytes: [255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255]
+ note: First-gear/automatic-stage limiter, 16 rpm cols, kPa ABS. Factory 255 = disabled.
 
-Max_regl_sp        ROM 0x415A6  RAM 0x05F22  len 32
-  factory bytes: [2, 138, 2, 88, 2, 63, 2, 38, 1, 244, 1, 194, 1, 144, 1, 94, 1, 69, 1, 44, 1, 19, 0, 250, 0, 225, 0, 200, 0, 175, 0, 150]
-  decoded (rpm x10): [650, 600, 575, 550, 500, 450, 400, 350, 325, 300, 275, 250, 225, 200, 175, 150]
-  note: Intake-air-temp boost limiter rpm AXIS, 16 words rpm x10 DESCENDING 6500->1500 (interpolated by F_0006A410).
+Max_regl_sp ROM 0x415A6 RAM 0x05F22 len 32
+ factory bytes: [2, 138, 2, 88, 2, 63, 2, 38, 1, 244, 1, 194, 1, 144, 1, 94, 1, 69, 1, 44, 1, 19, 0, 250, 0, 225, 0, 200, 0, 175, 0, 150]
+ decoded (rpm x10): [650, 600, 575, 550, 500, 450, 400, 350, 325, 300, 275, 250, 225, 200, 175, 150]
+ note: Intake-air-temp boost limiter rpm AXIS, 16 words rpm x10 DESCENDING 6500->1500 (interpolated by F_0006A410).
 
-Max_regl_temp_1    ROM 0x41566  RAM 0x05EE2  len 32
-  factory bytes: [0, 145, 0, 150, 0, 160, 0, 158, 0, 158, 0, 154, 0, 153, 0, 156, 0, 157, 0, 160, 0, 161, 0, 162, 0, 163, 0, 170, 0, 180, 0, 180]
-  note: Max charge pressure limit @ warm point Temp_max_regl[0], 16 words kPa ABS on Max_regl_sp axis. Automatics only.
+Max_regl_temp_1 ROM 0x41566 RAM 0x05EE2 len 32
+ factory bytes: [0, 145, 0, 150, 0, 160, 0, 158, 0, 158, 0, 154, 0, 153, 0, 156, 0, 157, 0, 160, 0, 161, 0, 162, 0, 163, 0, 170, 0, 180, 0, 180]
+ note: Max charge pressure limit @ warm point Temp_max_regl[0], 16 words kPa ABS on Max_regl_sp axis. Automatics only.
 
-Max_regl_temp_2    ROM 0x41586  RAM 0x05F02  len 32
-  factory bytes: [0, 135, 0, 140, 0, 150, 0, 148, 0, 148, 0, 144, 0, 143, 0, 146, 0, 147, 0, 150, 0, 151, 0, 152, 0, 153, 0, 160, 0, 170, 0, 170]
-  note: Same @ cold point Temp_max_regl[1]. Interpolated between by Lufttemp (F_0006A314).
+Max_regl_temp_2 ROM 0x41586 RAM 0x05F02 len 32
+ factory bytes: [0, 135, 0, 140, 0, 150, 0, 148, 0, 148, 0, 144, 0, 143, 0, 146, 0, 147, 0, 150, 0, 151, 0, 152, 0, 153, 0, 160, 0, 170, 0, 170]
+ note: Same @ cold point Temp_max_regl[1]. Interpolated between by Lufttemp (F_0006A314).
 
-Temp_max_regl      ROM 0x41564  RAM 0x05EE0  len 2
-  factory bytes: [60, 20]
-  note: Two intake-air temp interpolation points [60, 20] degC for the two limiter curves.
+Temp_max_regl ROM 0x41564 RAM 0x05EE0 len 2
+ factory bytes: [60, 20]
+ note: Two intake-air temp interpolation points [60, 20] degC for the two limiter curves.
 
-I_fak_max          ROM 0x41666  RAM 0x05E9A  len 2
-  factory bytes: [1, 144]
-  note: Integral I_fak clamp, word 400 (book: default 400).
+I_fak_max ROM 0x41666 RAM 0x05E9A len 2
+ factory bytes: [1, 144]
+ note: Integral I_fak clamp, word 400 (book: default 400).
 
-Adaption_time      ROM 0x41664  RAM 0x05E98  len 1
-  factory bytes: [5]
-  note: Apc_adapt learning settle time, byte 5 ticks in F_00073550.
+Adaption_time ROM 0x41664 RAM 0x05E98 len 1
+ factory bytes: [5]
+ note: Apc_adapt learning settle time, byte 5 ticks in F_00073550.
 
-Frek_230           ROM 0x41670  RAM 0x05EA6  len 2
-  factory bytes: [0, 90]
-  note: Boost valve PWM frequency below 2300 rpm, word Hz. Factory 90.
+Frek_230 ROM 0x41670 RAM 0x05EA6 len 2
+ factory bytes: [0, 90]
+ note: Boost valve PWM frequency below 2300 rpm, word Hz. Factory 90.
 
-Frek_250           ROM 0x41672  RAM 0x05EA8  len 2
-  factory bytes: [0, 70]
-  note: Boost valve PWM frequency above 2500 rpm, word Hz. Factory 70.
+Frek_250 ROM 0x41672 RAM 0x05EA8 len 2
+ factory bytes: [0, 70]
+ note: Boost valve PWM frequency above 2500 rpm, word Hz. Factory 70.
 
-Apc_konst_tid      ROM 0x4153A  RAM 0x05EAE  len 1
-  factory bytes: [255]
-  note: Constant-light-load timer preset for 0x334B bit7 flag, byte 255.
+Apc_konst_tid ROM 0x4153A RAM 0x05EAE len 1
+ factory bytes: [255]
+ note: Constant-light-load timer preset for 0x334B bit7 flag, byte 255.
 
-Apc_cert_tid       ROM 0x4153B  RAM 0x05EB0  len 1
-  factory bytes: [0]
-  note: Gear-limiter confirm timer preset (0 = immediate), byte.
+Apc_cert_tid ROM 0x4153B RAM 0x05EB0 len 1
+ factory bytes: [0]
+ note: Gear-limiter confirm timer preset (0 = immediate), byte.
 
-Apc_fullgas        ROM 0x4153C  RAM 0x05EB2  len 1
-  factory bytes: [85]
-  note: Full-load APC threshold, byte 85 on throttle-opening scale (0x47E8); gates I-term and full-load flag.
+Apc_fullgas ROM 0x4153C RAM 0x05EB2 len 1
+ factory bytes: [85]
+ note: Full-load APC threshold, byte 85 on throttle-opening scale (0x47E8); gates I-term and full-load flag.
 
-Apc_frek           ROM 0x4153E  RAM 0x05EB6  len 1
-  factory bytes: [0]
-  note: Loop prescaler skip count, byte 0 = run every cycle (unused optional, stock).
+Apc_frek ROM 0x4153E RAM 0x05EB6 len 1
+ factory bytes: [0]
+ note: Loop prescaler skip count, byte 0 = run every cycle (unused optional, stock).
 
-Apc_decrese_asp    ROM 0x4154F  RAM 0x05EC8  len 1
-  factory bytes: [0]
-  note: Alternate floor for Apc_decrese, byte 0 = unused.
+Apc_decrese_asp ROM 0x4154F RAM 0x05EC8 len 1
+ factory bytes: [0]
+ note: Alternate floor for Apc_decrese, byte 0 = unused.
 
-Apc_knock_back     ROM 0x42EAA  RAM 0x05F62  len 1
-  factory bytes: [5]
-  note: Knock derate recovery: -1% per this many cycles after 5 consecutive... (0x72DC2), byte factory 5.
+Apc_knock_back ROM 0x42EAA RAM 0x05F62 len 1
+ factory bytes: [5]
+ note: Knock derate recovery: -1% per this many cycles after 5 consecutive... (0x72DC2), byte factory 5.
 
-Apc_knock_tab      ROM 0x40AC0  RAM 0x0641E  len 8
-  factory bytes: [8, 8, 8, 8, 8, 8, 8, 8]
-  note: APC boost derate step per knock event, 8 bytes % (index = event counter 0-7), factory all 8.
+Apc_knock_tab ROM 0x40AC0 RAM 0x0641E len 8
+ factory bytes: [8, 8, 8, 8, 8, 8, 8, 8]
+ note: APC boost derate step per knock event, 8 bytes % (index = event counter 0-7), factory all 8.
 
-Gear_st            ROM 0x41540  RAM 0x05EB8  len 10
-  factory bytes: [0, 137, 0, 71, 0, 48, 0, 36, 0, 27]
-  note: Gear ratios x10 (reverse/1st..4th? 13.7/7.1/4.8/3.6/2.7) used for gear detection (speed vs rpm).
+Gear_st ROM 0x41540 RAM 0x05EB8 len 10
+ factory bytes: [0, 137, 0, 71, 0, 48, 0, 36, 0, 27]
+ note: Gear ratios x10 (reverse/1st..4th? 13.7/7.1/4.8/3.6/2.7) used for gear detection (speed vs rpm).
 
-Gear_ratio_delta   ROM 0x4154A  RAM 0x05EC2  len 5
-  factory bytes: [15, 9, 4, 3, 3]
-  note: Gear-detection ratio windows, 5 bytes.
+Gear_ratio_delta ROM 0x4154A RAM 0x05EC2 len 5
+ factory bytes: [15, 9, 4, 3, 3]
+ note: Gear-detection ratio windows, 5 bytes.
 
-Max_um_time        ROM 0x41668  RAM 0x05E9C  len 2
-  factory bytes: [0, 32]
-  note: UNUSED in this revision: init copy only, no references found in listing.
+Max_um_time ROM 0x41668 RAM 0x05E9C len 2
+ factory bytes: [0, 32]
+ note: UNUSED in this revision: init copy only, no references found in listing.
 
-Max_pos_der        ROM 0x4166A  RAM 0x05E9E  len 2
-  factory bytes: [0, 5]
-  note: UNUSED: init copy only (probable old derivative clamp, +5).
+Max_pos_der ROM 0x4166A RAM 0x05E9E len 2
+ factory bytes: [0, 5]
+ note: UNUSED: init copy only (probable old derivative clamp, +5).
 
-Max_neg_der        ROM 0x4166C  RAM 0x05EA0  len 2
-  factory bytes: [255, 246]
-  note: UNUSED: init copy only (derivative clamp -10 signed).
+Max_neg_der ROM 0x4166C RAM 0x05EA0 len 2
+ factory bytes: [255, 246]
+ note: UNUSED: init copy only (derivative clamp -10 signed).
 
-Um_thr_lim         ROM 0x4166E  RAM 0x05EA2  len 1
-  factory bytes: [96]
-  note: UNUSED: init copy only.
+Um_thr_lim ROM 0x4166E RAM 0x05EA2 len 1
+ factory bytes: [96]
+ note: UNUSED: init copy only.
 
-Um_min_limit       ROM 0x4166F  RAM 0x05EA4  len 1
-  factory bytes: [50]
-  note: UNUSED: init copy only.
+Um_min_limit ROM 0x4166F RAM 0x05EA4 len 1
+ factory bytes: [50]
+ note: UNUSED: init copy only.

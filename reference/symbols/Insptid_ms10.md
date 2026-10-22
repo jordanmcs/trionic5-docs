@@ -1,6 +1,6 @@
 # Insptid_ms10
 
-State word (RAM)  ·  0x1064 (symbol table)
+State word (RAM) · 0x1064 (symbol table)
 
 **Value in factory 4780656:** runtime — units: 0.1 ms
 

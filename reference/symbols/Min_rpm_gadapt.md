@@ -1,6 +1,6 @@
 # Min_rpm_gadapt
 
-Calibration word (flash)  ·  0x40980 -> 0x4B7A
+Calibration word (flash) · 0x40980 -> 0x4B7A
 
 **Value in factory 4780656:** 0x00AE — units: rpm/10
 

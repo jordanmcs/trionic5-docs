@@ -1,6 +1,6 @@
 # Tryck_mat_a
 
-8-bit table (16x8 bytes, flash)  ·  ROM 0x41360, RAM 0x5C46
+8-bit table (16x8 bytes, flash) · ROM 0x41360, RAM 0x5C46
 
 **Value in factory 4780656:** peak 180 — units: kPa absolute
 

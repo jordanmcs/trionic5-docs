@@ -1,6 +1,6 @@
 # Ign_offset_cyl2
 
-Calibration word (flash)  ·  ROM 0x4284E
+Calibration word (flash) · ROM 0x4284E
 
 **Value in factory 4780656:** 0 — units: 0.1 crank degree
 

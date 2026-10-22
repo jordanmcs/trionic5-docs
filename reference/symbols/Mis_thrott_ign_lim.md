@@ -1,6 +1,6 @@
 # Mis_thrott_ign_lim
 
-Calibration word  ·  ROM 0x4289A -> RAM 0x5AF2
+Calibration word · ROM 0x4289A -> RAM 0x5AF2
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
 

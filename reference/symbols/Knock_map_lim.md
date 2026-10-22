@@ -1,6 +1,6 @@
 # Knock_map_lim
 
-State word (RAM 0x10B8)  ·  RAM 0x10B8
+State word (RAM 0x10B8) · RAM 0x10B8
 
 **Value in factory 4780656:** runtime — units: 0.1 crank degree
 

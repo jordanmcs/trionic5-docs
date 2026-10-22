@@ -1,6 +1,6 @@
 # Idle_st_last
 
-Calibration table (flash)  ·  0x416D4 -> 0x61E2
+Calibration table (flash) · 0x416D4 -> 0x61E2
 
 **Value in factory 4780656:** 1E,23,28,...,64 (12 B) — units: kPa abs
 

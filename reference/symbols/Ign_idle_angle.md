@@ -1,15 +1,11 @@
 
 # Ign_idle_angle
 
-Calibration word (flash->RAM)  ·  ROM 0x4181E
+Calibration word (flash->RAM) · ROM 0x4181E
 
 
 
 **Value in factory 4780656:** 70 (=7.0 deg) — units: 0.1 crank degree
-
-**MCS differs** — see T5 MCS Tune Changes.
-
-
 
 **Function:** idle base ignition angle seed for work word 0x4770
 

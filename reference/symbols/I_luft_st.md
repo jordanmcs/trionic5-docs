@@ -1,7 +1,7 @@
 
 # I_luft_st
 
-Calibration table, 8 B (°C axis)  ·  ROM 0x4115A
+Calibration table, 8 B (°C axis) · ROM 0x4115A
 
 **Value in factory 4780656:**
 

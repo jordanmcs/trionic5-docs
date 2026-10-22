@@ -1,5 +1,9 @@
 # Trionic 5.5 boost (charge-pressure) control subsystem — working doc
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 Code paths traced on a commercial reflash (not distributed); listing: `firmware/4780656.asm` (factory image, same code layout, ROM base 0x40000).
 Value authority: factory `firmware/4780656_factory.BIN` (raw bytes in `boost_tables.txt`).
 Decompiles: `evidence/boost/func_*.json` (REA/Ghidra). Batch script `tools/boost_funcs.sh`.
@@ -33,15 +37,14 @@ Active window: when AD_trot (0x1015) < [Overs_angle](../reference/symbols/Overs_
 ### 1.3 Gear-based limiters, 0x72772-0x72858 (`Regl_tryck_fgm/sgm/fgaut`)
 Applied to the byte at 0x3353 ([Regl_tryck](../reference/symbols/Regl_tryck.md)), indexed by rpm column 0x47D8 (search over rpm axis, first index whose next point passes rpm):
 - Automatic-stage: if status 0x334C bit 7 set (set in 0x72380 when 0x7668 < 0x3608 ≠ 0xFFFF — a transmission-stage flag) → request = `Regl_tryck_fgaut![rpm_idx]`, flag 0x334C bit 6 set. Factory table = 255 (off).
-- Manual: gear code 0x47F2 == 1 → cap to `Regl_tryck_fgm![rpm_idx]` (factory 158-163 ≈ 0.58-0.63 bar); gear 2 → cap [Regl_tryck_sgm](../reference/symbols/Regl_tryck_sgm.md) (194-199 ≈ 0.94-0.99 bar); both set 0x334C bit 6 ("limiter active"). Book rule (p46): a limiter set above the main map is switched off (MCS differs — `T5 MCS Tune Changes.md`).
-- Reverse: no table — in the output clamp chain (0x733E0 area, decompile 0x7300C): gear 'R' (and 0x76E3 bit 6 clear) forces duty to 2 % with cause byte 0x3FA2 = 0x10 (book: reverse limiter exists, reduces to basic boost).
+- Manual: gear code 0x47F2 == 1 → cap to `Regl_tryck_fgm![rpm_idx]` (factory 158-163 ≈ 0.58-0.63 bar); gear 2 → cap [Regl_tryck_sgm](../reference/symbols/Regl_tryck_sgm.md) (194-199 ≈ 0.94-0.99 bar); both set 0x334C bit 6 ("limiter active").- Reverse: no table — in the output clamp chain (0x733E0 area, decompile 0x7300C): gear 'R' (and 0x76E3 bit 6 clear) forces duty to 2 % with cause byte 0x3FA2 = 0x10 (book: reverse limiter exists, reduces to basic boost).
 - Gear code 0x47F2 is the transmission gear byte (characters 'R','D','U' for automatics mirrored at 0x72380 0x72496-0x724A6; 1..5 manual). Gear detection itself (book: "calculates which gear ... by comparing the speed of the automobile and the engine's RPM") consumes [Gear_st](../reference/symbols/Gear_st.md) (word ratios ×10: 13.7/7.1/4.8/3.6/2.7) + [Gear_ratio_delta](../reference/symbols/Gear_ratio_delta.md) — detection routine not traced further here (open item).
 
 ### 1.4 Intake-air-temperature charge-pressure cap (automatics), 0x7285C-0x728E0
 Guard: 0x76E5 bit 1 set (automatic) only.
-`cap_hot  = F_0006A410(Max_regl_sp! 0x5F22 rpm-axis, Max_regl_temp_1! 0x5EE2, rpm) → 0x47EE`
+`cap_hot = F_0006A410(Max_regl_sp! 0x5F22 rpm-axis, Max_regl_temp_1! 0x5EE2, rpm) → 0x47EE`
 `cap_cold = F_0006A410(Max_regl_sp!, Max_regl_temp_2! 0x5F02, rpm) → 0x47F0`
-`cap      = F_0006A314(Temp_max_regl! 0x5EE0 = [60,20] °C, [0x47EE,0x47F0], Lufttemp byte 0x1033)` — two-point linear interpolation/extrapolation on intake air temperature, word cap → `RAM_Regl_temp_max`; if request > cap, request = cap low byte.
+`cap = F_0006A314(Temp_max_regl! 0x5EE0 = [60,20] °C, [0x47EE,0x47F0], Lufttemp byte 0x1033)` — two-point linear interpolation/extrapolation on intake air temperature, word cap → `RAM_Regl_temp_max`; if request > cap, request = cap low byte.
 Factory: 145-180 kPa ABS warm curve / 135-170 cold curve on descending rpm axis 6500→1500 — a real torque-management cap on automatics. [Max_regl_sp](../reference/symbols/Max_regl_sp.md) is the rpm axis (words 650→150 ×10), NOT a pressure table — the naming is misleading.
 No altitude or air-mass-flow-based boost limiter was found in this chain (open item; the Lufttemp cap above is the only density-related correction).
 
@@ -135,7 +138,6 @@ Overboost fuel cut (§1.7) is an independent safety net on actual pressure, not 
 - Table enumeration, ROM/RAM addrs, factory bytes: verified programmatically from init copy instructions + both binaries (byte-exact).
 - Chain order, limiters, PID terms, frequency switching, fuel cut, derate arithmetic: read directly from the disassembly listing (ASM label lines quoted by address) and REA decompiles (`evidence/boost/func_*.json`); unit interpretations use the book and the established MAP-kPa rule.
 - Flagged inferences: 0x101C semantics (§1.5); 0x334B bit meanings beyond bit1/4/6 (bit names partly from book context); tick time bases (Overstid, [Apc_konst_tid](../reference/symbols/Apc_konst_tid.md), [Apc_cert_tid](../reference/symbols/Apc_cert_tid.md), [Apc_knock_back](../reference/symbols/Apc_knock_back.md), [Adaption_time](../reference/symbols/Adaption_time.md) counters — driven by the compute-pass tick, period not derived); exact caller set of 0x334B bit 7; gear detection internals (consumes Gear_st/Gear_ratio_delta); 0x72A2 writer.
-- MCS vs factory (this subsystem): catalogued in `T5 MCS Tune Changes.md` (boost regulation).
 - Dead calibration: [Max_um_time](../reference/symbols/Max_um_time.md), [Max_pos_der](../reference/symbols/Max_pos_der.md), [Max_neg_der](../reference/symbols/Max_neg_der.md), [Um_thr_lim](../reference/symbols/Um_thr_lim.md), [Um_min_limit](../reference/symbols/Um_min_limit.md) — copied flash→RAM but no references found anywhere in the listing (likely inherited derivative-limit scalars from an earlier revision). Documented in boost_tables.txt.
 
 ## PROPOSED SYMBOL PAGES

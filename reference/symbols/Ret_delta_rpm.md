@@ -1,6 +1,6 @@
 # Ret_delta_rpm
 
-Calibration word (flash)  ·  ROM 0x41766
+Calibration word (flash) · ROM 0x41766
 
 **Value in factory 4780656:** 5 — units: rpm x10
 

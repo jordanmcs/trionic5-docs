@@ -90,11 +90,3 @@ Knock uses **hard gates only**: detection dead ≤ 40 °C (0x60EB2, bypass if co
 
 
 
-## Tune differences
-
-
-
-All known MCS-vs-factory differences (84 calibration tables in total) are recorded in one place: T5 MCS Tune Changes. Knock detection and protection logic itself is byte-identical between the two images.
-
-
-

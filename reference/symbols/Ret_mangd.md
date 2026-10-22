@@ -1,7 +1,7 @@
 
 # Ret_mangd
 
-State byte (per cylinder)  ·  per cylinder
+State byte (per cylinder) · per cylinder
 
 **Value in factory 4780656:** 0.1° demand
 

@@ -1,6 +1,6 @@
 # Misfgear_lim
 
-Calibration word  ·  ROM 0x42ECB -> RAM 0x7538
+Calibration word · ROM 0x42ECB -> RAM 0x7538
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
 

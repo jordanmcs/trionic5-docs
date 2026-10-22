@@ -1,15 +1,11 @@
 
 # Tryck_vakt_tab
 
-8-bit table x16 (flash)  ·  0x412D0 -> 0x5BB6
+8-bit table x16 (flash) · 0x412D0 -> 0x5BB6
 
 
 
 **Value in factory 4780656:** E6 x16 (230) — units: kPa absolute
-
-**MCS differs** — see T5 MCS Tune Changes.
-
-
 
 **Function:** overboost fuel-cut MAP limit per rpm row
 

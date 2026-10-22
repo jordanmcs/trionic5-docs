@@ -1,7 +1,7 @@
 
 # Knock_ref_level
 
-State long (RAM 0x4622)  ·  RAM 0x4622
+State long (RAM 0x4622) · RAM 0x4622
 
 **Value in factory 4780656:** scaled value
 

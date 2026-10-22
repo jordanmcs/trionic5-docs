@@ -1,7 +1,7 @@
 
 # Tempkomp_konst
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x408AB
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x408AB
 
 **Value in factory 4780656:**
 

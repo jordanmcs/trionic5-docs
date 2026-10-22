@@ -1,7 +1,7 @@
 
 # Startvev_fak
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x4085E
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x4085E
 
 **Value in factory 4780656:**
 

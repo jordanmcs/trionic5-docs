@@ -1,6 +1,6 @@
 # API_ku_derivata
 
-Calibration word  ·  ROM 0x42E64 -> RAM 0x5B38
+Calibration word · ROM 0x42E64 -> RAM 0x5B38
 
 **Value in factory 4780656:** words: 10
 

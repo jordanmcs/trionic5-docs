@@ -1,7 +1,7 @@
 
 # Start_proc
 
-Calibration scalar  ·  ROM 0x040F10
+Calibration scalar · ROM 0x040F10
 
 **Value in factory 4780656:**
 

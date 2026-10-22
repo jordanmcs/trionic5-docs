@@ -1,7 +1,7 @@
 
 # Knock_reduce
 
-Calibration word (flash)  ·  ROM 0x417DA
+Calibration word (flash) · ROM 0x417DA
 
 **Value in factory 4780656:** 15 = 1.5° (0.1° units)
 

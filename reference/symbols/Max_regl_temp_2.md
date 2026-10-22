@@ -1,6 +1,6 @@
 # Max_regl_temp_2
 
-16-bit tables (16 words each, flash)  ·  ROM 0x41566/0x41586, RAM 0x5EE2/0x5F02
+16-bit tables (16 words each, flash) · ROM 0x41566/0x41586, RAM 0x5EE2/0x5F02
 
 **Value in factory 4780656:** 145-180 / 135-170 — units: kPa absolute
 

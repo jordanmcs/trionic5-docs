@@ -1,6 +1,6 @@
 # Ret_fuel_step
 
-Calibration word (flash)  ·  0x41768 -> 0x4F4E
+Calibration word (flash) · 0x41768 -> 0x4F4E
 
 **Value in factory 4780656:** 0x01 — units: factor units
 

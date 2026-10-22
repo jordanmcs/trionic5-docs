@@ -1,5 +1,9 @@
 # T5 Fuel Injection
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 > **Summary:** Base pulse = **injector constant × air charge**, then a fixed multiplier chain: global adaptation → one of {main VE map [Insp_mat](../reference/symbols/Insp_mat.md) + per-cell adaptation | idle map | knock map} → warm-up blend → transient max/min → WOT enrichment → lambda integrator (±25 %) → post-cut/hot-start ramps → cylinder balance trims → additive trims + purge, then ÷10, **battery-voltage open-time add**, minimum-duration floor [Min_tid](../reference/symbols/Min_tid.md) (250 = 1.000 ms), cap 130 ms. Injection is **fully sequential, firing order 1-3-4-2**, one pulse per port per 720° cycle, at a fixed crank angle ([Vinkel_konst](../reference/symbols/Vinkel_konst.md) = 53°) — with grouped/halved fallback whenever cycle sync is lost.
 
 Time base: **1 tick = 4 µs** (anchor: [Min_tid](../reference/symbols/Min_tid.md) = 250 = 1 ms per the book). Working evidence: `source/fuel_system.md`, raw bytes `source/fuel_tables.txt`, decompiles in `t5-re/evidence/fuel/`. Driver: `Function_0006D2BC` per injection cycle.
@@ -10,12 +14,12 @@ Time base: **1 tick = 4 µs** (anchor: [Min_tid](../reference/symbols/Min_tid.md
 
 ## Duration chain (code order)
 
-1. `Grund_tid = Inj_konst × aircharge` — the mass term; [Inj_konst](../reference/symbols/Inj_konst.md) factory 20. The book's E85 recipe (raise [Inj_konst](../reference/symbols/Inj_konst.md)) works exactly because this term is linear in air mass; **there is no E85 bit** in [Pgm_mod](../reference/symbols/Pgm_mod.md).
+1. `Grund_tid = Inj_konst × aircharge` — the mass term; [Inj_konst](../reference/symbols/Inj_konst.md) factory 20. Because this term is linear in air mass, a fuel that needs proportionally more mass per unit of air (E85: stoichiometric mixture ~1.5× richer) is tuned by scaling [Inj_konst](../reference/symbols/Inj_konst.md) up by the same factor — the method the T5Suite book prescribes; **there is no E85 bit** in [Pgm_mod](../reference/symbols/Pgm_mod.md).
 2. × global adaptation ([Adapt_injfaktor](../reference/symbols/Adapt_injfaktor.md) + 384)/512
 3. one load branch:
-   - **idle map** [Idle_fuel_korr](../reference/symbols/Idle_fuel_korr.md) (book formula (v+128)/256) + idle global adaptation [Adapt_inj_imat](../reference/symbols/Adapt_inj_imat.md), engaged at closed throttle below idle rpm/load limits once the idle counter passes [Com_on_idle](../reference/symbols/Com_on_idle.md);
-   - **normal**: [Insp_mat](../reference/symbols/Insp_mat.md) × per-cell pointed adaptation [Adapt_korr](../reference/symbols/Adapt_korr.md);
-   - **knock**: while knock status bit 0 and load exceeds the knock map's first column, [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) *replaces* both VE factors for the cycle (book: enrichment regime above ~140 kPa).
+ - **idle map** [Idle_fuel_korr](../reference/symbols/Idle_fuel_korr.md) (book formula (v+128)/256) + idle global adaptation [Adapt_inj_imat](../reference/symbols/Adapt_inj_imat.md), engaged at closed throttle below idle rpm/load limits once the idle counter passes [Com_on_idle](../reference/symbols/Com_on_idle.md);
+ - **normal**: [Insp_mat](../reference/symbols/Insp_mat.md) × per-cell pointed adaptation [Adapt_korr](../reference/symbols/Adapt_korr.md);
+ - **knock**: while knock status bit 0 and load exceeds the knock map's first column, [Fuel_knock_mat](../reference/symbols/Fuel_knock_mat.md) *replaces* both VE factors for the cycle (book: enrichment regime above ~140 kPa).
 4. × warm-up after-start blend ([Temp_fak](../reference/symbols/Temp_fak.md) family — see [T5 Warmup Cycle and Temperature Inputs](warmup-cycle-and-temperature-inputs.md))
 5. transient: acceleration `max(load-deriv, throttle-deriv)` enrichment, deceleration `min(...)` lean-out (`Lacc/Acc/Ret/Lret` demand quantities, ceilings `Max_*_dec`)
 6. × WOT catalyst enrichment ([Fload_tab](../reference/symbols/Fload_tab.md) +6…10 %, throttle-AD gated, 550–2400 rpm only)
@@ -46,8 +50,6 @@ All cuts clear injector channel enable bytes; after-reaction ramps ([After_fcut_
 - **Deceleration / fuel save** — closed throttle above ~1900 rpm in gear: [Delay_cut](../reference/symbols/Delay_cut.md) timer, per-cylinder cut pattern, re-enable at [Open_varv](../reference/symbols/Open_varv.md) (1400 rpm), forced re-enable below [Open_all_varv](../reference/symbols/Open_all_varv.md) (1000 rpm).
 - **Per-cylinder torque cut** for shift requests; **[KillInjection](../reference/symbols/KillInjection.md)** (immobilizer/limp) emits the no-pulse code at the TPU writers regardless of everything else.
 
-## MCS differences
-
-See T5 MCS Tune Changes (fuel).
+## Factory-side notes
 
 Index: [T5 Symbols](../reference/symbol-index.md)

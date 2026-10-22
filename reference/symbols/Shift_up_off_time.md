@@ -1,6 +1,6 @@
 # Shift_up_off_time
 
-Calibration word  ·  ROM 0x40F48 -> RAM 0x7656
+Calibration word · ROM 0x40F48 -> RAM 0x7656
 
 **Value in factory 4780656:** words: 3
 

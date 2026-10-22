@@ -1,6 +1,6 @@
 # AC_delay
 
-Calibration word  ·  ROM 0x40F9A -> RAM 0x60A6
+Calibration word · ROM 0x40F9A -> RAM 0x60A6
 
 **Value in factory 4780656:** words: 64
 

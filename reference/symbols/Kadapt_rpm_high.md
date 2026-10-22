@@ -1,7 +1,7 @@
 
 # Kadapt_rpm_high
 
-Calibration word (RAM 0x5AC2)  ·  ROM 0x4286C
+Calibration word (RAM 0x5AC2) · ROM 0x4286C
 
 **Value in factory 4780656:** 325 (rpm/10 = 3250 rpm)
 

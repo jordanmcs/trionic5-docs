@@ -1,6 +1,6 @@
 # Overs_tab
 
-8-bit tables (flash)  ·  ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6
+8-bit tables (flash) · ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6
 
 **Value in factory 4780656:** all 0 / [0..96] / 255 — units: kPa, kPa, /255
 

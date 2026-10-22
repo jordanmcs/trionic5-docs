@@ -2,9 +2,7 @@
 
 Working notes on a commercial reflash (not distributed) vs factory `firmware/4780656_factory.BIN`. Assembly evidence: `firmware/4780656.asm`. Companion: `knock_system.md` (knock), wiki pages under `Wiki/T5-Tuning/`.
 
-> **Summary:** Coolant and intake-air temperature enter the ECU as 8-bit AD counts, are converted to signed °C through lookup tables, and drive every warmup stage: cranking enrichment ([Startvev_fak](../reference/symbols/Startvev_fak.md)), after-start enrichment ([Eftersta_fak](../reference/symbols/Eftersta_fak.md)/[Eft_dec_fak](../reference/symbols/Eft_dec_fak.md)), the running temperature coefficient ([Tempkomp_konst](../reference/symbols/Tempkomp_konst.md)), ignition retard ([Retard_temp](../reference/symbols/Retard_temp.md)), idle speed ([Idle_rpm_tab](../reference/symbols/Idle_rpm_tab.md)), secondary-air and lambda startup gates. MCS tune changes to this family are catalogued in `T5 MCS Tune Changes.md`; the sensor chain and the cranking table are identical to stock.
-
-## 1. Sensor inputs and raw conversion
+> **Summary:** Coolant and intake-air temperature enter the ECU as 8-bit AD counts, are converted to signed °C through lookup tables, and drive every warmup stage: cranking enrichment ([Startvev_fak](../reference/symbols/Startvev_fak.md)), after-start enrichment ([Eftersta_fak](../reference/symbols/Eftersta_fak.md)/[Eft_dec_fak](../reference/symbols/Eft_dec_fak.md)), the running temperature coefficient ([Tempkomp_konst](../reference/symbols/Tempkomp_konst.md)), ignition retard ([Retard_temp](../reference/symbols/Retard_temp.md)), idle speed ([Idle_rpm_tab](../reference/symbols/Idle_rpm_tab.md)), secondary-air and lambda startup gates.## 1. Sensor inputs and raw conversion
 
 - Coolant sensor: NTC resistor on the sensor supply, read through the TPU ADC. The raw 8-bit count lands in the AD buffer at RAM `0x4054` and is copied to [AD_kylv](../reference/symbols/AD_kylv.md) (RAM) at `0x69FB2`. If the AD conversion fails, the code substitutes the fixed count `0x6E` = 110 (`0x69F9C`), which is ≈ 66 °C on the conversion table — a plausible-value limp substitute, not a rail value.
 - Intake-air sensor: same path from AD buffer `0x4052` to [AD_lufttemp](../reference/symbols/AD_lufttemp.md); failure substitute is `0x96` = 150 (`0x69FCA`).
@@ -61,7 +59,7 @@ While the starter turns the engine (rpm below running threshold), the per-cylind
 
 ```
 interp = Interp(Startvev_fak!, Temp_steg!, AD_kylv)
-Start_tid = interp × Start_insp          ; MULU at 0x6EFAC, Start_insp = 2250 (word)
+Start_tid = interp × Start_insp ; MULU at 0x6EFAC, Start_insp = 2250 (word)
 ```
 
 scaled through [Start_proc](../reference/symbols/Start_proc.md) (128) into the injection-time array (`0x6F090` → `0x4748+Cyl_nr`). Supporting scalars: [Start_insp](../reference/symbols/Start_insp.md) (base injection count word, `0x40BAC`), [Start_trottel](../reference/symbols/Start_trottel.md) = 150 — the throttle-AD threshold above which enrichment is suppressed (flood-clear, `0x6F0EC`), [Start_dead_tab](../reference/symbols/Start_dead_tab.md) — an all-zero 15 B dead-pulse table (feature disabled in both tunes), and the post-catch ramp: [Start_count](../reference/symbols/Start_count.md) compared against [Start_max](../reference/symbols/Start_max.md) (14) and [Start_ramp](../reference/symbols/Start_ramp.md) (34) at `0x6F14C`–`0x6F164` while [Ramp_fak](../reference/symbols/Ramp_fak.md) (÷128, ≈ 1.00 across the range) blends cranking fuel into running fuel. [Grund_tid](../reference/symbols/Grund_tid.md) holds the base running injection time that the blend targets.
@@ -75,14 +73,12 @@ Before the cranking tables take over, a "build-up" window primes enrichment: [Be
 After firing, enrichment leaves the cranking tables and enters the after-start stage:
 
 ```
-Eft_fak_bas  = Interp(Eftersta_fak!,  Temp_steg!, AD_kylv)   ; 0x6F220
-Eft_fak_bas2 = Interp(Eftersta_fak2!, Temp_steg!, AD_kylv)   ; 0x6F342
-Eft_dec      = Interp(Eft_dec_fak!,   Temp_steg!, AD_kylv)   ; 0x6F284, −1 at 0x6F298
+Eft_fak_bas = Interp(Eftersta_fak!, Temp_steg!, AD_kylv) ; 0x6F220
+Eft_fak_bas2 = Interp(Eftersta_fak2!, Temp_steg!, AD_kylv) ; 0x6F342
+Eft_dec = Interp(Eft_dec_fak!, Temp_steg!, AD_kylv) ; 0x6F284, −1 at 0x6F298
 ```
 
 Two coefficient sets ([Eft_fak](../reference/symbols/Eft_fak.md) / [Eft_fak2](../reference/symbols/Eft_fak2.md)) are maintained as per-cylinder arrays (indexed by `Cyl_nr` at `0x6F2A0`–`0x6F2C2`), selected by the stage byte checked against `#1`/`#2` at `0x6F1FA`. While [Eft_dec](../reference/symbols/Eft_dec.md) is non-zero, [Eft_fak](../reference/symbols/Eft_fak.md) is decremented one point at a time (`SUBQ.B #1,(Eft_fak)`, `0x6F2E4`) — the warmup enrichment walk-down. `Restart_fak` is folded in when the restart path (§4) is armed. The coefficients are added to the injection-time build with the ÷128 house scaling (raw 99 ≈ +77 %); the scaling itself is inference — the ÷128 convention matches every neighboring table, but no fixed-point shift is visible in the slice.
-
-Per-table MCS values: `T5 MCS Tune Changes.md` (warm-up / temperature family).
 
 ### 2.4 Hot restart (`Function_0006EE26`)
 
@@ -110,9 +106,9 @@ Computed in the same housekeeping block (`Function_0006D384`):
 The nominal-idle block (`0x6F5EE`–`0x6F730`) computes the nominal idle speed target [Rpm_idle_nom](../reference/symbols/Rpm_idle_nom.md):
 
 ```
-Rpm_idle_nom = InterpW(Idle_rpm_tab!, I_kyl_st!, Kyl_temp)   ; 0x6F63E–0x6F64A
-if starting:  Rpm_idle_nom += Iv_start_rpm_offset (20 → +200 rpm)
-Rpm_idle_nom += Idle_rpm_off (0 in both tunes)               ; A/C-style offset, unused here
+Rpm_idle_nom = InterpW(Idle_rpm_tab!, I_kyl_st!, Kyl_temp) ; 0x6F63E–0x6F64A
+if starting: Rpm_idle_nom += Iv_start_rpm_offset (20 → +200 rpm)
+Rpm_idle_nom += Idle_rpm_off (0 in both tunes) ; A/C-style offset, unused here
 ```
 
 Axis [I_kyl_st](../reference/symbols/I_kyl_st.md) (8 B, signed °C, descending): `[65, 50, 35, 20, 5, −5, −20, −40]`. Values are words in units of 10 rpm:
@@ -137,9 +133,7 @@ Secondary-air operation is a warmup-only function and is gated entirely on the s
 
 ### 7.2 Lambda startup — `Function_0005DEE4`
 
-First closed-loop entry is delayed on cold engines: with [Lamstart_time](../reference/symbols/Lamstart_time.md) = 0 (never been closed-loop this key-on), the gate at `0x5DF18` requires `Start_kylv ≤ 10 °C` **or** `S_Lufttemp ≤ 10 °C` to proceed with the startup enrichment/lambda timer logic; timers (`Engine_start_time`, `Cl_timer1/3`) stage the closed-loop entry. The scalar [Lamb_temp](../reference/symbols/Lamb_temp.md) (60 °C) is the lambda-enable coolant threshold (RAM copy consumed by the lambda control block); [Misf_kyltemp](../reference/symbols/Misf_kyltemp.md) (18 °C) additionally gates misfire-monitoring activity (9 call sites `0x641FC`–`0x65C66`, RPM thresholds per temperature band in [Mis_kyltemp_tab](../reference/symbols/Mis_kyltemp_tab.md) — this 15 B table is changed on the MCS tune).
-
-### 7.3 Adaptation temperature windows
+First closed-loop entry is delayed on cold engines: with [Lamstart_time](../reference/symbols/Lamstart_time.md) = 0 (never been closed-loop this key-on), the gate at `0x5DF18` requires `Start_kylv ≤ 10 °C` **or** `S_Lufttemp ≤ 10 °C` to proceed with the startup enrichment/lambda timer logic; timers (`Engine_start_time`, `Cl_timer1/3`) stage the closed-loop entry. The scalar [Lamb_temp](../reference/symbols/Lamb_temp.md) (60 °C) is the lambda-enable coolant threshold (RAM copy consumed by the lambda control block); [Misf_kyltemp](../reference/symbols/Misf_kyltemp.md) (18 °C) additionally gates misfire-monitoring activity (9 call sites `0x641FC`–`0x65C66`, RPM thresholds per temperature band in [Mis_kyltemp_tab](../reference/symbols/Mis_kyltemp_tab.### 7.3 Adaptation temperature windows
 
 Ignition- and K-adaptation fade windows reference the same sensor: [Temp_limit_low](../reference/symbols/Temp_limit_low.md)/[Temp_limit_high](../reference/symbols/Temp_limit_high.md) (bytes 216/217 = −40/−39 °C signed) bracket a window that is never entered in practice — effectively disabling adaptation fade by temperature (recorded in `knock_system.md`).
 
@@ -150,10 +144,7 @@ Ignition- and K-adaptation fade windows reference the same sensor: [Temp_limit_l
 - [Motortid](../reference/symbols/Motortid.md) — engine-running tick counter, incremented per running-cycle at `0x6D2CA`.
 - `Engine_start_time`, [Lamstart_time](../reference/symbols/Lamstart_time.md), `Diag_tid` — running timers consumed by the lambda-startup gate (§7.2).
 
-## 9. MCS vs stock, warmup summary
-
-Catalogued on the tune-changes page: `T5 MCS Tune Changes.md` (warm-up / temperature family). Identical to stock: the entire sensor chain ([Kyltemp_steg](../reference/symbols/Kyltemp_steg.md)/[Kyltemp_tab](../reference/symbols/Kyltemp_tab.md)), [Temp_steg](../reference/symbols/Temp_steg.md), [Startvev_fak](../reference/symbols/Startvev_fak.md), [Ramp_fak](../reference/symbols/Ramp_fak.md), [Retard_temp](../reference/symbols/Retard_temp.md), [Accel_temp](../reference/symbols/Accel_temp.md)/[Accel_temp2](../reference/symbols/Accel_temp2.md), [Before_start](../reference/symbols/Before_start.md), build-up scalars, [BS_temp](../reference/symbols/BS_temp.md)/[Lamb_temp](../reference/symbols/Lamb_temp.md)/[Misf_kyltemp](../reference/symbols/Misf_kyltemp.md) scalars, [Start_insp](../reference/symbols/Start_insp.md)/[Start_max](../reference/symbols/Start_max.md)/[Start_ramp](../reference/symbols/Start_ramp.md)/[Start_proc](../reference/symbols/Start_proc.md)/[Start_trottel](../reference/symbols/Start_trottel.md); only fuelling amounts and the idle target are re-tuned, the warmup structure is untouched.
-
+## 9../reference/symbols/Kyltemp_steg.md)/[Kyltemp_tab](../reference/symbols/Kyltemp_tab.md)), [Temp_steg](../reference/symbols/Temp_steg.md), [Startvev_fak](../reference/symbols/Startvev_fak.md), [Ramp_fak](../reference/symbols/Ramp_fak.md), [Retard_temp](../reference/symbols/Retard_temp.md), [Accel_temp](../reference/symbols/Accel_temp.md)/[Accel_temp2](../reference/symbols/Accel_temp2.md), [Before_start](../reference/symbols/Before_start.md), build-up scalars, [BS_temp](../reference/symbols/BS_temp.md)/[Lamb_temp](../reference/symbols/Lamb_temp.md)/[Misf_kyltemp](../reference/symbols/Misf_kyltemp.md) scalars, [Start_insp](../reference/symbols/Start_insp.md)/[Start_max](../reference/symbols/Start_max.md)/[Start_ramp](../reference/symbols/Start_ramp.md)/[Start_proc](../reference/symbols/Start_proc.md)/[Start_trottel](../reference/symbols/Start_trottel.md); only fuelling amounts and the idle target are re-tuned, the warmup structure is untouched.
 ## 10. Open items
 
 1. Exact fixed-point scaling of [Eft_fak](../reference/symbols/Eft_fak.md)/`Eftersta_*` and [Start_insp](../reference/symbols/Start_insp.md) (÷128 assumed from house convention; no shift visible in the slice).

@@ -1,6 +1,6 @@
 # Fload_throt_tab
 
-Calibration table (flash)  ·  0x409CA -> 0x4BD4
+Calibration table (flash) · 0x409CA -> 0x4BD4
 
 **Value in factory 4780656:** AA x5, B4 x3, BE, FF x6 — units: AD counts
 

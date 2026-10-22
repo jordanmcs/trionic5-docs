@@ -1,6 +1,6 @@
 # Ret_fuel_fak
 
-State byte (RAM 0x1151)  ·  RAM 0x1151
+State byte (RAM 0x1151) · RAM 0x1151
 
 **Value in factory 4780656:** runtime — units: fuel x/128
 

@@ -1,6 +1,6 @@
 # Reg_last
 
-8-bit table (4, flash)  ·  ROM 0x4148E, RAM 0x5EAA
+8-bit table (4, flash) · ROM 0x4148E, RAM 0x5EAA
 
 **Value in factory 4780656:** [5,15,30,50] — units: kPa error
 

@@ -1,6 +1,6 @@
 # API_dt_ramp
 
-Calibration word  ·  ROM 0x42E5C -> RAM 0x5B30
+Calibration word · ROM 0x42E5C -> RAM 0x5B30
 
 **Value in factory 4780656:** words: 500
 

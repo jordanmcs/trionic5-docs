@@ -1,7 +1,7 @@
 
 # Apc_decrese_asp
 
-Calibration byte (flash)  ·  per init map
+Calibration byte (flash) · per init map
 
 **Value in factory 4780656:** (variant value)
 

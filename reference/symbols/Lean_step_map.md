@@ -1,6 +1,6 @@
 # Lean_step_map
 
-8-bit table 16x4 (flash)  ·  0x40BB8 -> 0x6A40
+8-bit table 16x4 (flash) · 0x40BB8 -> 0x6A40
 
 **Value in factory 4780656:** 4..15 — units: steps per lambda event
 

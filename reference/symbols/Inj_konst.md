@@ -1,15 +1,11 @@
 
 # Inj_konst
 
-Calibration word (flash)  ·  0x40BA6 -> 0x4BF4
+Calibration word (flash) · 0x40BA6 -> 0x4BF4
 
 
 
 **Value in factory 4780656:** 0x14 (20) — units: ticks per air-charge count
-
-**MCS differs** — see T5 MCS Tune Changes.
-
-
 
 **Function:** injector constant, base mass term
 

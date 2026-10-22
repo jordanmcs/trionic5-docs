@@ -1,7 +1,7 @@
 
 # Eft_fak_bas
 
-State byte (RAM)  ·  (RAM)
+State byte (RAM) · (RAM)
 
 **Value in factory 4780656:**
 

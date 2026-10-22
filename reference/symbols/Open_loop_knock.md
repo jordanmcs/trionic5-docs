@@ -1,6 +1,6 @@
 # Open_loop_knock
 
-Calibration table (flash)  ·  0x40738 -> 0x4D1E
+Calibration table (flash) · 0x40738 -> 0x4D1E
 
 **Value in factory 4780656:** per row — units: kPa abs
 

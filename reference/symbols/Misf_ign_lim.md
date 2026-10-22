@@ -1,9 +1,8 @@
 # Misf_ign_lim
 
-Calibration word  ·  ROM 0x42EC2 -> RAM 0x752A
+Calibration word · ROM 0x42EC2 -> RAM 0x752A
 
 **Value in factory 4780656:** words: 0, 0
- **MCS differs** — see T5 MCS Tune Changes.
 **Function:** Base misfire count-inhibit window (combustion counts).
 
 **Code path:** 0x64xxx compare chain

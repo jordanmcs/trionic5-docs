@@ -1,7 +1,7 @@
 
 # Build_up_time_switch
 
-Calibration scalar  ·  ROM 0x040536
+Calibration scalar · ROM 0x040536
 
 **Value in factory 4780656:**
 

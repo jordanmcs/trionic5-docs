@@ -1,6 +1,6 @@
 # KillInjection
 
-State byte (RAM, disassembly alias)  ·  runtime
+State byte (RAM, disassembly alias) · runtime
 
 **Value in factory 4780656:** 0 — units: bool
 

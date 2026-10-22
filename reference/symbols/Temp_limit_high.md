@@ -1,7 +1,7 @@
 
 # Temp_limit_high
 
-Calibration scalar  ·  ROM 0x042897
+Calibration scalar · ROM 0x042897
 
 **Value in factory 4780656:**
 

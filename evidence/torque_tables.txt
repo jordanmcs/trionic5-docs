@@ -2,223 +2,223 @@ T5.5 TORQUE-INTERVENTION / DRIVABILITY CALIBRATION TABLES - RAW BYTES
 Sources: firmware/4780656_factory.BIN (factory AUTHORITY).
 ROM addrs identical in both images (init copy sites byte-verified 513/513).
 All addresses/lengths from init-copy PEA-scan inventory; NOT ASM labels.
-Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs); that tune's data is not distributed
+Factory bytes authoritative. tune deltas are out of scope for this repo
 
 
 == Shift_up_temp ==
-  ROM 0x040F35  len 1 B  RAM 0x7642
-  factory hex  : 28
-  factory words: 40
-  NOTE: MT upshift request temperature threshold (F_00071F30).
+ ROM 0x040F35 len 1 B RAM 0x7642
+ factory hex : 28
+ factory words: 40
+ NOTE: MT upshift request temperature threshold (F_00071F30).
 
 == Shift_max_rpm ==
-  ROM 0x040F36  len 2 B  RAM 0x7644
-  factory hex  : 15 7C
-  factory words: 5500
-  NOTE: MT upshift max-speed guard, rpm/10 (F_00071F30).
+ ROM 0x040F36 len 2 B RAM 0x7644
+ factory hex : 15 7C
+ factory words: 5500
+ NOTE: MT upshift max-speed guard, rpm/10 (F_00071F30).
 
 == Shift_rpm ==
-  ROM 0x040F38  len 8 B  RAM 0x7646
-  factory hex  : 07 D0 07 6C 07 08 06 A4
-  factory words: 2000 1900 1800 1700
-  NOTE: MT shift-window rpm centre, rpm/10; +/- Shift_up_rpm_hyst window.
+ ROM 0x040F38 len 8 B RAM 0x7646
+ factory hex : 07 D0 07 6C 07 08 06 A4
+ factory words: 2000 1900 1800 1700
+ NOTE: MT shift-window rpm centre, rpm/10; +/- Shift_up_rpm_hyst window.
 
 == Shift_up_rpm_hyst ==
-  ROM 0x040F44  len 2 B  RAM 0x7652
-  factory hex  : 00 32
-  factory words: 50
-  NOTE: RPM hysteresis around Shift_rpm for shift-request window.
+ ROM 0x040F44 len 2 B RAM 0x7652
+ factory hex : 00 32
+ factory words: 50
+ NOTE: RPM hysteresis around Shift_rpm for shift-request window.
 
 == Shift_up_off_time ==
-  ROM 0x040F48  len 2 B  RAM 0x7656
-  factory hex  : 00 03
-  factory words: 3
-  NOTE: Ignition-blip OFF delay (scheduler ticks; time engine F_0006162A).
+ ROM 0x040F48 len 2 B RAM 0x7656
+ factory hex : 00 03
+ factory words: 3
+ NOTE: Ignition-blip OFF delay (scheduler ticks; time engine F_0006162A).
 
 == Shift_up_time ==
-  ROM 0x040F4A  len 2 B  RAM 0x7658
-  factory hex  : 00 03
-  factory words: 3
-  NOTE: Ignition-blip duration while cut active.
+ ROM 0x040F4A len 2 B RAM 0x7658
+ factory hex : 00 03
+ factory words: 3
+ NOTE: Ignition-blip duration while cut active.
 
 == Gear_st ==
-  ROM 0x041540  len 10 B  RAM 0x5EB8  (MCS differs)
-  factory hex  : 00 89 00 47 00 30 00 24 00 1B
-  factory words: 137 71 48 36 27
-  NOTE: Gear ratios x10, 5 words (book: overall ratio x10, e.g. 137 = 13.7), indexed by RAM_Gear (MT shift-request logic F_00071F30).
+ ROM 0x041540 len 10 B RAM 0x5EB8 
+ factory hex : 00 89 00 47 00 30 00 24 00 1B
+ factory words: 137 71 48 36 27
+ NOTE: Gear ratios x10, 5 words (book: overall ratio x10, e.g. 137 = 13.7), indexed by RAM_Gear (MT shift-request logic F_00071F30).
 
 == Gear_ratio_delta ==
-  ROM 0x04154A  len 5 B  RAM 0x5EC2  (MCS differs)
-  factory hex  : 0F 09 04 03 03
-  factory words: 3849 1027 3
-  NOTE: Gear-ratio steps x10 (book) used by MT gear-change detection.
+ ROM 0x04154A len 5 B RAM 0x5EC2 
+ factory hex : 0F 09 04 03 03
+ factory words: 3849 1027 3
+ NOTE: Gear-ratio steps x10 (book) used by MT gear-change detection.
 
 == API_throttle_tab ==
-  ROM 0x042E4A  len 5 B  RAM 0x5B1E
-  factory hex  : 0A 14 1E 28 32
-  factory words: 2580 7720 50
-  NOTE: API_dt axis: throttle-delta breakpoints (byte). Index selects API_dt_offset_tab cell.
+ ROM 0x042E4A len 5 B RAM 0x5B1E
+ factory hex : 0A 14 1E 28 32
+ factory words: 2580 7720 50
+ NOTE: API_dt axis: throttle-delta breakpoints (byte). Index selects API_dt_offset_tab cell.
 
 == API_dt_offset_tab ==
-  ROM 0x042E50  len 10 B  RAM 0x5B24
-  factory hex  : 00 00 00 00 00 00 00 00 00 00
-  factory words: 0 0 0 0 0
-  NOTE: API_dt retard offset cells (5 words), selected by throttle-delta bin vs API_throttle_tab midpoints. FACTORY ALL ZERO = dt retard disabled at factory.
+ ROM 0x042E50 len 10 B RAM 0x5B24
+ factory hex : 00 00 00 00 00 00 00 00 00 00
+ factory words: 0 0 0 0 0
+ NOTE: API_dt retard offset cells (5 words), selected by throttle-delta bin vs API_throttle_tab midpoints. FACTORY ALL ZERO = dt retard disabled at factory.
 
 == API_dt_delay ==
-  ROM 0x042E5A  len 2 B  RAM 0x5B2E
-  factory hex  : 03 E8
-  factory words: 1000
-  NOTE: API_dt retard hold time before ramp-out (scheduler ticks).
+ ROM 0x042E5A len 2 B RAM 0x5B2E
+ factory hex : 03 E8
+ factory words: 1000
+ NOTE: API_dt retard hold time before ramp-out (scheduler ticks).
 
 == API_dt_ramp ==
-  ROM 0x042E5C  len 2 B  RAM 0x5B30
-  factory hex  : 01 F4
-  factory words: 500
-  NOTE: API_dt linear ramp-out duration (ticks).
+ ROM 0x042E5C len 2 B RAM 0x5B30
+ factory hex : 01 F4
+ factory words: 500
+ NOTE: API_dt linear ramp-out duration (ticks).
 
 == API_ku_offset ==
-  ROM 0x042E5E  len 2 B  RAM 0x5B32
-  factory hex  : 00 00
-  factory words: 0
-  NOTE: API_ku (kickdown-upshift) retard offset, fixed value.
+ ROM 0x042E5E len 2 B RAM 0x5B32
+ factory hex : 00 00
+ factory words: 0
+ NOTE: API_ku (kickdown-upshift) retard offset, fixed value.
 
 == API_ku_delay ==
-  ROM 0x042E60  len 2 B  RAM 0x5B34
-  factory hex  : 00 C8
-  factory words: 200
-  NOTE: API_ku hold-before-ramp time.
+ ROM 0x042E60 len 2 B RAM 0x5B34
+ factory hex : 00 C8
+ factory words: 200
+ NOTE: API_ku hold-before-ramp time.
 
 == API_ku_ramp ==
-  ROM 0x042E62  len 2 B  RAM 0x5B36  (MCS differs)
-  factory hex  : 00 C8
-  factory words: 200
-  NOTE: API_ku ramp-out duration.
+ ROM 0x042E62 len 2 B RAM 0x5B36 
+ factory hex : 00 C8
+ factory words: 200
+ NOTE: API_ku ramp-out duration.
 
 == API_ku_derivata ==
-  ROM 0x042E64  len 2 B  RAM 0x5B38
-  factory hex  : 00 0A
-  factory words: 10
-  NOTE: API_ku rpm-derivative sensitivity; also hysteresis for +/- rate sign.
+ ROM 0x042E64 len 2 B RAM 0x5B38
+ factory hex : 00 0A
+ factory words: 10
+ NOTE: API_ku rpm-derivative sensitivity; also hysteresis for +/- rate sign.
 
 == API_rpm_limit ==
-  ROM 0x042E66  len 2 B  RAM 0x5B3A
-  factory hex  : 0F A0
-  factory words: 4000
-  NOTE: API_ku: minimum engine speed (raw rpm; word 4000) for retard activation.
+ ROM 0x042E66 len 2 B RAM 0x5B3A
+ factory hex : 0F A0
+ factory words: 4000
+ NOTE: API_ku: minimum engine speed (raw rpm; word 4000) for retard activation.
 
 == API_throttle_limit ==
-  ROM 0x042E68  len 1 B  RAM 0x5B3C  (MCS differs)
-  factory hex  : 64
-  factory words: 100
-  NOTE: API_ku: minimum throttle delta (raw AD step word 0x3918; factory 100) for activation.
+ ROM 0x042E68 len 1 B RAM 0x5B3C 
+ factory hex : 64
+ factory words: 100
+ NOTE: API_ku: minimum throttle delta (raw AD step word 0x3918; factory 100) for activation.
 
 == Mainrly_off ==
-  ROM 0x040F30  len 2 B  RAM 0x4E38
-  factory hex  : 00 18
-  factory words: 24
-  NOTE: Main-relay on-time threshold (word 24; time-engine compare at F_0006D3B2) gating part of the torque/idle region after start.
+ ROM 0x040F30 len 2 B RAM 0x4E38
+ factory hex : 00 18
+ factory words: 24
+ NOTE: Main-relay on-time threshold (word 24; time-engine compare at F_0006D3B2) gating part of the torque/idle region after start.
 
 == AC_Control ==
-  ROM 0x040F9E  len 4 B  RAM 0x61F4
-  factory hex  : 05 3A 03 E8
-  factory words: 1338 1000
-  NOTE: AC-induced timing/fuel trim table (byte rows x 2).
+ ROM 0x040F9E len 4 B RAM 0x61F4
+ factory hex : 05 3A 03 E8
+ factory words: 1338 1000
+ NOTE: AC-induced timing/fuel trim table (byte rows x 2).
 
 == AC_start_tid ==
-  ROM 0x040FA2  len 1 B  RAM 0x5FCE
-  factory hex  : 0E
-  factory words: 14
-  NOTE: AC compensation time-table y-axis (byte, rpm).
+ ROM 0x040FA2 len 1 B RAM 0x5FCE
+ factory hex : 0E
+ factory words: 14
+ NOTE: AC compensation time-table y-axis (byte, rpm).
 
 == AC_klick ==
-  ROM 0x040FA3  len 1 B  RAM 0x5FD0
-  factory hex  : 08
-  factory words: 8
-  NOTE: AC compensation map y-axis byte (0x72700 interp).
+ ROM 0x040FA3 len 1 B RAM 0x5FD0
+ factory hex : 08
+ factory words: 8
+ NOTE: AC compensation map y-axis byte (0x72700 interp).
 
 == AC_fak ==
-  ROM 0x040FA5  len 1 B  RAM 0x5FD4
-  factory hex  : 1E
-  factory words: 30
-  NOTE: AC compensation map x-axis byte.
+ ROM 0x040FA5 len 1 B RAM 0x5FD4
+ factory hex : 1E
+ factory words: 30
+ NOTE: AC compensation map x-axis byte.
 
 == AC_wait_on ==
-  ROM 0x04110A  len 8 B  RAM 0x6006
-  factory hex  : 0E 0E 0E 0E 0E 0E 0E 0E
-  factory words: 3598 3598 3598 3598
-  NOTE: Delay (ticks) after AC request before torque intervention.
+ ROM 0x04110A len 8 B RAM 0x6006
+ factory hex : 0E 0E 0E 0E 0E 0E 0E 0E
+ factory words: 3598 3598 3598 3598
+ NOTE: Delay (ticks) after AC request before torque intervention.
 
 == AC_wait_off ==
-  ROM 0x041112  len 8 B  RAM 0x600E
-  factory hex  : 12 11 0E 0E 0C 06 04 04
-  factory words: 4625 3598 3078 1028
-  NOTE: Delay (ticks) after AC release before restoring.
+ ROM 0x041112 len 8 B RAM 0x600E
+ factory hex : 12 11 0E 0E 0C 06 04 04
+ factory words: 4625 3598 3078 1028
+ NOTE: Delay (ticks) after AC release before restoring.
 
 == AC_const ==
-  ROM 0x040FA6  len 1 B  RAM 0x60A2
-  factory hex  : 0C
-  factory words: 12
-  NOTE: AC idle-speed increase constant (0x6F3E4).
+ ROM 0x040FA6 len 1 B RAM 0x60A2
+ factory hex : 0C
+ factory words: 12
+ NOTE: AC idle-speed increase constant (0x6F3E4).
 
 == AC_slope ==
-  ROM 0x040FA7  len 1 B  RAM 0x60A4
-  factory hex  : 04
-  factory words: 4
-  NOTE: AC idle-speed increase rate limit (0x6F3F2).
+ ROM 0x040FA7 len 1 B RAM 0x60A4
+ factory hex : 04
+ factory words: 4
+ NOTE: AC idle-speed increase rate limit (0x6F3F2).
 
 == AC_delay ==
-  ROM 0x040F9A  len 2 B  RAM 0x60A6
-  factory hex  : 00 40
-  factory words: 64
-  NOTE: AC activation delay constant (0x6F744).
+ ROM 0x040F9A len 2 B RAM 0x60A6
+ factory hex : 00 40
+ factory words: 64
+ NOTE: AC activation delay constant (0x6F744).
 
 == Br_plus_tab ==
-  ROM 0x041164  len 16 B  RAM 0x6106
-  factory hex  : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  factory words: 0 0 0 0 0 0 0 0
-  NOTE: Brake-vacuum enrichment table x-axis (byte; idle stability, F_000707CC region).
+ ROM 0x041164 len 16 B RAM 0x6106
+ factory hex : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ factory words: 0 0 0 0 0 0 0 0
+ NOTE: Brake-vacuum enrichment table x-axis (byte; idle stability, F_000707CC region).
 
 == Br_minus_tab ==
-  ROM 0x041174  len 16 B  RAM 0x6116
-  factory hex  : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-  factory words: 0 0 0 0 0 0 0 0
-  NOTE: Brake-vacuum enrichment table y-axis (byte).
+ ROM 0x041174 len 16 B RAM 0x6116
+ factory hex : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ factory words: 0 0 0 0 0 0 0 0
+ NOTE: Brake-vacuum enrichment table y-axis (byte).
 
 == Temp_reduce_mat ==
-  ROM 0x0411DA  len 64 B  RAM 0x6136
-  factory hex  : 64 80 FF FF FF FF FF FF 80 C8 FF FF FF FF FF FF 64 80 C8 FF FF FF FF FF 64 64 96 B2 FF FF FF FF 3C 50 8C 9B FF FF FF FF 14 19 19 19 19 00 00 00 00 0C 0C 0C 00 00 00 00 00 00 00 00 00 00 00 00
-  NOTE: 8x8 Temp compensation reduction matrix, branch used when status byte 0x103A bit2 is CLEAR (interpolated at F_00069FEC; output byte 0x46D4 consumed by fuel task 0x6E11E). x-axis Temp_reduce_x_st = coolant temp 30..192 C; y-axis Temp_reduce_y_st (RAM 0x61BE). 0xFF cells = clamp region.
+ ROM 0x0411DA len 64 B RAM 0x6136
+ factory hex : 64 80 FF FF FF FF FF FF 80 C8 FF FF FF FF FF FF 64 80 C8 FF FF FF FF FF 64 64 96 B2 FF FF FF FF 3C 50 8C 9B FF FF FF FF 14 19 19 19 19 00 00 00 00 0C 0C 0C 00 00 00 00 00 00 00 00 00 00 00 00
+ NOTE: 8x8 Temp compensation reduction matrix, branch used when status byte 0x103A bit2 is CLEAR (interpolated at F_00069FEC; output byte 0x46D4 consumed by fuel task 0x6E11E). x-axis Temp_reduce_x_st = coolant temp 30..192 C; y-axis Temp_reduce_y_st (RAM 0x61BE). 0xFF cells = clamp region.
 
 == Temp_reduce_mat_2 ==
-  ROM 0x04121A  len 64 B  RAM 0x6176
-  factory hex  : 64 80 FF FF FF FF FF FF 80 C8 FF FF FF FF FF FF 64 80 C8 FF FF FF FF FF 64 64 96 B2 B2 99 99 99 3C 50 8C B2 B2 80 80 66 14 19 19 19 19 00 00 00 00 0C 0C 0C 00 00 00 00 00 00 00 00 00 00 00 00
-  NOTE: Same-format 8x8 matrix, branch used when status byte 0x103A bit2 is SET (RAM 0x6176).
+ ROM 0x04121A len 64 B RAM 0x6176
+ factory hex : 64 80 FF FF FF FF FF FF 80 C8 FF FF FF FF FF FF 64 80 C8 FF FF FF FF FF 64 64 96 B2 B2 99 99 99 3C 50 8C B2 B2 80 80 66 14 19 19 19 19 00 00 00 00 0C 0C 0C 00 00 00 00 00 00 00 00 00 00 00 00
+ NOTE: Same-format 8x8 matrix, branch used when status byte 0x103A bit2 is SET (RAM 0x6176).
 
 == Temp_reduce_x_st ==
-  ROM 0x04125A  len 8 B  RAM 0x61B6
-  factory hex  : 1E 32 46 5A 90 A0 B0 C0
-  factory words: 7730 18010 37024 45248
-  NOTE: Temp_reduce x-axis (coolant temperature, 8 bytes).
+ ROM 0x04125A len 8 B RAM 0x61B6
+ factory hex : 1E 32 46 5A 90 A0 B0 C0
+ factory words: 7730 18010 37024 45248
+ NOTE: Temp_reduce x-axis (coolant temperature, 8 bytes).
 
 == Regl_tryck_sgm ==
-  ROM 0x0415D6  len 16 B  RAM 0x5F52  (MCS differs)
-  factory hex  : C2 C2 C2 C2 C7 C7 C1 B8 B2 B2 B4 B1 AD A8 A0 9F
-  factory words: 49858 49858 51143 49592 45746 46257 44456 41119
-  NOTE: Boost limiter table; book glossary: "Boost limiter 2nd gear manual", values are boost pressure (kPa absolute). AT-region limiter at F_0007285C.
+ ROM 0x0415D6 len 16 B RAM 0x5F52 
+ factory hex : C2 C2 C2 C2 C7 C7 C1 B8 B2 B2 B4 B1 AD A8 A0 9F
+ factory words: 49858 49858 51143 49592 45746 46257 44456 41119
+ NOTE: Boost limiter table; book glossary: "Boost limiter 2nd gear manual", values are boost pressure (kPa absolute). AT-region limiter at F_0007285C.
 
 == Regl_tryck_fgaut ==
-  ROM 0x041554  len 16 B  RAM 0x5ED0
-  factory hex  : FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
-  factory words: 65535 65535 65535 65535 65535 65535 65535 65535
-  NOTE: Boost limiter companion table (fgm family; book: per-gear boost limiters), factory all 0xFF = inactive.
+ ROM 0x041554 len 16 B RAM 0x5ED0
+ factory hex : FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+ factory words: 65535 65535 65535 65535 65535 65535 65535 65535
+ NOTE: Boost limiter companion table (fgm family; book: per-gear boost limiters), factory all 0xFF = inactive.
 
 == Ign_map_6 ==
-  ROM 0x042056  len 50 B  RAM 0x59FA
-  factory hex  : 00 00 FF EC FF C4 00 A0 00 AA FF BC FF 9C FF 9C 00 46 00 28 FF 9C FF 9C 00 14 00 14 FF CE FF 9C FF E2 FF DD 00 00 FF 9C FF 9C FF EC FF CE FF C4 FF 9C
-  NOTE: Torque-intervention retard channel 6 map (weight word 0x39A0).
+ ROM 0x042056 len 50 B RAM 0x59FA
+ factory hex : 00 00 FF EC FF C4 00 A0 00 AA FF BC FF 9C FF 9C 00 46 00 28 FF 9C FF 9C 00 14 00 14 FF CE FF 9C FF E2 FF DD 00 00 FF 9C FF 9C FF EC FF CE FF C4 FF 9C
+ NOTE: Torque-intervention retard channel 6 map (weight word 0x39A0).
 
 == Ign_map_7 ==
-  ROM 0x04209C  len 50 B  RAM 0x5A40
-  factory hex  : 00 64 00 64 00 64 00 64 00 AA 00 64 00 B4 00 82 00 46 00 28 00 32 00 0A 00 14 00 0A 00 0A 00 1E FF CE FF 9C FF 9C FF 9C 00 64 FF 9C FF 9C FF 9C FF 9C
-  NOTE: Torque-intervention retard channel 7 map (weight word 0x39A2).
+ ROM 0x04209C len 50 B RAM 0x5A40
+ factory hex : 00 64 00 64 00 64 00 64 00 AA 00 64 00 B4 00 82 00 46 00 28 00 32 00 0A 00 14 00 0A 00 0A 00 1E FF CE FF 9C FF 9C FF 9C 00 64 FF 9C FF 9C FF 9C FF 9C
+ NOTE: Torque-intervention retard channel 7 map (weight word 0x39A2).

@@ -1,6 +1,6 @@
 # Sond_ign_limit
 
-Calibration word (flash)  ·  ROM 0x428A4
+Calibration word (flash) · ROM 0x428A4
 
 **Value in factory 4780656:** 500 (=5000 rpm) — units: rpm x10
 

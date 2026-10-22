@@ -1,6 +1,6 @@
 # Lam_minlast
 
-Calibration table (flash)  ·  0x40F8A -> 0x6C62
+Calibration table (flash) · 0x40F8A -> 0x6C62
 
 **Value in factory 4780656:** 16 bytes 12..18 — units: kPa abs
 

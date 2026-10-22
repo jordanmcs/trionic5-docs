@@ -1,7 +1,7 @@
 
 # Kadapt_rpm_low
 
-Calibration word (RAM 0x5AC4)  ·  ROM 0x4286E
+Calibration word (RAM 0x5AC4) · ROM 0x4286E
 
 **Value in factory 4780656:** 210 (rpm/10 = 2100 rpm)
 

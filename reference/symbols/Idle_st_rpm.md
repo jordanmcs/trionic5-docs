@@ -1,6 +1,6 @@
 # Idle_st_rpm
 
-Calibration table (flash)  ·  0x416E0 -> 0x4EC2
+Calibration table (flash) · 0x416E0 -> 0x4EC2
 
 **Value in factory 4780656:** 0032,003C,...,0078 (8 words) — units: rpm/10 (500..1200)
 

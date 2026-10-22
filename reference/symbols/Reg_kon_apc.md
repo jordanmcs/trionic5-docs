@@ -1,6 +1,6 @@
 # Reg_kon_apc
 
-State word (RAM 0x1154)  ·  0x1154
+State word (RAM 0x1154) · 0x1154
 
 **Value in factory 4780656:** dynamic — units: PWM counts
 

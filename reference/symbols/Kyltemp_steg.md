@@ -1,7 +1,7 @@
 
 # Kyltemp_steg
 
-Calibration table, 19 B (AD axis)  ·  ROM 0x40B45
+Calibration table, 19 B (AD axis) · ROM 0x40B45
 
 **Value in factory 4780656:**
 

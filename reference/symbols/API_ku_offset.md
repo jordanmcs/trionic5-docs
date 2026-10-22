@@ -1,6 +1,6 @@
 # API_ku_offset
 
-Calibration word  ·  ROM 0x42E5E -> RAM 0x5B32
+Calibration word · ROM 0x42E5E -> RAM 0x5B32
 
 **Value in factory 4780656:** words: 0
 

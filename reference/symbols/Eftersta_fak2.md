@@ -1,7 +1,7 @@
 
 # Eftersta_fak2
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x4087C
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x4087C
 
 **Value in factory 4780656:**
 

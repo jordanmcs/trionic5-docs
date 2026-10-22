@@ -1,6 +1,6 @@
 # Retard_konst
 
-Calibration word (flash)  ·  ROM 0x428xx (init PEA; see evidence)
+Calibration word (flash) · ROM 0x428xx (init PEA; see evidence)
 
 **Value in factory 4780656:** 8x8 grid via F_00072972 — units: x/256 after Ret_temp multiply
 

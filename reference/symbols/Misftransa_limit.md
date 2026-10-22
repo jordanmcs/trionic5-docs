@@ -1,9 +1,8 @@
 # Misftransa_limit
 
-Calibration word  ·  ROM 0x42ECC -> RAM 0x753A
+Calibration word · ROM 0x42ECC -> RAM 0x753A
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
- **MCS differs** — see T5 MCS Tune Changes.
 **Function:** Count-inhibit window, acceleration transients.
 
 **Code path:** 0x64xxx compare chain

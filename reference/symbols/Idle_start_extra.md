@@ -1,6 +1,6 @@
 # Idle_start_extra
 
-Calibration table, 8 words  ·  ROM 0x41132 -> RAM 0x6068
+Calibration table, 8 words · ROM 0x41132 -> RAM 0x6068
 
 **Value in factory 4780656:** words: 25, 20, 20, 20, 20, 15, 0, 0
 

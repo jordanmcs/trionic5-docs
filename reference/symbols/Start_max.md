@@ -1,7 +1,7 @@
 
 # Start_max
 
-Calibration scalar  ·  ROM 0x040712
+Calibration scalar · ROM 0x040712
 
 **Value in factory 4780656:**
 

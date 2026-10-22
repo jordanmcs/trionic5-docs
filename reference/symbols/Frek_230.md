@@ -1,6 +1,6 @@
 # Frek_230
 
-Calibration word (flash, 16-bit)  ·  ROM 0x41670, RAM 0x5EA6
+Calibration word (flash, 16-bit) · ROM 0x41670, RAM 0x5EA6
 
 **Value in factory 4780656:** 90 — units: Hz
 

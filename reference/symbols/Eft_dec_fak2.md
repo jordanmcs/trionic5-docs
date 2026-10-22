@@ -1,7 +1,7 @@
 
 # Eft_dec_fak2
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x4089A
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x4089A
 
 **Value in factory 4780656:**
 

@@ -1,6 +1,6 @@
 # Lambdaint
 
-State byte (RAM)  ·  0x102E area (Ghidra DAT_0000102e; disassembly alias RAM_Lambdaint)
+State byte (RAM) · 0x102E area (Ghidra DAT_0000102e; disassembly alias RAM_Lambdaint)
 
 **Value in factory 4780656:** reset 0x80 — units: +-128 -> +/-25 %
 

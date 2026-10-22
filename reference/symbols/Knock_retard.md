@@ -1,7 +1,7 @@
 
 # Knock_retard
 
-State word (RAM 0x1D16)  ·  RAM 0x1D16
+State word (RAM 0x1D16) · RAM 0x1D16
 
 **Value in factory 4780656:** 0.1° units
 

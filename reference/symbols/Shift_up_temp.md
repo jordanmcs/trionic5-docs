@@ -1,6 +1,6 @@
 # Shift_up_temp
 
-Calibration byte  ·  ROM 0x40F35 -> RAM 0x7642
+Calibration byte · ROM 0x40F35 -> RAM 0x7642
 
 **Value in factory 4780656:** bytes: 0x28
 

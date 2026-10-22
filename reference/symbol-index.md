@@ -1,31 +1,35 @@
 
 # T5 Symbols
 
-Symbol reference for the knock, warm-up, ignition, boost-control, fuel-injection, torque-intervention, misfire-detection and idle-air-control subsystems; values reference the factory 4780656 image (MCS tune differences are collected in T5 MCS Tune Changes). Every symbol named in the subsystem explainers ([T5 Knock Detection and Adaptation](../guide/knock-detection-and-adaptation.md), [T5 Warmup Cycle and Temperature Inputs](../guide/warmup-cycle-and-temperature-inputs.md), [T5 Ignition Timing](../guide/ignition-timing.md), [T5 Boost Control](../guide/boost-control.md), [T5 Fuel Injection](../guide/fuel-injection.md), [T5 Torque Intervention](../guide/torque-intervention.md), [T5 Misfire Detection](../guide/misfire-detection.md), [T5 Idle Air Control](../guide/idle-air-control.md)) has a page here. 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+Every symbol named in the subsystem explainers ([T5 Knock Detection and Adaptation](../guide/knock-detection-and-adaptation.md), [T5 Warmup Cycle and Temperature Inputs](../guide/warmup-cycle-and-temperature-inputs.md), [T5 Ignition Timing](../guide/ignition-timing.md), [T5 Boost Control](../guide/boost-control.md), [T5 Fuel Injection](../guide/fuel-injection.md), [T5 Torque Intervention](../guide/torque-intervention.md), [T5 Misfire Detection](../guide/misfire-detection.md), [T5 Idle Air Control](../guide/idle-air-control.md)) has a page here. 
 
 **Current count: 361 symbol pages** (count the `Symbols/` folder to verify; regenerated 2026-10-21). ROM addresses are flash sources; `!`-suffix disassembly names denote RAM copies. Evidence tree: the t5-re research workspace.
 
 ### Calibration — detection & retard
 
-| Symbol                  | Type                               | Address                                                               | Function                                                                                                                     |
+| Symbol | Type | Address | Function |
 | ----------------------- | ---------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [Knock_reduce](symbols/Knock_reduce.md)        | Calibration word                   | ROM 0x417DA                                                           | Retard increment added to a cylinder's ignition offset on each confirmed knock event.                                        |
-| [Knock_back](symbols/Knock_back.md)          | Calibration word                   | ROM 0x417DC                                                           | Recovery rate: spark advance returned to a cylinder each knock-free control period.                                          |
-| [Knock_lim_tab](symbols/Knock_lim_tab.md)       | Calibration table, 16 words × rpm  | ROM 0x417DE                                                           | Maximum per-cylinder knock retard at each rpm point: 3.0° idle, 13.0° at ~2500, 9.0° at redline                              |
-| [Knock_matrix_time](symbols/Knock_matrix_time.md)   | Calibration word                   | ROM 0x428B8                                                           | Hold/refresh period for knock reference matrix bookkeeping (matrix re-interpolated and offset decay windows advance on t     |
-| [Knock_ref_matrix](symbols/Knock_ref_matrix.md)    | Calibration map, 288 words         | ROM 0x428BA                                                           | Expected window pulse count per rpm/load cell — the per-window knock threshold grid                                          |
-| [Lknock_oref_tab](symbols/Lknock_oref_tab.md)     | Calibration table, 16 words × rpm  | ROM 0x42AFA                                                           | Percentage trim scaling [Knock_ref_matrix](symbols/Knock_ref_matrix.md) before comparison.                                                              |
-| [Knock_press_tab](symbols/Knock_press_tab.md)     | Calibration table, 16 words × rpm  | ROM 0x42B1A                                                           | Base table for the minimum manifold-pressure gate: knock evaluation only above the interpolated value.                       |
-| [Knock_press_limit](symbols/Knock_press_limit.md)   | Runtime word                       | derived from [Knock_press_tab](symbols/Knock_press_tab.md)                                      | Live interpolated threshold: evaluation skipped while P_Manifold is at or below it — suppresses knock judgement at part      |
-| [Turbo_knock_tab](symbols/Turbo_knock_tab.md)     | Calibration table, 16 words × rpm  | ROM 0x42B3A                                                           | Interpolated by rpm in the knock-scaling path near boost control; magnitude suggests ~1.1–1.2× scaling under boost           |
-| [Knock_average_tab](symbols/Knock_average_tab.md)   | Calibration table, 16 words × rpm  | ROM 0x42B5A                                                           | Escalation limits: rpm-scheduled ceiling for [Knock_average](symbols/Knock_average.md) before the sustained-knock status flag sets.                  |
-| [Knock_average_limit](symbols/Knock_average_limit.md) | Runtime word                       | derived from [Knock_average_tab](symbols/Knock_average_tab.md)                                    | Live comparison threshold for the four-cylinder average offset; exceeding it sets the documented [Knock_status](symbols/Knock_status.md) "average > |
-| [Knock_wind_rpm](symbols/Knock_wind_rpm.md)      | Calibration axis, 16 words         | ROM 0x42B7A                                                           | rpm axis shared by the detection-window edge tables.                                                                         |
-| [Knock_wind_on_tab](symbols/Knock_wind_on_tab.md)   | Calibration table, 16 words × rpm  | ROM 0x42B9A                                                           | Detection-window opening, in 0.1° after the spark reference (30.0°–45.0° advanced by rpm).                                   |
-| [Knock_wind_off_tab](symbols/Knock_wind_off_tab.md)  | Calibration table, 16 words × rpm  | ROM 0x42BBA                                                           | Detection-window closing (60.0°–75.0° after spark) — brackets the ion/combustion phase.                                      |
-| [Detect_map](symbols/Detect_map.md)          | Calibration mask, 18 load × 16 rpm | ROM 0x42144 (x-axis 0x42100 load 32–212; y-axis 0x42124 rpm 880–6010) | Where knock evaluation is permitted at all                                                                                   |
-| [Knock_start](symbols/Knock_start.md)         | Calibration word                   | ROM 0x40512                                                           | Monitor-start engine speed for knock supervision bookkeeping.                                                                |
-| [Knock_ang_dec](symbols/Knock_ang_dec.md)       | Calibration word                   | ROM 0x42874                                                           | Step size for angle-based retard reduction paths.                                                                            |
+| [Knock_reduce](symbols/Knock_reduce.md) | Calibration word | ROM 0x417DA | Retard increment added to a cylinder's ignition offset on each confirmed knock event. |
+| [Knock_back](symbols/Knock_back.md) | Calibration word | ROM 0x417DC | Recovery rate: spark advance returned to a cylinder each knock-free control period. |
+| [Knock_lim_tab](symbols/Knock_lim_tab.md) | Calibration table, 16 words × rpm | ROM 0x417DE | Maximum per-cylinder knock retard at each rpm point: 3.0° idle, 13.0° at ~2500, 9.0° at redline |
+| [Knock_matrix_time](symbols/Knock_matrix_time.md) | Calibration word | ROM 0x428B8 | Hold/refresh period for knock reference matrix bookkeeping (matrix re-interpolated and offset decay windows advance on t |
+| [Knock_ref_matrix](symbols/Knock_ref_matrix.md) | Calibration map, 288 words | ROM 0x428BA | Expected window pulse count per rpm/load cell — the per-window knock threshold grid |
+| [Lknock_oref_tab](symbols/Lknock_oref_tab.md) | Calibration table, 16 words × rpm | ROM 0x42AFA | Percentage trim scaling [Knock_ref_matrix](symbols/Knock_ref_matrix.md) before comparison. |
+| [Knock_press_tab](symbols/Knock_press_tab.md) | Calibration table, 16 words × rpm | ROM 0x42B1A | Base table for the minimum manifold-pressure gate: knock evaluation only above the interpolated value. |
+| [Knock_press_limit](symbols/Knock_press_limit.md) | Runtime word | derived from [Knock_press_tab](symbols/Knock_press_tab.md) | Live interpolated threshold: evaluation skipped while P_Manifold is at or below it — suppresses knock judgement at part |
+| [Turbo_knock_tab](symbols/Turbo_knock_tab.md) | Calibration table, 16 words × rpm | ROM 0x42B3A | Interpolated by rpm in the knock-scaling path near boost control; magnitude suggests ~1.1–1.2× scaling under boost |
+| [Knock_average_tab](symbols/Knock_average_tab.md) | Calibration table, 16 words × rpm | ROM 0x42B5A | Escalation limits: rpm-scheduled ceiling for [Knock_average](symbols/Knock_average.md) before the sustained-knock status flag sets. |
+| [Knock_average_limit](symbols/Knock_average_limit.md) | Runtime word | derived from [Knock_average_tab](symbols/Knock_average_tab.md) | Live comparison threshold for the four-cylinder average offset; exceeding it sets the documented [Knock_status](symbols/Knock_status.md) "average > |
+| [Knock_wind_rpm](symbols/Knock_wind_rpm.md) | Calibration axis, 16 words | ROM 0x42B7A | rpm axis shared by the detection-window edge tables. |
+| [Knock_wind_on_tab](symbols/Knock_wind_on_tab.md) | Calibration table, 16 words × rpm | ROM 0x42B9A | Detection-window opening, in 0.1° after the spark reference (30.0°–45.0° advanced by rpm). |
+| [Knock_wind_off_tab](symbols/Knock_wind_off_tab.md) | Calibration table, 16 words × rpm | ROM 0x42BBA | Detection-window closing (60.0°–75.0° after spark) — brackets the ion/combustion phase. |
+| [Detect_map](symbols/Detect_map.md) | Calibration mask, 18 load × 16 rpm | ROM 0x42144 (x-axis 0x42100 load 32–212; y-axis 0x42124 rpm 880–6010) | Where knock evaluation is permitted at all |
+| [Knock_start](symbols/Knock_start.md) | Calibration word | ROM 0x40512 | Monitor-start engine speed for knock supervision bookkeeping. |
+| [Knock_ang_dec](symbols/Knock_ang_dec.md) | Calibration word | ROM 0x42874 | Step size for angle-based retard reduction paths. |
 
 ### Calibration — boost interface & adaptation
 
@@ -250,37 +254,37 @@ Entry: [T5 Warmup Cycle and Temperature Inputs](../guide/warmup-cycle-and-temper
 
 ### Boost — request & limiters
 
-| Symbol                     | Type                                 | Address                                               | Function                                                                               |
+| Symbol | Type | Address | Function |
 | -------------------------- | ------------------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [Tryck_mat](symbols/Tryck_mat.md)              | 8-bit table (16x8 bytes, flash)      | ROM 0x412E0, RAM 0x5BC6                               | main boost request map (rpm x throttle)                                                |
-| [Tryck_mat_a](symbols/Tryck_mat_a.md)            | 8-bit table (16x8 bytes, flash)      | ROM 0x41360, RAM 0x5C46                               | boost request, automatic transmission                                                  |
-| [Pwm_ind_rpm](symbols/Pwm_ind_rpm.md)            | 16-bit table (16 words, flash)       | ROM 0x41288, RAM 0x5B6E                               | shared regulation rpm axis (misnomer name)                                             |
-| [Pwm_ind_trot](symbols/Pwm_ind_trot.md)           | 8-bit table (5x8 bytes, flash)       | ROM 0x412A8, RAM 0x5B8E                               | throttle row axis, bank per gear                                                       |
-| [Tryck_vakt_tab](symbols/Tryck_vakt_tab.md)         | 8-bit table (16, flash)              | ROM 0x412D0, RAM 0x5BB6                               | overboost fuel-cut limit per rpm                                                       |
-| [Regl_tryck_fgm](symbols/Regl_tryck_fgm.md)         | 8-bit table (16, flash)              | ROM 0x415C6, RAM 0x5F42                               | 1st-gear max boost limiter (manual)                                                    |
-| [Regl_tryck_sgm](symbols/Regl_tryck_sgm.md)         | 8-bit table (16, flash)              | ROM 0x415D6, RAM 0x5F52                               | 2nd-gear max boost limiter (manual)                                                    |
-| [Regl_tryck_fgaut](symbols/Regl_tryck_fgaut.md)       | 8-bit table (16, flash)              | ROM 0x41554, RAM 0x5ED0                               | automatic-stage/transmission limiter                                                   |
-| [Max_regl_sp](symbols/Max_regl_sp.md)            | 16-bit table (16 words, flash)       | ROM 0x415A6, RAM 0x5F22                               | rpm axis for air-temp limiter curves                                                   |
-| [Max_regl_temp_1](symbols/Max_regl_temp_1.md)        | 16-bit tables (16 words each, flash) | ROM 0x41566/0x41586, RAM 0x5EE2/0x5F02                | max charge pressure at warm / cold interp point (automatics only)                      |
-| [Max_regl_temp_2](symbols/Max_regl_temp_2.md)        | 16-bit tables (16 words each, flash) | ROM 0x41566/0x41586, RAM 0x5EE2/0x5F02                | max charge pressure at warm / cold interp point (automatics only)                      |
-| [Temp_max_regl](symbols/Temp_max_regl.md)          | Calibration words (flash, 2)         | ROM 0x41564, RAM 0x5EE0                               | intake-air temp interpolation points for the two limiter curves                        |
-| [Overstid_tab](symbols/Overstid_tab.md)           | 8-bit table (16, flash)              | ROM 0x41470, RAM 0x5D56                               | tip-in overshoot-comp duration per rpm                                                 |
-| [Overs_tab](symbols/Overs_tab.md)              | 8-bit tables (flash)                 | ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6 | overshoot boost add-on (16 rpm x 8 shortfall), its kPa axis, intake-temp scaling /255  |
-| [Overs_tab_xaxis](symbols/Overs_tab_xaxis.md)        | 8-bit tables (flash)                 | ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6 | overshoot boost add-on (16 rpm x 8 shortfall), its kPa axis, intake-temp scaling /255  |
-| [Overs_komp_tab](symbols/Overs_komp_tab.md)         | 8-bit tables (flash)                 | ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6 | overshoot boost add-on (16 rpm x 8 shortfall), its kPa axis, intake-temp scaling /255  |
-| [Overs_angle](symbols/Overs_angle.md)            | Calibration word (flash)             | ROM 0x4153D, RAM 0x5EB4                               | throttle threshold to arm tip-in overshoot comp                                        |
-| [Apc_fullgas](symbols/Apc_fullgas.md)            | Calibration word (flash)             | ROM 0x4153C, RAM 0x5EB2                               | full-load APC threshold; gates I-term + Reg_kon derate + full-gas flag                 |
-| [Apc_konst_tid](symbols/Apc_konst_tid.md)          | Calibration words (flash)            | ROM 0x4153A/0x4153B/0x4153E, RAM 0x5EAE/0x5EB0/0x5EB6 | const-light-load flag timer / limiter-confirm timer / optional loop prescaler (unused) |
-| [Apc_cert_tid](symbols/Apc_cert_tid.md)           | Calibration words (flash)            | ROM 0x4153A/0x4153B/0x4153E, RAM 0x5EAE/0x5EB0/0x5EB6 | const-light-load flag timer / limiter-confirm timer / optional loop prescaler (unused) |
-| [Max_vehicle_speed](symbols/Max_vehicle_speed.md)      | Calibration word (flash)             | ROM 0x42BDC, RAM 0x5B6C                               | threshold feeding the derate counter                                                   |
-| [Gear_st](symbols/Gear_st.md)                | 16-bit + 8-bit tables (flash)        | ROM 0x41540/0x4154A, RAM 0x5EB8/0x5EC2                | overall gear ratios and detection windows for gear identification from speed vs rpm    |
-| [Gear_ratio_delta](symbols/Gear_ratio_delta.md)       | 16-bit + 8-bit tables (flash)        | ROM 0x41540/0x4154A, RAM 0x5EB8/0x5EC2                | overall gear ratios and detection windows for gear identification from speed vs rpm    |
-| [Boost_valve_pwm_driver](symbols/Boost_valve_pwm_driver.md) | Function                             | 0x466F0                                               | programs TPU period/duty for boost solenoid                                            |
-| [Max_um_time](symbols/Max_um_time.md)            | Calibration words (flash, UNUSED)    | ROM 0x41668/6A/6C/6E, 0x4166F                         | no code references in this revision (legacy derivative-limit scalars)                  |
-| [Max_pos_der](symbols/Max_pos_der.md)            | Calibration words (flash, UNUSED)    | ROM 0x41668/6A/6C/6E, 0x4166F                         | no code references in this revision (legacy derivative-limit scalars)                  |
-| [Max_neg_der](symbols/Max_neg_der.md)            | Calibration words (flash, UNUSED)    | ROM 0x41668/6A/6C/6E, 0x4166F                         | no code references in this revision (legacy derivative-limit scalars)                  |
-| [Um_thr_lim](symbols/Um_thr_lim.md)             | Calibration words (flash, UNUSED)    | ROM 0x41668/6A/6C/6E, 0x4166F                         | no code references in this revision (legacy derivative-limit scalars)                  |
-| [Um_min_limit](symbols/Um_min_limit.md)           | Calibration words (flash, UNUSED)    | ROM 0x41668/6A/6C/6E, 0x4166F                         | no code references in this revision (legacy derivative-limit scalars)                  |
+| [Tryck_mat](symbols/Tryck_mat.md) | 8-bit table (16x8 bytes, flash) | ROM 0x412E0, RAM 0x5BC6 | main boost request map (rpm x throttle) |
+| [Tryck_mat_a](symbols/Tryck_mat_a.md) | 8-bit table (16x8 bytes, flash) | ROM 0x41360, RAM 0x5C46 | boost request, automatic transmission |
+| [Pwm_ind_rpm](symbols/Pwm_ind_rpm.md) | 16-bit table (16 words, flash) | ROM 0x41288, RAM 0x5B6E | shared regulation rpm axis (misnomer name) |
+| [Pwm_ind_trot](symbols/Pwm_ind_trot.md) | 8-bit table (5x8 bytes, flash) | ROM 0x412A8, RAM 0x5B8E | throttle row axis, bank per gear |
+| [Tryck_vakt_tab](symbols/Tryck_vakt_tab.md) | 8-bit table (16, flash) | ROM 0x412D0, RAM 0x5BB6 | overboost fuel-cut limit per rpm |
+| [Regl_tryck_fgm](symbols/Regl_tryck_fgm.md) | 8-bit table (16, flash) | ROM 0x415C6, RAM 0x5F42 | 1st-gear max boost limiter (manual) |
+| [Regl_tryck_sgm](symbols/Regl_tryck_sgm.md) | 8-bit table (16, flash) | ROM 0x415D6, RAM 0x5F52 | 2nd-gear max boost limiter (manual) |
+| [Regl_tryck_fgaut](symbols/Regl_tryck_fgaut.md) | 8-bit table (16, flash) | ROM 0x41554, RAM 0x5ED0 | automatic-stage/transmission limiter |
+| [Max_regl_sp](symbols/Max_regl_sp.md) | 16-bit table (16 words, flash) | ROM 0x415A6, RAM 0x5F22 | rpm axis for air-temp limiter curves |
+| [Max_regl_temp_1](symbols/Max_regl_temp_1.md) | 16-bit tables (16 words each, flash) | ROM 0x41566/0x41586, RAM 0x5EE2/0x5F02 | max charge pressure at warm / cold interp point (automatics only) |
+| [Max_regl_temp_2](symbols/Max_regl_temp_2.md) | 16-bit tables (16 words each, flash) | ROM 0x41566/0x41586, RAM 0x5EE2/0x5F02 | max charge pressure at warm / cold interp point (automatics only) |
+| [Temp_max_regl](symbols/Temp_max_regl.md) | Calibration words (flash, 2) | ROM 0x41564, RAM 0x5EE0 | intake-air temp interpolation points for the two limiter curves |
+| [Overstid_tab](symbols/Overstid_tab.md) | 8-bit table (16, flash) | ROM 0x41470, RAM 0x5D56 | tip-in overshoot-comp duration per rpm |
+| [Overs_tab](symbols/Overs_tab.md) | 8-bit tables (flash) | ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6 | overshoot boost add-on (16 rpm x 8 shortfall), its kPa axis, intake-temp scaling /255 |
+| [Overs_tab_xaxis](symbols/Overs_tab_xaxis.md) | 8-bit tables (flash) | ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6 | overshoot boost add-on (16 rpm x 8 shortfall), its kPa axis, intake-temp scaling /255 |
+| [Overs_komp_tab](symbols/Overs_komp_tab.md) | 8-bit tables (flash) | ROM 0x413E8/0x41468/0x413E0, RAM 0x5CCE/0x5D4E/0x5CC6 | overshoot boost add-on (16 rpm x 8 shortfall), its kPa axis, intake-temp scaling /255 |
+| [Overs_angle](symbols/Overs_angle.md) | Calibration word (flash) | ROM 0x4153D, RAM 0x5EB4 | throttle threshold to arm tip-in overshoot comp |
+| [Apc_fullgas](symbols/Apc_fullgas.md) | Calibration word (flash) | ROM 0x4153C, RAM 0x5EB2 | full-load APC threshold; gates I-term + Reg_kon derate + full-gas flag |
+| [Apc_konst_tid](symbols/Apc_konst_tid.md) | Calibration words (flash) | ROM 0x4153A/0x4153B/0x4153E, RAM 0x5EAE/0x5EB0/0x5EB6 | const-light-load flag timer / limiter-confirm timer / optional loop prescaler (unused) |
+| [Apc_cert_tid](symbols/Apc_cert_tid.md) | Calibration words (flash) | ROM 0x4153A/0x4153B/0x4153E, RAM 0x5EAE/0x5EB0/0x5EB6 | const-light-load flag timer / limiter-confirm timer / optional loop prescaler (unused) |
+| [Max_vehicle_speed](symbols/Max_vehicle_speed.md) | Calibration word (flash) | ROM 0x42BDC, RAM 0x5B6C | threshold feeding the derate counter |
+| [Gear_st](symbols/Gear_st.md) | 16-bit + 8-bit tables (flash) | ROM 0x41540/0x4154A, RAM 0x5EB8/0x5EC2 | overall gear ratios and detection windows for gear identification from speed vs rpm |
+| [Gear_ratio_delta](symbols/Gear_ratio_delta.md) | 16-bit + 8-bit tables (flash) | ROM 0x41540/0x4154A, RAM 0x5EB8/0x5EC2 | overall gear ratios and detection windows for gear identification from speed vs rpm |
+| [Boost_valve_pwm_driver](symbols/Boost_valve_pwm_driver.md) | Function | 0x466F0 | programs TPU period/duty for boost solenoid |
+| [Max_um_time](symbols/Max_um_time.md) | Calibration words (flash, UNUSED) | ROM 0x41668/6A/6C/6E, 0x4166F | no code references in this revision (legacy derivative-limit scalars) |
+| [Max_pos_der](symbols/Max_pos_der.md) | Calibration words (flash, UNUSED) | ROM 0x41668/6A/6C/6E, 0x4166F | no code references in this revision (legacy derivative-limit scalars) |
+| [Max_neg_der](symbols/Max_neg_der.md) | Calibration words (flash, UNUSED) | ROM 0x41668/6A/6C/6E, 0x4166F | no code references in this revision (legacy derivative-limit scalars) |
+| [Um_thr_lim](symbols/Um_thr_lim.md) | Calibration words (flash, UNUSED) | ROM 0x41668/6A/6C/6E, 0x4166F | no code references in this revision (legacy derivative-limit scalars) |
+| [Um_min_limit](symbols/Um_min_limit.md) | Calibration words (flash, UNUSED) | ROM 0x41668/6A/6C/6E, 0x4166F | no code references in this revision (legacy derivative-limit scalars) |
 
 ### Boost — PID & output
 

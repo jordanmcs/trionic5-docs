@@ -1,7 +1,7 @@
 
 # Knock_start
 
-Calibration word (flash)  ·  ROM 0x40512
+Calibration word (flash) · ROM 0x40512
 
 **Value in factory 4780656:** 0x76C = 1900 (rpm)
 

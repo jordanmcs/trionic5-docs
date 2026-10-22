@@ -1,6 +1,6 @@
 # Shift_max_rpm
 
-Calibration word  ·  ROM 0x40F36 -> RAM 0x7644
+Calibration word · ROM 0x40F36 -> RAM 0x7644
 
 **Value in factory 4780656:** words: 5500
 

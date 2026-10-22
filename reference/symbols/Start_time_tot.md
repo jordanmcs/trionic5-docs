@@ -1,7 +1,7 @@
 
 # Start_time_tot
 
-State word (RAM)  ·  (RAM)
+State word (RAM) · (RAM)
 
 **Value in factory 4780656:**
 

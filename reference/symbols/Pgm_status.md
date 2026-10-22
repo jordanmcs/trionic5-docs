@@ -1,6 +1,6 @@
 # Pgm_status
 
-State byte (RAM)  ·  0x1041 (symbol table)
+State byte (RAM) · 0x1041 (symbol table)
 
 **Value in factory 4780656:** runtime — units: bits
 

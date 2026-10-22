@@ -1,6 +1,6 @@
 # Apc_fullgas
 
-Calibration word (flash)  ·  ROM 0x4153C, RAM 0x5EB2
+Calibration word (flash) · ROM 0x4153C, RAM 0x5EB2
 
 **Value in factory 4780656:** 85 — units: throttle opening counts
 

@@ -1,6 +1,6 @@
 # Ign_map_value
 
-State word (RAM 0x3984)  ·  RAM 0x3984
+State word (RAM 0x3984) · RAM 0x3984
 
 **Value in factory 4780656:** runtime — units: 0.1 crank degree
 

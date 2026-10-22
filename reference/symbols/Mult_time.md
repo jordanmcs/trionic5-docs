@@ -1,6 +1,6 @@
 # Mult_time
 
-State word (RAM 0x1108)  ·  RAM 0x1108
+State word (RAM 0x1108) · RAM 0x1108
 
 **Value in factory 4780656:** runtime — units: TPU ticks
 

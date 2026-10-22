@@ -1,7 +1,7 @@
 
 # Accel_temp2
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x409BB
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x409BB
 
 **Value in factory 4780656:**
 

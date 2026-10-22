@@ -1,7 +1,7 @@
 
 # Knock_press_tab
 
-Calibration table, 16 words × rpm  ·  ROM 0x42B1A
+Calibration table, 16 words × rpm · ROM 0x42B1A
 
 **Value in factory 4780656:**
 

@@ -1,6 +1,10 @@
 # Idle_fuel_korr
 
-8-bit table 8x12 (flash)  ·  0x40DB0 -> 0x5F6A
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+8-bit table 8x12 (flash) · 0x40DB0 -> 0x5F6A
 
 **Value in factory 4780656:** signed rows (book idle map) — units: (v+128)/256
 

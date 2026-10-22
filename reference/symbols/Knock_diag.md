@@ -1,7 +1,7 @@
 
 # Knock_diag
 
-State word (RAM 0x1D14)  ·  RAM 0x1D14
+State word (RAM 0x1D14) · RAM 0x1D14
 
 **Value in factory 4780656:** (diag byte)
 

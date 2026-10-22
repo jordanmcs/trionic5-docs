@@ -1,6 +1,10 @@
 # Min_tid
 
-Calibration word (flash)  ·  0x40BA8 -> 0x4BF6
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
+Calibration word (flash) · 0x40BA8 -> 0x4BF6
 
 **Value in factory 4780656:** 0x00FA — units: 4 us ticks
 

@@ -1,6 +1,6 @@
 # Reg_kon_fga
 
-Calibration word (flash)  ·  ROM 0x41550, RAM 0x5ECA
+Calibration word (flash) · ROM 0x41550, RAM 0x5ECA
 
 **Value in factory 4780656:** 14 — units: PWM counts /10
 

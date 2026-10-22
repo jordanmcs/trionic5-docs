@@ -1,6 +1,6 @@
 # Ramp_down_ram
 
-8/16-bit table (flash)  ·  ROM 0x42886
+8/16-bit table (flash) · ROM 0x42886
 
 **Value in factory 4780656:** 1000,1000,1000,250,0,0,0,0 — units: weight counts per event
 

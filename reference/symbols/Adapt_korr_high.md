@@ -1,6 +1,6 @@
 # Adapt_korr_high
 
-Calibration word (flash)  ·  0x428B4 -> 0x5B12
+Calibration word (flash) · 0x428B4 -> 0x5B12
 
 **Value in factory 4780656:** 0xB3 — units: factor byte
 

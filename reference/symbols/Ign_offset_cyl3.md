@@ -1,6 +1,6 @@
 # Ign_offset_cyl3
 
-Calibration word (flash)  ·  ROM 0x42850
+Calibration word (flash) · ROM 0x42850
 
 **Value in factory 4780656:** 0 — units: 0.1 crank degree
 

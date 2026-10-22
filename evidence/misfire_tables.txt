@@ -2,160 +2,160 @@ T5.5 MISFIRE-DETECTION CALIBRATION TABLES - RAW BYTES
 Sources: firmware/4780656_factory.BIN (factory AUTHORITY).
 ROM addrs identical in both images (init copy sites byte-verified 513/513).
 All addresses/lengths from init-copy PEA-scan inventory; NOT ASM labels.
-Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs); that tune's data is not distributed
+Factory bytes authoritative. tune deltas are out of scope for this repo
 
 
 == Mis200_map ==
-  ROM 0x0423CA  len 576 B  RAM 0x6E22
-  factory hex  : 01 90 00 A8 00 A8 00 A8 00 98 00 8C 00 80 00 70 00 68 00 60 00 50 00 48 00 44 00 3C 00 38 00 2C 00 2C 00 2C 01 90 00 A8 00 B0 00 A8 00 98 00 8C 00 80 00 70 00 68 00 60 00 50 00 40 00 44 00 3C 00 38 00 2C 00 2C 00 2C 01 90 00 A0 00 98 00 90 00 84 00 78 00 6C 00 68 00 5C 00 4C 00 40 00 38 00 44 00 3C 00 38 00 2C 00 2C 00 2C 01 90 00 80 00 7C 00 74 00 64 00 54 00 4C 00 40 00 40 00 40 00 38 00 30 00 44 00 3C 00 38 00 2C 00 2C 00 24 01 90 00 74 00 6C 00 68 00 54 00 4C 00 44 00 58 00 44 00 38 00 24 00 20 00 2C 00 28 00 28 00 24 00 24 00 24 01 90 00 74 00 68 00 78 00 58 00 4C 00 48 00 38 00 48 00 40 00 3C 00 34 00 24 00 24 00 24 00 24 00 24 00 20 01 90 00 6C 00 70 00 64 00 5C 00 50 00 48 00 40 00 3C 00 38 00 30 00 24 00 18 00 1C 00 20 00 24 00 20 00 20 01 90 01 90 00 60 00 5C 00 50 00 40 00 38 00 38 00 28 00 24 00 14 00 0C 00 10 00 18 00 1C 00 20 00 20 00 20 01 90 01 90 00 64 00 5C 00 50 00 48 00 40 00 38 00 28 00 24 00 20 00 14 00 18 00 1C 00 20 00 20 00 20 00 20 01 90 01 90 00 64 00 60 00 4C 00 44 00 3C 00 2C 00 28 00 20 00 18 00 18 00 18 00 20 00 28 00 24 00 20 00 20 01 90 01 90 01 90 00 58 00 54 00 3C 00 34 00 28 00 20 00 14 00 14 00 18 00 1C 00 20 00 24 00 24 00 20 00 20 01 90 01 90 01 90 00 54 00 48 00 3C 00 28 00 24 00 18 00 14 00 14 00 20 00 24 00 2C 00 28 00 24 00 20 00 20 01 90 01 90 01 90 00 50 00 44 00 2C 00 24 00 18 00 1C 00 18 00 1C 00 24 00 2C 00 34 00 28 00 24 00 20 00 20 01 90 01 90 01 90 01 90 00 3C 00 28 00 1C 00 18 00 18 00 1C 00 28 00 2C 00 30 00 2C 00 28 00 24 00 20 00 20 01 90 01 90 01 90 01 90 00 34 00 20 00 18 00 18 00 18 00 1C 00 24 00 2C 00 28 00 28 00 24 00 24 00 20 00 20 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90
-  NOTE: CATALYST-damage limit map, 576 B = 24x24 bytes (interpolated via Misfire_map_x_axis/y_axis at F_00061F30). Limit -> Mis200_limit 0x110E.
+ ROM 0x0423CA len 576 B RAM 0x6E22
+ factory hex : 01 90 00 A8 00 A8 00 A8 00 98 00 8C 00 80 00 70 00 68 00 60 00 50 00 48 00 44 00 3C 00 38 00 2C 00 2C 00 2C 01 90 00 A8 00 B0 00 A8 00 98 00 8C 00 80 00 70 00 68 00 60 00 50 00 40 00 44 00 3C 00 38 00 2C 00 2C 00 2C 01 90 00 A0 00 98 00 90 00 84 00 78 00 6C 00 68 00 5C 00 4C 00 40 00 38 00 44 00 3C 00 38 00 2C 00 2C 00 2C 01 90 00 80 00 7C 00 74 00 64 00 54 00 4C 00 40 00 40 00 40 00 38 00 30 00 44 00 3C 00 38 00 2C 00 2C 00 24 01 90 00 74 00 6C 00 68 00 54 00 4C 00 44 00 58 00 44 00 38 00 24 00 20 00 2C 00 28 00 28 00 24 00 24 00 24 01 90 00 74 00 68 00 78 00 58 00 4C 00 48 00 38 00 48 00 40 00 3C 00 34 00 24 00 24 00 24 00 24 00 24 00 20 01 90 00 6C 00 70 00 64 00 5C 00 50 00 48 00 40 00 3C 00 38 00 30 00 24 00 18 00 1C 00 20 00 24 00 20 00 20 01 90 01 90 00 60 00 5C 00 50 00 40 00 38 00 38 00 28 00 24 00 14 00 0C 00 10 00 18 00 1C 00 20 00 20 00 20 01 90 01 90 00 64 00 5C 00 50 00 48 00 40 00 38 00 28 00 24 00 20 00 14 00 18 00 1C 00 20 00 20 00 20 00 20 01 90 01 90 00 64 00 60 00 4C 00 44 00 3C 00 2C 00 28 00 20 00 18 00 18 00 18 00 20 00 28 00 24 00 20 00 20 01 90 01 90 01 90 00 58 00 54 00 3C 00 34 00 28 00 20 00 14 00 14 00 18 00 1C 00 20 00 24 00 24 00 20 00 20 01 90 01 90 01 90 00 54 00 48 00 3C 00 28 00 24 00 18 00 14 00 14 00 20 00 24 00 2C 00 28 00 24 00 20 00 20 01 90 01 90 01 90 00 50 00 44 00 2C 00 24 00 18 00 1C 00 18 00 1C 00 24 00 2C 00 34 00 28 00 24 00 20 00 20 01 90 01 90 01 90 01 90 00 3C 00 28 00 1C 00 18 00 18 00 1C 00 28 00 2C 00 30 00 2C 00 28 00 24 00 20 00 20 01 90 01 90 01 90 01 90 00 34 00 20 00 18 00 18 00 18 00 1C 00 24 00 2C 00 28 00 28 00 24 00 24 00 20 00 20 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90 01 90
+ NOTE: CATALYST-damage limit map, 576 B = 24x24 bytes (interpolated via Misfire_map_x_axis/y_axis at F_00061F30). Limit -> Mis200_limit 0x110E.
 
 == Mis1000_map ==
-  ROM 0x04260A  len 576 B  RAM 0x7062
-  factory hex  : 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0
-  NOTE: EMISSION (MIL) limit map, 576 B = 24x24 bytes -> Detect_limit/Mis1000 limit.
+ ROM 0x04260A len 576 B RAM 0x7062
+ factory hex : 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 07 D0 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 00 3C 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0 07 D0
+ NOTE: EMISSION (MIL) limit map, 576 B = 24x24 bytes -> Detect_limit/Mis1000 limit.
 
 == Misfire_map_x_axis ==
-  ROM 0x042384  len 36 B  RAM 0x69E2
-  factory hex  : 00 20 00 24 00 28 00 2C 00 38 00 44 00 50 00 5C 00 68 00 74 00 80 00 8C 00 98 00 A4 00 B0 00 BC 00 C8 00 D4
-  NOTE: Misfire limit map x-axis.
+ ROM 0x042384 len 36 B RAM 0x69E2
+ factory hex : 00 20 00 24 00 28 00 2C 00 38 00 44 00 50 00 5C 00 68 00 74 00 80 00 8C 00 98 00 A4 00 B0 00 BC 00 C8 00 D4
+ NOTE: Misfire limit map x-axis.
 
 == Misfire_map_y_axis ==
-  ROM 0x0423A8  len 32 B  RAM 0x6A06
-  factory hex  : 03 70 04 EC 06 68 07 E4 09 60 0A DC 0C 58 0D D4 0F 50 10 CC 12 48 13 C4 15 40 16 BC 17 70 17 7A
-  NOTE: Misfire limit map y-axis.
+ ROM 0x0423A8 len 32 B RAM 0x6A06
+ factory hex : 03 70 04 EC 06 68 07 E4 09 60 0A DC 0C 58 0D D4 0F 50 10 CC 12 48 13 C4 15 40 16 BC 17 70 17 7A
+ NOTE: Misfire limit map y-axis.
 
 == Mis_kyltemp_tab ==
-  ROM 0x042ECE  len 15 B  RAM 0x753E  (MCS differs)
-  factory hex  : EC F6 00 0A 14 1E 28 32 3C 46 50 5A 64 6E 78
-  factory words: 60662 10 5150 10290 15430 20570 25710 120
-  factory rows (decimal):
-  236 246   0  10  20  30  40  50  60  70  80  90 100 110
-  120
-  NOTE: Coolant temperature breakpoints (14 rows) selecting per-row misfire ignition limits.
+ ROM 0x042ECE len 15 B RAM 0x753E 
+ factory hex : EC F6 00 0A 14 1E 28 32 3C 46 50 5A 64 6E 78
+ factory words: 60662 10 5150 10290 15430 20570 25710 120
+ factory rows (decimal):
+ 236 246 0 10 20 30 40 50 60 70 80 90 100 110
+ 120
+ NOTE: Coolant temperature breakpoints (14 rows) selecting per-row misfire ignition limits.
 
 == Misftakeoff_ign_tab ==
-  ROM 0x042EDD  len 15 B  RAM 0x754E  (MCS differs)
-  factory hex  : FF FA BE 64 55 55 55 55 5A 5F 5F 64 64 6E 78
-  factory words: 65530 48740 21845 21845 23135 24420 25710 120
-  factory rows (decimal):
-  255 250 190 100  85  85  85  85  90  95  95 100 100 110
-  120
-  NOTE: Per-temp-row misfire limit, takeoff (load increase) condition.
+ ROM 0x042EDD len 15 B RAM 0x754E 
+ factory hex : FF FA BE 64 55 55 55 55 5A 5F 5F 64 64 6E 78
+ factory words: 65530 48740 21845 21845 23135 24420 25710 120
+ factory rows (decimal):
+ 255 250 190 100 85 85 85 85 90 95 95 100 100 110
+ 120
+ NOTE: Per-temp-row misfire limit, takeoff (load increase) condition.
 
 == Misftrans_ign_tab ==
-  ROM 0x042EEC  len 15 B  RAM 0x755E  (MCS differs)
-  factory hex  : 96 6E 64 64 55 55 55 55 5A 5F 5F 64 64 6E 78
-  factory words: 38510 25700 21845 21845 23135 24420 25710 120
-  factory rows (decimal):
-  150 110 100 100  85  85  85  85  90  95  95 100 100 110
-  120
-  NOTE: Per-temp-row misfire limit, transient condition.
+ ROM 0x042EEC len 15 B RAM 0x755E 
+ factory hex : 96 6E 64 64 55 55 55 55 5A 5F 5F 64 64 6E 78
+ factory words: 38510 25700 21845 21845 23135 24420 25710 120
+ factory rows (decimal):
+ 150 110 100 100 85 85 85 85 90 95 95 100 100 110
+ 120
+ NOTE: Per-temp-row misfire limit, transient condition.
 
 == Misf_ign_lim ==
-  ROM 0x042EC2  len 4 B  RAM 0x752A  (MCS differs)
-  factory hex  : 00 00 00 00
-  factory words: 0 0
-  NOTE: Base misfire ignition limit (window count).
+ ROM 0x042EC2 len 4 B RAM 0x752A 
+ factory hex : 00 00 00 00
+ factory words: 0 0
+ NOTE: Base misfire ignition limit (window count).
 
 == Misfcut_ign_lim ==
-  ROM 0x042EC6  len 1 B  RAM 0x752E  (MCS differs)
-  factory hex  : 1E
-  factory words: 30
-  NOTE: Misfire limit: fuel-cut source (decel cut events).
+ ROM 0x042EC6 len 1 B RAM 0x752E 
+ factory hex : 1E
+ factory words: 30
+ NOTE: Misfire limit: fuel-cut source (decel cut events).
 
 == Misfpres_ign_lim ==
-  ROM 0x042EC7  len 1 B  RAM 0x7530  (MCS differs)
-  factory hex  : 50
-  factory words: 80
-  NOTE: Misfire limit: overboost/pressure source.
+ ROM 0x042EC7 len 1 B RAM 0x7530 
+ factory hex : 50
+ factory words: 80
+ NOTE: Misfire limit: overboost/pressure source.
 
 == Misfrpm_ign_lim ==
-  ROM 0x042EC8  len 1 B  RAM 0x7532
-  factory hex  : 50
-  factory words: 80
-  NOTE: Misfire limit: rev-limit source.
+ ROM 0x042EC8 len 1 B RAM 0x7532
+ factory hex : 50
+ factory words: 80
+ NOTE: Misfire limit: rev-limit source.
 
 == Misfac_ign_lim ==
-  ROM 0x042EC9  len 1 B  RAM 0x7534  (MCS differs)
-  factory hex  : 1E
-  factory words: 30
-  NOTE: Misfire limit: AC activation source.
+ ROM 0x042EC9 len 1 B RAM 0x7534 
+ factory hex : 1E
+ factory words: 30
+ NOTE: Misfire limit: AC activation source.
 
 == Misfpur_ign_lim ==
-  ROM 0x042ECA  len 1 B  RAM 0x7536  (MCS differs)
-  factory hex  : 14
-  factory words: 20
-  NOTE: Misfire limit: purge activation source.
+ ROM 0x042ECA len 1 B RAM 0x7536 
+ factory hex : 14
+ factory words: 20
+ NOTE: Misfire limit: purge activation source.
 
 == Misfgear_lim ==
-  ROM 0x042ECB  len 1 B  RAM 0x7538
-  factory hex  : 14
-  factory words: 20
-  NOTE: Misfire limit: gear-change source (AT).
+ ROM 0x042ECB len 1 B RAM 0x7538
+ factory hex : 14
+ factory words: 20
+ NOTE: Misfire limit: gear-change source (AT).
 
 == Misftransa_limit ==
-  ROM 0x042ECC  len 1 B  RAM 0x753A  (MCS differs)
-  factory hex  : 03
-  factory words: 3
-  NOTE: Misfire limit: acceleration transient source.
+ ROM 0x042ECC len 1 B RAM 0x753A 
+ factory hex : 03
+ factory words: 3
+ NOTE: Misfire limit: acceleration transient source.
 
 == Misftransr_limit ==
-  ROM 0x042ECD  len 1 B  RAM 0x753C
-  factory hex  : 03
-  factory words: 3
-  NOTE: Misfire limit: deceleration transient source.
+ ROM 0x042ECD len 1 B RAM 0x753C
+ factory hex : 03
+ factory words: 3
+ NOTE: Misfire limit: deceleration transient source.
 
 == Mis_thrott_ign_lim ==
-  ROM 0x04289A  len 1 B  RAM 0x5AF2
-  factory hex  : 19
-  factory words: 25
-  NOTE: Misfire limit: throttle-sudden-open source.
+ ROM 0x04289A len 1 B RAM 0x5AF2
+ factory hex : 19
+ factory words: 25
+ NOTE: Misfire limit: throttle-sudden-open source.
 
 == Mis_thrott_ign_lim_g ==
-  ROM 0x04289B  len 1 B  RAM 0x5AF4
-  factory hex  : 19
-  factory words: 25
-  NOTE: Misfire limit: throttle-sudden-open source (gear variant).
+ ROM 0x04289B len 1 B RAM 0x5AF4
+ factory hex : 19
+ factory words: 25
+ NOTE: Misfire limit: throttle-sudden-open source (gear variant).
 
 == Mis_temp_limit ==
-  ROM 0x04289C  len 1 B  RAM 0x5AF6
-  factory hex  : D8
-  factory words: 216
-  NOTE: Misfire source temp-change limit.
+ ROM 0x04289C len 1 B RAM 0x5AF6
+ factory hex : D8
+ factory words: 216
+ NOTE: Misfire source temp-change limit.
 
 == Mis_trans_limit ==
-  ROM 0x042898  len 2 B  RAM 0x5AF0
-  factory hex  : 00 03
-  factory words: 3
-  NOTE: Misfire gear-transient window limit.
+ ROM 0x042898 len 2 B RAM 0x5AF0
+ factory hex : 00 03
+ factory words: 3
+ NOTE: Misfire gear-transient window limit.
 
 == Misf_rpm_diff ==
-  ROM 0x042E42  len 2 B  RAM 0x74B6
-  factory hex  : FF E2
-  factory words: 65506
-  NOTE: Misfire-detection enable: rpm-difference threshold.
+ ROM 0x042E42 len 2 B RAM 0x74B6
+ factory hex : FF E2
+ factory words: 65506
+ NOTE: Misfire-detection enable: rpm-difference threshold.
 
 == Misf_rpm_diff_start ==
-  ROM 0x042E44  len 2 B  RAM 0x74B8
-  factory hex  : FF D3
-  factory words: 65491
-  NOTE: Misfire-detection enable: rpm-difference threshold at start.
+ ROM 0x042E44 len 2 B RAM 0x74B8
+ factory hex : FF D3
+ factory words: 65491
+ NOTE: Misfire-detection enable: rpm-difference threshold at start.
 
 == Misf_kyltemp ==
-  ROM 0x042E46  len 1 B  RAM 0x74BA
-  factory hex  : 12
-  factory words: 18
-  NOTE: Misfire-detection enable coolant temperature.
+ ROM 0x042E46 len 1 B RAM 0x74BA
+ factory hex : 12
+ factory words: 18
+ NOTE: Misfire-detection enable coolant temperature.
 
 == Misf_wait_time ==
-  ROM 0x04289D  len 1 B  RAM 0x5AF8
-  factory hex  : 08
-  factory words: 8
-  NOTE: Post-inhibition wait before misfire counters active.
+ ROM 0x04289D len 1 B RAM 0x5AF8
+ factory hex : 08
+ factory words: 8
+ NOTE: Post-inhibition wait before misfire counters active.
 
 == Ign_counter_mis_lim ==
-  ROM 0x042EBE  len 4 B  RAM 0x7526  (MCS differs)
-  factory hex  : 00 00 09 60
-  factory words: 0 2400
-  NOTE: Ignition counter window limit for misfire evaluation.
+ ROM 0x042EBE len 4 B RAM 0x7526 
+ factory hex : 00 00 09 60
+ factory words: 0 2400
+ NOTE: Ignition counter window limit for misfire evaluation.

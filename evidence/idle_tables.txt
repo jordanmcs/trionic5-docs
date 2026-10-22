@@ -2,418 +2,418 @@ T5.5 IDLE-AIR CONTROL CALIBRATION TABLES - RAW BYTES
 Sources: firmware/4780656_factory.BIN (factory AUTHORITY).
 ROM addrs identical in both images (init copy sites byte-verified 513/513).
 All addresses/lengths from init-copy PEA-scan inventory; NOT ASM labels.
-Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs); that tune's data is not distributed
+Factory bytes authoritative. tune deltas are out of scope for this repo
 
 
 == Iv_min_tab ==
-  ROM 0x040FFC  len 108 B  RAM 0x61FC
-  factory hex  : 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 B4 00 B4 00 B4 00 B4 00 B4 00 B4 00 B4 00 C8 00 D2 01 03 01 0D 01 1B 01 1B 01 20 01 22 01 28 01 36 01 4C 01 54 01 5B 01 4A 01 4E 01 54 01 57 01 5A 01 5A 01 5A 01 81 01 90 01 A9 01 B3 01 D1 01 DB 01 F0 01 FE 02 15 02 1C 02 37 02 51 02 58 02 58 02 58 02 58 02 58 02 58 02 58 02 58
-  factory rows (decimal):
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 180
-    0 180
-    0 180
-    0 180
-    0 180
-    0 180
-    0 180
-    0 200
-    0 210
-    1   3
-    1  13
-    1  27
-    1  27
-    1  32
-    1  34
-    1  40
-    1  54
-    1  76
-    1  84
-    1  91
-    1  74
-    1  78
-    1  84
-    1  87
-    1  90
-    1  90
-    1  90
-    1 129
-    1 144
-    1 169
-    1 179
-    1 209
-    1 219
-    1 240
-    1 254
-    2  21
-    2  28
-    2  55
-    2  81
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-  NOTE: Idle-valve base position table, 54 words indexed by raw-rpm/125 (F_000709D4). Runtime = base + Iv_min_offset, clamped LLS_min..624.
+ ROM 0x040FFC len 108 B RAM 0x61FC
+ factory hex : 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 B4 00 B4 00 B4 00 B4 00 B4 00 B4 00 B4 00 C8 00 D2 01 03 01 0D 01 1B 01 1B 01 20 01 22 01 28 01 36 01 4C 01 54 01 5B 01 4A 01 4E 01 54 01 57 01 5A 01 5A 01 5A 01 81 01 90 01 A9 01 B3 01 D1 01 DB 01 F0 01 FE 02 15 02 1C 02 37 02 51 02 58 02 58 02 58 02 58 02 58 02 58 02 58 02 58
+ factory rows (decimal):
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 180
+ 0 180
+ 0 180
+ 0 180
+ 0 180
+ 0 180
+ 0 180
+ 0 200
+ 0 210
+ 1 3
+ 1 13
+ 1 27
+ 1 27
+ 1 32
+ 1 34
+ 1 40
+ 1 54
+ 1 76
+ 1 84
+ 1 91
+ 1 74
+ 1 78
+ 1 84
+ 1 87
+ 1 90
+ 1 90
+ 1 90
+ 1 129
+ 1 144
+ 1 169
+ 1 179
+ 1 209
+ 1 219
+ 1 240
+ 1 254
+ 2 21
+ 2 28
+ 2 55
+ 2 81
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ NOTE: Idle-valve base position table, 54 words indexed by raw-rpm/125 (F_000709D4). Runtime = base + Iv_min_offset, clamped LLS_min..624.
 
 == Iv_min_tab_ac ==
-  ROM 0x041068  len 108 B  RAM 0x6268
-  factory hex  : 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 BE 00 BE 00 BE 00 BE 00 BE 00 DC 00 E6 01 17 01 21 01 2F 01 2F 01 34 01 36 01 3C 01 4A 01 60 01 68 01 6F 01 5E 01 62 01 68 01 6B 01 6E 01 6E 01 6E 01 95 01 A4 01 BD 01 C7 01 E5 01 EF 02 04 02 12 02 29 02 30 02 4B 02 58 02 58 02 58 02 58 02 58 02 58 02 58 02 58 02 58
-  factory rows (decimal):
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 220
-    0 190
-    0 190
-    0 190
-    0 190
-    0 190
-    0 220
-    0 230
-    1  23
-    1  33
-    1  47
-    1  47
-    1  52
-    1  54
-    1  60
-    1  74
-    1  96
-    1 104
-    1 111
-    1  94
-    1  98
-    1 104
-    1 107
-    1 110
-    1 110
-    1 110
-    1 149
-    1 164
-    1 189
-    1 199
-    1 229
-    1 239
-    2   4
-    2  18
-    2  41
-    2  48
-    2  75
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-    2  88
-  NOTE: AC-variant base position table (same format), selected per status bits (0x1137 bit6 / 0x103A bit2) in F_000709D4.
+ ROM 0x041068 len 108 B RAM 0x6268
+ factory hex : 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 DC 00 BE 00 BE 00 BE 00 BE 00 BE 00 DC 00 E6 01 17 01 21 01 2F 01 2F 01 34 01 36 01 3C 01 4A 01 60 01 68 01 6F 01 5E 01 62 01 68 01 6B 01 6E 01 6E 01 6E 01 95 01 A4 01 BD 01 C7 01 E5 01 EF 02 04 02 12 02 29 02 30 02 4B 02 58 02 58 02 58 02 58 02 58 02 58 02 58 02 58 02 58
+ factory rows (decimal):
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 220
+ 0 190
+ 0 190
+ 0 190
+ 0 190
+ 0 190
+ 0 220
+ 0 230
+ 1 23
+ 1 33
+ 1 47
+ 1 47
+ 1 52
+ 1 54
+ 1 60
+ 1 74
+ 1 96
+ 1 104
+ 1 111
+ 1 94
+ 1 98
+ 1 104
+ 1 107
+ 1 110
+ 1 110
+ 1 110
+ 1 149
+ 1 164
+ 1 189
+ 1 199
+ 1 229
+ 1 239
+ 2 4
+ 2 18
+ 2 41
+ 2 48
+ 2 75
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ 2 88
+ NOTE: AC-variant base position table (same format), selected per status bits (0x1137 bit6 / 0x103A bit2) in F_000709D4.
 
 == Iv_min_count ==
-  ROM 0x0410D4  len 1 B  RAM 0x62D4
-  factory hex  : 05
-  factory words: 5
-  NOTE: Adaptation confirmation count (5) before Iv_min_offset steps. (The integrator word itself, Iv_min_offset = RAM 0x3460, clamped ±100, is a runtime word, not a table.)
+ ROM 0x0410D4 len 1 B RAM 0x62D4
+ factory hex : 05
+ factory words: 5
+ NOTE: Adaptation confirmation count (5) before Iv_min_offset steps. (The integrator word itself, Iv_min_offset = RAM 0x3460, clamped ±100, is a runtime word, not a table.)
 
 == Iv_min_load ==
-  ROM 0x0410D5  len 1 B  RAM 0x62D6
-  factory hex  : 16
-  factory words: 22
-  NOTE: Target minimum manifold-load count (0x16=22) for the Iv_min_offset integrator.
+ ROM 0x0410D5 len 1 B RAM 0x62D6
+ factory hex : 16
+ factory words: 22
+ NOTE: Target minimum manifold-load count (0x16=22) for the Iv_min_offset integrator.
 
 == Iv_min_change ==
-  ROM 0x0410D6  len 1 B  RAM 0x62D8
-  factory hex  : 03
-  factory words: 3
-  NOTE: Iv_min_offset step size (3).
+ ROM 0x0410D6 len 1 B RAM 0x62D8
+ factory hex : 03
+ factory words: 3
+ NOTE: Iv_min_offset step size (3).
 
 == LLS_min ==
-  ROM 0x040FE4  len 2 B  RAM 0x60B0
-  factory hex  : 00 E1
-  factory words: 225
-  NOTE: Minimum idle-valve command word (0xE1=225); max clamp 624 (0x270).
+ ROM 0x040FE4 len 2 B RAM 0x60B0
+ factory hex : 00 E1
+ factory words: 225
+ NOTE: Minimum idle-valve command word (0xE1=225); max clamp 624 (0x270).
 
 == Iv_start_pos_offset ==
-  ROM 0x0410F8  len 1 B  RAM 0x62FA
-  factory hex  : 32
-  factory words: 50
-  NOTE: Start-up idle-valve position extra (0x32).
+ ROM 0x0410F8 len 1 B RAM 0x62FA
+ factory hex : 32
+ factory words: 50
+ NOTE: Start-up idle-valve position extra (0x32).
 
 == Iv_start_rpm_offset ==
-  ROM 0x0410F9  len 1 B  RAM 0x62FC
-  factory hex  : 14
-  factory words: 20
-  NOTE: Start-up idle-valve rpm-window extra (0x14).
+ ROM 0x0410F9 len 1 B RAM 0x62FC
+ factory hex : 14
+ factory words: 20
+ NOTE: Start-up idle-valve rpm-window extra (0x14).
 
 == Iv_start_time_tab ==
-  ROM 0x0410FA  len 16 B  RAM 0x62FE
-  factory hex  : 00 00 00 10 00 20 00 30 00 40 00 50 00 60 00 70
-  factory words: 0 16 32 48 64 80 96 112
-  factory rows (decimal):
-    0   0
-    0  16
-    0  32
-    0  48
-    0  64
-    0  80
-    0  96
-    0 112
-  NOTE: Start-up idle-valve timing table (8 words).
+ ROM 0x0410FA len 16 B RAM 0x62FE
+ factory hex : 00 00 00 10 00 20 00 30 00 40 00 50 00 60 00 70
+ factory words: 0 16 32 48 64 80 96 112
+ factory rows (decimal):
+ 0 0
+ 0 16
+ 0 32
+ 0 48
+ 0 64
+ 0 80
+ 0 96
+ 0 112
+ NOTE: Start-up idle-valve timing table (8 words).
 
 == Idle_rpm_tab ==
-  ROM 0x04111A  len 16 B  RAM 0x60C4  (MCS differs)
-  factory hex  : 00 5A 00 5F 00 64 00 6E 00 6E 00 6E 00 6E 00 6E
-  factory words: 90 95 100 110 110 110 110 110
-  factory rows (decimal):
-    0  90
-    0  95
-    0 100
-    0 110
-    0 110
-    0 110
-    0 110
-    0 110
-  NOTE: Idle speed target table (rpm/10) on coolant axis — warmup doc Idle_rpm_tab.
+ ROM 0x04111A len 16 B RAM 0x60C4 
+ factory hex : 00 5A 00 5F 00 64 00 6E 00 6E 00 6E 00 6E 00 6E
+ factory words: 90 95 100 110 110 110 110 110
+ factory rows (decimal):
+ 0 90
+ 0 95
+ 0 100
+ 0 110
+ 0 110
+ 0 110
+ 0 110
+ 0 110
+ NOTE: Idle speed target table (rpm/10) on coolant axis — warmup doc Idle_rpm_tab.
 
 == Idle_der_tab ==
-  ROM 0x040FAE  len 32 B  RAM 0x5FD6
-  factory hex  : 00 80 00 81 81 81 81 82 00 80 80 80 80 80 80 80 00 80 81 82 84 85 86 88 00 00 80 80 80 80 80 80
-  factory rows (decimal):
-    0 128
-    0 129
-  129 129
-  129 130
-    0 128
-  128 128
-  128 128
-  128 128
-    0 128
-  129 130
-  132 133
-  134 136
-    0   0
-  128 128
-  128 128
-  128 128
-  NOTE: Idle rate-of-change / derivative table (16 words).
+ ROM 0x040FAE len 32 B RAM 0x5FD6
+ factory hex : 00 80 00 81 81 81 81 82 00 80 80 80 80 80 80 80 00 80 81 82 84 85 86 88 00 00 80 80 80 80 80 80
+ factory rows (decimal):
+ 0 128
+ 0 129
+ 129 129
+ 129 130
+ 0 128
+ 128 128
+ 128 128
+ 128 128
+ 0 128
+ 129 130
+ 132 133
+ 134 136
+ 0 0
+ 128 128
+ 128 128
+ 128 128
+ NOTE: Idle rate-of-change / derivative table (16 words).
 
 == Idle_p_tab ==
-  ROM 0x040FCE  len 16 B  RAM 0x5FF6
-  factory hex  : 00 00 01 01 01 01 01 04 00 01 01 02 02 03 04 05
-  factory words: 0 257 257 260 1 258 515 1029
-  factory rows (decimal):
-    0
-    0
-    1
-    1
-    1
-    1
-    1
-    4
-    0
-    1
-    1
-    2
-    2
-    3
-    4
-    5
-  NOTE: Idle governor proportional step table (per |error| bin).
+ ROM 0x040FCE len 16 B RAM 0x5FF6
+ factory hex : 00 00 01 01 01 01 01 04 00 01 01 02 02 03 04 05
+ factory words: 0 257 257 260 1 258 515 1029
+ factory rows (decimal):
+ 0
+ 0
+ 1
+ 1
+ 1
+ 1
+ 1
+ 4
+ 0
+ 1
+ 1
+ 2
+ 2
+ 3
+ 4
+ 5
+ NOTE: Idle governor proportional step table (per |error| bin).
 
 == Idle_step_imns ==
-  ROM 0x040FDE  len 2 B  RAM 0x60AC
-  factory hex  : 00 01
-  factory words: 1
-  NOTE: Idle integrator decrease step (word 1).
+ ROM 0x040FDE len 2 B RAM 0x60AC
+ factory hex : 00 01
+ factory words: 1
+ NOTE: Idle integrator decrease step (word 1).
 
 == Idle_step_ioka ==
-  ROM 0x040FE0  len 2 B  RAM 0x60AE
-  factory hex  : 00 01
-  factory words: 1
-  NOTE: Idle integrator increase step (word 1).
+ ROM 0x040FE0 len 2 B RAM 0x60AE
+ factory hex : 00 01
+ factory words: 1
+ NOTE: Idle integrator increase step (word 1).
 
 == Idle_update ==
-  ROM 0x040FA4  len 1 B  RAM 0x5FD2
-  factory hex  : 00
-  factory words: 0
-  NOTE: Idle controller update divider (factory 0).
+ ROM 0x040FA4 len 1 B RAM 0x5FD2
+ factory hex : 00
+ factory words: 0
+ NOTE: Idle controller update divider (factory 0).
 
 == Idle_ej_off ==
-  ROM 0x0411C9  len 1 B  RAM 0x6098
-  factory hex  : 00
-  factory words: 0
-  NOTE: Idle-exclusion threshold byte ("idle not off"): read heavily 0x6FF00-0x6FF5C, gates when idle control may disengage.
+ ROM 0x0411C9 len 1 B RAM 0x6098
+ factory hex : 00
+ factory words: 0
+ NOTE: Idle-exclusion threshold byte ("idle not off"): read heavily 0x6FF00-0x6FF5C, gates when idle control may disengage.
 
 == Idle_start ==
-  ROM 0x041284  len 1 B  RAM 0x609E
-  factory hex  : 05
-  factory words: 5
-  NOTE: Idle controller start counter (5).
+ ROM 0x041284 len 1 B RAM 0x609E
+ factory hex : 05
+ factory words: 5
+ NOTE: Idle controller start counter (5).
 
 == Idle_rpm_off ==
-  ROM 0x041162  len 2 B  RAM 0x6018
-  factory hex  : 00 00
-  factory words: 0
-  NOTE: Idle rpm offset word (factory 0).
+ ROM 0x041162 len 2 B RAM 0x6018
+ factory hex : 00 00
+ factory words: 0
+ NOTE: Idle rpm offset word (factory 0).
 
 == Idle_temp_off ==
-  ROM 0x040FE6  len 16 B  RAM 0x60B4
-  factory hex  : 00 00 00 1E 00 32 00 50 00 64 00 8C 00 C8 01 2C
-  factory words: 0 30 50 80 100 140 200 300
-  factory rows (decimal):
-    0   0
-    0  30
-    0  50
-    0  80
-    0 100
-    0 140
-    0 200
-    1  44
-  NOTE: Idle speed temperature offset table (8 words).
+ ROM 0x040FE6 len 16 B RAM 0x60B4
+ factory hex : 00 00 00 1E 00 32 00 50 00 64 00 8C 00 C8 01 2C
+ factory words: 0 30 50 80 100 140 200 300
+ factory rows (decimal):
+ 0 0
+ 0 30
+ 0 50
+ 0 80
+ 0 100
+ 0 140
+ 0 200
+ 1 44
+ NOTE: Idle speed temperature offset table (8 words).
 
 == Idle_ac_tab ==
-  ROM 0x0410D8  len 32 B  RAM 0x62DA
-  factory hex  : 01 4A 01 4A 01 4A 01 4A 01 4A 01 40 01 3B 01 36 01 22 01 24 01 27 01 28 01 23 01 22 01 15 01 22
-  factory rows (decimal):
-    1  74
-    1  74
-    1  74
-    1  74
-    1  74
-    1  64
-    1  59
-    1  54
-    1  34
-    1  36
-    1  39
-    1  40
-    1  35
-    1  34
-    1  21
-    1  34
-  NOTE: AC idle-speed bump table (16 words).
+ ROM 0x0410D8 len 32 B RAM 0x62DA
+ factory hex : 01 4A 01 4A 01 4A 01 4A 01 4A 01 40 01 3B 01 36 01 22 01 24 01 27 01 28 01 23 01 22 01 15 01 22
+ factory rows (decimal):
+ 1 74
+ 1 74
+ 1 74
+ 1 74
+ 1 74
+ 1 64
+ 1 59
+ 1 54
+ 1 34
+ 1 36
+ 1 39
+ 1 40
+ 1 35
+ 1 34
+ 1 21
+ 1 34
+ NOTE: AC idle-speed bump table (16 words).
 
 == Idle_ac_extra_tab ==
-  ROM 0x041188  len 32 B  RAM 0x601A
-  factory hex  : 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04
-  factory rows (decimal):
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-    0   4
-  NOTE: AC idle-speed extra table (16 words).
+ ROM 0x041188 len 32 B RAM 0x601A
+ factory hex : 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04 00 04
+ factory rows (decimal):
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ 0 4
+ NOTE: AC idle-speed extra table (16 words).
 
 == Idle_ac_extra_sp ==
-  ROM 0x0411A8  len 32 B  RAM 0x603A
-  factory hex  : 02 6C 02 46 02 20 01 FA 01 D4 01 AE 01 88 01 62 01 3C 01 16 00 F0 00 CA 00 A4 00 8E 00 7E 00 64
-  factory rows (decimal):
-    2 108
-    2  70
-    2  32
-    1 250
-    1 212
-    1 174
-    1 136
-    1  98
-    1  60
-    1  22
-    0 240
-    0 202
-    0 164
-    0 142
-    0 126
-    0 100
-  NOTE: AC idle-speed setpoint extras (16 words).
+ ROM 0x0411A8 len 32 B RAM 0x603A
+ factory hex : 02 6C 02 46 02 20 01 FA 01 D4 01 AE 01 88 01 62 01 3C 01 16 00 F0 00 CA 00 A4 00 8E 00 7E 00 64
+ factory rows (decimal):
+ 2 108
+ 2 70
+ 2 32
+ 1 250
+ 1 212
+ 1 174
+ 1 136
+ 1 98
+ 1 60
+ 1 22
+ 0 240
+ 0 202
+ 0 164
+ 0 142
+ 0 126
+ 0 100
+ NOTE: AC idle-speed setpoint extras (16 words).
 
 == Idle_start_extra ==
-  ROM 0x041132  len 16 B  RAM 0x6068
-  factory hex  : 00 19 00 14 00 14 00 14 00 14 00 0F 00 00 00 00
-  factory words: 25 20 20 20 20 15 0 0
-  factory rows (decimal):
-    0  25
-    0  20
-    0  20
-    0  20
-    0  20
-    0  15
-    0   0
-    0   0
-  NOTE: Start-idle extra rpm table (8 words).
+ ROM 0x041132 len 16 B RAM 0x6068
+ factory hex : 00 19 00 14 00 14 00 14 00 14 00 0F 00 00 00 00
+ factory words: 25 20 20 20 20 15 0 0
+ factory rows (decimal):
+ 0 25
+ 0 20
+ 0 20
+ 0 20
+ 0 20
+ 0 15
+ 0 0
+ 0 0
+ NOTE: Start-idle extra rpm table (8 words).
 
 == Idle_start_extra_sp ==
-  ROM 0x041142  len 8 B  RAM 0x6060
-  factory hex  : 78 64 50 46 3C 32 28 26
-  factory words: 30820 20550 15410 10278
-  NOTE: Start-idle extra setpoints (8 bytes).
+ ROM 0x041142 len 8 B RAM 0x6060
+ factory hex : 78 64 50 46 3C 32 28 26
+ factory words: 30820 20550 15410 10278
+ NOTE: Start-idle extra setpoints (8 bytes).
 
 == Idle_start_extra_ramp ==
-  ROM 0x04114A  len 16 B  RAM 0x6078
-  factory hex  : 01 2C 01 2C 01 2C 01 5E 01 90 01 90 00 00 00 00
-  factory words: 300 300 300 350 400 400 0 0
-  factory rows (decimal):
-    1  44
-    1  44
-    1  44
-    1  94
-    1 144
-    1 144
-    0   0
-    0   0
-  NOTE: Start-idle extra ramp times (8 words).
+ ROM 0x04114A len 16 B RAM 0x6078
+ factory hex : 01 2C 01 2C 01 2C 01 5E 01 90 01 90 00 00 00 00
+ factory words: 300 300 300 350 400 400 0 0
+ factory rows (decimal):
+ 1 44
+ 1 44
+ 1 44
+ 1 94
+ 1 144
+ 1 144
+ 0 0
+ 0 0
+ NOTE: Start-idle extra ramp times (8 words).
 
 == Idle_tryck ==
-  ROM 0x041272  len 16 B  RAM 0x61CE
-  factory hex  : 00 14 00 14 00 0A 00 00 00 00 00 00 00 00 00 00
-  factory words: 20 20 10 0 0 0 0 0
-  factory rows (decimal):
-    0
-   20
-    0
-   20
-    0
-   10
-    0
-    0
-    0
-    0
-    0
-    0
-    0
-    0
-    0
-    0
-  NOTE: Idle load (MAP) targets/limits, 16 bytes.
+ ROM 0x041272 len 16 B RAM 0x61CE
+ factory hex : 00 14 00 14 00 0A 00 00 00 00 00 00 00 00 00 00
+ factory words: 20 20 10 0 0 0 0 0
+ factory rows (decimal):
+ 0
+ 20
+ 0
+ 20
+ 0
+ 10
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ NOTE: Idle load (MAP) targets/limits, 16 bytes.
 
 == Idle_drift_tab ==
-  ROM 0x040FF8  len 4 B  RAM 0x61F8  (MCS differs)
-  factory hex  : 01 36 01 18
-  factory words: 310 280
-  NOTE: Idle drift correction pair (word 310/280).
+ ROM 0x040FF8 len 4 B RAM 0x61F8 
+ factory hex : 01 36 01 18
+ factory words: 310 280
+ NOTE: Idle drift correction pair (word 310/280).

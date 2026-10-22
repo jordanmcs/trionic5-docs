@@ -1,6 +1,6 @@
 # Iv_min_tab
 
-Calibration table, 54 words  ·  ROM 0x40FFC -> RAM 0x61FC
+Calibration table, 54 words · ROM 0x40FFC -> RAM 0x61FC
 
 **Value in factory 4780656:** 108 bytes — full hex in `source/idle_tables.txt`
 

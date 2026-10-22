@@ -1,6 +1,6 @@
 # Ret_fuel_time
 
-Calibration word (flash)  ·  0x41769 -> 0x4F4C
+Calibration word (flash) · 0x41769 -> 0x4F4C
 
 **Value in factory 4780656:** 0x02 — units: ticks
 

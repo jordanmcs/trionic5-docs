@@ -1,7 +1,7 @@
 
 # Lamb_temp
 
-Calibration scalar  ·  ROM 0x04074A
+Calibration scalar · ROM 0x04074A
 
 **Value in factory 4780656:**
 

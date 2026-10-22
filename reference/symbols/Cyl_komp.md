@@ -1,6 +1,6 @@
 # Cyl_komp
 
-Calibration table 4 B (flash/RAM state)  ·  0x40538 -> 0x4E0C
+Calibration table 4 B (flash/RAM state) · 0x40538 -> 0x4E0C
 
 **Value in factory 4780656:** 80 80 80 80 — units: (v+384)/512
 

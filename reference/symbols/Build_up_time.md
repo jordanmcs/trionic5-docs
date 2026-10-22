@@ -1,7 +1,7 @@
 
 # Build_up_time
 
-Calibration scalar  ·  ROM 0x040534
+Calibration scalar · ROM 0x040534
 
 **Value in factory 4780656:**
 

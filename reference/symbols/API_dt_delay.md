@@ -1,6 +1,6 @@
 # API_dt_delay
 
-Calibration word  ·  ROM 0x42E5A -> RAM 0x5B2E
+Calibration word · ROM 0x42E5A -> RAM 0x5B2E
 
 **Value in factory 4780656:** words: 1000
 

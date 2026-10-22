@@ -1,7 +1,7 @@
 
 # Knock_average
 
-State word (RAM, computed 0x62A28)  ·  RAM, computed 0x62A28
+State word (RAM, computed 0x62A28) · RAM, computed 0x62A28
 
 **Value in factory 4780656:** 0.1° units
 

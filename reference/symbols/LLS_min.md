@@ -1,6 +1,6 @@
 # LLS_min
 
-Calibration word  ·  ROM 0x40FE4 -> RAM 0x60B0
+Calibration word · ROM 0x40FE4 -> RAM 0x60B0
 
 **Value in factory 4780656:** words: 225
 

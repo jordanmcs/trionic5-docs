@@ -1,5 +1,9 @@
 # T5.5 ignition timing calculation subsystem (factory 4780656 disassembly and values)
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 Scope: how the ECU computes the final ignition angle every crank-sync ignition event — base map
 arbitration ([Ign_map_0](../reference/symbols/Ign_map_0.md)..8, [Ign_idle_angle](../reference/symbols/Ign_idle_angle.md)), every correction term, knock/idle/warm-up/transient
 links, and the output path. Raw table bytes: `ignition_tables.txt`. Decompiles (REA/Ghidra
@@ -14,82 +18,82 @@ the book's 0..50 deg display scale (book p ~2038 logs [Ign_angle](../reference/s
 
 ## 1. Inputs and sensors
 - Engine speed: RAM word `RAM_Rpm` 0x1066, units rpm x10 (gates compare 0x190=400 -> 4000 rpm at
-  0x6C0BC; [Ret_up_rpm](../reference/symbols/Ret_up_rpm.md) 150 = 1500 rpm). Filtered copy 0x3B72 used for the multi-spark rpm window.
+ 0x6C0BC; [Ret_up_rpm](../reference/symbols/Ret_up_rpm.md) 150 = 1500 rpm). Filtered copy 0x3B72 used for the multi-spark rpm window.
 - Load: 8-bit MAP sensor count (2.5-bar sensor, count ~= kPa absolute). Interpolation uses a
-  "Last"/Medellast byte 0x1032 and per-channel load/rpm coordinate pairs precomputed per event
-  (0x4664-0x468A, written by the event handler 0x638BE from rpm and MAP/rpm-interpolation indices
-  like Knock_wind code: 0x4688/0x468A for map0).
+ "Last"/Medellast byte 0x1032 and per-channel load/rpm coordinate pairs precomputed per event
+ (0x4664-0x468A, written by the event handler 0x638BE from rpm and MAP/rpm-interpolation indices
+ like Knock_wind code: 0x4688/0x468A for map0).
 - Coolant NTC -> [AD_kylv](../reference/symbols/AD_kylv.md) -> [Kyl_temp](../reference/symbols/Kyl_temp.md) degC (0x102E); intake NTC -> Lufttemp AD byte (0x1035).
-  Lufttemp selects the warm-up map crossfade (with [Temp_limit_low](../reference/symbols/Temp_limit_low.md)!/high! 0x42896/0x42897).
+ Lufttemp selects the warm-up map crossfade (with [Temp_limit_low](../reference/symbols/Temp_limit_low.md)!/high! 0x42896/0x42897).
 - TPS/idle switch, coast, gear: status bytes 0x76E5 (idle bits, e.g. bit $02 idle-map select),
-  0x76E6 (bit $02 = idle branch active with weight, bit $08 = AIR pump on, bit $10 = idle-weight
-  active), RAM_Gear (0x3356), RAM_Bil_hast (vehicle speed, vs Hast_grans!).
+ 0x76E6 (bit $02 = idle branch active with weight, bit $08 = AIR pump on, bit $10 = idle-weight
+ active), RAM_Gear (0x3356), RAM_Bil_hast (vehicle speed, vs Hast_grans!).
 - Knock subsystem outputs: [Ret_mangd](../reference/symbols/Ret_mangd.md)[4] bytes (0x3A40.., per-cyl retard event counters),
-  [Knock_level](../reference/symbols/Knock_level.md) 0x112C, Knock_map_offset/lim runtime words, adaptive offset work word 0x3896.
+ [Knock_level](../reference/symbols/Knock_level.md) 0x112C, Knock_map_offset/lim runtime words, adaptive offset work word 0x3896.
 - Idle controller output: idle torque angle word 0x4770 (seeded from RAM_Ign_idle_angle!).
 - API idle-governor (adaptive idle) outputs [API_dt_offset_tab](../reference/symbols/API_dt_offset_tab.md) index -> work word 0x390E.
 - Crank sync angle word 0x3BEC -> copy 0x4690 (values 0 / 0xB4 / 0x168 / 0x21C = 0/180/360/540 deg)
-  selects the per-cylinder ignition offset at the final sum.
+ selects the per-cylinder ignition offset at the final sum.
 - Trans/comfort inputs for torque requests: flags 0x39A0 (upshift request), 0x39A2 (downshift),
-  set by the transmission/comfort arbitration elsewhere.
+ set by the transmission/comfort arbitration elsewhere.
 
 ## 2. Function map (ROM addresses)
 - `0x48896` ISR chain: ignition crank-sync interrupt service routine; calls 0x43B74 after the
-  angle pass. `0x488A8` companion handler: multi-spark pulse scheduling (RAM_Multispark,
-  RAM_Mult_time -> TPU), reads RAM_Ign_angle for the pulse window.
+ angle pass. `0x488A8` companion handler: multi-spark pulse scheduling (RAM_Multispark,
+ RAM_Mult_time -> TPU), reads RAM_Ign_angle for the pulse window.
 - `Function_00063712` (0x63712): ignition event preparation. Multi-spark decision:
-  [Kyl_temp](../reference/symbols/Kyl_temp.md) < 0 degC AND rpm < 425 -> [Mult_time](../reference/symbols/Mult_time.md)=5000; rpm <= 850 -> [Mult_time](../reference/symbols/Mult_time.md)=3000; else off.
-  (Book: multi-spark below 0 degC coolant up to ~900 rpm, 210/s.)
+ [Kyl_temp](../reference/symbols/Kyl_temp.md) < 0 degC AND rpm < 425 -> [Mult_time](../reference/symbols/Mult_time.md)=5000; rpm <= 850 -> [Mult_time](../reference/symbols/Mult_time.md)=3000; else off.
+ (Book: multi-spark below 0 degC coolant up to ~900 rpm, 210/s.)
 - `Function_000638BE` (0x638BE, evidence func_0x638be.json): per-event orchestrator. Precomputes
-  all map interpolation coordinate pairs (0x4664..0x468A), increments Ign_counter/Ign_counter2/
-  Ign_counter3 (0x1086/0x108A) against [Ign_counter_mis_lim](../reference/symbols/Ign_counter_mis_lim.md)!/Sync_rpm!, calls knock offset engine
-  Function_00062842 (0x63ABA), then calls CalculateIgnitionAngle (0x63ADE) unless bypassed
-  (0x3B78 set -> force 10 deg, or 0x76E6 bit $40), clamps and stores result.
+ all map interpolation coordinate pairs (0x4664..0x468A), increments Ign_counter/Ign_counter2/
+ Ign_counter3 (0x1086/0x108A) against [Ign_counter_mis_lim](../reference/symbols/Ign_counter_mis_lim.md)!/Sync_rpm!, calls knock offset engine
+ Function_00062842 (0x63ABA), then calls CalculateIgnitionAngle (0x63ADE) unless bypassed
+ (0x3B78 set -> force 10 deg, or 0x76E6 bit $40), clamps and stores result.
 - `CalculateIgnitionAngle` = `Function_00062102` (0x62102-0x62840, labeled in listing;
-  evidence func_0x62102.json): the main angle calculation. Described in section 4.
+ evidence func_0x62102.json): the main angle calculation. Described in section 4.
 - `Function_00061F30` (evidence func_0x61f30.json): generic 2-D map interpolation
-  (map, x_frac, x_int, y_axis, x_axis, y_idx_pair). Same engine used by knock maps.
+ (map, x_frac, x_int, y_axis, x_axis, y_idx_pair). Same engine used by knock maps.
 - `Function_00061600` (evidence func_0x61600.json): generic weight-ramp engine for the map blend.
-  Channel index in stack arg; shared target word 0x3B02; per-channel up/down rates from
-  RAM_Ramp_up_ram!/Ramp_down_ram! (0x42876/0x42886, 8 words each); produces RAM_Weight[ch]
-  (= 0x3994, 8 words, 0..1000 scale).
+ Channel index in stack arg; shared target word 0x3B02; per-channel up/down rates from
+ RAM_Ramp_up_ram!/Ramp_down_ram! (0x42876/0x42886, 8 words each); produces RAM_Weight[ch]
+ (= 0x3994, 8 words, 0..1000 scale).
 - `Function_00062842` (0x62842, evidence func_0x62842.json): knock offset engine (see knock
-  subsystem notes) — consumes Knock_map_offset/Knock_map_lim at 0x63444, produces [Ret_mangd](../reference/symbols/Ret_mangd.md)
-  demands; runs immediately before the angle calculation.
+ subsystem notes) — consumes Knock_map_offset/Knock_map_lim at 0x63444, produces [Ret_mangd](../reference/symbols/Ret_mangd.md)
+ demands; runs immediately before the angle calculation.
 - `Function_0006BFA4` (evidence func_0x6bfa4.json): per-cylinder load transient detector.
-  NOT the spark scheduler: builds Lacc_mangd/Lret_mangd fuel demand via Lacc_konst!/Lret_konst!
-  maps scaled by [Acc_temp](../reference/symbols/Acc_temp.md) / [Ret_temp](../reference/symbols/Ret_temp.md) ([Ret_temp](../reference/symbols/Ret_temp.md) at 0x6C2DC). This is the fuel-side sibling of
-  the ignition path; [Ret_temp](../reference/symbols/Ret_temp.md) (warm-up multiplier, [Retard_temp](../reference/symbols/Retard_temp.md)! table 1.40..2.00x) acts HERE,
-  not on the angle sum.
+ NOT the spark scheduler: builds Lacc_mangd/Lret_mangd fuel demand via Lacc_konst!/Lret_konst!
+ maps scaled by [Acc_temp](../reference/symbols/Acc_temp.md) / [Ret_temp](../reference/symbols/Ret_temp.md) ([Ret_temp](../reference/symbols/Ret_temp.md) at 0x6C2DC). This is the fuel-side sibling of
+ the ignition path; [Ret_temp](../reference/symbols/Ret_temp.md) (warm-up multiplier, [Retard_temp](../reference/symbols/Retard_temp.md)! table 1.40..2.00x) acts HERE,
+ not on the angle sum.
 - `Function_0006E722` (evidence func_0x6e722.json): per-cylinder knock-retard demand handler.
-  Increments [Ret_mangd](../reference/symbols/Ret_mangd.md)[cyl] by ([Retard_konst](../reference/symbols/Retard_konst.md)! interp x [Ret_temp](../reference/symbols/Ret_temp.md))/256, decays by
-  ([Max_ret_dec](../reference/symbols/Max_ret_dec.md)! x prev)/256 per event, clamps via [Ret_tab_mul](../reference/symbols/Ret_tab_mul.md)!/255, mirrors history into 0x3A40,
-  sets per-cyl active bits in RAM_Ret_ind (0x10,0x20,0x40,0x80).
+ Increments [Ret_mangd](../reference/symbols/Ret_mangd.md)[cyl] by ([Retard_konst](../reference/symbols/Retard_konst.md)! interp x [Ret_temp](../reference/symbols/Ret_temp.md))/256, decays by
+ ([Max_ret_dec](../reference/symbols/Max_ret_dec.md)! x prev)/256 per event, clamps via [Ret_tab_mul](../reference/symbols/Ret_tab_mul.md)!/255, mirrors history into 0x3A40,
+ sets per-cyl active bits in RAM_Ret_ind (0x10,0x20,0x40,0x80).
 - `Function_0006C402` (evidence func_0x6c402.json): start/restart handler. Seeds
-  0x4770 := RAM_Ign_idle_angle! at 0x6C456; forces RAM_Ign_angle := 100 (=10.0 deg) and
-  [Mult_time](../reference/symbols/Mult_time.md) := 5000 at 0x6C58E-0x6C596 (book: start angle 10 deg BTDC).
+ 0x4770 := RAM_Ign_idle_angle! at 0x6C456; forces RAM_Ign_angle := 100 (=10.0 deg) and
+ [Mult_time](../reference/symbols/Mult_time.md) := 5000 at 0x6C58E-0x6C596 (book: start angle 10 deg BTDC).
 - `Function_0006F450` (evidence func_0x6f450.json): idle speed controller; writes
-  [Rpm_idle_nom](../reference/symbols/Rpm_idle_nom.md) (0x1160) and manages the idle angle work word 0x4770 — normally
-  0x4770 := RAM_Ign_idle_angle! (0x6F752), but if idle has been outside band for Diag_tid it
-  substitutes RAM_Ign_idle_angle_start! (18.0 deg, 0x6F76A). Idle-torque modulation of 0x4770
-  happens in the same controller region; the anti-stall/hold behavior (flag set at 0x622DE
-  bit $04 @0x1139, cleared at 0x62354) holds the idle angle when vehicle speed exceeds
-  Hast_grans! (book: advance up to 20 deg to prevent stall).
+ [Rpm_idle_nom](../reference/symbols/Rpm_idle_nom.md) (0x1160) and manages the idle angle work word 0x4770 — normally
+ 0x4770 := RAM_Ign_idle_angle! (0x6F752), but if idle has been outside band for Diag_tid it
+ substitutes RAM_Ign_idle_angle_start! (18.0 deg, 0x6F76A). Idle-torque modulation of 0x4770
+ happens in the same controller region; the anti-stall/hold behavior (flag set at 0x622DE
+ bit $04 @0x1139, cleared at 0x62354) holds the idle angle when vehicle speed exceeds
+ Hast_grans! (book: advance up to 20 deg to prevent stall).
 - `Function_0004AAC6` (evidence func_0x4aac6.json): AIR-pump ignition advance ramp. Steps
-  current offset by [Ap_ign_step](../reference/symbols/Ap_ign_step.md)! (0.5 deg) up to [Airpump_ign_offset](../reference/symbols/Airpump_ign_offset.md)! cap and subtracts it from
-  the angle sum input when active (0x76E6 bit $08). Factory target offset = 0 (feature off;
-  book p6010 [Airpump_ign_offset](../reference/symbols/Airpump_ign_offset.md)!).
+ current offset by [Ap_ign_step](../reference/symbols/Ap_ign_step.md)! (0.5 deg) up to [Airpump_ign_offset](../reference/symbols/Airpump_ign_offset.md)! cap and subtracts it from
+ the angle sum input when active (0x76E6 bit $08). Factory target offset = 0 (feature off;
+ book p6010 [Airpump_ign_offset](../reference/symbols/Airpump_ign_offset.md)!).
 - `Function_000610D2` (K-adapt sampler): initializes the adaptive ignition offset work word
-  0x3896 from [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md)! (0x611AA) / clears it when a learning run completes.
+ 0x3896 from [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md)! (0x611AA) / clears it when a learning run completes.
 - `Function_000694B2`: all-cyl knock fuel enrichment gate — inside rpm window
-  [Ret_down_rpm](../reference/symbols/Ret_down_rpm.md)!..[Ret_up_rpm](../reference/symbols/Ret_up_rpm.md)! (900..1500 rpm) with knock status and rpm deficit >= [Ret_delta_rpm](../reference/symbols/Ret_delta_rpm.md)!,
-  loads [Ret_fuel_fak](../reference/symbols/Ret_fuel_fak.md) := [Ret_fuel_tab](../reference/symbols/Ret_fuel_tab.md)! (102). This is the book's "adds a small amount of fuel
-  when all four cylinders knock" response; the ignition counterpart is the map2 overlay.
+ [Ret_down_rpm](../reference/symbols/Ret_down_rpm.md)!..[Ret_up_rpm](../reference/symbols/Ret_up_rpm.md)! (900..1500 rpm) with knock status and rpm deficit >= [Ret_delta_rpm](../reference/symbols/Ret_delta_rpm.md)!,
+ loads [Ret_fuel_fak](../reference/symbols/Ret_fuel_fak.md) := [Ret_fuel_tab](../reference/symbols/Ret_fuel_tab.md)! (102). This is the book's "adds a small amount of fuel
+ when all four cylinders knock" response; the ignition counterpart is the map2 overlay.
 
 ## 3. Base map selection — simultaneous weighted blend, not a switch
 CalculateIgnitionAngle evaluates ALL relevant maps every event and blends them by weights:
 
-  angle_blend = sum(map_value[i] * weight[i]) / sum(weight[i])
+ angle_blend = sum(map_value[i] * weight[i]) / sum(weight[i])
 
 Sources and their weight words (weight scale 0..1000, RAM_Weight base 0x3994):
 
@@ -119,27 +123,27 @@ factory constant 20 = +2.0 deg).
 
 ## 4. Correction terms applied after the blend (in code order, 0x6266E-0x62838)
 1. Knock retard overlay: Ign_map2 (16 rpm x 8 load starting at 128 = above ~atmospheric)
-   interpolated at 0x62684/0x626BE (either always-on or weight-gated path by 0x3998). Result
-   word 0x3988. Also produces runtime diagnostics: RAM_Knock_map_offset (0x10BA) = weight0x3998 x
-   map2 value / 1000, RAM_Knock_map_lim (0x10B8) = map2 value + [Knock_ang_dec](../reference/symbols/Knock_ang_dec.md)! (2.0 deg), both
-   consumed by knock engine F_00062842.
+ interpolated at 0x62684/0x626BE (either always-on or weight-gated path by 0x3998). Result
+ word 0x3988. Also produces runtime diagnostics: RAM_Knock_map_offset (0x10BA) = weight0x3998 x
+ map2 value / 1000, RAM_Knock_map_lim (0x10B8) = map2 value + [Knock_ang_dec](../reference/symbols/Knock_ang_dec.md)! (2.0 deg), both
+ consumed by knock engine F_00062842.
 2. Global knock subtract: D2 -= [Knock_offset](../reference/symbols/Knock_offset.md)! (0x41822; factory 0) at 0x62776.
 3. API idle governor subtract: D2 -= word 0x390E at 0x62824. 0x390E/0x3910 hold the API
-   (adaptive idle) retard/advance offset selected from [API_dt_offset_tab](../reference/symbols/API_dt_offset_tab.md)! with [API_dt_delay](../reference/symbols/API_dt_delay.md)!/
-   [API_dt_ramp](../reference/symbols/API_dt_ramp.md)! ramping (0x61D0E-0x61E62). This is idle-stability spark dither.
+ (adaptive idle) retard/advance offset selected from [API_dt_offset_tab](../reference/symbols/API_dt_offset_tab.md)! with [API_dt_delay](../reference/symbols/API_dt_delay.md)!/
+ [API_dt_ramp](../reference/symbols/API_dt_ramp.md)! ramping (0x61D0E-0x61E62). This is idle-stability spark dither.
 4. Transient overlay add: D2 += (weight0x399A x map3 value)/1000 (0x626F4-0x627A4), also stored
-   to RAM word [Trans_offset](../reference/symbols/Trans_offset.md) (0x3D... runtime copy; constant in flash is 0x41824=0). Factory
-   Ign_map3 is all zeros — transient ignition advance exists but is disabled in factory tune.
+ to RAM word [Trans_offset](../reference/symbols/Trans_offset.md) (0x3D... runtime copy; constant in flash is 0x41824=0). Factory
+ Ign_map3 is all zeros — transient ignition advance exists but is disabled in factory tune.
 5. Global fixed offset: D2 += [Ign_offset](../reference/symbols/Ign_offset.md)! (0x4284A, factory 0).
 6. Per-cylinder offset: D2 += Ign_offset_cylN! (0x4284C-0x52) selected by crank sync angle word
-   0x4690: 0xB4 -> cyl4, 0x168 -> cyl2, 0x21C -> cyl1, else cyl3. Factory all 0 (per-cyl trim).
+ 0x4690: 0xB4 -> cyl4, 0x168 -> cyl2, 0x21C -> cyl1, else cyl3. Factory all 0 (per-cyl trim).
 7. AIR pump advance: if 0x76E6 bit $08, D2 = F_0004AAC6(D2) — subtracts the ramped airpump
-   offset (factory cap 0).
+ offset (factory cap 0).
 8. Adaptive knock ignition offset: D2 += work word 0x3896 (0x6282E), the live copy of
-   [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md)! (factory -100 = -10.0 deg as init; maintained by the K-adapt routine).
+ [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md)! (factory -100 = -10.0 deg as init; maintained by the K-adapt routine).
 9. Clamp: -100..+400 counts (-10.0..+40.0 deg) at 0x63AE6/0x63AF2; store RAM_Ign_angle 0x10B4.
 10. Log byte: [Ign_angle_byte](../reference/symbols/Ign_angle_byte.md) (0x3902) = ([Ign_angle](../reference/symbols/Ign_angle.md) + 100)/10 (0x63B0E), 1 deg steps, -10..+40
-    window — the scale T5Suite logs as [Ign_angle](../reference/symbols/Ign_angle.md).
+ window — the scale T5Suite logs as [Ign_angle](../reference/symbols/Ign_angle.md).
 
 Knock per-cylinder retard ([Ret_mangd](../reference/symbols/Ret_mangd.md)) is NOT summed into this global angle here; it is applied
 per cylinder downstream (see section 6). [Knock_reduce](../reference/symbols/Knock_reduce.md) 1.5 deg/event and [Knock_back](../reference/symbols/Knock_back.md) recovery
@@ -154,21 +158,21 @@ Ign_map4 crossfade. Keep this separation in docs (naming trap, matches warmup no
 ## 5. Starting / multi-spark
 - At start (F_0006C402): [Ign_angle](../reference/symbols/Ign_angle.md) forced to 100 (10.0 deg, book exact) and [Mult_time](../reference/symbols/Mult_time.md)=5000.
 - F_00063712 arms RAM_Multispark when [Kyl_temp](../reference/symbols/Kyl_temp.md) < 0 degC and rpm (0x3B72) < 850 (5000 ticks
-  below 425 rpm, 3000 ticks 425-850). Multi-spark pulses are emitted by the 0x488A8 handler:
-  it schedules pulses between the primary spark point ([Ign_angle](../reference/symbols/Ign_angle.md) + 300 counts) using
-  [Mult_time](../reference/symbols/Mult_time.md) as the tick period (0x488DE-0x48906), i.e. repeated sparks from ~10 BTDC to ATDC,
-  matching the book's 210/s description. Disabled during knock evaluation (ion window).
+ below 425 rpm, 3000 ticks 425-850). Multi-spark pulses are emitted by the 0x488A8 handler:
+ it schedules pulses between the primary spark point ([Ign_angle](../reference/symbols/Ign_angle.md) + 300 counts) using
+ [Mult_time](../reference/symbols/Mult_time.md) as the tick period (0x488DE-0x48906), i.e. repeated sparks from ~10 BTDC to ATDC,
+ matching the book's 210/s description. Disabled during knock evaluation (ion window).
 
 ## 6. Output path
 RAM_Ign_angle (0x10B4, 0.1 deg BTDC) is the single angular output of this subsystem. It is
 consumed by:
 - the ignition event ISR chain at 0x488xx (sync event -> next spark scheduling, cassette
-  trigger lines pins 9-12 per book; per-cylinder offsets come from the 0x4690 sync word and the
-  [Ret_mangd](../reference/symbols/Ret_mangd.md) demand bytes),
+ trigger lines pins 9-12 per book; per-cylinder offsets come from the 0x4690 sync word and the
+ [Ret_mangd](../reference/symbols/Ret_mangd.md) demand bytes),
 - the multi-spark pulse scheduler (0x488A8),
 - the diagnostic analog logger (0x593E8: Ign_angle/5 + 80 for the serial stream),
 - knock window placement (knock subsystem reads [Ign_angle](../reference/symbols/Ign_angle.md) at 0x60BA6/0x60BE6 to open the ion
-  window after spark).
+ window after spark).
 No coil-dwell (charge-time) table exists in this subsystem: the T5 ignition cassette holds the
 400 V charge rail and the ECU only grounds the trigger lines (book p36); "[Overs_tab](../reference/symbols/Overs_tab.md)!/Overstid_tab!
 /Overs_komp_tab!/Overs_angle!" are APC boost-monitoring tables (naming trap, used at 0x725B8 with
@@ -188,21 +192,19 @@ work words, 0x3A40-0x3A43 [Ret_mangd](../reference/symbols/Ret_mangd.md)[4] (kno
 Knock_count_cyl1, Ign_counter(Ign_counter_mis) + Ign_counter2 0x1086 + Ign_counter3 0x108A
 (ignition-event counters for misfire/O2 windows), 0x1151 [Ret_fuel_fak](../reference/symbols/Ret_fuel_fak.md).
 
-## MCS diffs
+## Factory-side notes
 
-Catalogued on the tune-changes page: `T5 MCS Tune Changes.md` (ignition).
 IDENTICAL to factory: every correction mechanism in code, Ign_map_1/3/5/6/7/8, all axes except
 map0/map2 x-axes, [Ign_offset](../reference/symbols/Ign_offset.md)* (all 0), [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md) (-10.0), Ramp_up/down_ram, [Knock_offset](../reference/symbols/Knock_offset.md),
 [Trans_offset](../reference/symbols/Trans_offset.md), Airpump set, Ret_* scalars, [Retard_temp](../reference/symbols/Retard_temp.md)!, multi-spark gates.
-
 ## Open questions
 - Exact sum point of per-cylinder [Ret_mangd](../reference/symbols/Ret_mangd.md) x 1.5 deg into the commanded spark instant
-  (downstream of RAM_Ign_angle, in the 0x48xxx event scheduling / TPU compare write).
+ (downstream of RAM_Ign_angle, in the 0x48xxx event scheduling / TPU compare write).
 - Setter of the channel-5 gate (0x399E, Ign_map5 +2 deg condition) and flag 0x39A6 owner
-  semantics beyond knock-priority inference.
+ semantics beyond knock-priority inference.
 - [Ign_map_1](../reference/symbols/Ign_map_1.md) y-axis (0x41AAC) decodes to [-460,-196,-166,-146,-86,0,30,250,400,1650,2000] —
-  plausibly rpm error vs [Rpm_idle_nom](../reference/symbols/Rpm_idle_nom.md); exact reference unconfirmed. Map8 axis is a clean
-  +/-100 rpm-error axis supporting that reading.
+ plausibly rpm error vs [Rpm_idle_nom](../reference/symbols/Rpm_idle_nom.md); exact reference unconfirmed. Map8 axis is a clean
+ +/-100 rpm-error axis supporting that reading.
 - [Ret_ind](../reference/symbols/Ret_ind.md) (0x1043) vs symbol-table [Ret_temp](../reference/symbols/Ret_temp.md) same-address collision — one table entry is wrong.
 - [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md) factory -10.0 deg: initial value vs learned-range center not established.
 

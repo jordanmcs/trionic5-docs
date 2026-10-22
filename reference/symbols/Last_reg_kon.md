@@ -1,6 +1,6 @@
 # Last_reg_kon
 
-16-bit table x4 (flash)  ·  0x417CC -> 0x51BE
+16-bit table x4 (flash) · 0x417CC -> 0x51BE
 
 **Value in factory 4780656:** 290,100,150,0 — units: counts
 

@@ -1,6 +1,6 @@
 # Max_regl_sp
 
-16-bit table (16 words, flash)  ·  ROM 0x415A6, RAM 0x5F22
+16-bit table (16 words, flash) · ROM 0x415A6, RAM 0x5F22
 
 **Value in factory 4780656:** 6500->1500 desc — units: rpm x10
 

@@ -1,5 +1,9 @@
 # T5 Misfire Detection
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 > **Summary:** Misfires are detected by **ionic conduction** — the spark plug is the combustion sensor, and a commanded spark without a flame-front ion signature is one misfire event for that cylinder. Events accumulate per cylinder in two OBD windows: **Mis200** (400 combustions = 200 rev, catalyst criterion) and **Mis1000** (2000 combustions = 1000 rev, emissions criterion), normalized against limit maps [Mis200_map](../reference/symbols/Mis200_map.md) / [Mis1000_map](../reference/symbols/Mis1000_map.md) interpolated at the current rpm/load point. Counting is inhibited exactly when combustion is legitimately abnormal (fuel cut, rev limit, purge, AC kick, throttle/gear transients, cold engine). **The firmware reports misfires; it never cuts a cylinder on account of them.**
 
 Working evidence: `source/misfire_system.md`, raw bytes `source/misfire_tables.txt`, window-machinery decompile `t5-re/evidence/torque_mine/func_0x63b1e.json`.

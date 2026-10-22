@@ -1,6 +1,6 @@
 # Iv_min_load
 
-Calibration byte  ·  ROM 0x410D5 -> RAM 0x62D6
+Calibration byte · ROM 0x410D5 -> RAM 0x62D6
 
 **Value in factory 4780656:** bytes: 0x16
 

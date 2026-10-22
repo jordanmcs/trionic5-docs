@@ -1,6 +1,6 @@
 # Max_neg_der
 
-Calibration words (flash, UNUSED)  ·  ROM 0x41668/6A/6C/6E, 0x4166F
+Calibration words (flash, UNUSED) · ROM 0x41668/6A/6C/6E, 0x4166F
 
 **Value in factory 4780656:** 32/5/-10/96/50 — units: mixed
 

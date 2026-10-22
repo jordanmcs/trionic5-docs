@@ -1,6 +1,6 @@
 # Ret_tab_mul
 
-Calibration byte (flash)  ·  ROM 0x4097D
+Calibration byte (flash) · ROM 0x4097D
 
 **Value in factory 4780656:** 10 — units: per-mille/10 scale
 

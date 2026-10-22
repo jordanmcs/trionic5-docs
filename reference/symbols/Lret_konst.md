@@ -1,6 +1,6 @@
 # Lret_konst
 
-Calibration word (flash)  ·  ROM 0x4093C
+Calibration word (flash) · ROM 0x4093C
 
 **Value in factory 4780656:** 8x8 grid 0..102 — units: dimensionless
 

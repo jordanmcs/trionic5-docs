@@ -1,6 +1,6 @@
 # Reg_varv
 
-16-bit table (7 words, flash)  ·  ROM 0x41480, RAM 0x5D66
+16-bit table (7 words, flash) · ROM 0x41480, RAM 0x5D66
 
 **Value in factory 4780656:** 2000-5500 — units: rpm x10
 

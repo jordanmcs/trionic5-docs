@@ -1,7 +1,7 @@
 
 # Eft_dec_fak
 
-Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x4088B
+Calibration table, 15 B (coolant-AD-indexed) · ROM 0x4088B
 
 **Value in factory 4780656:**
 

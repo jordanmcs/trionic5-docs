@@ -1,6 +1,6 @@
 # Ign_angle_byte
 
-State byte (RAM 0x3902)  ·  RAM 0x3902
+State byte (RAM 0x3902) · RAM 0x3902
 
 **Value in factory 4780656:** runtime — units: 1 crank degree, +10 offset
 

@@ -1,6 +1,6 @@
 # Misf_wait_time
 
-Calibration word  ·  ROM 0x4289D -> RAM 0x5AF8
+Calibration word · ROM 0x4289D -> RAM 0x5AF8
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
 

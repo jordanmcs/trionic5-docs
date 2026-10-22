@@ -1,6 +1,6 @@
 # Rpm_dif
 
-Calibration word (flash)  ·  0x40F28 -> 0x7664
+Calibration word (flash) · 0x40F28 -> 0x7664
 
 **Value in factory 4780656:** (fuel_tables.txt) — units: rpm/10
 

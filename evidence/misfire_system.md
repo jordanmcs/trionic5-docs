@@ -1,5 +1,9 @@
 # Trionic 5.5 — Misfire Detection & Counters
 
+> **Source note:** “the book” below means Dilemma & J.K. Nilsson,
+> *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+> documentation shipped with the T5SuiteII tuning suite.
+
 > **Summary:** Misfire detection is an ion-current (ionic conduction) function: the spark plug itself is the combustion sensor, and a spark that produces no flame is reported as a misfire event. The ECU accumulates those events per cylinder into two OBD-style windows — **Mis200** (per 400 combustions = 200 crank revolutions, catalyst-damage criterion) and **Mis1000** (per 2000 combustions = 1000 revolutions, emissions criterion) — and compares them against the **limit maps** [Mis200_map](../reference/symbols/Mis200_map.md) / [Mis1000_map](../reference/symbols/Mis1000_map.md) interpolated for the current boost/rpm operating point. Counting is inhibited during conditions where combustion is intentionally or transiently abnormal (fuel cut, rev limit, purge, AC kick, throttle transients, gear changes, low coolant). Exceedance sets MIL/DTC state and per-cylinder worst-cylinder selection. **There is no cylinder cut and no torque intervention on the misfire path** — this firmware reports misfires; it does not react to them by cutting fuel or spark on the affected cylinder.
 
 **Platform:** NG900 Saab 900/9-3, B204RM, OBD2. **Factory reference:** factory `4780656` throughout.
@@ -29,7 +33,7 @@ Code: evaluation task at `0x63B1E` region (window/limit machinery `0x63D0E`–`0
 At each window rollover the per-cylinder counters `Mis200_1..4` / `Mis1000_1..4` are cleared (`0x64A70`–`0x64A9C`, `0x64B3C`–`0x64B9A`). Per window, each cylinder's raw event count is scaled and accumulated:
 
 ```
-Mis200_cyl += window_events_cyl / Mis200_limit      (0x64BB2–0x64BC4, DIVU)
+Mis200_cyl += window_events_cyl / Mis200_limit (0x64BB2–0x64BC4, DIVU)
 ```
 
 `Mis200_limit` / `Mis1000_limit` (RAM working words, min 1) are the interpolated map limits: [Mis200_map](../reference/symbols/Mis200_map.md) / [Mis1000_map](../reference/symbols/Mis1000_map.md) (576-byte grids) with axes [Misfire_map_x_axis](../reference/symbols/Misfire_map_x_axis.md) / [Misfire_map_y_axis](../reference/symbols/Misfire_map_y_axis.md) (book: "Boost pressure in x axis"), interpolated at `0x6185C`–`0x6189C`; related reference grid [Detect_map](../reference/symbols/Detect_map.md) ("Reference map for misfire detection") feeds the gate word `Detect_limit`. Factory values in `misfire_tables.txt`; both totals report through the OBD live-data block (`Mis200_tot` id 0x56, `Mis200_1..4` 0x58.., `Mis1000_tot` 0x60, `Mis1000_1..4` 0x62..).
@@ -65,7 +69,7 @@ Diagnostic evaluation (`0x5C4xx`–`0x5CB6x`): with `Mis200_tot ≠ 0` and windo
 
 ## 5. Calibration table reference
 
-Full raw bytes: **`misfire_tables.txt`** (25 tables, factory-authoritative via init-copy inventory; MCS diffs: catalogued in `T5 MCS Tune Changes.md`). Key entries: [Mis200_map](../reference/symbols/Mis200_map.md), [Mis1000_map](../reference/symbols/Mis1000_map.md) (576-byte limit grids), [Misfire_map_x_axis](../reference/symbols/Misfire_map_x_axis.md)/`_y_axis`, `Detect_map(_x_axis/_y_axis)`, [Mis_kyltemp_tab](../reference/symbols/Mis_kyltemp_tab.md) (14 coolant rows), [Misftakeoff_ign_tab](../reference/symbols/Misftakeoff_ign_tab.md) / [Misftrans_ign_tab](../reference/symbols/Misftrans_ign_tab.md) (14 limit rows), the `Misf*_ign_lim` scalar set, `Misf_rpm_diff(_start)`, [Misf_kyltemp](../reference/symbols/Misf_kyltemp.md), [Misf_wait_time](../reference/symbols/Misf_wait_time.md), [Ign_counter_mis_lim](../reference/symbols/Ign_counter_mis_lim.md).
+Full raw bytes: **`misfire_tables.Key entries: [Mis200_map](../reference/symbols/Mis200_map.md), [Mis1000_map](../reference/symbols/Mis1000_map.md) (576-byte limit grids), [Misfire_map_x_axis](../reference/symbols/Misfire_map_x_axis.md)/`_y_axis`, `Detect_map(_x_axis/_y_axis)`, [Mis_kyltemp_tab](../reference/symbols/Mis_kyltemp_tab.md) (14 coolant rows), [Misftakeoff_ign_tab](../reference/symbols/Misftakeoff_ign_tab.md) / [Misftrans_ign_tab](../reference/symbols/Misftrans_ign_tab.md) (14 limit rows), the `Misf*_ign_lim` scalar set, `Misf_rpm_diff(_start)`, [Misf_kyltemp](../reference/symbols/Misf_kyltemp.md), [Misf_wait_time](../reference/symbols/Misf_wait_time.md), [Ign_counter_mis_lim](../reference/symbols/Ign_counter_mis_lim.md).
 
 ## 6. Open items
 

@@ -3,15 +3,11 @@
 
 # Ign_map_0_x_axis
 
-Calibration axis, 18 words (raw MAP count)  ·  ROM 0x41826 (RAM [Ign_map_0_x_axis](Ign_map_0_x_axis.md))
+Calibration axis, 18 words (raw MAP count) · ROM 0x41826 (RAM [Ign_map_0_x_axis](Ign_map_0_x_axis.md))
 
 
 
-**Value in factory 4780656:** 18 words, MAP counts 0–240 (full table below). Factory upper points 208/224/240. **MCS differs** — see T5 MCS Tune Changes.
-
-
-
-MAP axis of the main ignition map, passed as the x-axis for the [Knock_ref_matrix](Knock_ref_matrix.md) interpolation (0x61B46).
+**Value in factory 4780656:** 18 words, MAP counts 0–240 (full table below). Factory upper points 208/224/240.MAP axis of the main ignition map, passed as the x-axis for the [Knock_ref_matrix](Knock_ref_matrix.md) interpolation (0x61B46).
 
 
 

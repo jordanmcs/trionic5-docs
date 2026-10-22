@@ -5,13 +5,20 @@ Reverse-engineering documentation for the Saab **Trionic 5** engine-management E
 REA + Ghidra (m68k). The analysis targets a T5.5 (NG900 era — Saab 900 / 9-3,
 B204RM) 256 KiB flash with the ROM based at `0x40000`.
 
-All calibration values in these pages are **factory 4780656** values. Some tables carry
-an `(MCS differs)` tag: a commercial reflash changes that table, and the tune
-differences are documented separately (not distributed here). Detection and control
-*logic* is byte-identical between the factory image and that tune; the differences are
-calibration-only.
+All calibration values in these pages are **factory 4780656** values. Differences
+introduced by commercial reflashes are out of scope here and not distributed; the
+detection and control *logic* is identical between the factory image and those tunes —
+the differences are calibration-only.
+
+Throughout the docs, **"the book"** means: Dilemma & J.K. Nilsson,
+*Analysing/Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
+documentation shipped with the T5SuiteII tuning suite.
 
 ## Where to start
+
+**Looking up a symbol?** → **[`reference/symbol-index.md`](reference/symbol-index.md)** — every named
+calibration and state symbol, grouped by subsystem, each linking to a page with ROM/RAM
+address, factory value, units, and consuming code paths.
 
 `guide/` holds one subsystem explainer per functional area:
 

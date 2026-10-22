@@ -1,7 +1,7 @@
 
 # Eft_fak2
 
-State byte array (RAM, per cylinder)  ·  (RAM)
+State byte array (RAM, per cylinder) · (RAM)
 
 **Value in factory 4780656:**
 

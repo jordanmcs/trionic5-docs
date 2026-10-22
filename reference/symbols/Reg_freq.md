@@ -1,6 +1,6 @@
 # Reg_freq
 
-State word (RAM 0x3A88)  ·  0x3A88
+State word (RAM 0x3A88) · 0x3A88
 
 **Value in factory 4780656:** 90 — units: Hz
 
