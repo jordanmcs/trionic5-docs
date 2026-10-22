@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash->RAM)"
-address: "ROM 0x42854"
----
 # Ign_offset_adapt
+
+Calibration word (flash->RAM)  ·  ROM 0x42854
 
 **Value in factory 4780656:** -100 (= -10.0) — units: 0.1 crank degree
 

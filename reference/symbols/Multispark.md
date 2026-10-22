@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "State byte (RAM 0x1118)"
-address: "RAM 0x1118"
----
 # Multispark
+
+State byte (RAM 0x1118)  ·  RAM 0x1118
 
 **Value in factory 4780656:** runtime — units: 0/1
 

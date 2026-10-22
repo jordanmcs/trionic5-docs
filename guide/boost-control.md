@@ -1,6 +1,3 @@
----
-tags: [saab, trionic5, boost, subsystem]
----
 # T5 Boost Control
 
 > **Summary:** Charge-pressure control is a per-cycle chain: **request** from [Tryck_mat](../reference/symbols/Tryck_mat.md) (rpm × throttle) → overshoot compensation → **knock derate** → **gear / transmission limiters** → **intake-air-temperature cap** (automatics) → fault derate; the result [Regl_tryck](../reference/symbols/Regl_tryck.md) (kPa absolute) is compared against averaged actual MAP ([P_medel](../reference/symbols/P_medel.md)) and closed by a **PID with feed-forward** (`P/I/D_fors` gains, [Reg_kon_mat](../reference/symbols/Reg_kon_mat.md) duty offset, [Apc_adapt](../reference/symbols/Apc_adapt.md) learned term) whose output [PWM_ut](../reference/symbols/PWM_ut.md) (0–98.0 %) drives the boost-control solenoid that bleeds boost pressure to the wastegate actuator.

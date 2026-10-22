@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "Calibration table, 19 B (°C values)"
-address: "ROM 0x40B58"
----
 
 # Kyltemp_tab
+
+Calibration table, 19 B (°C values)  ·  ROM 0x40B58
 
 **Value in factory 4780656:**
 

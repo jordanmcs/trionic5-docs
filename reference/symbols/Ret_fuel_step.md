@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x41768 -> 0x4F4E"
----
 # Ret_fuel_step
+
+Calibration word (flash)  ·  0x41768 -> 0x4F4E
 
 **Value in factory 4780656:** 0x01 — units: factor units
 

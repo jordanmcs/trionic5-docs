@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration word"
-address: "ROM 0x42E42 -> RAM 0x74B6"
----
 # Misf_rpm_diff
+
+Calibration word  ·  ROM 0x42E42 -> RAM 0x74B6
 
 **Value in factory 4780656:** words: 65506
 

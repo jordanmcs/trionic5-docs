@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM)"
-address: "RAM"
----
 
 # Kadapt_ref_value
+
+State word (RAM)  ·  RAM
 
 **Value in factory 4780656:** 2·(activity score)
 

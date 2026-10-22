@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x4075C -> 0x4A7A"
----
 # Nr_adapt_idle_mat
+
+Calibration word (flash)  ·  0x4075C -> 0x4A7A
 
 **Value in factory 4780656:** 0x0080 — units: count
 

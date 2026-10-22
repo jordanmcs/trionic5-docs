@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (RAM state, init flash)"
-address: "0x4075B -> 0x4A78"
----
 # Adapt_inj_imat
+
+Calibration word (RAM state, init flash)  ·  0x4075B -> 0x4A78
 
 **Value in factory 4780656:** 0x80 — units: (v+384)/512
 

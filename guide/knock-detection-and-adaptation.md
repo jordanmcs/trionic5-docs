@@ -1,12 +1,3 @@
----
-
-tags: [saab, trionic5, knock, ion-sensing, ignition, reverse-engineering, reference]
-
-firmware: "factory 4780656"
-
-created: 2026-10-20
-
----
 
 
 
@@ -65,11 +56,8 @@ count vs [Knock_ref_matrix](../reference/symbols/Knock_ref_matrix.md)[rpm,load] 
 
 
 | loop | action | recovery |
-
 |---|---|---|
-
 | per-cyl ignition | +1.5°/event ([Knock_reduce](../reference/symbols/Knock_reduce.md)=15), cap [Knock_lim_tab](../reference/symbols/Knock_lim_tab.md)[rpm] = 3→**13°**@2500→9°@6000 (stock) | −0.2°/period ([Knock_back](../reference/symbols/Knock_back.md)=2), out as [Ret_mangd](../reference/symbols/Ret_mangd.md) |
-
 | global APC boost | [Apc_decrese](../reference/symbols/Apc_decrese.md) +8 %/event; `APC_knock = (100−[Apc_decrese](../reference/symbols/Apc_decrese.md))/100` on boost PID ([Regl_tryck](../reference/symbols/Regl_tryck.md) @0x72782) | factory +5 %/period ([Apc_knock_back](../reference/symbols/Apc_knock_back.md)) |
 
 

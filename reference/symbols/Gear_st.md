@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, torque]
-
-type: "Calibration table, 5 words"
-
-address: "ROM 0x41540 -> RAM 0x5EB8"
-
----
 
 # Gear_st
+
+Calibration table, 5 words  ·  ROM 0x41540 -> RAM 0x5EB8
 
 
 

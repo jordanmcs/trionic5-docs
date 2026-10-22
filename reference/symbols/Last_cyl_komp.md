@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40BAA -> 0x4BF8"
----
 # Last_cyl_komp
+
+Calibration word (flash)  ·  0x40BAA -> 0x4BF8
 
 **Value in factory 4780656:** 0x28 (40) — units: kPa abs
 

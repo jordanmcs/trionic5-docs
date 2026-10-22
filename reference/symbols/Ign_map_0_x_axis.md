@@ -1,16 +1,9 @@
----
-
-tags: [saab, trionic5, symbol, knock]
-
-type: "Calibration axis, 18 words (raw MAP count)"
-
-address: "ROM 0x41826 (RAM [Ign_map_0_x_axis](Ign_map_0_x_axis.md))"
-
----
 
 
 
 # Ign_map_0_x_axis
+
+Calibration axis, 18 words (raw MAP count)  ·  ROM 0x41826 (RAM [Ign_map_0_x_axis](Ign_map_0_x_axis.md))
 
 
 
@@ -27,43 +20,24 @@ MAP axis of the main ignition map, passed as the x-axis for the [Knock_ref_matri
 
 
 | # | Raw (MAP count) | ≈ kPa abs | ≈ boost (bar) |
-
 |---|---|---|---|
-
 | 0 | 0 | ≈0 | -1.00 |
-
 | 1 | 16 | ≈16 | -0.84 |
-
 | 2 | 24 | ≈24 | -0.76 |
-
 | 3 | 32 | ≈32 | -0.68 |
-
 | 4 | 40 | ≈40 | -0.60 |
-
 | 5 | 48 | ≈48 | -0.52 |
-
 | 6 | 64 | ≈64 | -0.36 |
-
 | 7 | 80 | ≈80 | -0.20 |
-
 | 8 | 96 | ≈96 | -0.04 |
-
 | 9 | 112 | ≈112 | +0.12 |
-
 | 10 | 128 | ≈128 | +0.28 |
-
 | 11 | 144 | ≈144 | +0.44 |
-
 | 12 | 160 | ≈160 | +0.60 |
-
 | 13 | 176 | ≈176 | +0.76 |
-
 | 14 | 192 | ≈192 | +0.92 |
-
 | 15 | 208 | ≈208 | +1.08 |
-
 | 16 | 224 | ≈224 | +1.24 |
-
 | 17 | 240 | ≈240 | +1.40 |
 
 

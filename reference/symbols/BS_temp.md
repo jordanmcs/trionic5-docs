@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration scalar"
-address: "ROM 0x040F23"
----
 
 # BS_temp
+
+Calibration scalar  ·  ROM 0x040F23
 
 **Value in factory 4780656:**
 

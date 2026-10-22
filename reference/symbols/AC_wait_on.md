@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration table, 8 bytes"
-address: "ROM 0x4110A -> RAM 0x6006"
----
 # AC_wait_on
+
+Calibration table, 8 bytes  ·  ROM 0x4110A -> RAM 0x6006
 
 **Value in factory 4780656:** bytes: 0x0E 0x0E 0x0E 0x0E 0x0E 0x0E 0x0E 0x0E
 

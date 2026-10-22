@@ -1,16 +1,9 @@
----
-
-tags: [saab, trionic5, symbol, knock]
-
-type: "Calibration byte (flash)"
-
-address: "ROM 0x4153E"
-
----
 
 
 
 # Apc_frek
+
+Calibration byte (flash)  ·  ROM 0x4153E
 
 
 

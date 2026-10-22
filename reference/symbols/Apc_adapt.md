@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State word (RAM 0x345A)"
-address: "0x345A"
----
 # Apc_adapt
+
+State word (RAM 0x345A)  ·  0x345A
 
 **Value in factory 4780656:** dynamic — units: PWM counts
 

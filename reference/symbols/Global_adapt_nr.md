@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40984 -> 0x4B7E"
----
 # Global_adapt_nr
+
+Calibration word (flash)  ·  0x40984 -> 0x4B7E
 
 **Value in factory 4780656:** 0x0320 — units: ticks
 

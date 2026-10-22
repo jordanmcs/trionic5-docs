@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "Calibration table, 19 B (AD axis)"
-address: "ROM 0x40B45"
----
 
 # Kyltemp_steg
+
+Calibration table, 19 B (AD axis)  ·  ROM 0x40B45
 
 **Value in factory 4780656:**
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration byte"
-address: "ROM 0x4289C -> RAM 0x5AF6"
----
 # Mis_temp_limit
+
+Calibration byte  ·  ROM 0x4289C -> RAM 0x5AF6
 
 **Value in factory 4780656:** bytes: 0xD8
 

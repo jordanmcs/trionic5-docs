@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration table, 15 B (coolant-AD-indexed)"
-address: "ROM 0x4085E"
----
 
 # Startvev_fak
+
+Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x4085E
 
 **Value in factory 4780656:**
 

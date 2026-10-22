@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration table, 16 words × rpm"
-address: "ROM 0x417DE"
----
 
 # Knock_lim_tab
+
+Calibration table, 16 words × rpm  ·  ROM 0x417DE
 
 **Value in factory 4780656:**
 

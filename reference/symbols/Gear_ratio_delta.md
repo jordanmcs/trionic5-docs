@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, torque]
-
-type: "Calibration table, 5 bytes"
-
-address: "ROM 0x4154A -> RAM 0x5EC2"
-
----
 
 # Gear_ratio_delta
+
+Calibration table, 5 bytes  ·  ROM 0x4154A -> RAM 0x5EC2
 
 
 

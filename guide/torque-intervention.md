@@ -1,6 +1,3 @@
----
-tags: [saab, trionic5, torque, subsystem]
----
 # T5 Torque Intervention
 
 > **Summary:** There is no torque-request bus and no arbitration hub. Interventions are small strategy blocks that all converge on one shared retard word, **0x390E**, subtracted from the summed ignition advance by the combiner `Function_00061F30` at `0x6282C`: `timing = Σ per-cylinder offsets − 0x390E + 0x3896`. The automatic-transmission pair **API_dt** (N→D engagement assist) and **API_ku** (kickdown-upshift shock cut) detect gearbox events from engine sensors alone — gear-characteristic discrete, engine-speed trace, throttle delta — and at factory both produce **zero** retard (offset tables all zero). MT cars get a full ignition blip during lever moves instead (`Function_00071F30`). `RAM_API` has zero producers: "API" is internal strategy namespace, not a link to the gearbox.

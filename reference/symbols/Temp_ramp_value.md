@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration scalar"
-address: "ROM 0x0408BA"
----
 
 # Temp_ramp_value
+
+Calibration scalar  ·  ROM 0x0408BA
 
 **Value in factory 4780656:**
 

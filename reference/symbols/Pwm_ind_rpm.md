@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "16-bit table (16 words, flash)"
-address: "ROM 0x41288, RAM 0x5B6E"
----
 # Pwm_ind_rpm
+
+16-bit table (16 words, flash)  ·  ROM 0x41288, RAM 0x5B6E
 
 **Value in factory 4780656:** 1500-6500 rpm — units: rpm x10
 

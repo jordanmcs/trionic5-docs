@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration table, 4 words"
-address: "ROM 0x42EBE -> RAM 0x7526"
----
 # Ign_counter_mis_lim
+
+Calibration table, 4 words  ·  ROM 0x42EBE -> RAM 0x7526
 
 **Value in factory 4780656:** words: 0, 2400
  **MCS differs** — see T5 MCS Tune Changes.

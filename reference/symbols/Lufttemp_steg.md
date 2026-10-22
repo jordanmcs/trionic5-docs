@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "Calibration table, 16 B (AD axis)"
-address: "ROM 0x40B6E"
----
 
 # Lufttemp_steg
+
+Calibration table, 16 B (AD axis)  ·  ROM 0x40B6E
 
 **Value in factory 4780656:**
 

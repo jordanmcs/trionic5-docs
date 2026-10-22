@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration table, 15 B (coolant-AD-indexed)"
-address: "ROM 0x409AC"
----
 
 # Accel_temp
+
+Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x409AC
 
 **Value in factory 4780656:**
 

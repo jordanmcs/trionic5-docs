@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State word (RAM 0x3356)"
-address: "0x3356"
----
 # P_medel
+
+State word (RAM 0x3356)  ·  0x3356
 
 **Value in factory 4780656:** dynamic — units: kPa absolute
 

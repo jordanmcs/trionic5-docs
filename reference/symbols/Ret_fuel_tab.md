@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x4176A -> 0x4F50"
----
 # Ret_fuel_tab
+
+Calibration word (flash)  ·  0x4176A -> 0x4F50
 
 **Value in factory 4780656:** 0x66 — units: (v+1024)/1024
 

@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM 0x1D0E)"
-address: "RAM 0x1D0E"
----
 
 # Knock_count
+
+State word (RAM 0x1D0E)  ·  RAM 0x1D0E
 
 **Value in factory 4780656:** counter
 

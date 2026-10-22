@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration scalar"
-address: "ROM 0x042E6A"
----
 
 # Start_time_rpm_lim
+
+Calibration scalar  ·  ROM 0x042E6A
 
 **Value in factory 4780656:**
 

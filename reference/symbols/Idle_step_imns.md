@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration word"
-address: "ROM 0x40FDE -> RAM 0x60AC"
----
 # Idle_step_imns
+
+Calibration word  ·  ROM 0x40FDE -> RAM 0x60AC
 
 **Value in factory 4780656:** words: 1
 

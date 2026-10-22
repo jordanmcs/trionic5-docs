@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x417AB -> 0x4F92"
----
 # Load_adapt_time
+
+Calibration word (flash)  ·  0x417AB -> 0x4F92
 
 **Value in factory 4780656:** 2 — units: window units (book: 30 s)
 

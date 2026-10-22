@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration axis, 16 words"
-address: "ROM 0x42B7A"
----
 
 # Knock_wind_rpm
+
+Calibration axis, 16 words  ·  ROM 0x42B7A
 
 **Value in factory 4780656:**
 

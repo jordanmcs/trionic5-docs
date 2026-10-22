@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration byte"
-address: "ROM 0x40FA7 -> RAM 0x60A4"
----
 # AC_slope
+
+Calibration byte  ·  ROM 0x40FA7 -> RAM 0x60A4
 
 **Value in factory 4780656:** bytes: 0x04
 

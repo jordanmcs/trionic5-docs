@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration word"
-address: "ROM 0x42ECC -> RAM 0x753A"
----
 # Misftransa_limit
+
+Calibration word  ·  ROM 0x42ECC -> RAM 0x753A
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
  **MCS differs** — see T5 MCS Tune Changes.

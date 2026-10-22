@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, torque]
-
-type: "Calibration table, 16 bytes"
-
-address: "ROM 0x415D6 -> RAM 0x5F52"
-
----
 
 # Regl_tryck_sgm
+
+Calibration table, 16 bytes  ·  ROM 0x415D6 -> RAM 0x5F52
 
 
 

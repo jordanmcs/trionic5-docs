@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration word (flash)"
-address: "ROM 0x417DC"
----
 
 # Knock_back
+
+Calibration word (flash)  ·  ROM 0x417DC
 
 **Value in factory 4780656:** 2 = 0.2° per control period
 

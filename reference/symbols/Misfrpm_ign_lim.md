@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration word"
-address: "ROM 0x42EC8 -> RAM 0x7532"
----
 # Misfrpm_ign_lim
+
+Calibration word  ·  ROM 0x42EC8 -> RAM 0x7532
 
 **Value in factory 4780656:** 1 bytes — full hex in `source/misfire_tables.txt`
 

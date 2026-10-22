@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration byte"
-address: "ROM 0x411C9 -> RAM 0x6098"
----
 # Idle_ej_off
+
+Calibration byte  ·  ROM 0x411C9 -> RAM 0x6098
 
 **Value in factory 4780656:** bytes: 0x00
 

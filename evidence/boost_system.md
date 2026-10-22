@@ -91,7 +91,7 @@ Factory 90 Hz / 70 Hz = the book's T5-valve values (switch ≈2500 rpm to avoid 
 
 ## 3. Derate/limit path summary (priority as coded, all applied to the request byte unless noted)
 1. [Tryck_mat](../reference/symbols/Tryck_mat.md)(_a) request (0x3352).
-2. + overshoot comp (0x47B2).
+2. \+ overshoot comp (0x47B2).
 3. − knock derate [Apc_decrese](../reference/symbols/Apc_decrese.md) (floor 120 kPa) — 0x72776-0x72786.
 4. = [Regl_tryck_fgaut](../reference/symbols/Regl_tryck_fgaut.md) if auto-stage flag; else cap by [Regl_tryck_fgm](../reference/symbols/Regl_tryck_fgm.md) (1st) / _sgm (2nd) — 0x727B0-0x72858.
 5. = intake-air-temp cap Max_regl_temp_1/2 (automatics only) — 0x7285C-0x728E0.

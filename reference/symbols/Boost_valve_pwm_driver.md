@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "Function"
-address: "0x466F0"
----
 # Boost_valve_pwm_driver
+
+Function  ·  0x466F0
 
 **Value in factory 4780656:** — — units: counts
 

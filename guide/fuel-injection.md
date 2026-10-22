@@ -1,6 +1,3 @@
----
-tags: [saab, trionic5, fuel, subsystem]
----
 # T5 Fuel Injection
 
 > **Summary:** Base pulse = **injector constant × air charge**, then a fixed multiplier chain: global adaptation → one of {main VE map [Insp_mat](../reference/symbols/Insp_mat.md) + per-cell adaptation | idle map | knock map} → warm-up blend → transient max/min → WOT enrichment → lambda integrator (±25 %) → post-cut/hot-start ramps → cylinder balance trims → additive trims + purge, then ÷10, **battery-voltage open-time add**, minimum-duration floor [Min_tid](../reference/symbols/Min_tid.md) (250 = 1.000 ms), cap 130 ms. Injection is **fully sequential, firing order 1-3-4-2**, one pulse per port per 720° cycle, at a fixed crank angle ([Vinkel_konst](../reference/symbols/Vinkel_konst.md) = 53°) — with grouped/halved fallback whenever cycle sync is lost.
@@ -24,7 +21,7 @@ Time base: **1 tick = 4 µs** (anchor: [Min_tid](../reference/symbols/Min_tid.md
 6. × WOT catalyst enrichment ([Fload_tab](../reference/symbols/Fload_tab.md) +6…10 %, throttle-AD gated, 550–2400 rpm only)
 7. × lambda integrator ([Lambdaint](../reference/symbols/Lambdaint.md) + 384)/512 — closed loop ±25 %
 8. × post-cut re-enrichment ([Ret_fuel_fak](../reference/symbols/Ret_fuel_fak.md)), hot-start, after-fuel-cut ramps; × per-cylinder [Cyl_komp](../reference/symbols/Cyl_komp.md) only below [Last_cyl_komp](../reference/symbols/Last_cyl_komp.md) = 40 kPa
-9. + `Br_plus − Br_minus`, + purge compensation
+9. \+ `Br_plus − Br_minus`, + purge compensation
 10. ÷ 10, + `Batt_korr_tab[14 − V]` (injector open-time compensation, 0.59–3.7 ms, added *after* all scaling), air-pump trim
 11. overrides: fixed idle time [Tid_konst](../reference/symbols/Tid_konst.md), external/dyno `Extern_tid`; floor [Min_tid](../reference/symbols/Min_tid.md); cap 32500 ticks
 → [Insp_tid](../reference/symbols/Insp_tid.md) (halved in group fallback) → TPU.

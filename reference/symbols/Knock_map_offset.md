@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "State word (RAM 0x10BA)"
-address: "RAM 0x10BA"
----
 # Knock_map_offset
+
+State word (RAM 0x10BA)  ·  RAM 0x10BA
 
 **Value in factory 4780656:** runtime — units: 0.1 crank degree (scaled)
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "State word (RAM)"
-address: "0x1064 (symbol table)"
----
 # Insptid_ms10
+
+State word (RAM)  ·  0x1064 (symbol table)
 
 **Value in factory 4780656:** runtime — units: 0.1 ms
 

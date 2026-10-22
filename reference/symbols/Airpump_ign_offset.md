@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x42BEA"
----
 # Airpump_ign_offset
+
+Calibration word (flash)  ·  ROM 0x42BEA
 
 **Value in factory 4780656:** 0 — units: 0.1 crank degree
 

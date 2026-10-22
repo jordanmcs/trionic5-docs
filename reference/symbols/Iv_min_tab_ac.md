@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration table, 54 words"
-address: "ROM 0x41068 -> RAM 0x6268"
----
 # Iv_min_tab_ac
+
+Calibration table, 54 words  ·  ROM 0x41068 -> RAM 0x6268
 
 **Value in factory 4780656:** 108 bytes — full hex in `source/idle_tables.txt`
 

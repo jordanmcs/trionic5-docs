@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (per cylinder)"
-address: "per cylinder"
----
 
 # Spik_count
+
+State word (per cylinder)  ·  per cylinder
 
 **Value in factory 4780656:** 1 = over reference, 2 = strong
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration byte (flash)"
-address: "ROM 0x4098B"
----
 # Max_lret_dec
+
+Calibration byte (flash)  ·  ROM 0x4098B
 
 **Value in factory 4780656:** 180 (180/256) — units: /256 fraction
 

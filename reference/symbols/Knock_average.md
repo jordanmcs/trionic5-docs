@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM, computed 0x62A28)"
-address: "RAM, computed 0x62A28"
----
 
 # Knock_average
+
+State word (RAM, computed 0x62A28)  ·  RAM, computed 0x62A28
 
 **Value in factory 4780656:** 0.1° units
 

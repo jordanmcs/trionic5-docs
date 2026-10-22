@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration table, 14 bytes"
-address: "ROM 0x42EEC -> RAM 0x755E"
----
 # Misftrans_ign_tab
+
+Calibration table, 14 bytes  ·  ROM 0x42EEC -> RAM 0x755E
 
 **Value in factory 4780656:** bytes: 0x96 0x6E 0x64 0x64 0x55 0x55 0x55 0x55 0x5A 0x5F 0x5F 0x64 0x64 0x6E 0x78
  **MCS differs** — see T5 MCS Tune Changes.

@@ -1,9 +1,8 @@
 T5.5 MISFIRE-DETECTION CALIBRATION TABLES - RAW BYTES
-Sources: bin/4780656_factory.BIN (factory AUTHORITY).
+Sources: firmware/4780656_factory.BIN (factory AUTHORITY).
 ROM addrs identical in both images (init copy sites byte-verified 513/513).
 All addresses/lengths from init-copy PEA-scan inventory; NOT ASM labels.
-Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs);
-their bytes live in mcs_bytes_by_table.txt (summary: T5 MCS Tune Changes.md).
+Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs); that tune's data is not distributed
 
 
 == Mis200_map ==

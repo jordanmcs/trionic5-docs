@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "Calibration table, 8 B (°C axis)"
-address: "ROM 0x4115A"
----
 
 # I_luft_st
+
+Calibration table, 8 B (°C axis)  ·  ROM 0x4115A
 
 **Value in factory 4780656:**
 

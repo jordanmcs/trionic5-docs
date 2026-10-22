@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, ignition]
-
-type: "Calibration word (flash->RAM)"
-
-address: "ROM 0x4181E"
-
----
 
 # Ign_idle_angle
+
+Calibration word (flash->RAM)  ·  ROM 0x4181E
 
 
 

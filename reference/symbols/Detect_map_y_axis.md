@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration axis, 16 words (rpm)"
-address: "ROM 0x42124 (RAM [Detect_map_y_axis](Detect_map_y_axis.md))"
----
 
 # Detect_map_y_axis
+
+Calibration axis, 16 words (rpm)  ·  ROM 0x42124 (RAM [Detect_map_y_axis](Detect_map_y_axis.md))
 
 **Value in factory 4780656:** 16 words, rpm 880–6010 (full table below).
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State word (RAM 0x3FA2)"
-address: "0x3FA2"
----
 # Limiter_cause
+
+State word (RAM 0x3FA2)  ·  0x3FA2
 
 **Value in factory 4780656:** bitfield — units: cause code
 

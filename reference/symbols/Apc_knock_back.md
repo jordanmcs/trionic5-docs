@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration byte (flash)"
-address: "ROM 0x42EAA"
----
 
 # Apc_knock_back
+
+Calibration byte (flash)  ·  ROM 0x42EAA
 
 **Value in factory 4780656:** Raw **5** (1 B) at ROM `0x42EAA`.
 

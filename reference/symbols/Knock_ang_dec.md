@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration word (flash)"
-address: "ROM 0x42874"
----
 
 # Knock_ang_dec
+
+Calibration word (flash)  ·  ROM 0x42874
 
 **Value in factory 4780656:** 20 = 2.0°
 

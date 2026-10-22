@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x41DC0"
----
 # Ign_map_4
+
+Calibration word (flash)  ·  ROM 0x41DC0
 
 **Value in factory 4780656:** 0..360 — units: 0.1 crank degree
 

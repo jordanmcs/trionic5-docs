@@ -1,8 +1,3 @@
----
-
-tags: [saab, trionic5, ignition, subsystem]
-
----
 
 # T5 Ignition Timing
 
@@ -33,19 +28,12 @@ All relevant maps are interpolated every event (engine `Function_00061F30`) and 
 
 
 | Map | Role | Engagement |
-
 |---|---|---|
-
 | [Ign_map_0](../reference/symbols/Ign_map_0.md) | warm base advance (rpm × load) | always computed, weight instant |
-
 | [Ign_map_4](../reference/symbols/Ign_map_4.md) | warm-up map (cat light-off advance) | crossfade by intake temp between [Temp_limit_low](../reference/symbols/Temp_limit_low.md)/`high` |
-
 | idle branch: [Ign_idle_angle](../reference/symbols/Ign_idle_angle.md) + [Ign_map_1](../reference/symbols/Ign_map_1.md) (or [Ign_map_8](../reference/symbols/Ign_map_8.md) in coast) | idle torque control | idle governor active; bare angle in gears 1–2 |
-
 | [Ign_map_5](../reference/symbols/Ign_map_5.md) | flat +2.0° overlay | channel-5 condition (setter untraced) |
-
 | [Ign_map_6](../reference/symbols/Ign_map_6.md) / [Ign_map_7](../reference/symbols/Ign_map_7.md) | upshift / downshift torque control | transmission request flags |
-
 | [Ign_map_3](../reference/symbols/Ign_map_3.md) | transient advance | present, **all zero in factory** |
 
 
@@ -60,13 +48,13 @@ All relevant maps are interpolated every event (engine `Function_00061F30`) and 
 
 3. − API idle-governor offset word (idle stability dither from `API_dt_offset_tab`)
 
-4. + transient overlay ([Ign_map_3](../reference/symbols/Ign_map_3.md) × weight / 1000)
+4. \+ transient overlay ([Ign_map_3](../reference/symbols/Ign_map_3.md) × weight / 1000)
 
-5. + [Ign_offset](../reference/symbols/Ign_offset.md), + per-cylinder `Ign_offset_cyl1..4` (selected by crank-sync angle word; all factory 0)
+5. \+ [Ign_offset](../reference/symbols/Ign_offset.md), + per-cylinder `Ign_offset_cyl1..4` (selected by crank-sync angle word; all factory 0)
 
 6. AIR-pump advance ramp ([Airpump_ign_offset](../reference/symbols/Airpump_ign_offset.md) = 0 in factory — feature off)
 
-7. + adaptive knock offset work word (init [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md) = −10.0°, maintained by the K-adapt routine)
+7. \+ adaptive knock offset work word (init [Ign_offset_adapt](../reference/symbols/Ign_offset_adapt.md) = −10.0°, maintained by the K-adapt routine)
 
 8. Clamp −10.0…+40.0° → [Ign_angle](../reference/symbols/Ign_angle.md); log byte at 1° steps.
 

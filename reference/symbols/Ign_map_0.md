@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x4186A"
----
 # Ign_map_0
+
+Calibration word (flash)  ·  ROM 0x4186A
 
 **Value in factory 4780656:** factory 0..360 (rows shown in ignition_tables.txt) — units: 0.1 crank degree (BTDC)
 

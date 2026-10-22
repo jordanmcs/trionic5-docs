@@ -43,7 +43,7 @@
 <body>
 <div class="wrap">
   <h1>Saab Trionic 5 — knock detection, end to end</h1>
-  <p class="sub">MCS Green Giant V3 — identical to factory 4780656 except <code>Apc_knock_back</code> (5→0) and <code>Fuel_knock_mat</code>. Values below are real calibration data from your binary.</p>
+  <p class="sub">All values below are factory <code>4780656</code> calibration data.</p>
 
   <h2>1 · Signal chain — the spark plug IS the knock sensor</h2>
   <div class="chain">
@@ -98,11 +98,7 @@
         <div style="font-size:11.5px;margin-bottom:4px">Global APC boost derate <code>Apc_decrese</code></div>
         <div class="bar-out"><div class="bar boost" id="boostbar" style="width:0%"></div></div>
         <div class="lbl"><span><b id="decv">0</b> % charge-pressure pulled</span><span>+8 %/knock event · cap 100 %</span></div>
-        <div style="margin-top:8px;font-size:11px">recovery mode:
-          <label><input type="radio" name="mode" value="stock" checked> stock (Apc_knock_back = 5 %/period)</label><br>
-          <label style="margin-left:2px"><input type="radio" name="mode" value="mcs"> MCS ( = 0: derate held)</label>
-        </div>
-        <div style="font-size:10.5px;color:var(--muted-foreground);margin-top:6px">Severe sustained knock → boost control falls back to <b>basic charge pressure</b> (ISAT shows cause “KNOCK CONTROL”: bad fuel or dying cassette). Per-cylinder offsets exit as <code>Ret_mangd</code> retard demand → spark + dwell. MCS also enriches differently while knocking (<code>Fuel_knock_mat</code>, peak 1.51× vs stock 1.61×).</div>
+        <div style="font-size:10.5px;color:var(--muted-foreground);margin-top:6px">Severe sustained knock → boost control falls back to <b>basic charge pressure</b> (ISAT shows cause “KNOCK CONTROL”: bad fuel or dying cassette). Per-cylinder offsets exit as <code>Ret_mangd</code> retard demand → spark + dwell. Enrichment while knocking runs through <code>Fuel_knock_mat</code> (factory peak 1.61×).</div>
       </div>
     </div>
   </div>
@@ -190,25 +186,23 @@
         <div style="font-size:10.5px;color:var(--muted-foreground);margin-top:4px">T5 knock uses <b>no smooth temperature table</b> — just these gates (+ the 40–60 kPa <code>Knock_press_limit</code> map and the battery <code>DI_cassette_U_limit</code> gate). Below 40 °C the ECU never retards or derates for knock. Sensor failed? Detection is force-enabled so a dead sensor can't disarm protection.</div>
       </div>
       <div class="col">
-        <div style="font-size:11.5px;margin-bottom:4px"><code>Tempkomp_konst</code> — the table literally named “temperature compensation”… is <b>warm-up fuel</b>. Stock vs MCS, ×128:</div>
+        <div style="font-size:11.5px;margin-bottom:4px"><code>Tempkomp_konst</code> — the table literally named “temperature compensation”… is <b>warm-up fuel</b>. Factory 4780656, ×128:</div>
         <svg width="100%" height="120" viewBox="0 0 260 120">
           <line x1="26" y1="100" x2="252" y2="100" stroke="var(--border)"/>
           <line x1="26" y1="10" x2="26" y2="100" stroke="var(--border)"/>
-          <polyline id="tk_stock" fill="none" stroke="var(--muted-foreground)" stroke-width="1.6" stroke-dasharray="4 3"/>
-          <polyline id="tk_mcs" fill="none" stroke="#e67e22" stroke-width="1.8"/>
+          <polyline id="tk_stock" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
           <text x="26" y="112" font-size="8" fill="var(--muted-foreground)">warm (idx 0)</text>
           <text x="205" y="112" font-size="8" fill="var(--muted-foreground)">cold (idx 14)</text>
           <text x="0" y="14" font-size="8" fill="var(--muted-foreground)">+90</text>
           <text x="0" y="102" font-size="8" fill="var(--muted-foreground)">0</text>
-          <text x="30" y="20" font-size="8.5" fill="var(--muted-foreground)">- - stock</text>
-          <text x="80" y="20" font-size="8.5" fill="#e67e22">— MCS</text>
+          <text x="30" y="20" font-size="8.5" fill="var(--muted-foreground)">factory 4780656</text>
         </svg>
-        <div style="font-size:10.5px;color:var(--muted-foreground)">MCS runs richer through the warm-up band (after-start +6…10, cold decel 46→58, this table +2…+6, peak +0.75× vs +0.70×) — while its K-adapt and knock-gate calibration is byte-identical to factory.</div>
+        <div style="font-size:10.5px;color:var(--muted-foreground)">Richer through the warm-up band (after-start, cold decel). K-adapt and knock-gate calibration are byte-identical to factory 4780656.</div>
       </div>
     </div>
   </div>
 
-  <div class="foot">Sources: <code>notes/knock_system.md</code> + §7b/§7c (K-adapt: F_000610D2/F_000611E6, tables 0x42856/0x42B5A; gates 0x60EB2/0x61134), <code>notes/knock_stock_vs_mcs.md</code> (warm-up family diff, ROM 0x4085E–0x408AB), <i>Analyzing Trionic 5 with T5Suite</i> pp 72/102-104/145-148, Saab 9000 2.7 OBD II manual pp 91-92/232-233. Simulator is illustrative — periods are compressed for interactivity.</div>
+  <div class="foot">Sources: <code>evidence/knock_system.md</code> + §7b/§7c (K-adapt: F_000610D2/F_000611E6, tables 0x42856/0x42B5A; gates 0x60EB2/0x61134), <i>Analyzing Trionic 5 with T5Suite</i> pp 72/102-104/145-148, Saab 9000 2.7 OBD II manual pp 91-92/232-233. Simulator is illustrative — periods are compressed for interactivity.</div>
 </div>
 
 <script>
@@ -245,8 +239,7 @@ function fire(i){ offs[i]=Math.min(lim, offs[i]+15); dec=Math.min(100,dec+8); re
 $('fire1').onclick=()=>fire(0); $('fire2').onclick=()=>fire(1); $('fire3').onclick=()=>fire(2); $('fire4').onclick=()=>fire(3);
 $('tick').onclick=()=>{
   for(let i=0;i<4;i++) offs[i]=Math.max(0,offs[i]-2);
-  const mode=document.querySelector('input[name=mode]:checked').value;
-  if(mode==='stock') dec=Math.max(0,dec-5);
+  dec=Math.max(0,dec-5);   // Apc_knock_back = 5 %/period
   render();
 };
 render();
@@ -312,10 +305,9 @@ function temps(){
 }
 $('ct').oninput = temps; $('tsens').onchange = temps; temps();
 (function(){
-  const S=[0,0,4,8,10,13,15,21,27,34,43,54,70,82,90], M=[0,2,5,10,13,16,17,19,30,37,47,58,75,88,96];
+  const S=[0,0,4,8,10,13,15,21,27,34,43,54,70,82,90];
   const pts = a => a.map((v,i)=>`${26+i*(226/14)},${100-v/96*84}`).join(' ');
   $('tk_stock').setAttribute('points', pts(S));
-  $('tk_mcs').setAttribute('points', pts(M));
 })();
 </script>
 </body>

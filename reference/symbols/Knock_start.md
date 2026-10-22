@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration word (flash)"
-address: "ROM 0x40512"
----
 
 # Knock_start
+
+Calibration word (flash)  ·  ROM 0x40512
 
 **Value in factory 4780656:** 0x76C = 1900 (rpm)
 

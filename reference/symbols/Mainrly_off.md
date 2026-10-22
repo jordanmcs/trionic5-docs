@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration word"
-address: "ROM 0x40F30 -> RAM 0x4E38"
----
 # Mainrly_off
+
+Calibration word  ·  ROM 0x40F30 -> RAM 0x4E38
 
 **Value in factory 4780656:** words: 24
 

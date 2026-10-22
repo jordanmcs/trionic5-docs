@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "State word (RAM 0x3994)"
-address: "RAM 0x3994..0x39A6"
----
 # Weight
+
+State word (RAM 0x3994)  ·  RAM 0x3994..0x39A6
 
 **Value in factory 4780656:** runtime — units: weight 0..1000
 

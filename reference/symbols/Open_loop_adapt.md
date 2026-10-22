@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration table (flash)"
-address: "0x40728 -> 0x4D0E"
----
 # Open_loop_adapt
+
+Calibration table (flash)  ·  0x40728 -> 0x4D0E
 
 **Value in factory 4780656:** per row — units: kPa abs
 

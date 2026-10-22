@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration word"
-address: "ROM 0x42EC2 -> RAM 0x752A"
----
 # Misf_ign_lim
+
+Calibration word  ·  ROM 0x42EC2 -> RAM 0x752A
 
 **Value in factory 4780656:** words: 0, 0
  **MCS differs** — see T5 MCS Tune Changes.

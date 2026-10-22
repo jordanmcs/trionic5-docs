@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration table, 4 words"
-address: "ROM 0x40F38 -> RAM 0x7646"
----
 # Shift_rpm
+
+Calibration table, 4 words  ·  ROM 0x40F38 -> RAM 0x7646
 
 **Value in factory 4780656:** words: 2000, 1900, 1800, 1700
 

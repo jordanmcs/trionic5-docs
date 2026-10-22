@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration word"
-address: "ROM 0x42E64 -> RAM 0x5B38"
----
 # API_ku_derivata
+
+Calibration word  ·  ROM 0x42E64 -> RAM 0x5B38
 
 **Value in factory 4780656:** words: 10
 

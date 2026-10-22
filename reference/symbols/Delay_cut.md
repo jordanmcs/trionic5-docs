@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40F25 -> 0x4E30"
----
 # Delay_cut
+
+Calibration word (flash)  ·  0x40F25 -> 0x4E30
 
 **Value in factory 4780656:** 0x00 — units: cycle ticks
 

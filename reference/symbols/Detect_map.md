@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration mask, 18 load × 16 rpm"
-address: "ROM 0x42144 (x-axis 0x42100 raw MAP 32–212 ≈ −0.68…+1.12 bar; y-axis 0x42124 rpm 880–6010)"
----
 
 # Detect_map
+
+Calibration mask, 18 load × 16 rpm  ·  ROM 0x42144 (x-axis 0x42100 raw MAP 32–212 ≈ −0.68…+1.12 bar; y-axis 0x42124 rpm 880–6010)
 
 **Value in factory 4780656:**
 

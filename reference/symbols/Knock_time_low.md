@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM 0x2108/0x210A)"
-address: "RAM 0x2108/0x210A"
----
 
 # Knock_time_low
+
+State word (RAM 0x2108/0x210A)  ·  RAM 0x2108/0x210A
 
 **Value in factory 4780656:** (timer ticks)
 

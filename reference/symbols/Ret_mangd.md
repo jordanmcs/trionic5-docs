@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State byte (per cylinder)"
-address: "per cylinder"
----
 
 # Ret_mangd
+
+State byte (per cylinder)  ·  per cylinder
 
 **Value in factory 4780656:** 0.1° demand
 

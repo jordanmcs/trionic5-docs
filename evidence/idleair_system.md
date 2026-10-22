@@ -65,7 +65,7 @@ Full raw bytes in **`idle_tables.txt`** (27 entries). Highlights:
 | [Idle_ac_tab](../reference/symbols/Idle_ac_tab.md), `Idle_ac_extra_tab/_sp` | 0x014a…, words | AC idle bumps |
 | [Iv_start_pos_offset](../reference/symbols/Iv_start_pos_offset.md) / `_rpm_offset` / `_time_tab` | 50 / 20 / 8 words | start-up valve extra |
 
-**MCS tune relevance:** [Idle_rpm_tab](../reference/symbols/Idle_rpm_tab.md) and [Idle_drift_tab](../reference/symbols/Idle_drift_tab.md) changes (plus [Reg_last](../reference/symbols/Reg_last.md)) are the idle-affecting parts of the Green Giant tune; recorded in `T5 MCS Tune Changes.md`.
+**MCS tune relevance:** [Idle_rpm_tab](../reference/symbols/Idle_rpm_tab.md) and [Idle_drift_tab](../reference/symbols/Idle_drift_tab.md) changes (plus [Reg_last](../reference/symbols/Reg_last.md)) are the idle-affecting parts of a commercial reflash; recorded in `T5 MCS Tune Changes.md`.
 
 ## 6. Open items
 

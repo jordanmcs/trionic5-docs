@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration scalar"
-address: "ROM 0x040F10"
----
 
 # Start_proc
+
+Calibration scalar  ·  ROM 0x040F10
 
 **Value in factory 4780656:**
 

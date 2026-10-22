@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State block (RAM 0x293A)"
-address: "RAM 0x293A"
----
 
 # Knock_frame
+
+State block (RAM 0x293A)  ·  RAM 0x293A
 
 **Value in factory 4780656:** 25 longs
 

@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, fuel]
-
-type: "Calibration word (flash)"
-
-address: "0x40BA6 -> 0x4BF4"
-
----
 
 # Inj_konst
+
+Calibration word (flash)  ·  0x40BA6 -> 0x4BF4
 
 
 

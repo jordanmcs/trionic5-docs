@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "State byte (RAM)"
-address: "(RAM)"
----
 
 # AD_lufttemp
+
+State byte (RAM)  ·  (RAM)
 
 **Value in factory 4780656:**
 

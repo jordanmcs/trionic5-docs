@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "State word (RAM 0x1108)"
-address: "RAM 0x1108"
----
 # Mult_time
+
+State word (RAM 0x1108)  ·  RAM 0x1108
 
 **Value in factory 4780656:** runtime — units: TPU ticks
 

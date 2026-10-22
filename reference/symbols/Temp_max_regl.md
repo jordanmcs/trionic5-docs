@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "Calibration words (flash, 2)"
-address: "ROM 0x41564, RAM 0x5EE0"
----
 # Temp_max_regl
+
+Calibration words (flash, 2)  ·  ROM 0x41564, RAM 0x5EE0
 
 **Value in factory 4780656:** [60, 20] — units: degC
 

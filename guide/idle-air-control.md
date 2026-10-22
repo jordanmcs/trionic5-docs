@@ -1,6 +1,3 @@
----
-tags: [saab, trionic5, idle, subsystem]
----
 # T5 Idle Air Control
 
 > **Summary:** Idle speed is held by a **separate idle control valve** (`Iv_*` namespace, Swedish *regulerdon*) on a linear PWM output — not the throttle plate (cable-driven) and not any "throttle actuator": the symbol `Throttle_pwm_out` is a confirmed misnomer for the idle-valve PWM word. Command chain: base position from [Iv_min_tab](../reference/symbols/Iv_min_tab.md) indexed by rpm/125, plus a learned minimum-load offset `Iv_min_offset` (±100), clamped [LLS_min](../reference/symbols/LLS_min.md)…624, then written linearly (×655/1000) to PWM reload register `0xFFFFC4`. A parallel rpm governor (nominal from [Idle_rpm_tab](../reference/symbols/Idle_rpm_tab.md) + AC and start-idle extras) trims with [Idle_p_tab](../reference/symbols/Idle_p_tab.md) proportional steps and ±1 integrator steps.

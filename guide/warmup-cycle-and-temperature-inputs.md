@@ -1,7 +1,3 @@
----
-tags: [saab, trionic5, warmup, temperature, tuning]
-ecu: "Trionic 5.5 — factory 4780656"
----
 
 # T5 Warmup Cycle and Temperature Inputs
 

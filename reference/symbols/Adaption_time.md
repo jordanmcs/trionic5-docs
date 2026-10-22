@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x41664 -> 0x5E98"
----
 # Adaption_time
+
+Calibration word (flash)  ·  0x41664 -> 0x5E98
 
 **Value in factory 4780656:** 5 — units: min
 

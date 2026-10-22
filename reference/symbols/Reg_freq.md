@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State word (RAM 0x3A88)"
-address: "0x3A88"
----
 # Reg_freq
+
+State word (RAM 0x3A88)  ·  0x3A88
 
 **Value in factory 4780656:** 90 — units: Hz
 

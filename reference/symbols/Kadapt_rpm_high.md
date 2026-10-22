@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration word (RAM 0x5AC2)"
-address: "ROM 0x4286C"
----
 
 # Kadapt_rpm_high
+
+Calibration word (RAM 0x5AC2)  ·  ROM 0x4286C
 
 **Value in factory 4780656:** 325 (rpm/10 = 3250 rpm)
 

@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration table, 16 words × rpm"
-address: "ROM 0x42AFA"
----
 
 # Lknock_oref_tab
+
+Calibration table, 16 words × rpm  ·  ROM 0x42AFA
 
 **Value in factory 4780656:**
 

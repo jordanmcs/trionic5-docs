@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "State word (RAM)"
-address: "0x1150 (symbol table)"
----
 # Br_plus
+
+State word (RAM)  ·  0x1150 (symbol table)
 
 **Value in factory 4780656:** 0 — units: 4 us ticks (/10 domain)
 

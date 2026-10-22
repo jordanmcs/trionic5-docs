@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "Calibration words (flash, UNUSED)"
-address: "ROM 0x41668/6A/6C/6E, 0x4166F"
----
 # Um_min_limit
+
+Calibration words (flash, UNUSED)  ·  ROM 0x41668/6A/6C/6E, 0x4166F
 
 **Value in factory 4780656:** 32/5/-10/96/50 — units: mixed
 

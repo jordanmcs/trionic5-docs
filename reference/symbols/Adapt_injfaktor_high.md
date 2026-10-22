@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x428B7 -> 0x5B18"
----
 # Adapt_injfaktor_high
+
+Calibration word (flash)  ·  0x428B7 -> 0x5B18
 
 **Value in factory 4780656:** 0xE6 — units: (v+384)/512
 

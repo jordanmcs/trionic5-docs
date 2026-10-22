@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration matrix, 8x8 bytes"
-address: "ROM 0x411DA -> RAM 0x6136"
----
 # Temp_reduce_mat
+
+Calibration matrix, 8x8 bytes  ·  ROM 0x411DA -> RAM 0x6136
 
 **Value in factory 4780656:** 8x8 byte grid; rows: see `source/torque_tables.txt`
 

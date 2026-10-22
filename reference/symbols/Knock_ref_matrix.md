@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration map, 288 words (18 load × 16 rpm)"
-address: "ROM 0x428BA"
----
 
 # Knock_ref_matrix
+
+Calibration map, 288 words (18 load × 16 rpm)  ·  ROM 0x428BA
 
 **Value in factory 4780656:**
 

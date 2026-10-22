@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State words (RAM 0x334B / 0x334C)"
-address: "0x334B/0x334C"
----
 # Regl_status2
+
+State words (RAM 0x334B / 0x334C)  ·  0x334B/0x334C
 
 **Value in factory 4780656:** bitfields — units: flags
 

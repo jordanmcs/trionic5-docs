@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, fuel]
-
-type: "8-bit table x16 (flash)"
-
-address: "0x412D0 -> 0x5BB6"
-
----
 
 # Tryck_vakt_tab
+
+8-bit table x16 (flash)  ·  0x412D0 -> 0x5BB6
 
 
 

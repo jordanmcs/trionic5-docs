@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "Calibration word (flash)"
-address: "ROM 0x41552, RAM 0x5ECE"
----
 # Reg_kon_sgm
+
+Calibration word (flash)  ·  ROM 0x41552, RAM 0x5ECE
 
 **Value in factory 4780656:** 255 (-1) — units: PWM counts /10
 

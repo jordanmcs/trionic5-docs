@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration axis, 18 words"
-address: "ROM 0x42384 -> RAM 0x69E2"
----
 # Misfire_map_x_axis
+
+Calibration axis, 18 words  ·  ROM 0x42384 -> RAM 0x69E2
 
 **Value in factory 4780656:** words: 32, 36, 40, 44, 56, 68, 80, 92, 104, 116, 128, 140, 152, 164, 176, 188, 200, 212
 

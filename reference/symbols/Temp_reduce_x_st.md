@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration axis, 8 bytes"
-address: "ROM 0x4125A -> RAM 0x61B6"
----
 # Temp_reduce_x_st
+
+Calibration axis, 8 bytes  ·  ROM 0x4125A -> RAM 0x61B6
 
 **Value in factory 4780656:** bytes: 0x1E 0x32 0x46 0x5A 0x90 0xA0 0xB0 0xC0
 

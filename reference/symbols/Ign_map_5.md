@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x42022"
----
 # Ign_map_5
+
+Calibration word (flash)  ·  ROM 0x42022
 
 **Value in factory 4780656:** 20 x16 (constant +2.0) — units: 0.1 crank degree
 

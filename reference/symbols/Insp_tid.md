@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "State word (RAM)"
-address: "RAM alias (word written 0x6E684; halved in group mode 0x103B bit0)"
----
 # Insp_tid
+
+State word (RAM)  ·  RAM alias (word written 0x6E684; halved in group mode 0x103B bit0)
 
 **Value in factory 4780656:** runtime — units: 4 us ticks
 

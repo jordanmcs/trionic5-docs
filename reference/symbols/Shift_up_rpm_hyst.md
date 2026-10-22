@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration word"
-address: "ROM 0x40F44 -> RAM 0x7652"
----
 # Shift_up_rpm_hyst
+
+Calibration word  ·  ROM 0x40F44 -> RAM 0x7652
 
 **Value in factory 4780656:** words: 50
 

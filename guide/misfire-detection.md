@@ -1,6 +1,3 @@
----
-tags: [saab, trionic5, misfire, subsystem]
----
 # T5 Misfire Detection
 
 > **Summary:** Misfires are detected by **ionic conduction** — the spark plug is the combustion sensor, and a commanded spark without a flame-front ion signature is one misfire event for that cylinder. Events accumulate per cylinder in two OBD windows: **Mis200** (400 combustions = 200 rev, catalyst criterion) and **Mis1000** (2000 combustions = 1000 rev, emissions criterion), normalized against limit maps [Mis200_map](../reference/symbols/Mis200_map.md) / [Mis1000_map](../reference/symbols/Mis1000_map.md) interpolated at the current rpm/load point. Counting is inhibited exactly when combustion is legitimately abnormal (fuel cut, rev limit, purge, AC kick, throttle/gear transients, cold engine). **The firmware reports misfires; it never cuts a cylinder on account of them.**

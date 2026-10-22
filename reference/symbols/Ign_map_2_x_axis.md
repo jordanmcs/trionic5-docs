@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "8/16-bit table (flash)"
-address: "ROM 0x41AD8"
----
 # Ign_map_2_x_axis
+
+8/16-bit table (flash)  ·  ROM 0x41AD8
 
 **Value in factory 4780656:** 128,144,160,176,192,208,224,240 — units: raw MAP count
 

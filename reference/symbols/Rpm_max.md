@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40F2C -> 0x7640"
----
 # Rpm_max
+
+Calibration word (flash)  ·  0x40F2C -> 0x7640
 
 **Value in factory 4780656:** (fuel_tables.txt) — units: rpm/10
 

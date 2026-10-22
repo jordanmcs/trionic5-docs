@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration byte (flash)"
-address: "ROM 0x4097D"
----
 # Ret_tab_mul
+
+Calibration byte (flash)  ·  ROM 0x4097D
 
 **Value in factory 4780656:** 10 — units: per-mille/10 scale
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State word (RAM 0x1154)"
-address: "0x1154"
----
 # Reg_kon_apc
+
+State word (RAM 0x1154)  ·  0x1154
 
 **Value in factory 4780656:** dynamic — units: PWM counts
 

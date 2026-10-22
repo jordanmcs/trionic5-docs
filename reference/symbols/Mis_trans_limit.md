@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration word"
-address: "ROM 0x42898 -> RAM 0x5AF0"
----
 # Mis_trans_limit
+
+Calibration word  ·  ROM 0x42898 -> RAM 0x5AF0
 
 **Value in factory 4780656:** words: 3
 

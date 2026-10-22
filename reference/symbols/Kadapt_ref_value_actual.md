@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM)"
-address: "RAM"
----
 
 # Kadapt_ref_value_actual
+
+State word (RAM)  ·  RAM
 
 **Value in factory 4780656:** init 34 (0x4EC0A)
 

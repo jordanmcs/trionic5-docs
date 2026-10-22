@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State byte (RAM)"
-address: "(derived from AD_kylv)"
----
 
 # Kyl_temp
+
+State byte (RAM)  ·  (derived from AD_kylv)
 
 **Value in factory 4780656:** signed °C
 

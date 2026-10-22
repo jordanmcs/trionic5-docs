@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration table (flash)"
-address: "0x41674 -> 0x4E62"
----
 # Fuel_map_xaxis
+
+Calibration table (flash)  ·  0x41674 -> 0x4E62
 
 **Value in factory 4780656:** 10 18 20 30 40 48 50 60 70 80 90 A0 B0 C0 D0 E0 — units: kPa absolute
 

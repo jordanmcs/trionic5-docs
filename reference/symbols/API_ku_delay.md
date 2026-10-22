@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration word"
-address: "ROM 0x42E60 -> RAM 0x5B34"
----
 # API_ku_delay
+
+Calibration word  ·  ROM 0x42E60 -> RAM 0x5B34
 
 **Value in factory 4780656:** words: 200
 

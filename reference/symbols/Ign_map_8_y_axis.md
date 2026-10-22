@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "8/16-bit table (flash)"
-address: "ROM 0x420D4"
----
 # Ign_map_8_y_axis
+
+8/16-bit table (flash)  ·  ROM 0x420D4
 
 **Value in factory 4780656:** -100,-80,...,+80,+100 (11 words) — units: rpm
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x4074B -> 0x4E10"
----
 # Com_on_idle
+
+Calibration word (flash)  ·  0x4074B -> 0x4E10
 
 **Value in factory 4780656:** (fuel_tables.txt) — units: count
 

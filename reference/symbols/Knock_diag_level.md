@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State byte (SRAM 0x1100)"
-address: "SRAM 0x1100"
----
 
 # Knock_diag_level
+
+State byte (SRAM 0x1100)  ·  SRAM 0x1100
 
 **Value in factory 4780656:** raw window count
 

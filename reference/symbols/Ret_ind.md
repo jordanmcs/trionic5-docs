@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "State byte (RAM 0x1043)"
-address: "RAM 0x1043"
----
 # Ret_ind
+
+State byte (RAM 0x1043)  ·  RAM 0x1043
 
 **Value in factory 4780656:** runtime — units: bitmask (symbol-table name collides with Ret_temp — verify)
 

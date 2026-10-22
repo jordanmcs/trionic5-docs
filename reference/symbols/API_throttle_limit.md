@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, torque]
-
-type: "Calibration byte"
-
-address: "ROM 0x42E68 -> RAM 0x5B3C"
-
----
 
 # API_throttle_limit
+
+Calibration byte  ·  ROM 0x42E68 -> RAM 0x5B3C
 
 
 

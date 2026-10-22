@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration matrix, 25 signed words"
-address: "ROM 0x42056 -> RAM 0x59FA"
----
 # Ign_map_6
+
+Calibration matrix, 25 signed words  ·  ROM 0x42056 -> RAM 0x59FA
 
 **Value in factory 4780656:** 25 signed words; hex in `source/torque_tables.txt`
 

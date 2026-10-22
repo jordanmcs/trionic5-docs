@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM 0x2116)"
-address: "RAM 0x2116"
----
 
 # Knock_error
+
+State word (RAM 0x2116)  ·  RAM 0x2116
 
 **Value in factory 4780656:** (code bookkeeping)
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration byte"
-address: "ROM 0x410F8 -> RAM 0x62FA"
----
 # Iv_start_pos_offset
+
+Calibration byte  ·  ROM 0x410F8 -> RAM 0x62FA
 
 **Value in factory 4780656:** bytes: 0x32
 

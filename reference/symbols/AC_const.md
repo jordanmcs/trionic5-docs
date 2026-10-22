@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration byte"
-address: "ROM 0x40FA6 -> RAM 0x60A2"
----
 # AC_const
+
+Calibration byte  ·  ROM 0x40FA6 -> RAM 0x60A2
 
 **Value in factory 4780656:** bytes: 0x0C
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration byte"
-address: "ROM 0x42E46 -> RAM 0x74BA"
----
 # Misf_kyltemp
+
+Calibration byte  ·  ROM 0x42E46 -> RAM 0x74BA
 
 **Value in factory 4780656:** bytes: 0x12
 

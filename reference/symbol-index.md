@@ -1,6 +1,3 @@
----
-tags: [saab, trionic5, symbol, knock, ignition, boost, fuel, torque, misfire, idle, index]
----
 
 # T5 Symbols
 

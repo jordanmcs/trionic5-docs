@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "State byte (RAM, disassembly alias)"
-address: "runtime"
----
 # KillInjection
+
+State byte (RAM, disassembly alias)  ·  runtime
 
 **Value in factory 4780656:** 0 — units: bool
 

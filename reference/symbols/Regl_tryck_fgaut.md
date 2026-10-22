@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "8-bit table (16, flash)"
-address: "ROM 0x41554, RAM 0x5ED0"
----
 # Regl_tryck_fgaut
+
+8-bit table (16, flash)  ·  ROM 0x41554, RAM 0x5ED0
 
 **Value in factory 4780656:** 255 (off) — units: kPa absolute
 

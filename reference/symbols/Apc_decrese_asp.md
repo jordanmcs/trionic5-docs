@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration byte (flash)"
-address: "per init map"
----
 
 # Apc_decrese_asp
+
+Calibration byte (flash)  ·  per init map
 
 **Value in factory 4780656:** (variant value)
 

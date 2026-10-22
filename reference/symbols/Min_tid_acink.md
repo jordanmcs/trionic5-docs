@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x41282 -> 0x61DE"
----
 # Min_tid_acink
+
+Calibration word (flash)  ·  0x41282 -> 0x61DE
 
 **Value in factory 4780656:** 0x01 — units: ticks
 

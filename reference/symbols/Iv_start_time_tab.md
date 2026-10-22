@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration table, 8 words"
-address: "ROM 0x410FA -> RAM 0x62FE"
----
 # Iv_start_time_tab
+
+Calibration table, 8 words  ·  ROM 0x410FA -> RAM 0x62FE
 
 **Value in factory 4780656:** words: 0, 16, 32, 48, 64, 80, 96, 112
 

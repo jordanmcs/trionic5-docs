@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40980 -> 0x4B7A"
----
 # Min_rpm_gadapt
+
+Calibration word (flash)  ·  0x40980 -> 0x4B7A
 
 **Value in factory 4780656:** 0x00AE — units: rpm/10
 

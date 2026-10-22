@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "8-bit table (7x4, flash)"
-address: "ROM 0x414AE, RAM 0x5D90"
----
 # I_fors
+
+8-bit table (7x4, flash)  ·  ROM 0x414AE, RAM 0x5D90
 
 **Value in factory 4780656:** 0-30 — units: dimensionless
 

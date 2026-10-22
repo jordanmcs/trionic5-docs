@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State byte (RAM 0x1D10)"
-address: "RAM 0x1D10"
----
 
 # Knock_status
+
+State byte (RAM 0x1D10)  ·  RAM 0x1D10
 
 **Value in factory 4780656:** bit flags
 

@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM)"
-address: "RAM"
----
 
 # Apc_decrese
+
+State word (RAM)  ·  RAM
 
 **Value in factory 4780656:** 0–100 (%)
 

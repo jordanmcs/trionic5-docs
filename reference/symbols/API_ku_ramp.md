@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, torque]
-
-type: "Calibration word"
-
-address: "ROM 0x42E62 -> RAM 0x5B36"
-
----
 
 # API_ku_ramp
+
+Calibration word  ·  ROM 0x42E62 -> RAM 0x5B36
 
 
 

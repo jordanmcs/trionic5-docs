@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State words (RAM 0x347C/0x347A/0x3478)"
-address: "dynamic"
----
 # D_fak
+
+State words (RAM 0x347C/0x347A/0x3478)  ·  dynamic
 
 **Value in factory 4780656:** proportional Kp*err/10, integral (clamp +-I_fak_max=400, full-gas gate), derivative on d(P_medel)/cycle — units: PWM counts
 

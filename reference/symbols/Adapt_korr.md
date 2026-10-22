@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "8-bit table 16x16 (flash+RAM state)"
-address: "0x4040A -> 0x4876"
----
 # Adapt_korr
+
+8-bit table 16x16 (flash+RAM state)  ·  0x4040A -> 0x4876
 
 **Value in factory 4780656:** all 0x80 — units: factor (v+128)/256; bounds 4D..B3
 

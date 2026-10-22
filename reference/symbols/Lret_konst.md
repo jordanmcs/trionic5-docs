@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x4093C"
----
 # Lret_konst
+
+Calibration word (flash)  ·  ROM 0x4093C
 
 **Value in factory 4780656:** 8x8 grid 0..102 — units: dimensionless
 

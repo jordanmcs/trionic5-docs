@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "8/16-bit table (flash)"
-address: "ROM 0x41AAC"
----
 # Ign_map_1_y_axis
+
+8/16-bit table (flash)  ·  ROM 0x41AAC
 
 **Value in factory 4780656:** -460,-196,-166,-146,-86,0,30,250,400,1650,2000 — units: rpm (inference)
 

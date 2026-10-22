@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "8-bit table 16x16 (flash)"
-address: "0x4075E -> 0x4BFC"
----
 # Del_mat
+
+8-bit table 16x16 (flash)  ·  0x4075E -> 0x4BFC
 
 **Value in factory 4780656:** 0x00..0x4D — units: 3 x map = crank degrees
 

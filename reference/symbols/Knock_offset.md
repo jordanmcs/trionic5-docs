@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x41822"
----
 # Knock_offset
+
+Calibration word (flash)  ·  ROM 0x41822
 
 **Value in factory 4780656:** 0 — units: 0.1 crank degree
 

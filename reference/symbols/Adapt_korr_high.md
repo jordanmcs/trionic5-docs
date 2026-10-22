@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x428B4 -> 0x5B12"
----
 # Adapt_korr_high
+
+Calibration word (flash)  ·  0x428B4 -> 0x5B12
 
 **Value in factory 4780656:** 0xB3 — units: factor byte
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "8-bit table (7x4 bytes, flash)"
-address: "ROM 0x41492, RAM 0x5D74"
----
 # P_fors
+
+8-bit table (7x4 bytes, flash)  ·  ROM 0x41492, RAM 0x5D74
 
 **Value in factory 4780656:** rows 255/120/0-110 — units: dimensionless (x/10 in P_fak)
 

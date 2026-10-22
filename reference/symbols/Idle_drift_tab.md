@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration table, 2 words"
-address: "ROM 0x40FF8 -> RAM 0x61F8"
----
 # Idle_drift_tab
+
+Calibration table, 2 words  ·  ROM 0x40FF8 -> RAM 0x61F8
 
 **Value in factory 4780656:** words: 310, 280
  **MCS differs** — see T5 MCS Tune Changes.

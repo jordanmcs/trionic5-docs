@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration word (flash→RAM 0x5ACA)"
-address: "ROM 0x42872"
----
 
 # Kadapt_period
+
+Calibration word (flash→RAM 0x5ACA)  ·  ROM 0x42872
 
 **Value in factory 4780656:** 320 (ticks)
 

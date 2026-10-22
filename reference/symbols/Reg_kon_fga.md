@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "Calibration word (flash)"
-address: "ROM 0x41550, RAM 0x5ECA"
----
 # Reg_kon_fga
+
+Calibration word (flash)  ·  ROM 0x41550, RAM 0x5ECA
 
 **Value in factory 4780656:** 14 — units: PWM counts /10
 

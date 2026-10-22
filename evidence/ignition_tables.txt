@@ -1,5 +1,5 @@
 T5.5 IGNITION SUBSYSTEM CALIBRATION TABLES - factory 4780656 raw bytes.
-MCS diffs: T5 MCS Tune Changes.md; changed-table markers in mcs_bytes_by_table.txt.
+Tables tagged (MCS differs) are changed by a commercial reflash; its data is not distributed.
 ROM base 0x40000. Angles are 16-bit words, 0.1 crank degrees per count unless stated. x-axes are raw MAP
 counts (2.5-bar sensor: count ~= kPa absolute; 100 = atmospheric). y-axes rpm unless stated.
 ====================================================================================================

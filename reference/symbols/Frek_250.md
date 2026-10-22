@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "Calibration word (flash, 16-bit)"
-address: "ROM 0x41672, RAM 0x5EA8"
----
 # Frek_250
+
+Calibration word (flash, 16-bit)  ·  ROM 0x41672, RAM 0x5EA8
 
 **Value in factory 4780656:** 70 — units: Hz
 

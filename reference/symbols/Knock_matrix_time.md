@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration word (flash)"
-address: "ROM 0x428B8"
----
 
 # Knock_matrix_time
+
+Calibration word (flash)  ·  ROM 0x428B8
 
 **Value in factory 4780656:** 12000 (ms)
 

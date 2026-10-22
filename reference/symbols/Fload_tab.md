@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration table (flash)"
-address: "0x409DA -> 0x4BE4"
----
 # Fload_tab
+
+Calibration table (flash)  ·  0x409DA -> 0x4BE4
 
 **Value in factory 4780656:** 1F 33 1F 2E 1F 00... per rpm row — units: (v+512)/512
 

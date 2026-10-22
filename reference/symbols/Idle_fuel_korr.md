@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "8-bit table 8x12 (flash)"
-address: "0x40DB0 -> 0x5F6A"
----
 # Idle_fuel_korr
+
+8-bit table 8x12 (flash)  ·  0x40DB0 -> 0x5F6A
 
 **Value in factory 4780656:** signed rows (book idle map) — units: (v+128)/256
 

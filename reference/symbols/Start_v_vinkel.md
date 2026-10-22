@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40F12 -> 0x4E14"
----
 # Start_v_vinkel
+
+Calibration word (flash)  ·  0x40F12 -> 0x4E14
 
 **Value in factory 4780656:** 0x0000 — units: crank degrees
 

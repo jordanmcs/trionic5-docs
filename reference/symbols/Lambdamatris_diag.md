@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "8-bit table 6x16 (flash)"
-address: "0x40D50 -> 0x6BD6"
----
 # Lambdamatris_diag
+
+8-bit table 6x16 (flash)  ·  0x40D50 -> 0x6BD6
 
 **Value in factory 4780656:** 0A 0A 19 02 00 00 x16 — units: mixed thresholds
 

@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration scalar"
-address: "ROM 0x040536"
----
 
 # Build_up_time_switch
+
+Calibration scalar  ·  ROM 0x040536
 
 **Value in factory 4780656:**
 

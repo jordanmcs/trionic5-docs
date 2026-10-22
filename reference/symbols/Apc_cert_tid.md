@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "Calibration words (flash)"
-address: "ROM 0x4153A/0x4153B/0x4153E, RAM 0x5EAE/0x5EB0/0x5EB6"
----
 # Apc_cert_tid
+
+Calibration words (flash)  ·  ROM 0x4153A/0x4153B/0x4153E, RAM 0x5EAE/0x5EB0/0x5EB6
 
 **Value in factory 4780656:** 255/0/0 — units: ticks / cycles
 

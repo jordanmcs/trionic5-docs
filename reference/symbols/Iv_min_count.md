@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration byte"
-address: "ROM 0x410D4 -> RAM 0x62D4"
----
 # Iv_min_count
+
+Calibration byte  ·  ROM 0x410D4 -> RAM 0x62D4
 
 **Value in factory 4780656:** bytes: 0x05
 

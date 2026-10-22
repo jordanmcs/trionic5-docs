@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x42BFC"
----
 # Ap_ign_step
+
+Calibration word (flash)  ·  ROM 0x42BFC
 
 **Value in factory 4780656:** 5 (=0.5 deg) — units: 0.1 crank degree
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration table 6 B (flash)"
-address: "0x4074E -> 0x76E2"
----
 # Pgm_mod
+
+Calibration table 6 B (flash)  ·  0x4074E -> 0x76E2
 
 **Value in factory 4780656:** FB F6 EA D4 86 10 — units: bits
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "16-bit table x11 (flash)"
-address: "0x4051E -> 0x4E4A"
----
 # Batt_korr_tab
+
+16-bit table x11 (flash)  ·  0x4051E -> 0x4E4A
 
 **Value in factory 4780656:** 148,193,196,234,321,376,463,580,932,932,932 — units: 4 us ticks
 

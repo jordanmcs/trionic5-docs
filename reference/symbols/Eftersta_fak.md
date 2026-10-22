@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration table, 15 B (coolant-AD-indexed)"
-address: "ROM 0x4086D"
----
 
 # Eftersta_fak
+
+Calibration table, 15 B (coolant-AD-indexed)  ·  ROM 0x4086D
 
 **Value in factory 4780656:**
 

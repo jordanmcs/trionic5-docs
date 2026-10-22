@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Runtime word (RAM)"
-address: "derived from Knock_press_tab"
----
 
 # Knock_press_limit
+
+Runtime word (RAM)  ·  derived from Knock_press_tab
 
 **Value in factory 4780656:** 60–70 (MAN pressure units)
 

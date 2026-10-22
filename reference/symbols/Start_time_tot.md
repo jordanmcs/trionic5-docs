@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "State word (RAM)"
-address: "(RAM)"
----
 
 # Start_time_tot
+
+State word (RAM)  ·  (RAM)
 
 **Value in factory 4780656:**
 

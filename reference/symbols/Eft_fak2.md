@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "State byte array (RAM, per cylinder)"
-address: "(RAM)"
----
 
 # Eft_fak2
+
+State byte array (RAM, per cylinder)  ·  (RAM)
 
 **Value in factory 4780656:**
 

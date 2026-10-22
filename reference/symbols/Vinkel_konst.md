@@ -1,14 +1,7 @@
----
-
-tags: [saab, trionic5, symbol, fuel]
-
-type: "Calibration word (flash)"
-
-address: "0x40BA4 -> 0x4E3C"
-
----
 
 # Vinkel_konst
+
+Calibration word (flash)  ·  0x40BA4 -> 0x4E3C
 
 
 

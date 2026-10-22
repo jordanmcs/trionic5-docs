@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Runtime word (RAM)"
-address: "derived from Knock_average_tab"
----
 
 # Knock_average_limit
+
+Runtime word (RAM)  ·  derived from Knock_average_tab
 
 **Value in factory 4780656:** 20–80 by rpm
 

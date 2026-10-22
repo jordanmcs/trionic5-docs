@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State word (RAM, F_725B8 A2)"
-address: "(Regl_temp_max label)"
----
 # Regl_temp_max
+
+State word (RAM, F_725B8 A2)  ·  (Regl_temp_max label)
 
 **Value in factory 4780656:** dynamic — units: kPa absolute
 

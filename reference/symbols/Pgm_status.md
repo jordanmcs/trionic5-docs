@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "State byte (RAM)"
-address: "0x1041 (symbol table)"
----
 # Pgm_status
+
+State byte (RAM)  ·  0x1041 (symbol table)
 
 **Value in factory 4780656:** runtime — units: bits
 

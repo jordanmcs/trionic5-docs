@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "State byte (RAM)"
-address: "(RAM)"
----
 
 # Temp_fak
+
+State byte (RAM)  ·  (RAM)
 
 **Value in factory 4780656:**
 

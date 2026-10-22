@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration byte (RAM 0x5AC6)"
-address: "ROM 0x42870"
----
 
 # Kadapt_load_high
+
+Calibration byte (RAM 0x5AC6)  ·  ROM 0x42870
 
 **Value in factory 4780656:** 105 (calculated-load units)
 

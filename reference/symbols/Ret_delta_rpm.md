@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x41766"
----
 # Ret_delta_rpm
+
+Calibration word (flash)  ·  ROM 0x41766
 
 **Value in factory 4780656:** 5 — units: rpm x10
 

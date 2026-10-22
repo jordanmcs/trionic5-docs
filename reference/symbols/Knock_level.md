@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "State word (RAM 0x1D0C)"
-address: "RAM 0x1D0C"
----
 
 # Knock_level
+
+State word (RAM 0x1D0C)  ·  RAM 0x1D0C
 
 **Value in factory 4780656:** 0…~90 pulse counts
 

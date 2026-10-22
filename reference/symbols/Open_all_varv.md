@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40F26 -> 0x4E32"
----
 # Open_all_varv
+
+Calibration word (flash)  ·  0x40F26 -> 0x4E32
 
 **Value in factory 4780656:** 0x64 (100) — units: rpm/10
 

@@ -1,9 +1,8 @@
 T5.5 FUEL SUBSYSTEM CALIBRATION TABLES - RAW BYTES
-Sources: bin/4780656_factory.BIN (factory AUTHORITY).
+Sources: firmware/4780656_factory.BIN (factory AUTHORITY).
 ROM addrs identical in both images (init copy sites byte-verified 513/513). RAM = runtime address.
 Enumerated via init 'PEA (ROM_x!) / MOVE.W #len / PEA (RAM_dst)' pattern scan (tools/fuel_tables.py -> symbols/init_copy_inventory.json).
-Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs);
-their bytes live in mcs_bytes_by_table.txt (summary: T5 MCS Tune Changes.md).
+Factory bytes authoritative. Tables the MCS tune changes are tagged (MCS differs); that tune's data is not distributed
 
 
 NOTE: fuel-PRESSURE regulator PID tables (P_fors/I_fors/D_fors, Tryck_mat) belong to the

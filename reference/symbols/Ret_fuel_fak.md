@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "State byte (RAM 0x1151)"
-address: "RAM 0x1151"
----
 # Ret_fuel_fak
+
+State byte (RAM 0x1151)  ·  RAM 0x1151
 
 **Value in factory 4780656:** runtime — units: fuel x/128
 

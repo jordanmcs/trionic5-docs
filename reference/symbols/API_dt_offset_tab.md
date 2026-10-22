@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, torque]
-type: "Calibration table, 5 words"
-address: "ROM 0x42E50 -> RAM 0x5B24"
----
 # API_dt_offset_tab
+
+Calibration table, 5 words  ·  ROM 0x42E50 -> RAM 0x5B24
 
 **Value in factory 4780656:** words: 0, 0, 0, 0, 0
 

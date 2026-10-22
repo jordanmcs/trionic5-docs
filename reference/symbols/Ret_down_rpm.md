@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration word (flash)"
-address: "ROM 0x41764"
----
 # Ret_down_rpm
+
+Calibration word (flash)  ·  ROM 0x41764
 
 **Value in factory 4780656:** 90 (=900 rpm) — units: rpm x10
 

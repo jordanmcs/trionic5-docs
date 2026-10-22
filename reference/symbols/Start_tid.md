@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, warmup]
-type: "State word (RAM, per cylinder)"
-address: "(RAM)"
----
 
 # Start_tid
+
+State word (RAM, per cylinder)  ·  (RAM)
 
 **Value in factory 4780656:**
 

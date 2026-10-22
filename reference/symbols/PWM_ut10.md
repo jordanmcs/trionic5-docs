@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, boost]
-type: "State words (RAM 0x3476 W / 0x3359 B)"
-address: "0x3476/0x3359"
----
 # PWM_ut10
+
+State words (RAM 0x3476 W / 0x3359 B)  ·  0x3476/0x3359
 
 **Value in factory 4780656:** 2-980 / 0-98 — units: 0.1% counts / %
 

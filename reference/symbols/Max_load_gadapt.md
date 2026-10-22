@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x4097F -> 0x4B78"
----
 # Max_load_gadapt
+
+Calibration word (flash)  ·  0x4097F -> 0x4B78
 
 **Value in factory 4780656:** 0x68 — units: kPa abs
 

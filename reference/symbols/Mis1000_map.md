@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, misfire]
-type: "Calibration matrix, 576 bytes"
-address: "ROM 0x4260A -> RAM 0x7062"
----
 # Mis1000_map
+
+Calibration matrix, 576 bytes  ·  ROM 0x4260A -> RAM 0x7062
 
 **Value in factory 4780656:** 576 bytes — full hex in `source/misfire_tables.txt`
 

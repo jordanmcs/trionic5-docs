@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, idle]
-type: "Calibration table, 16 words"
-address: "ROM 0x41188 -> RAM 0x601A"
----
 # Idle_ac_extra_tab
+
+Calibration table, 16 words  ·  ROM 0x41188 -> RAM 0x601A
 
 **Value in factory 4780656:** words: 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
 

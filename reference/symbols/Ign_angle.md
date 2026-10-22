@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "State word (RAM 0x10B4)"
-address: "RAM 0x10B4"
----
 # Ign_angle
+
+State word (RAM 0x10B4)  ·  RAM 0x10B4
 
 **Value in factory 4780656:** runtime — units: 0.1 crank degree BTDC (signed)
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration byte (flash)"
-address: "ROM 0x40989"
----
 # Max_ret_dec
+
+Calibration byte (flash)  ·  ROM 0x40989
 
 **Value in factory 4780656:** 150 (150/256) — units: /256 fraction
 

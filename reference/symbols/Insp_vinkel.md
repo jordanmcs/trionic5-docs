@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "State word (RAM)"
-address: "RAM alias; scheduled copy 0x1072"
----
 # Insp_vinkel
+
+State word (RAM)  ·  RAM alias; scheduled copy 0x1072
 
 **Value in factory 4780656:** runtime — units: crank degrees
 

@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration table (flash)"
-address: "0x40AB4 -> 0x6412"
----
 # Fuel_knock_xaxis
+
+Calibration table (flash)  ·  0x40AB4 -> 0x6412
 
 **Value in factory 4780656:** 12 bytes; [0] = engage load — units: kPa abs (book: active above ~140 kPa)
 

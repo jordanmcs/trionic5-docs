@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration table (flash)"
-address: "0x416D4 -> 0x61E2"
----
 # Idle_st_last
+
+Calibration table (flash)  ·  0x416D4 -> 0x61E2
 
 **Value in factory 4780656:** 1E,23,28,...,64 (12 B) — units: kPa abs
 

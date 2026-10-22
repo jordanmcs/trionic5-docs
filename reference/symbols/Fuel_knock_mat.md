@@ -1,16 +1,9 @@
----
-
-tags: [saab, trionic5, symbol, knock]
-
-type: "Calibration map, 192 B (rpm × MAP)"
-
-address: "ROM 0x409F4"
-
----
 
 
 
 # Fuel_knock_mat
+
+Calibration map, 192 B (rpm × MAP)  ·  ROM 0x409F4
 
 
 

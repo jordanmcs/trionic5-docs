@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, calibration, warmup]
-type: "Calibration scalar"
-address: "ROM 0x04074A"
----
 
 # Lamb_temp
+
+Calibration scalar  ·  ROM 0x04074A
 
 **Value in factory 4780656:**
 

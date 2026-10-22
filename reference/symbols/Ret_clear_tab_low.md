@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "Calibration byte (flash)"
-address: "ROM 0x40986"
----
 # Ret_clear_tab_low
+
+Calibration byte (flash)  ·  ROM 0x40986
 
 **Value in factory 4780656:** 3 — units: events
 

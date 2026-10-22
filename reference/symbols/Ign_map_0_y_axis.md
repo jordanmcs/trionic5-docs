@@ -1,10 +1,7 @@
----
-tags: [saab, trionic5, symbol, knock]
-type: "Calibration axis, 16 words (rpm)"
-address: "ROM 0x4184A (RAM [Ign_map_0_y_axis](Ign_map_0_y_axis.md))"
----
 
 # Ign_map_0_y_axis
+
+Calibration axis, 16 words (rpm)  ·  ROM 0x4184A (RAM [Ign_map_0_y_axis](Ign_map_0_y_axis.md))
 
 **Value in factory 4780656:** 16 words, rpm 500–6200 (full table below).
 

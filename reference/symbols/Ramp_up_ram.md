@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, ignition]
-type: "8/16-bit table (flash)"
-address: "ROM 0x42876"
----
 # Ramp_up_ram
+
+8/16-bit table (flash)  ·  ROM 0x42876
 
 **Value in factory 4780656:** 1000,1000,0,0,0,0,20,100 — units: weight counts per event (0..1000 scale)
 

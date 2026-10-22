@@ -1,9 +1,6 @@
----
-tags: [saab, trionic5, symbol, fuel]
-type: "Calibration word (flash)"
-address: "0x40BA2 -> 0x4BF2"
----
 # Tid_konst
+
+Calibration word (flash)  ·  0x40BA2 -> 0x4BF2
 
 **Value in factory 4780656:** 0x02EE — units: 4 us ticks (750 = 3.0 ms)
 

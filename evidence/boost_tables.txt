@@ -1,5 +1,5 @@
 BOOST CONTROL calibration tables -- raw bytes, factory 4780656_factory.BIN (authority).
-MCS diffs: T5 MCS Tune Changes.md; changed-table bytes in mcs_bytes_by_table.txt.
+Tables tagged (MCS differs) are changed by a commercial reflash; its data is not distributed.
 ROM base 0x40000; RAM dst = flash->RAM init copy (PEA/MOVE.W #len/PEA/JSR 0x4FC68, init fn 0x5101C-0x5147A + 0x51ADE).
 Enumerated via init copy sites; ROM addrs byte-verified from 48 79/3F 3C/48 79 copy instructions.
 ====================================================================================================
