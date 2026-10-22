@@ -33,6 +33,7 @@ distributed artifacts instead of guessing.
 | [knock-detection-and-adaptation.md](guide/knock-detection-and-adaptation.md) | ion-current knock sensing, K-adapt, APC boost derate |
 | [ignition-timing.md](guide/ignition-timing.md) | multi-map blend architecture, offsets, idle angle |
 | [fuel-injection.md](guide/fuel-injection.md) | injection duration chain, injector angle, program-mode bits |
+| [firmware-flags.md](guide/firmware-flags.md) | the `Pgm_mod` feature bitfield and every runtime status flag word, with consumers |
 | [boost-control.md](guide/boost-control.md) | charge-pressure request chain + PID final element |
 | [idle-air-control.md](guide/idle-air-control.md) | idle stepper governor |
 | [misfire-detection.md](guide/misfire-detection.md) | ion-based misfire monitoring |
