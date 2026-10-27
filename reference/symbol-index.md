@@ -7,7 +7,7 @@
 
 Every symbol named in the subsystem explainers ([T5 Knock Detection and Adaptation](../guide/knock-detection-and-adaptation.md), [T5 Warmup Cycle and Temperature Inputs](../guide/warmup-cycle-and-temperature-inputs.md), [T5 Ignition Timing](../guide/ignition-timing.md), [T5 Boost Control](../guide/boost-control.md), [T5 Fuel Injection](../guide/fuel-injection.md), [T5 Torque Intervention](../guide/torque-intervention.md), [T5 Misfire Detection](../guide/misfire-detection.md), [T5 Idle Air Control](../guide/idle-air-control.md)) has a page here. 
 
-**Current count: 361 symbol pages** (count the `Symbols/` folder to verify; regenerated 2026-10-21). ROM addresses are flash sources; `!`-suffix disassembly names denote RAM copies. Evidence tree: the t5-re research workspace.
+**Current count: 388 symbol pages** (count the `Symbols/` folder to verify; regenerated 2026-10-21). ROM addresses are flash sources; `!`-suffix disassembly names denote RAM copies. Evidence tree: the t5-re research workspace.
 
 ### Calibration — detection & retard
 
@@ -74,6 +74,7 @@ Every symbol named in the subsystem explainers ([T5 Knock Detection and Adaptati
 ### Runtime state
 
 | Symbol | Type | Address | Function |
+| [AD_knock](symbols/AD_knock.md) | State byte | RAM 0x1010 | Cassette knock ADC byte (TPU counter output, test-mux copy) |
 |---|---|---|---|
 | [Knock_level](symbols/Knock_level.md) | State word | RAM 0x112C | Current per-window pulse count |
 | [Knock_count](symbols/Knock_count.md) | State word | RAM 0x1D0A–0x1D10 | No single `Knock_count` symbol in the embedded table; there are per-cylinder words `Knock_count_cyl1..4` at 0x1D0A/0C/0E/10 |
@@ -412,3 +413,43 @@ Entry: [T5 Warmup Cycle and Temperature Inputs](../guide/warmup-cycle-and-temper
 | [KillInjection](symbols/KillInjection.md) | State byte (RAM, disassembly alias) | runtime | immobilizer/limp hard injection kill |
 | [Br_plus](symbols/Br_plus.md) | State word (RAM) | 0x1150 (symbol table) | additive fuel trim (plus) |
 | [Br_minus](symbols/Br_minus.md) | State word (RAM) | 0x1152 (symbol table) | additive fuel trim (minus) |
+
+## Misfire detection
+
+### Detection gates & counters
+
+| Symbol | Type | Address | Function |
+|---|---|---|---|
+| [Ign_counter_mis](symbols/Ign_counter_mis.md) | State long | — (see page) | Combustion counter; time base for all misfire windows/inhibits |
+| [Jd_lastvar](symbols/Jd_lastvar.md) | State word | RAM 0x74BC | Fuel-cut-end snapshot; resume-blocking threshold for Ign_counter_mis |
+| [Mis200_1](symbols/Mis200_1.md) | State word | RAM 0x10D0 | 200-rev window misfire count, cylinder 1 |
+| [Mis200_2](symbols/Mis200_2.md) | State word | RAM 0x10D2 | 200-rev window misfire count, cylinder 2 |
+| [Mis200_3](symbols/Mis200_3.md) | State word | RAM 0x10D4 | 200-rev window misfire count, cylinder 3 |
+| [Mis200_4](symbols/Mis200_4.md) | State word | RAM 0x10D6 | 200-rev window misfire count, cylinder 4 |
+| [Mis200_tot](symbols/Mis200_tot.md) | State word | RAM 0x10D8 | 200-rev window total |
+| [Mis200_limit](symbols/Mis200_limit.md) | State word | RAM 0x110C | Interpolated Mis200_map window limit |
+| [Mis1000_1](symbols/Mis1000_1.md) | State word | RAM 0x10DC | 1000-rev (MIL) window count, cylinder 1 |
+| [Mis1000_2](symbols/Mis1000_2.md) | State word | RAM 0x10DE | 1000-rev (MIL) window count, cylinder 2 |
+| [Mis1000_3](symbols/Mis1000_3.md) | State word | RAM 0x10E0 | 1000-rev (MIL) window count, cylinder 3 |
+| [Mis1000_4](symbols/Mis1000_4.md) | State word | RAM 0x10E2 | 1000-rev (MIL) window count, cylinder 4 |
+| [Mis1000_tot](symbols/Mis1000_tot.md) | State word | RAM 0x10E4 | 1000-rev window total (MIL basis) |
+| [Mis1000_limit](symbols/Mis1000_limit.md) | State word | RAM 0x110E | Interpolated Mis1000_map window limit |
+| [MisCountMap1](symbols/MisCountMap1.md) | State table, 288 B | RAM 0x2E3A | Misfire histogram vs rpm/boost cell, cylinder 1 |
+| [MisCountMap2](symbols/MisCountMap2.md) | State table, 288 B | RAM 0x2F5A | Misfire histogram vs rpm/boost cell, cylinder 2 |
+| [MisCountMap3](symbols/MisCountMap3.md) | State table, 288 B | RAM 0x307A | Misfire histogram vs rpm/boost cell, cylinder 3 |
+| [MisCountMap4](symbols/MisCountMap4.md) | State table, 288 B | RAM 0x319A | Misfire histogram vs rpm/boost cell, cylinder 4 |
+| [Misf_ignc1_idle](symbols/Misf_ignc1_idle.md) | State long | — (see page) | Ign_counter_mis idle snapshot, cylinder 1 |
+| [Misf_ignc2_idle](symbols/Misf_ignc2_idle.md) | State long | — (see page) | Ign_counter_mis idle snapshot, cylinder 2 |
+| [Misf_ignc3_idle](symbols/Misf_ignc3_idle.md) | State long | — (see page) | Ign_counter_mis idle snapshot, cylinder 3 |
+| [Misf_ignc4_idle](symbols/Misf_ignc4_idle.md) | State long | — (see page) | Ign_counter_mis idle snapshot, cylinder 4 |
+| [Detect_limit](symbols/Detect_limit.md) | State word | RAM 0x110A | Derived Detect_map gate for evaluation |
+| [Mis_heating_error](symbols/Mis_heating_error.md) | State byte | RAM 0x1D22 | Misfire mode during fuel heating |
+| [Mis_CVS_error](symbols/Mis_CVS_error.md) | State byte | RAM 0x1D23 | Misfire mode during CVS purge test |
+
+## Idle air control
+
+### Idle valve runtime
+
+| Symbol | Type | Address | Function |
+|---|---|---|---|
+| [PMProt_IdlePos](symbols/PMProt_IdlePos.md) | State word | RAM 0x3794 | Iv_position mirror for OBD monitor limits |
