@@ -108,7 +108,7 @@ Entry: [T5 Warmup Cycle and Temperature Inputs](../guide/warmup-cycle-and-temper
 | [AD_lufttemp](symbols/AD_lufttemp.md) | State byte (RAM) | (RAM) | Copied from AD buffer 0x4052; substituted on failure |
 | [Kyl_temp](symbols/Kyl_temp.md) | State byte (RAM) | (derived from [AD_kylv](symbols/AD_kylv.md)) | Coolant temperature used by the knock gates: detection enabled above 40 °C (0x60EB2, force-enabled if senso… |
 | [S_Kyl_temp](symbols/S_Kyl_temp.md) | State byte (RAM) | (RAM) | Secondary-air and lambda-startup gates read the start-time snapshot instead of the live value so decisions … |
-| [S_Lufttemp](symbols/S_Lufttemp.md) | State byte (RAM) | (RAM) | Same snapshot role as [S_Kyl_temp](symbols/S_Kyl_temp.md); start plausibility compares it ±10 °C around coolant temperature |
+| [S_Lufttemp](symbols/S_Lufttemp.md) | State byte (RAM) | (RAM) | Same snapshot role as [S_Kyl_temp](symbols/S_Kyl_temp.md); the start-up sensor cross-check uses the live intake value, not this snapshot |
 | [Start_kylv](symbols/Start_kylv.md) | State byte (RAM) | (RAM) | Cold-start classification: the lambda-startup delay compares it against 10 °C, keeping the cold-start verdi… |
 | [Start_tryck](symbols/Start_tryck.md) | State byte (RAM) | (RAM) | Reference load for the start enrichment in the start-recognition snapshot |
 | [Kyltemp_steg](symbols/Kyltemp_steg.md) | Calibration table, 19 B (AD axis) | ROM 0x40B45 | Axis of the coolant-sensor AD → °C conversion |
