@@ -98,7 +98,7 @@ Once running, the base fuel temperature correction is [Temp_fak](../reference/sy
 
 Computed in the same housekeeping block (`Function_0006D384`):
 
-- Mode flags: `Kyl_temp < 60 °C` sets [Pgm_status](../reference/symbols/Pgm_status.md) bit 4 (`0x6D388`), i.e. "still warming"; otherwise with intake ≥ 18 °C, a status byte (`0x103A`) bit 3 is set (`0x6D3AE`).
+- Mode flags: `Kyl_temp > 60 °C` sets [Pgm_status](../reference/symbols/Pgm_status.md) bit 4 — "fully warm" (`CMPI.B #$3C,(Kyl_temp)` `0x6D388`, `ORI.B #$10` `0x6D394`; direction corrected 2026-10-27, the earlier "< / still warming" reading inverted the BLE branch). At ≤ 60 °C, provided bit 3 is not already set and intake ≥ 18 °C (`CMPI.B #$12,(RAM_Lufttemp)` — 0x12 = 18), bit 3 of the `0x103A` extension byte is set instead (`0x6D3BA`).
 - Acceleration enrichment coefficient: `Acc_temp = Interp(Accel_temp!, Temp_steg!, AD_kylv)` (values 51…223, ÷128 = 0.40…1.74); on coolant-sensor failure the fallback table [Accel_temp2](../reference/symbols/Accel_temp2.md) (stock-identical) is used instead (`0x6D3E6` vs `0x6D404`).
 - Warmup ignition retard: `Ret_temp = Interp(Retard_temp!, Temp_steg!, AD_kylv)` at `0x6D41E`. Raw values 179…255 (÷128 = 1.40…2.00) — the multiplier never reaches unity inside the table body (points 12–13 hold the raw 128 = 1.00 encoding). Applied in the ignition-time computation (`0x6C2DC`, `0x6EC0C`). (Same table flagged in `knock_system.md` as *not* knock.)
 - Idle: see §5.

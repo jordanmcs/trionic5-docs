@@ -74,7 +74,7 @@ Sustained severe knock → basic charge pressure (ISAT cause "KNOCK CONTROL" = b
 
 
 
-**Sampling (`F_000610D2`) — every gate must hold:** 2100–3250 rpm · load 85–105 · coolant **> 60 °C** · [Ret_mangd](../reference/symbols/Ret_mangd.md)=0 · no misfires/accel (never learn while correcting). 100 samples = one run, abandoned after [Kadapt_period](../reference/symbols/Kadapt_period.md)=320 ticks if the window lapses. **Application (`F_000611E6`):** creep toward the learned target — |Δ|≤2 hold, ≤10 ±1, ≤20 ±2, >20 ±10. Repeated clean drives walk sensitivity to the true floor.
+**Sampling (`F_000610D2`) — every gate must hold:** 2100–3250 rpm · load 85–105 · coolant **> 60 °C** · [Ret_mangd](../reference/symbols/Ret_mangd.md)=0 · no misfires/accel (never learn while correcting). 100 samples = one run, abandoned after [Kadapt_period](../reference/symbols/Kadapt_period.md)=300 ticks if the window lapses. **Application (`F_000611E6`):** creep toward the learned target — |Δ|≤2 hold, ≤10 ±1, ≤20 ±2, >20 ±10. Repeated clean drives walk sensitivity to the true floor.
 
 
 

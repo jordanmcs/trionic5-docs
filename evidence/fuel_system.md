@@ -96,14 +96,15 @@ acc = Grund_tid = Inj_konst × aircharge(0x355A) 0x6DD9C-0x6DDAA
  (book formula (Idle_fuel_korr+128)/256 exactly; axes
  Idle_st_rpm 500..1200 rpm/10 x Idle_st_last load 30..100)
  if the counter has not reached Com_on_idle, this branch is replaced by B)
- and the counter is incremented (0x6DE44, 0x6DEDE).
+ and the counter is incremented (0x6DE44, 0x6DEDE). Factory Com_on_idle! = 0, so the
+ gate is permanently open and branch A always wins its load conditions (2026-10-27).
  B) normal branch: acc × (Insp_mat[rpm,load] + 128)/256 0x6DEE4/0x6E042
  acc × (Adapt_korr[cell] + 128)/256 ; pointed adaptation 0x6DF54/0x6E0B2
  (Insp_mat 16x16, axes Fuel_map_xaxis kPa x Fuel_map_yaxis rpm/10.
  Book: "correction factor from Insp_mat MAPxRPM"; cell range 0x0D..0xF1.)
  C) knock branch (0x6DFA2): if Knock_status bit0 AND Medellast >
  Fuel_knock_xaxis[0] (first column = knock-map min load; book: enrichment
- above ~140 kPa): acc × (Fuel_knock_mat[rpm,load] + 128)/256 0x6DFC0-0x6E006
+ above Fuel_knock_xaxis[0] = 64 kPa (factory byte 0x40 at 0x40AB4; 140 kPa = book regime where factors exceed 1.0): acc × (Fuel_knock_mat[rpm,load] + 128)/256 0x6DFC0-0x6E006
  and Insp_mat/Adapt_korr are NOT applied this cycle — Fuel_knock_mat
  (ROM 0x409F4, 12 load x 16 rpm) REPLACES the normal VE pair while
  knocking, setting flag 0x103A bit1.

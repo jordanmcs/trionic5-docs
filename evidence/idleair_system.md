@@ -4,7 +4,7 @@
 > *Analyzing Trionic 5 with T5Suite 2.0* (rev 1.23, 2010) — the T5 reference
 > documentation shipped with the T5SuiteII tuning suite.
 
-> **Summary:** Idle speed on the NG900 T5.5 is held by a **separate idle control valve** (Swedish *regulerdon*; symbol namespace `Iv_*` = Idle Valve) driven by a linear PWM output — **not** by the throttle plate and **not** by the throttle-actuator misnomer that an early symbol name suggests. The command chain is: base position table [Iv_min_tab](../reference/symbols/Iv_min_tab.md) indexed by rpm → plus learned offset `Iv_min_offset` (a minimum-load integrator) → clamped 225…624 → written to PWM reload register `0xFFFFC4` scaled ×655/1000. In parallel, an rpm-governor path (nominal-speed tables + P/I corrections) adjusts the same actuator and the ignition idle angle. AC engagement raises both the speed target and the base position.
+> **Summary:** Idle speed on the NG900 T5.5 is held by a **separate idle control valve** (Swedish *regulerdon*; symbol namespace `Iv_*` = Idle Valve) driven by a linear PWM output — **not** by the throttle plate and **not** by the throttle-actuator misnomer that an early symbol name suggests. The command chain is: base position table [Iv_min_tab](../reference/symbols/Iv_min_tab.md) indexed by rpm → plus learned offset `Iv_min_offset` (a minimum-load integrator) → clamped 225…624 → written to PWM reload register `0xFFFFC4` scaled ×655÷625. In parallel, an rpm-governor path (nominal-speed tables + P/I corrections) adjusts the same actuator and the ignition idle angle. AC engagement raises both the speed target and the base position.
 
 **Platform:** NG900 Saab 900/9-3, B204RM, OBD2. **Factory reference:** factory `4780656`.
 
@@ -19,7 +19,7 @@
 - **`Iv_position` (RAM 0x4762, word)** — commanded idle-valve position, range **225…624** ([LLS_min](../reference/symbols/LLS_min.md) = 0xE1 lower clamp; 0x270 = 624 upper clamp asserted at `0x709D4` tail, also checked at `0x59454`/`0x5C1CE`). The unit is an internal PWM-count-domain position; via the output scaling below it maps to valve duty.
 - Mirrored to `PMProt_IdlePos` at `0x4CDB0` — this is what the OBD monitor-limit family `PMProt_IdlePos*` watches.
 - Diagnostic override: when status byte 0x1137 bit 5 is set, the command word 0x1158 is forced to the caller-supplied setpoint (test-mode direct control, `0x709D4` entry branch).
-- **Position → hardware:** `F_00046782` computes `reload = x·655/1000` (LSL/ADD sequence + `DIVU #271`) and writes peripheral register **`0xFFFFC4`** (MC68332 PWM). For the legal range that is 147…408 counts. This closes the previously open "Iv_position → duty conversion" question: the mapping is **linear**, no table.
+- **Position → hardware:** `F_00046782` computes `reload = x·655/625` (LSL/ADD multiply sequence + `DIVU.L #$271`; the 271h is decimal 625, verified 2026-10-27) and writes peripheral register **`0xFFFFC4`** (MC68332 PWM). For the legal range that is 235…653 counts. This closes the previously open "Iv_position → duty conversion" question: the mapping is **linear**, no table.
 - **Output stage `F_000691E6`** (idle-valve PWM state machine, mode word 0x39F2): in init/limp/diag modes it stages the valve duty by coolant temperature (20/30/40/50/60/70 %, diag fixed 80 % when `Diag_status` bit 7) through `F_000469FC(duty, reg)`, which programs the PWM period/duty pair (reload 0x0CCD−·; register block 0xFFFF94/0xFFFFC4). `Throttle_pwm_out` (misnomer, see above) holds the stage value; written at `0x69226`–`0x6929A`.
 
 ## 2. Position command block — `F_000709D4`
@@ -74,6 +74,6 @@ Full raw bytes in **`idle_tables.txt`** (27 entries). Highlights:
 
 - Exact split of the two governor correction words (0x4772 vs 0x4776: which one lands on Iv vs idle ignition angle).
 - [Idle_ej_off](../reference/symbols/Idle_ej_off.md) semantics ("idle not off") only partially mapped from the 0x6FF00 block reads.
-- PWM register polarity/direction at 0xFFFFC4 (reload vs duty) — the ×655/1000 mapping is proven; whether larger count = more or less air follows from the 68332 PWM channel config at init (F_000467A6 block) and was not re-derived.
+- PWM register polarity/direction at 0xFFFFC4 (reload vs duty) — the ×655÷625 mapping is proven; whether larger count = more or less air follows from the 68332 PWM channel config at init (F_000467A6 block) and was not re-derived.
 
 *Evidence: `evidence/idleair_mine/func_0x709d4.pc.txt` (position block), `idleair_independent_check.md` (governor pass), ASM (`0x709D4`, `0x691E6`–`0x69432`, `0x46782`, `0x4CDB0`, `0x59454`), `data/init_copy_inventory.factory.json`, book glossary (Idle valve family).*

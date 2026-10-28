@@ -74,6 +74,7 @@ Full raw bytes: **`misfire_tables.Key entries: [Mis200_map](../reference/symbols
 ## 6. Open items
 
 - The bit-level single-event decision (ion-pulse amplitude/width thresholds in the combustion-capture handler, and [Detect_map](../reference/symbols/Detect_map.md)'s exact role vs the two limit maps) sits in the capture/scheduler layer — not re-derived this pass; book Appendix VII is the mechanism reference.
+- 2026-10-27 open item: `misfire_tables.txt` contains **no raw dump for Detect_map** (576 B grid, RAM default block 0x67A2 per the fixed symbol table) and its Mis1000_map header note ("24x24 → Detect_limit/Mis1000 limit") conflates the two grids — any Detect_map cell values quoted from docs are unverified until the block is re-dumped from the BIN.
 - [Ign_counter_mis_lim](../reference/symbols/Ign_counter_mis_lim.md) table (4 words) exact window semantics (values `[0,0,9,96]` per init copy) not fully mapped.
 - Whether misfire during the `Mis_heating_error`/`Mis_CVS_error` modes suppresses or doubles counting not traced.
 

@@ -46,7 +46,7 @@ All relevant maps are interpolated every event (engine `Function_00061F30`) and 
 
 
 
-1. [Ign_map_2](../reference/symbols/Ign_map_2.md) knock retard overlay (load axis starts at 128 ≈ atmospheric; book regime MAP > 140 kPa). Also exports [Knock_map_offset](../reference/symbols/Knock_map_offset.md)/[Knock_map_lim](../reference/symbols/Knock_map_lim.md) to the knock engine.
+1. [Ign_map_2](../reference/symbols/Ign_map_2.md) knock map (load axis starts at 128 ≈ atmospheric; book regime MAP > 140 kPa) — *not* part of the additive blend: it exports [Knock_map_offset](../reference/symbols/Knock_map_offset.md)/[Knock_map_lim](../reference/symbols/Knock_map_lim.md) to the knock engine.
 
 2. − [Knock_offset](../reference/symbols/Knock_offset.md) (factory 0)
 
@@ -76,7 +76,7 @@ While knock retard is active a cap flag (owned by the knock engine) prevents the
 
 
 
-`Ret_mangd[4]` (RAM `0x3A40`) counts retard events of 1.5° (15 counts), incremented by [Retard_konst](../reference/symbols/Retard_konst.md) × [Ret_temp](../reference/symbols/Ret_temp.md)/256 per knock event and decayed per event by [Max_ret_dec](../reference/symbols/Max_ret_dec.md)/256; capped by [Knock_map_lim](../reference/symbols/Knock_map_lim.md) inside the knock engine. Applied per cylinder downstream of [Ign_angle](../reference/symbols/Ign_angle.md) in the 0x48xxx event scheduler. All-cylinder knock additionally enriches fuel in the 900–1500 rpm window ([Ret_fuel_tab](../reference/symbols/Ret_fuel_tab.md) = 102 → ×1/128) — the book's "adds fuel when all four cylinders knock". Details: [T5 Knock Detection and Adaptation](knock-detection-and-adaptation.md).
+`Ret_mangd[4]` (RAM `0x3A40`) counts retard events of 1.5° (15 counts), incremented by [Retard_konst](../reference/symbols/Retard_konst.md) × [Ret_temp](../reference/symbols/Ret_temp.md)/256 per knock event and decayed per event by [Max_ret_dec](../reference/symbols/Max_ret_dec.md)/256; capped by [Knock_map_lim](../reference/symbols/Knock_map_lim.md) inside the knock engine. Applied per cylinder downstream of [Ign_angle](../reference/symbols/Ign_angle.md) in the 0x48xxx event scheduler. All-cylinder knock additionally enriches fuel in the 900–1500 rpm window ([Ret_fuel_tab](../reference/symbols/Ret_fuel_tab.md) = 102 → factor (1024+102)/1024 ≈ +10 %) — the book's "adds fuel when all four cylinders knock". Details: [T5 Knock Detection and Adaptation](knock-detection-and-adaptation.md).
 
 
 

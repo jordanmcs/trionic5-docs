@@ -48,12 +48,13 @@ No documented bit meanings; no consumers traced. Treat as reserved.
 
 ## Runtime status flag words
 
-### [Pgm_status](../reference/symbols/Pgm_status.md) — byte @ RAM `0x1041`
-The engine-state word every cut path checks first.
+### [Pgm_status](../reference/symbols/Pgm_status.md) — byte @ RAM `0x1039` (6-byte block; byte 1 = `0x103A` flag extension)
+The engine-state word every cut path checks first. (Address corrected 2026-10-27: symbol-table off-by-one — `0x1041` is `Ret_fak`.)
 
 | Bit | Meaning | Set when | Consumers / interactions |
 |---|---|---|---|
 | b0 | (tested in scheduler) | — | read `ANDI.B #$01` at `0x42FA8` (vector-path timing accounting) |
+| b4 | **Fully warm** | coolant `Kyl_temp` > 60 °C (`CMPI.B #$3C` at `0x6D388`, `ORI.B #$10` at `0x6D394`; set-only here — below 60 °C with intake ≥ 18 °C the code instead sets `0x103A` bit 3, the closed-throttle-adjacent flag the misfire gate reads) | tested `ANDI.B #$10` at `0x5B312`, `0x5C16E`, `0x5C2AA`, `0x6B650` (warm/cold strategy splits); set-only — latched until re-init |
 | b3 | **Engine running** | first combustion confirmed | cranking-vs-running branches: injection angle [Start_v_vinkel](../reference/symbols/Start_v_vinkel.md) 0° vs [Vinkel_konst](../reference/symbols/Vinkel_konst.md) 53°, warm-up stage transitions; gates fuel-cut paths `0x6C7F8`, `0x6CC00` |
 | b5 | **Overboost** | averaged MAP [P_medel](../reference/symbols/P_medel.md) > [Tryck_vakt_tab](../reference/symbols/Tryck_vakt_tab.md) (factory 230 = 1.30 bar abs) | requests the overboost fuel cut, zeroes the boost PID integral, and penalizes [Apc_adapt](../reference/symbols/Apc_adapt.md) by −50 — a safety net on *actual* pressure, independent of the request chain |
 | b7 | **Rev limit** | rpm > [Rpm_max](../reference/symbols/Rpm_max.md) (factory `0x0280` = 6400) | `Function_00071CEC`: scheduler clears the injector channel enables; [Rpm_dif](../reference/symbols/Rpm_dif.md) re-cut window produces the burst-cut pattern; misfire counting is inhibited while any cut is active |
@@ -85,7 +86,7 @@ Per-cycle flags of the boost control loop; both names resolve to the same pair i
 ### [Limiter_cause](../reference/symbols/Limiter_cause.md) — word @ RAM `0x3FA2`
 Records *why* the boost duty was clamped to its 2 % / 98 % bounds (clamp chain `0x73330`–`0x73470`). Known cause codes: `0x10` = reverse gear (forces 2 % duty directly), `8` = low speed / low battery ([DI_cassette_U_limit](../reference/symbols/DI_cassette_U_limit.md)). Below 1000 rpm and on sensor faults the clamp runs without a recorded code variant. Read by diagnostics — this is the word that answers "why am I at basic boost."
 
-### [Restart_status](../reference/symbols/Restart_status.md) — byte @ RAM `0x1050`
+### [Restart_status](../reference/symbols/Restart_status.md) — byte @ RAM `0x1983` (default copy from the init ROM block at `0x12F3C`; address corrected 2026-10-27 — `0x1050` is `Start_dead`)
 Stall-while-running (restart) state, written `0x6EE48`–`0x6EED4`.
 
 | Mask | Meaning | Interaction |
